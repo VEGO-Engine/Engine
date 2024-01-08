@@ -1,0 +1,38 @@
+[
+{
+  "directory": "/home/nano/Documents/inno/SDL_Minigame",
+  "command": "/usr/bin/c++  -I/usr/include/SDL -isystem /usr/include/SDL2 -std=gnu++20 -o CMakeFiles/game.dir/src/Game.cpp.o -c /home/nano/Documents/inno/SDL_Minigame/src/Game.cpp",
+  "file": "/home/nano/Documents/inno/SDL_Minigame/src/Game.cpp",
+  "output": "CMakeFiles/game.dir/src/Game.cpp.o"
+},
+{
+  "directory": "/home/nano/Documents/inno/SDL_Minigame",
+  "command": "/usr/bin/c++  -I/usr/include/SDL -isystem /usr/include/SDL2 -std=gnu++20 -o CMakeFiles/game.dir/src/GameObject.cpp.o -c /home/nano/Documents/inno/SDL_Minigame/src/GameObject.cpp",
+  "file": "/home/nano/Documents/inno/SDL_Minigame/src/GameObject.cpp",
+  "output": "CMakeFiles/game.dir/src/GameObject.cpp.o"
+},
+{
+  "directory": "/home/nano/Documents/inno/SDL_Minigame",
+  "command": "/usr/bin/c++  -I/usr/include/SDL -isystem /usr/include/SDL2 -std=gnu++20 -o CMakeFiles/game.dir/src/Map.cpp.o -c /home/nano/Documents/inno/SDL_Minigame/src/Map.cpp",
+  "file": "/home/nano/Documents/inno/SDL_Minigame/src/Map.cpp",
+  "output": "CMakeFiles/game.dir/src/Map.cpp.o"
+},
+{
+  "directory": "/home/nano/Documents/inno/SDL_Minigame",
+  "command": "/usr/bin/c++  -I/usr/include/SDL -isystem /usr/include/SDL2 -std=gnu++20 -o CMakeFiles/game.dir/src/TextureManager.cpp.o -c /home/nano/Documents/inno/SDL_Minigame/src/TextureManager.cpp",
+  "file": "/home/nano/Documents/inno/SDL_Minigame/src/TextureManager.cpp",
+  "output": "CMakeFiles/game.dir/src/TextureManager.cpp.o"
+},
+{
+  "directory": "/home/nano/Documents/inno/SDL_Minigame",
+  "command": "/usr/bin/c++  -I/usr/include/SDL -isystem /usr/include/SDL2 -std=gnu++20 -o CMakeFiles/game.dir/src/Vector2D.cpp.o -c /home/nano/Documents/inno/SDL_Minigame/src/Vector2D.cpp",
+  "file": "/home/nano/Documents/inno/SDL_Minigame/src/Vector2D.cpp",
+  "output": "CMakeFiles/game.dir/src/Vector2D.cpp.o"
+},
+{
+  "directory": "/home/nano/Documents/inno/SDL_Minigame",
+  "command": "/usr/bin/c++  -I/usr/include/SDL -isystem /usr/include/SDL2 -std=gnu++20 -o CMakeFiles/game.dir/src/main.cpp.o -c /home/nano/Documents/inno/SDL_Minigame/src/main.cpp",
+  "file": "/home/nano/Documents/inno/SDL_Minigame/src/main.cpp",
+  "output": "CMakeFiles/game.dir/src/main.cpp.o"
+}
+]
