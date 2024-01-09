@@ -14,6 +14,8 @@ public:
 	int tileID;
 	const char* path;
 
+	TextureDict textureDict;
+
 	TileComponent() = default;
 
 	TileComponent(int x, int y, int w, int h, int id)
@@ -24,7 +26,7 @@ public:
 		this->tileRect.h = h;
 		tileID = id;
 
-		auto it = textureDict.find(tileID)->second;
+		auto it = textureDict.textureDictionary.find(tileID)->second; //every id has its own distinct texture (in texturedict.h)
 		this->path = it;
 	}
 

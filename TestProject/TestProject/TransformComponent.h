@@ -33,6 +33,13 @@ public:
 		this->position.y = y;
 	}
 
+	TransformComponent(float x, float y, int scale)
+	{
+		this->position.x = x;
+		this->position.y = y;
+		this->scale = scale;
+	}
+
 	TransformComponent(float x, float y, int w, int h, int scale)
 	{
 		this->position.x = x;
@@ -49,7 +56,9 @@ public:
 
 	void update() override
 	{
-		position.x += velocity.x * speed;
-		position.y += velocity.y * speed;
+		// if(velocity.x != 0 && velocity.y != 0)
+		double multiplier = velocity.x != 0 && velocity.y != 0 ? 0.707 : 1;
+		position.x += velocity.x * speed * multiplier;
+		position.y += velocity.y * speed * multiplier;
 	}
 };

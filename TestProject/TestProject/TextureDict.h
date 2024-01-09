@@ -2,11 +2,13 @@
 #include <map>
 #include <string>
 
-std::map<int, const char*> textureDict =
+class TextureDict
 {
-	{0, "assets/water.png"},
-	{1, "assets/dirt.png"},
-	{2, "assets/grass.png"}
+public:
+	const std::map<int, const char*> textureDictionary =
+	{
+		{0, "assets/water.png"},
+		{1, "assets/dirt.png"},
+		{2, "assets/grass.png"}
+	};
 };
-
-

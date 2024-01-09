@@ -8,28 +8,17 @@ class KeyboardController : public Component
 public:
 	TransformComponent* transform;
 	const Uint8* keystates = SDL_GetKeyboardState(NULL);
+	SDL_Scancode up;
+	SDL_Scancode down;
+	SDL_Scancode left;
+	SDL_Scancode right;
 
-	void init() override
-	{
-		transform = &entity->getComponent<TransformComponent>();
-	}
+	KeyboardController();
+	KeyboardController(SDL_Scancode up, SDL_Scancode down, SDL_Scancode left, SDL_Scancode right);
 
-	void update() override
-	{
-		transform->velocity.x = 0;
-		transform->velocity.y = 0;
+	~KeyboardController();
 
-		if (keystates[SDL_SCANCODE_UP] || keystates[SDL_SCANCODE_W]) {
-			transform->velocity.y = -1;
-		}
-		if (keystates[SDL_SCANCODE_LEFT] || keystates[SDL_SCANCODE_A]) {
-			transform->velocity.x = -1;
-		}
-		if (keystates[SDL_SCANCODE_DOWN] || keystates[SDL_SCANCODE_S]) {
-			transform->velocity.y = 1;
-		}
-		if (keystates[SDL_SCANCODE_RIGHT] || keystates[SDL_SCANCODE_D]) {
-			transform->velocity.x = 1;
-		}
-	}
+	void init() override;
+
+	void update() override;
 };

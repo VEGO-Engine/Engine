@@ -16,6 +16,7 @@ SDL_Event Game::event;
 std::vector<ColliderComponent*> Game::colliders;
 
 auto& player(manager.addEntity());
+auto& enemy(manager.addEntity());
 auto& wall(manager.addEntity());
 
 Game::Game()
@@ -58,10 +59,15 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	//ecs implementation
 
-	player.addComponent<TransformComponent>(2);
+	player.addComponent<TransformComponent>(0,0,2); //posx, posy, scale
 	player.addComponent<SpriteComponent>("assets/chicken_neutral_knight.png");
-	player.addComponent<KeyboardController>();
+	player.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D);//custom keycontrols can be added
 	player.addComponent<ColliderComponent>("player");
+
+	enemy.addComponent<TransformComponent>(400, 400, 2);
+	enemy.addComponent<SpriteComponent>("assets/chicken_neutral.png");
+	enemy.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT);
+	enemy.addComponent<ColliderComponent>("enemy");
 
 	wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
 	wall.addComponent<SpriteComponent>("assets/stone.png");
@@ -87,6 +93,7 @@ void Game::handleEvents()
 void Game::update()
 {
 	Vector2D playerPos = player.getComponent<TransformComponent>().position;
+	Vector2D enemyPos = enemy.getComponent<TransformComponent>().position;
 
 	manager.refresh();
 	manager.update();
@@ -97,7 +104,12 @@ void Game::update()
 		{
 			player.getComponent<TransformComponent>().position = playerPos;
 		}
+		if (SDL_HasIntersection(&enemy.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "enemy"))
+		{
+			enemy.getComponent<TransformComponent>().position = enemyPos;
+		}
 	}
+
 }
 
 void Game::render()
