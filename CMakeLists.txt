@@ -5,31 +5,24 @@ project(SDL_Minigame)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# libpng stuff
-set(PNG_SHARED ON CACHE BOOL "" FORCE)
-set(PNG_STATIC OFF CACHE BOOL "" FORCE)
-set(PNG_EXECUTABLES OFF CACHE BOOL "" FORCE) # we only want lib
-set(PNG_TESTS OFF CACHE BOOL "" FORCE) # we only want lib
-set(SKIP_INSTALL_ALL OFF CACHE BOOL "" FORCE) # we only want lib
 
-include_directories(libpng)
+add_subdirectory(lib/SDL EXCLUDE_FROM_ALL)
+add_subdirectory(lib/SDL_image EXCLUDE_FROM_ALL)
+add_subdirectory(lib/libpng EXCLUDE_FROM_ALL)
 
-add_subdirectory(lib/SDL)
-add_subdirectory(lib/SDL_image)
-add_subdirectory(lib/libpng)
-
-find_package(SDL2 REQUIRED CONFIG REQUIRED COMPONENTS SDL2)
-find_package(SDL2 REQUIRED CONFIG COMPONENTS SDL2main)
-find_package(SDL_image REQUIRED)
-
-find_package(ZLIB REQUIRED)
-
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/libpng)
+include_directories(
+    ${SDL2_INCLUDE_DIRS}
+    ${SDL2_IMAGE_INCLUDE_DIRS}
+    ${PNG_INCLUDE_DIRS})
 
 file(GLOB_RECURSE SOURCES src/*.cpp)
-add_executable(game ${SOURCES})
+add_executable(${PROJECT_NAME} ${SOURCES})
 
-target_link_libraries(game PRIVATE SDL2::SDL2main)
-target_link_libraries(game PRIVATE SDL2::SDL2 SDL2_image ${SDL2_LIBRARIES} ${SDL_IMAGE_LIBRARIES})
-target_link_libraries(game PRIVATE ZLIB::ZLIB)
-target_link_libraries(game PRIVATE png)
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    SDL2
+    SDL2_image
+    ${PNG_LIBRARIES}
+)
+
+# Copy assets (if any) to build directory during build
+file(COPY src/assets DESTINATION ${CMAKE_BINARY_DIR})
