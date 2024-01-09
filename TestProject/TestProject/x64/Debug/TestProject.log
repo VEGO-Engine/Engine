@@ -1,24 +1,27 @@
 ﻿  Game.cpp
 C:\Users\User\Desktop\FH_TECHNIKUM\3.Semester\INNO1\TestProject\TestProject\TransformComponent.h(61,36): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
 C:\Users\User\Desktop\FH_TECHNIKUM\3.Semester\INNO1\TestProject\TestProject\TransformComponent.h(62,36): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\User\Desktop\FH_TECHNIKUM\3.Semester\INNO1\TestProject\TestProject\SpriteComponent.h(38,48): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\User\Desktop\FH_TECHNIKUM\3.Semester\INNO1\TestProject\TestProject\SpriteComponent.h(39,48): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\User\Desktop\FH_TECHNIKUM\3.Semester\INNO1\TestProject\TestProject\SpriteComponent.h(40,48): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\User\Desktop\FH_TECHNIKUM\3.Semester\INNO1\TestProject\TestProject\ColliderComponent.h(30,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 C:\Users\User\Desktop\FH_TECHNIKUM\3.Semester\INNO1\TestProject\TestProject\ColliderComponent.h(31,35): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\User\Desktop\FH_TECHNIKUM\3.Semester\INNO1\TestProject\TestProject\ECS.h(67,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\User\Desktop\FH_TECHNIKUM\3.Semester\INNO1\TestProject\TestProject\TileComponent.h(37,15): message : see reference to function template instantiation 'T &Entity::addComponent<TransformComponent,int&,int&,int&,int&,int>(int &,int &,int &,int &,int &&)' being compiled
+C:\Users\User\Desktop\FH_TECHNIKUM\3.Semester\INNO1\TestProject\TestProject\ECS.h(87,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Desktop\FH_TECHNIKUM\3.Semester\INNO1\TestProject\TestProject\TileComponent.h(44,15): message : see reference to function template instantiation 'T &Entity::addComponent<TransformComponent,int&,int&,int&,int&,int>(int &,int &,int &,int &,int &&)' being compiled
           with
           [
               T=TransformComponent
           ]
-C:\Users\User\Desktop\FH_TECHNIKUM\3.Semester\INNO1\TestProject\TestProject\ECS.h(67,34): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
+C:\Users\User\Desktop\FH_TECHNIKUM\3.Semester\INNO1\TestProject\TestProject\ECS.h(87,34): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
           with
           [
               _Ty=int
           ]
-C:\Users\User\Desktop\FH_TECHNIKUM\3.Semester\INNO1\TestProject\TestProject\Game.cpp(62,8): message : see reference to function template instantiation 'T &Entity::addComponent<TransformComponent,int,int,int>(int &&,int &&,int &&)' being compiled
+C:\Users\User\Desktop\FH_TECHNIKUM\3.Semester\INNO1\TestProject\TestProject\Game.cpp(71,8): message : see reference to function template instantiation 'T &Entity::addComponent<TransformComponent,int,int,int>(int &&,int &&,int &&)' being compiled
           with
           [
               T=TransformComponent
           ]
+  Map.cpp
+  main.cpp
+  Generating Code...
   TestProject.vcxproj -> C:\Users\User\Desktop\FH_TECHNIKUM\3.Semester\INNO1\TestProject\x64\Debug\TestProject.exe

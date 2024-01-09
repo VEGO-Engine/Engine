@@ -57,7 +57,7 @@ public:
 	void update() override
 	{
 		// if(velocity.x != 0 && velocity.y != 0)
-		double multiplier = velocity.x != 0 && velocity.y != 0 ? 0.707 : 1;
+		double multiplier = velocity.x != 0 && velocity.y != 0 ? 0.707 : 1; //normalizes vector
 		position.x += velocity.x * speed * multiplier;
 		position.y += velocity.y * speed * multiplier;
 	}

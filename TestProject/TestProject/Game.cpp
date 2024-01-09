@@ -19,6 +19,14 @@ auto& player(manager.addEntity());
 auto& enemy(manager.addEntity());
 auto& wall(manager.addEntity());
 
+enum GroupLabel
+{
+	GROUP_MAP,
+	GROUP_PLAYERS,
+	GROUP_ENEMIES,
+	GROUP_COLLIDERS
+};
+
 Game::Game()
 {
 
@@ -56,6 +64,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	this->isRunning = true;
 
 	map = new Map();
+	map->loadMap("assets/SDL_map_test.txt", 25, 20);
 
 	//ecs implementation
 
@@ -63,15 +72,13 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	player.addComponent<SpriteComponent>("assets/chicken_neutral_knight.png");
 	player.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D);//custom keycontrols can be added
 	player.addComponent<ColliderComponent>("player");
+	player.addGroup(GROUP_PLAYERS);
 
-	enemy.addComponent<TransformComponent>(400, 400, 2);
+	enemy.addComponent<TransformComponent>(600, 500, 2);
 	enemy.addComponent<SpriteComponent>("assets/chicken_neutral.png");
 	enemy.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT);
 	enemy.addComponent<ColliderComponent>("enemy");
-
-	wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
-	wall.addComponent<SpriteComponent>("assets/stone.png");
-	wall.addComponent<ColliderComponent>("wall");
+	enemy.addGroup(GROUP_ENEMIES);
 
 }
 
@@ -112,10 +119,25 @@ void Game::update()
 
 }
 
+auto& tiles(manager.getGroup(GROUP_MAP));
+auto& players(manager.getGroup(GROUP_PLAYERS));
+auto& enemies(manager.getGroup(GROUP_ENEMIES));
+
 void Game::render()
 {
 	SDL_RenderClear(renderer);
-	manager.draw();
+	for (auto& t : tiles)
+	{
+		t->draw();
+	}
+	for (auto& p : players)
+	{
+		p->draw();
+	}
+	for (auto& e : enemies)
+	{
+		e->draw();
+	}
 	SDL_RenderPresent(renderer);
 }
 
@@ -130,7 +152,9 @@ void Game::clean()
 void Game::addTile(int id, int x, int y)
 {
 	auto& tile(manager.addEntity());
-	tile.addComponent<TileComponent>(x, y, 32, 32, id);
+	tile.addComponent<TileComponent>(x, y, TILE_SIZE, TILE_SIZE, id);
+	if (id == 1) tile.addComponent<ColliderComponent>("water");
+	tile.addGroup(GROUP_MAP);
 }
 
 bool Game::running()

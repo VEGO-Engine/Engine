@@ -26,8 +26,15 @@ public:
 		this->tileRect.h = h;
 		tileID = id;
 
-		auto it = textureDict.textureDictionary.find(tileID)->second; //every id has its own distinct texture (in texturedict.h)
-		this->path = it;
+		auto it = textureDict.textureDictionary.find(tileID); //every id has its own distinct texture (in texturedict.h)
+		if (it == textureDict.textureDictionary.end())
+		{
+			std::cout << "it end" << std::endl;
+			return;
+		}
+		bool test = it == textureDict.textureDictionary.end();
+		std::cout << it->second.data() << std::endl;
+		this->path = it->second.data();
 	}
 
 	~TileComponent() = default;

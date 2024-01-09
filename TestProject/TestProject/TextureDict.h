@@ -5,10 +5,12 @@
 class TextureDict
 {
 public:
-	const std::map<int, const char*> textureDictionary =
+	const std::map<int, std::string> textureDictionary =
 	{
-		{0, "assets/water.png"},
-		{1, "assets/dirt.png"},
-		{2, "assets/grass.png"}
+		{1, "assets/water.png"},
+		{2, "assets/dirt.png"},
+		{3, "assets/grass.png"},
+		{7, "assets/grass_water_left.png"},
+		{9, "assets/grass_water_right.png"}
 	};
 };

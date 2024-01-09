@@ -19,7 +19,6 @@ class SpriteComponent : public Component
 
 		void setTexture(const char* path)
 		{
-			//SDL_DestroyTexture(this->texture);
 			this->texture = TextureManager::loadTexture(path);
 		}
 
