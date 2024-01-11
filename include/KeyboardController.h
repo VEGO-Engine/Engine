@@ -12,9 +12,10 @@ public:
 	SDL_Scancode down;
 	SDL_Scancode left;
 	SDL_Scancode right;
+	//SDL_Scancode action;
 
 	KeyboardController();
-	KeyboardController(SDL_Scancode up, SDL_Scancode down, SDL_Scancode left, SDL_Scancode right);
+	KeyboardController(SDL_Scancode up, SDL_Scancode down, SDL_Scancode left, SDL_Scancode right/*, SDL_Scancode action*/);
 
 	~KeyboardController();
 

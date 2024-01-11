@@ -69,10 +69,10 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	//ecs implementation
 
 	player.addComponent<TransformComponent>(0,0,2); //posx, posy, scale
-	player.addComponent<SpriteComponent>("assets/chicken_neutral_knight.png");
+	player.addComponent<SpriteComponent>("assets/chicken_neutral_knight.png"); //adds sprite (32x32px), path needed
 	player.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D);//custom keycontrols can be added
-	player.addComponent<ColliderComponent>("player");
-	player.addGroup(GROUP_PLAYERS);
+	player.addComponent<ColliderComponent>("player"); //adds tag (for further use, reference tag)
+	player.addGroup(GROUP_PLAYERS); //tell programm what group it belongs to for rendering order
 
 	enemy.addComponent<TransformComponent>(600, 500, 2);
 	enemy.addComponent<SpriteComponent>("assets/chicken_neutral.png");
