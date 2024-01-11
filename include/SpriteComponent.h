@@ -19,7 +19,7 @@ class SpriteComponent : public Component
 
 		void setTexture(const char* path)
 		{
-			this->texture = TextureManager::loadTexture(path);
+			this->texture = TextureManager::get().loadTexture(path);
 		}
 
 		void init() override
@@ -43,7 +43,7 @@ class SpriteComponent : public Component
 
 		void draw() override
 		{
-			TextureManager::draw(this->texture, this->srcRect, this->destRect);
+			TextureManager::get().draw(this->texture, this->srcRect, this->destRect);
 		}
 
 	private:

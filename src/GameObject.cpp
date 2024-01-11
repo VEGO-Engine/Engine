@@ -3,7 +3,7 @@
 
 GameObject::GameObject(const char* texturesheet, int x, int y)
 {
-	this->objTexture = TextureManager::loadTexture(texturesheet);
+	this->objTexture = TextureManager::get().loadTexture(texturesheet);
 	this->xPos = x;
 	this->yPos = y;
 }
