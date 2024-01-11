@@ -1,0 +1,16 @@
+[submodule "SDL"]
+	path = extern/SDL
+	url = https://github.com/libsdl-org/SDL.git
+	branch = release-2.28.x
+[submodule "SDL_image"]
+	path = extern/SDL_image
+	url = https://github.com/libsdl-org/SDL_image.git
+	branch = release-2.8.x
+[submodule "libpng"]
+	path = extern/libpng
+	url = https://github.com/glennrp/libpng.git
+	branch = libpng16
+[submodule "zlib"]
+	path = extern/zlib
+	url = https://github.com/madler/zlib.git
+	branch = master
