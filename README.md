@@ -1,7 +1,7 @@
 ##### Compiling:
 
 ```sh
-git submodule update --init # only needed once
+git submodule update --init --recursive # only needed once
 cmake -S . -B build
 cmake --build build
 ```
