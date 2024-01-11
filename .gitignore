@@ -71,3 +71,5 @@ Thumbs.db
 
 # Windows
 Desktop.ini
+
+compile_commands.json
