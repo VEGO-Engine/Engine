@@ -10,3 +10,7 @@
 	path = lib/libpng
 	url = https://github.com/glennrp/libpng.git
 	branch = libpng16
+[submodule "lib/zlib"]
+	path = lib/zlib
+	url = https://github.com/madler/zlib.git
+	branch = master
