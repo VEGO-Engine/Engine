@@ -5,14 +5,14 @@ project(SDL_Minigame)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
-set(PROJECT_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
+set(PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 set(PROJECT_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR})
 
-add_subdirectory(lib/SDL EXCLUDE_FROM_ALL)
-add_subdirectory(lib/SDL_image EXCLUDE_FROM_ALL)
-add_subdirectory(lib/zlib EXCLUDE_FROM_ALL)
-add_subdirectory(lib/libpng EXCLUDE_FROM_ALL)
+add_subdirectory(extern/SDL EXCLUDE_FROM_ALL)
+add_subdirectory(extern/SDL_image EXCLUDE_FROM_ALL)
+add_subdirectory(extern/zlib EXCLUDE_FROM_ALL)
+add_subdirectory(extern/libpng EXCLUDE_FROM_ALL)
 
 include_directories(
     ${PROJECT_INCLUDE_DIR}
@@ -21,7 +21,7 @@ include_directories(
     ${ZLIB_IMAGE_INCLUDE_DIRS}
     ${PNG_INCLUDE_DIRS})
 
-file(GLOB_RECURSE SOURCES src/*.cpp)
+file(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp)
 add_executable(${PROJECT_NAME} ${SOURCES})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
