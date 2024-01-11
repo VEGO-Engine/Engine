@@ -15,7 +15,7 @@ set(BUILD_SHARED_LIBS FALSE)
 add_subdirectory(extern/SDL EXCLUDE_FROM_ALL)
 add_subdirectory(extern/SDL_image EXCLUDE_FROM_ALL)
 add_subdirectory(extern/zlib EXCLUDE_FROM_ALL)
-set(ZLIB_ROOT extern/zlib)
+set(ZLIB_ROOT ${PROJECT_SOURCE_DIR}/extern/zlib)
 set(ZLIB_LIBRARY zlib)
 add_subdirectory(extern/libpng EXCLUDE_FROM_ALL)
 
