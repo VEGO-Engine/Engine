@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 
 project(SDL_Minigame)
 
+
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -27,7 +28,10 @@ include_directories(
     ${PNG_INCLUDE_DIRS})
 
 file(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp)
-add_executable(${PROJECT_NAME} ${SOURCES})
+add_executable(${PROJECT_NAME} ${SOURCES}
+        include/ProjectileComponent.h
+        include/AssetManager.h
+        src/AssetManager.cpp)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     SDL2::SDL2main

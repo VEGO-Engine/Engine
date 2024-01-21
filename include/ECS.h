@@ -7,6 +7,7 @@
 #include <bitset>
 #include <array>
 
+
 class Component;
 class Entity;
 class Manager;
@@ -63,7 +64,9 @@ class Entity
 		}
 
 		bool isActive() const { return this->active; }
-		void destroy() { this->active = false; }
+		void destroy() {
+            this->active = false;
+        }
 
 		bool hasGroup(Group mGroup)
 		{

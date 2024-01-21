@@ -4,10 +4,12 @@
 #include "ECS.h"
 #include "Components.h"
 #include "Vector2D.h"
-
+#include "AssetManager.h"
 
 Map* map;
 Manager manager;
+
+AssetManager* Game::assets = new AssetManager(&manager);
 
 SDL_Renderer* Game::renderer = nullptr;
 
@@ -18,14 +20,9 @@ std::vector<ColliderComponent*> Game::colliders;
 auto& player(manager.addEntity());
 auto& enemy(manager.addEntity());
 auto& wall(manager.addEntity());
+auto& projectile (manager.addEntity());
 
-enum GroupLabel
-{
-	GROUP_MAP,
-	GROUP_PLAYERS,
-	GROUP_ENEMIES,
-	GROUP_COLLIDERS
-};
+
 
 Game::Game()
 {
@@ -66,21 +63,40 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	map = new Map();
 	map->loadMap("assets/SDL_map_test.txt", 25, 20);
 
+    assets->addTexture("player1", "assets/chicken_neutral_knight.png");
+    assets->addTexture("player2", "assets/chicken_neutral.png");
+    assets->addTexture("bigEgg", "assets/bigger_egg.png");
+
+
 	//ecs implementation
 
 	player.addComponent<TransformComponent>(0,0,2); //posx, posy, scale
 	player.addComponent<SpriteComponent>("assets/chicken_neutral_knight.png"); //adds sprite (32x32px), path needed
-	player.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D);//custom keycontrols can be added
+	player.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D, SDL_SCANCODE_E, Vector2D(1, 0));//custom keycontrols can be added
 	player.addComponent<ColliderComponent>("player"); //adds tag (for further use, reference tag)
 	player.addGroup(GROUP_PLAYERS); //tell programm what group it belongs to for rendering order
 
 	enemy.addComponent<TransformComponent>(600, 500, 2);
 	enemy.addComponent<SpriteComponent>("assets/chicken_neutral.png");
-	enemy.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT);
+	enemy.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT, SDL_SCANCODE_RCTRL, Vector2D(-1, 0));
 	enemy.addComponent<ColliderComponent>("enemy");
 	enemy.addGroup(GROUP_ENEMIES);
 
+    /*
+    projectile.addComponent<TransformComponent>(500, 500, 32, 32, 2);
+    projectile.addComponent<SpriteComponent>("assets/chicken_neutral_knight.png");
+    projectile.addComponent<ProjectileComponent>(200, 1, Vector2D(1,0));
+    projectile.addComponent<ColliderComponent>("projectile");
+    projectile.addGroup(Game::PROJECTILE);
+
+    assets->createProjectile(Vector2D(50, 100), Vector2D(1,0), 1, 180, 1, "assets/chicken_neutral_knight.png");
+     */
 }
+
+auto& tiles(manager.getGroup(Game::GROUP_MAP));
+auto& players(manager.getGroup(Game::GROUP_PLAYERS));
+auto& enemies(manager.getGroup(Game::GROUP_ENEMIES));
+auto& projectiles(manager.getGroup(Game::PROJECTILE));
 
 void Game::handleEvents()
 {
@@ -107,21 +123,35 @@ void Game::update()
 
 	for (auto cc : colliders)
 	{
-		if (SDL_HasIntersection(&player.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "player"))
+		if (SDL_HasIntersection(&player.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "player") && cc->hasCollision)
 		{
 			player.getComponent<TransformComponent>().position = playerPos;
 		}
-		if (SDL_HasIntersection(&enemy.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "enemy"))
+		if (SDL_HasIntersection(&enemy.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "enemy") && cc->hasCollision)
 		{
 			enemy.getComponent<TransformComponent>().position = enemyPos;
 		}
 	}
 
-}
 
-auto& tiles(manager.getGroup(GROUP_MAP));
-auto& players(manager.getGroup(GROUP_PLAYERS));
-auto& enemies(manager.getGroup(GROUP_ENEMIES));
+    for (auto& p : projectiles) {
+        if(SDL_HasIntersection(&enemy.getComponent<ColliderComponent>().collider, &p->getComponent<ColliderComponent>().collider)
+        && (p->getComponent<ColliderComponent>().hasCollision) && !p->getComponent<ProjectileComponent>().getSource()) {
+            std::cout << "Enemy hit!";
+            p->getComponent<ColliderComponent>().removeCollision();
+            p->destroy();
+        }
+
+        if(SDL_HasIntersection(&player.getComponent<ColliderComponent>().collider, &p->getComponent<ColliderComponent>().collider)
+        && (p->getComponent<ColliderComponent>().hasCollision) && p->getComponent<ProjectileComponent>().getSource()) {
+            std::cout << "Player hit!";
+            p->getComponent<ColliderComponent>().removeCollision();
+            p->destroy();
+        }
+    }
+
+
+}
 
 void Game::render()
 {
@@ -138,6 +168,9 @@ void Game::render()
 	{
 		e->draw();
 	}
+    for (auto& p : projectiles)
+        p->draw();
+
 	SDL_RenderPresent(renderer);
 }
 
@@ -154,7 +187,7 @@ void Game::addTile(int id, int x, int y)
 	auto& tile(manager.addEntity());
 	tile.addComponent<TileComponent>(x, y, TILE_SIZE, TILE_SIZE, id);
 	if (id == 1) tile.addComponent<ColliderComponent>("water");
-	tile.addGroup(GROUP_MAP);
+	tile.addGroup(Game::GROUP_MAP);
 }
 
 bool Game::running()

@@ -6,6 +6,8 @@
 #include <vector>
 #include <string.h>
 
+
+class AssetManager;
 class ColliderComponent;
 
 class Game
@@ -26,6 +28,16 @@ class Game
 		static SDL_Renderer* renderer;
 		static SDL_Event event;
 		static std::vector<ColliderComponent*> colliders;
+        static AssetManager* assets;
+
+        enum GroupLabel
+        {
+            GROUP_MAP,
+            GROUP_PLAYERS,
+            GROUP_ENEMIES,
+            GROUP_COLLIDERS,
+            PROJECTILE
+        };
 
 	private:
 		int counter = 0;

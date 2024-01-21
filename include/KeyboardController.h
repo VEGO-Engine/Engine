@@ -12,14 +12,21 @@ public:
 	SDL_Scancode down;
 	SDL_Scancode left;
 	SDL_Scancode right;
-	//SDL_Scancode action;
+	SDL_Scancode fire;
+
+    Uint32 lastFireTime;
+    Uint32 fireCooldown = 1000;
 
 	KeyboardController();
-	KeyboardController(SDL_Scancode up, SDL_Scancode down, SDL_Scancode left, SDL_Scancode right/*, SDL_Scancode action*/);
+	KeyboardController(SDL_Scancode up, SDL_Scancode down, SDL_Scancode left, SDL_Scancode right, SDL_Scancode fire, Vector2D fireVelocity);
 
 	~KeyboardController();
 
 	void init() override;
 
 	void update() override;
+
+private:
+    TransformComponent* player;
+    Vector2D fireVelocity;
 };

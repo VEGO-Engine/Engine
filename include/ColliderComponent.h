@@ -10,10 +10,17 @@ public:
 	const char* tag;
 	TransformComponent* transform;
 
+    bool hasCollision;
+
 	ColliderComponent(const char* tag)
 	{
 		this->tag = tag;
+        this->hasCollision = true;
 	}
+
+    ~ColliderComponent() {
+
+    }
 
 	void init() override
 	{
@@ -33,4 +40,8 @@ public:
 		collider.w = transform->width * transform->scale;
 		collider.h = transform->height * transform->scale;
 	}
+
+    void removeCollision() {
+        this->hasCollision = false;
+    }
 };

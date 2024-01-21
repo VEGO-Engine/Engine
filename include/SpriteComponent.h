@@ -2,6 +2,10 @@
 #include "Components.h"
 #include "SDL.h"
 #include "TextureManager.h"
+#include "Game.h"
+
+class Game;
+class AssetManager;
 
 class SpriteComponent : public Component
 {
@@ -14,7 +18,7 @@ class SpriteComponent : public Component
 
 		~SpriteComponent()
 		{
-			SDL_DestroyTexture(this->texture);
+			//SDL_DestroyTexture(this->texture);
 		}
 
 		void setTexture(const char* path)
