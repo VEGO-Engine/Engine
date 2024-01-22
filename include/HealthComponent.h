@@ -21,12 +21,9 @@ public:
         createAllHearts();
     }
 
-    void update() override {
-
-    }
-
     void createAllHearts() {
-        int x;
+
+        int x; //starting position for first health icon
 
         if(player) {
             x = 10;
@@ -35,6 +32,8 @@ public:
         }
 
         for(int i = 0; i < health; i++) {
+
+            //checks for player side
             if(player) {
                 createHeartComponents(x);
                 x += 50;
@@ -58,8 +57,6 @@ public:
 private:
 
     int health;
-
-    TransformComponent* transformComponent;
 
     Manager* manager;
 

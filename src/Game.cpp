@@ -140,6 +140,7 @@ void Game::update()
 
             enemy.getComponent<HealthComponent>().getDamage();
 
+            //display updated health | pretty scuffed but works ig
             for(auto h : hearts)
                 h->destroy();
 
@@ -161,6 +162,7 @@ void Game::update()
 
             player.getComponent<HealthComponent>().getDamage();
 
+            //display updated health
             for(auto h : hearts)
                 h->destroy();
 
