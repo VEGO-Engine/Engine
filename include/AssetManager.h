@@ -13,7 +13,6 @@ public:
     AssetManager(Manager* manager);
     ~AssetManager();
 
-    //game object management
     void createProjectile(Vector2D pos, Vector2D velocity, bool source, int scale, int range, int speed, const char* texturePath);
 
     //texture management

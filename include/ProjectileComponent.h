@@ -6,6 +6,8 @@
 
 class ProjectileComponent : public Component {
 
+    //can maybe be split in separate .cpp file
+
 public:
 
     ProjectileComponent(int range, int speed, Vector2D velocity, bool source) : range(range), speed(speed), velocity(velocity), source(source) {
@@ -19,13 +21,15 @@ public:
     }
 
     void update() override {
+
         transformComponent->velocity = velocity;
+
         distance += speed;
 
         if (distance > range) {
             entity->destroy();
             entity->getComponent<ColliderComponent>().removeCollision();
-            std::cout << "out of range" << std::endl;
+            //std::cout << "out of range" << std::endl;
         }
 
     }
@@ -43,7 +47,7 @@ private:
     int speed = 0;
     int distance = 0;
 
-    const bool source;
+    const bool source; //true if from player1 / false if from player2
 
     Vector2D velocity;
 };

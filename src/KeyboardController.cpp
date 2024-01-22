@@ -45,10 +45,15 @@ void KeyboardController::update()
 	}
 
     if (keystates[this->fire]) {
+
         Uint32 currentTicks = SDL_GetTicks();
+
         if (currentTicks - lastFireTime >= fireCooldown) {
 
             player = &entity->getComponent<TransformComponent>();
+
+            //checks player source via the firing velocity
+            //TODO: adding actual projectile textures
             if(fireVelocity.x > 0) {
                 Game::assets->createProjectile(Vector2D(player->position.x, player->position.y), fireVelocity,
                                                false,1, 180, 1, "assets/chicken_neutral_knight.png");

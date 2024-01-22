@@ -63,6 +63,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	map = new Map();
 	map->loadMap("assets/SDL_map_test.txt", 25, 20);
 
+    //adding textures to the library in AssetManager
+
     assets->addTexture("player1", "assets/chicken_neutral_knight.png");
     assets->addTexture("player2", "assets/chicken_neutral.png");
     assets->addTexture("bigEgg", "assets/bigger_egg.png");
@@ -81,16 +83,6 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	enemy.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT, SDL_SCANCODE_RCTRL, Vector2D(-1, 0));
 	enemy.addComponent<ColliderComponent>("enemy");
 	enemy.addGroup(GROUP_ENEMIES);
-
-    /*
-    projectile.addComponent<TransformComponent>(500, 500, 32, 32, 2);
-    projectile.addComponent<SpriteComponent>("assets/chicken_neutral_knight.png");
-    projectile.addComponent<ProjectileComponent>(200, 1, Vector2D(1,0));
-    projectile.addComponent<ColliderComponent>("projectile");
-    projectile.addGroup(Game::PROJECTILE);
-
-    assets->createProjectile(Vector2D(50, 100), Vector2D(1,0), 1, 180, 1, "assets/chicken_neutral_knight.png");
-     */
 }
 
 auto& tiles(manager.getGroup(Game::GROUP_MAP));
@@ -133,18 +125,18 @@ void Game::update()
 		}
 	}
 
-
+    //checking if projectiles hit player1 or player2
     for (auto& p : projectiles) {
         if(SDL_HasIntersection(&enemy.getComponent<ColliderComponent>().collider, &p->getComponent<ColliderComponent>().collider)
         && (p->getComponent<ColliderComponent>().hasCollision) && !p->getComponent<ProjectileComponent>().getSource()) {
-            std::cout << "Enemy hit!";
+            //std::cout << "Enemy hit!";
             p->getComponent<ColliderComponent>().removeCollision();
             p->destroy();
         }
 
         if(SDL_HasIntersection(&player.getComponent<ColliderComponent>().collider, &p->getComponent<ColliderComponent>().collider)
         && (p->getComponent<ColliderComponent>().hasCollision) && p->getComponent<ProjectileComponent>().getSource()) {
-            std::cout << "Player hit!";
+            //std::cout << "Player hit!";
             p->getComponent<ColliderComponent>().removeCollision();
             p->destroy();
         }

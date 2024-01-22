@@ -10,7 +10,7 @@ public:
 	const char* tag;
 	TransformComponent* transform;
 
-    bool hasCollision;
+    bool hasCollision; //added for removing collision of destroyed projectiles
 
 	ColliderComponent(const char* tag)
 	{
