@@ -6,6 +6,7 @@
 #include "Vector2D.h"
 #include "AssetManager.h"
 
+
 Map* map;
 Manager manager;
 
@@ -20,7 +21,7 @@ std::vector<ColliderComponent*> Game::colliders;
 auto& player(manager.addEntity());
 auto& enemy(manager.addEntity());
 auto& wall(manager.addEntity());
-auto& projectile (manager.addEntity());
+//auto& projectile (manager.addEntity());
 
 
 
@@ -72,23 +73,27 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	//ecs implementation
 
-	player.addComponent<TransformComponent>(0,0,2); //posx, posy, scale
+	player.addComponent<TransformComponent>(80,80,2); //posx, posy, scale
 	player.addComponent<SpriteComponent>("assets/chicken_neutral_knight.png"); //adds sprite (32x32px), path needed
 	player.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D, SDL_SCANCODE_E, Vector2D(1, 0));//custom keycontrols can be added
 	player.addComponent<ColliderComponent>("player"); //adds tag (for further use, reference tag)
+    player.addComponent<HealthComponent>(5, &manager, true);
 	player.addGroup(GROUP_PLAYERS); //tell programm what group it belongs to for rendering order
 
 	enemy.addComponent<TransformComponent>(600, 500, 2);
 	enemy.addComponent<SpriteComponent>("assets/chicken_neutral.png");
 	enemy.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT, SDL_SCANCODE_RCTRL, Vector2D(-1, 0));
 	enemy.addComponent<ColliderComponent>("enemy");
+    enemy.addComponent<HealthComponent>(5, &manager, false);
 	enemy.addGroup(GROUP_ENEMIES);
+
 }
 
 auto& tiles(manager.getGroup(Game::GROUP_MAP));
 auto& players(manager.getGroup(Game::GROUP_PLAYERS));
 auto& enemies(manager.getGroup(Game::GROUP_ENEMIES));
 auto& projectiles(manager.getGroup(Game::PROJECTILE));
+auto& hearts(manager.getGroup(Game::HEARTS));
 
 void Game::handleEvents()
 {
@@ -132,6 +137,20 @@ void Game::update()
             //std::cout << "Enemy hit!";
             p->getComponent<ColliderComponent>().removeCollision();
             p->destroy();
+
+            enemy.getComponent<HealthComponent>().getDamage();
+
+            for(auto h : hearts)
+                h->destroy();
+
+            player.getComponent<HealthComponent>().createAllHearts();
+            enemy.getComponent<HealthComponent>().createAllHearts();
+
+            if(enemy.getComponent<HealthComponent>().getHealth() < 1) {
+                std::cout << "Player1 wins!" << std::endl;
+                winner = true;
+                isRunning = false;
+            }
         }
 
         if(SDL_HasIntersection(&player.getComponent<ColliderComponent>().collider, &p->getComponent<ColliderComponent>().collider)
@@ -139,6 +158,20 @@ void Game::update()
             //std::cout << "Player hit!";
             p->getComponent<ColliderComponent>().removeCollision();
             p->destroy();
+
+            player.getComponent<HealthComponent>().getDamage();
+
+            for(auto h : hearts)
+                h->destroy();
+
+            player.getComponent<HealthComponent>().createAllHearts();
+            enemy.getComponent<HealthComponent>().createAllHearts();
+
+            if(player.getComponent<HealthComponent>().getHealth() < 1) {
+                std::cout << "Player2 wins!" << std::endl;
+                winner = false;
+                isRunning = false;
+            }
         }
     }
 
@@ -163,6 +196,9 @@ void Game::render()
     for (auto& p : projectiles)
         p->draw();
 
+    for (auto& h : hearts)
+        h->draw();
+
 	SDL_RenderPresent(renderer);
 }
 
@@ -185,4 +221,8 @@ void Game::addTile(int id, int x, int y)
 bool Game::running()
 {
 	return isRunning;
+}
+
+bool Game::getWinner() {
+    return this->winner;
 }

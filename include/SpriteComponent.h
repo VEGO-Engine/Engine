@@ -50,6 +50,7 @@ class SpriteComponent : public Component
 			TextureManager::get().draw(this->texture, this->srcRect, this->destRect);
 		}
 
+
 	private:
 		TransformComponent* transform;
 		SDL_Texture* texture;

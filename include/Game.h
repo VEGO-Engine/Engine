@@ -36,12 +36,18 @@ class Game
             GROUP_PLAYERS,
             GROUP_ENEMIES,
             GROUP_COLLIDERS,
-            PROJECTILE
+            PROJECTILE,
+            HEARTS
         };
+
+        bool getWinner();
 
 	private:
 		int counter = 0;
 		bool isRunning = false;
 		SDL_Window* window;
+
+        //true for player1 win / false for player2 win;
+        bool winner;
 };
 

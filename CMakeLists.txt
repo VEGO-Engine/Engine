@@ -31,7 +31,9 @@ file(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp)
 add_executable(${PROJECT_NAME} ${SOURCES}
         include/ProjectileComponent.h
         include/AssetManager.h
-        src/AssetManager.cpp)
+        src/AssetManager.cpp
+        include/HealthComponent.h
+)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     SDL2::SDL2main
