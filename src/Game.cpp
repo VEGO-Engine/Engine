@@ -1,10 +1,14 @@
 #include "Game.h"
 #include "TextureManager.h"
+#include "Manager.h"
 #include "Map.h"
-#include "ECS.h"
-#include "Components.h"
-#include "Vector2D.h"
-
+#include "Entity.h"
+#include "Component.h"
+#include "TransformComponent.h"
+#include "TileComponent.h"
+#include "ColliderComponent.h"
+#include "SpriteComponent.h"
+#include "KeyboardController.h"
 
 Map* map;
 Manager manager;
@@ -19,44 +23,42 @@ auto& player(manager.addEntity());
 auto& enemy(manager.addEntity());
 auto& wall(manager.addEntity());
 
-enum GroupLabel
+enum class GroupLabel
 {
-	GROUP_MAP,
-	GROUP_PLAYERS,
-	GROUP_ENEMIES,
-	GROUP_COLLIDERS
+	MAP,
+	PLAYERS,
+	ENEMIES,
+	COLLIDERS
 };
 
-Game::Game()
-{
+Game::Game() = default;
 
-}
-
-Game::~Game()
-{
-
-}
+Game::~Game() = default;
 
 void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
 	int flags = 0;
-	if (fullscreen) {
+	if (fullscreen)
+	{
 		flags = SDL_WINDOW_FULLSCREEN;
 	}
 
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+	{
 		std::cout << "ERROR. Subsystem couldnt be initialized!" << std::endl;
 		return;
 	}
 
 	window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
-	if (!window) {
+	if (!window)
+	{
 		std::cout << "ERROR: Window couldnt be created!" << std::endl;
 		return;
 	}
 
 	renderer = SDL_CreateRenderer(window, -1, 0);
-	if (!renderer) {
+	if (!renderer)
+	{
 		std::cout << "ERROR: Renderer couldnt be created!" << std::endl;
 		return;
 	}
@@ -72,13 +74,13 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	player.addComponent<SpriteComponent>("assets/chicken_neutral_knight.png"); //adds sprite (32x32px), path needed
 	player.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D);//custom keycontrols can be added
 	player.addComponent<ColliderComponent>("player"); //adds tag (for further use, reference tag)
-	player.addGroup(GROUP_PLAYERS); //tell programm what group it belongs to for rendering order
+	player.addGroup((size_t)GroupLabel::PLAYERS); //tell programm what group it belongs to for rendering order
 
 	enemy.addComponent<TransformComponent>(600, 500, 2);
 	enemy.addComponent<SpriteComponent>("assets/chicken_neutral.png");
 	enemy.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT);
 	enemy.addComponent<ColliderComponent>("enemy");
-	enemy.addGroup(GROUP_ENEMIES);
+	enemy.addGroup((size_t)GroupLabel::ENEMIES);
 
 }
 
@@ -94,7 +96,6 @@ void Game::handleEvents()
 		default:
 			break;
 	}
-
 }
 
 void Game::update()
@@ -116,12 +117,11 @@ void Game::update()
 			enemy.getComponent<TransformComponent>().position = enemyPos;
 		}
 	}
-
 }
 
-auto& tiles(manager.getGroup(GROUP_MAP));
-auto& players(manager.getGroup(GROUP_PLAYERS));
-auto& enemies(manager.getGroup(GROUP_ENEMIES));
+auto& tiles(manager.getGroup((size_t)GroupLabel::MAP));
+auto& players(manager.getGroup((size_t)GroupLabel::PLAYERS));
+auto& enemies(manager.getGroup((size_t)GroupLabel::ENEMIES));
 
 void Game::render()
 {
@@ -153,11 +153,14 @@ void Game::addTile(int id, int x, int y)
 {
 	auto& tile(manager.addEntity());
 	tile.addComponent<TileComponent>(x, y, TILE_SIZE, TILE_SIZE, id);
-	if (id == 1) tile.addComponent<ColliderComponent>("water");
-	tile.addGroup(GROUP_MAP);
+	if (id == 1)
+	{
+		tile.addComponent<ColliderComponent>("water");
+	}
+	tile.addGroup((size_t)GroupLabel::MAP);
 }
 
-bool Game::running()
+bool Game::running() const
 {
 	return isRunning;
 }

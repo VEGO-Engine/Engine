@@ -20,7 +20,7 @@ class Game
 		void update();
 		void render();
 		void clean();
-		bool running();
+		bool running() const;
 
 		static void addTile(int id, int x, int y);
 		static SDL_Renderer* renderer;
@@ -32,4 +32,3 @@ class Game
 		bool isRunning = false;
 		SDL_Window* window;
 };
-

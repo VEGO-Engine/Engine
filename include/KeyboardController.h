@@ -1,7 +1,8 @@
 #pragma once
-#include "Game.h"
-#include "ECS.h"
-#include "Components.h"
+#include "SDL.h"
+#include "Component.h"
+
+class TransformComponent;
 
 class KeyboardController : public Component
 {
@@ -14,12 +15,10 @@ public:
 	SDL_Scancode right;
 	//SDL_Scancode action;
 
-	KeyboardController();
+	KeyboardController() = default;
 	KeyboardController(SDL_Scancode up, SDL_Scancode down, SDL_Scancode left, SDL_Scancode right/*, SDL_Scancode action*/);
-
-	~KeyboardController();
+	~KeyboardController() = default;
 
 	void init() override;
-
 	void update() override;
 };

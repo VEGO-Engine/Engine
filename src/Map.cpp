@@ -1,15 +1,7 @@
 #include "Map.h"
-#include "Game.h"
 #include <fstream>
-
-Map::Map()
-{
-
-}
-
-Map::~Map()
-{
-}
+#include "Constants.h"
+#include "Game.h"
 
 void Map::loadMap(const char* path, int sizeX, int sizeY)
 {

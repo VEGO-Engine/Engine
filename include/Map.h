@@ -1,17 +1,10 @@
 #pragma once
-#include "Defines.h"
-#include <string>
 
 class Map
 {
-	public:
-		Map();
-		~Map();
+public:
+	Map() = default;
+	~Map() = default;
 
-		static void loadMap(const char* path, int sizeX, int sizeY);
-
-	private:
-		
-
+	static void loadMap(const char* path, int sizeX, int sizeY);
 };
-

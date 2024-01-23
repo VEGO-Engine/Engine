@@ -1,9 +1,6 @@
 #include "KeyboardController.h"
-
-KeyboardController::KeyboardController()
-{
-
-}
+#include "TransformComponent.h"
+#include "Entity.h"
 
 KeyboardController::KeyboardController(SDL_Scancode up, SDL_Scancode down, SDL_Scancode left, SDL_Scancode right)
 {
@@ -11,11 +8,6 @@ KeyboardController::KeyboardController(SDL_Scancode up, SDL_Scancode down, SDL_S
 	this->down = down;
 	this->left = left;
 	this->right = right;
-}
-
-KeyboardController::~KeyboardController()
-{
-
 }
 
 void KeyboardController::init()

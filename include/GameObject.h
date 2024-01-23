@@ -1,11 +1,11 @@
 #pragma once
-#include "Game.h"
+#include "SDL.h"
 
 class GameObject
 {
 	public:
 		GameObject(const char* texturesheet, int x, int y);
-		~GameObject();
+		~GameObject() = default;
 
 		void update();
 		void render();
@@ -15,6 +15,7 @@ class GameObject
 		int yPos;
 
 		SDL_Texture* objTexture;
-		SDL_Rect srcRect, destRect;
+		SDL_Rect srcRect;
+		SDL_Rect destRect;
 };
 
