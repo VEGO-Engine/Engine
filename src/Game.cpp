@@ -69,7 +69,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	//ecs implementation
 
 	player.addComponent<TransformComponent>(0,0,2); //posx, posy, scale
-	player.addComponent<SpriteComponent>("assets/chicken_neutral_knight.png", true); //adds sprite (32x32px), path needed
+	player.addComponent<SpriteComponent>("assets/chicken_knight_spritesheet.png", true); //adds sprite (32x32px), path needed
 	player.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D);//custom keycontrols can be added
 	player.addComponent<ColliderComponent>("player"); //adds tag (for further use, reference tag)
 	player.addGroup(GROUP_PLAYERS); //tell programm what group it belongs to for rendering order
