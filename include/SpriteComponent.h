@@ -1,6 +1,6 @@
 #pragma once
 #include "SDL.h"
-#include "Component.h"
+#include "Game.h"
 
 class TransformComponent;
 

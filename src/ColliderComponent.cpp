@@ -6,6 +6,7 @@
 ColliderComponent::ColliderComponent(const char* tag)
 {
 	this->tag = tag;
+    this->hasCollision = true;
 }
 
 void ColliderComponent::init()
@@ -25,4 +26,9 @@ void ColliderComponent::update()
 
 	collider.w = transform->width * transform->scale;
 	collider.h = transform->height * transform->scale;
+}
+
+void ColliderComponent::removeCollision()
+{
+    this->hasCollision = false;
 }

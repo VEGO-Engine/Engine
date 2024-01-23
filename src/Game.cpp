@@ -9,9 +9,12 @@
 #include "ColliderComponent.h"
 #include "SpriteComponent.h"
 #include "KeyboardController.h"
+#include "AssetManager.h"
 
 Map* map;
 Manager manager;
+
+AssetManager* Game::assets = new AssetManager(&manager);
 
 SDL_Renderer* Game::renderer = nullptr;
 
@@ -22,14 +25,7 @@ std::vector<ColliderComponent*> Game::colliders;
 auto& player(manager.addEntity());
 auto& enemy(manager.addEntity());
 auto& wall(manager.addEntity());
-
-enum class GroupLabel
-{
-	MAP,
-	PLAYERS,
-	ENEMIES,
-	COLLIDERS
-};
+//auto& projectile (manager.addEntity());
 
 Game::Game() = default;
 
@@ -68,21 +64,36 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	map = new Map();
 	map->loadMap("assets/SDL_map_test.txt", 25, 20);
 
+    //adding textures to the library in AssetManager
+
+    assets->addTexture("player1", "assets/chicken_neutral_knight.png");
+    assets->addTexture("player2", "assets/chicken_neutral.png");
+    assets->addTexture("bigEgg", "assets/bigger_egg.png");
+
+
 	//ecs implementation
 
-	player.addComponent<TransformComponent>(0,0,2); //posx, posy, scale
+	player.addComponent<TransformComponent>(80,80,2); //posx, posy, scale
 	player.addComponent<SpriteComponent>("assets/chicken_neutral_knight.png"); //adds sprite (32x32px), path needed
-	player.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D);//custom keycontrols can be added
+	player.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D, SDL_SCANCODE_E, Vector2D(1, 0));//custom keycontrols can be added
 	player.addComponent<ColliderComponent>("player"); //adds tag (for further use, reference tag)
+    player.addComponent<HealthComponent>(5, &manager, true);
 	player.addGroup((size_t)GroupLabel::PLAYERS); //tell programm what group it belongs to for rendering order
 
 	enemy.addComponent<TransformComponent>(600, 500, 2);
 	enemy.addComponent<SpriteComponent>("assets/chicken_neutral.png");
-	enemy.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT);
+	enemy.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT, SDL_SCANCODE_RCTRL, Vector2D(-1, 0));
 	enemy.addComponent<ColliderComponent>("enemy");
+    enemy.addComponent<HealthComponent>(5, &manager, false);
 	enemy.addGroup((size_t)GroupLabel::ENEMIES);
 
 }
+
+auto& tiles(manager.getGroup((size_t)GroupLabel::MAP));
+auto& players(manager.getGroup((size_t)GroupLabel::PLAYERS));
+auto& enemies(manager.getGroup((size_t)GroupLabel::ENEMIES));
+auto& projectiles(manager.getGroup((size_t)GroupLabel::PROJECTILE));
+auto& hearts(manager.getGroup((size_t)GroupLabel::HEARTS));
 
 void Game::handleEvents()
 {
@@ -108,20 +119,63 @@ void Game::update()
 
 	for (auto cc : colliders)
 	{
-		if (SDL_HasIntersection(&player.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "player"))
+		if (SDL_HasIntersection(&player.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "player") && cc->hasCollision)
 		{
 			player.getComponent<TransformComponent>().position = playerPos;
 		}
-		if (SDL_HasIntersection(&enemy.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "enemy"))
+		if (SDL_HasIntersection(&enemy.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "enemy") && cc->hasCollision)
 		{
 			enemy.getComponent<TransformComponent>().position = enemyPos;
 		}
 	}
-}
 
-auto& tiles(manager.getGroup((size_t)GroupLabel::MAP));
-auto& players(manager.getGroup((size_t)GroupLabel::PLAYERS));
-auto& enemies(manager.getGroup((size_t)GroupLabel::ENEMIES));
+    //checking if projectiles hit player1 or player2
+    for (auto& p : projectiles) {
+        if(SDL_HasIntersection(&enemy.getComponent<ColliderComponent>().collider, &p->getComponent<ColliderComponent>().collider)
+        && (p->getComponent<ColliderComponent>().hasCollision) && !p->getComponent<ProjectileComponent>().getSource()) {
+            //std::cout << "Enemy hit!";
+            p->getComponent<ColliderComponent>().removeCollision();
+            p->destroy();
+
+            enemy.getComponent<HealthComponent>().getDamage();
+
+            //display updated health | pretty scuffed but works ig
+            for(auto h : hearts)
+                h->destroy();
+
+            player.getComponent<HealthComponent>().createAllHearts();
+            enemy.getComponent<HealthComponent>().createAllHearts();
+
+            if(enemy.getComponent<HealthComponent>().getHealth() < 1) {
+                std::cout << "Player1 wins!" << std::endl;
+                winner = true;
+                isRunning = false;
+            }
+        }
+
+        if(SDL_HasIntersection(&player.getComponent<ColliderComponent>().collider, &p->getComponent<ColliderComponent>().collider)
+        && (p->getComponent<ColliderComponent>().hasCollision) && p->getComponent<ProjectileComponent>().getSource()) {
+            //std::cout << "Player hit!";
+            p->getComponent<ColliderComponent>().removeCollision();
+            p->destroy();
+
+            player.getComponent<HealthComponent>().getDamage();
+
+            //display updated health
+            for(auto h : hearts)
+                h->destroy();
+
+            player.getComponent<HealthComponent>().createAllHearts();
+            enemy.getComponent<HealthComponent>().createAllHearts();
+
+            if(player.getComponent<HealthComponent>().getHealth() < 1) {
+                std::cout << "Player2 wins!" << std::endl;
+                winner = false;
+                isRunning = false;
+            }
+        }
+    }
+}
 
 void Game::render()
 {
@@ -138,6 +192,12 @@ void Game::render()
 	{
 		e->draw();
 	}
+    for (auto& p : projectiles)
+        p->draw();
+
+    for (auto& h : hearts)
+        h->draw();
+
 	SDL_RenderPresent(renderer);
 }
 
@@ -153,14 +213,15 @@ void Game::addTile(int id, int x, int y)
 {
 	auto& tile(manager.addEntity());
 	tile.addComponent<TileComponent>(x, y, TILE_SIZE, TILE_SIZE, id);
-	if (id == 1)
-	{
-		tile.addComponent<ColliderComponent>("water");
-	}
+	if (id == 1) tile.addComponent<ColliderComponent>("water");
 	tile.addGroup((size_t)GroupLabel::MAP);
 }
 
 bool Game::running() const
 {
 	return isRunning;
+}
+
+bool Game::getWinner() {
+    return this->winner;
 }

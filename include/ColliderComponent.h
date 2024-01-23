@@ -10,9 +10,11 @@ public:
 	SDL_Rect collider;
 	const char* tag;
 	TransformComponent* transform;
+	bool hasCollision; //added for removing collision of destroyed projectiles
 
 	ColliderComponent(const char* tag);
 
 	void init() override;
 	void update() override;
+    void removeCollision();
 };

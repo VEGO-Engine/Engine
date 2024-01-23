@@ -6,6 +6,8 @@
 #include <vector>
 #include <string.h>
 
+
+class AssetManager;
 class ColliderComponent;
 
 class Game
@@ -26,9 +28,15 @@ class Game
 		static SDL_Renderer* renderer;
 		static SDL_Event event;
 		static std::vector<ColliderComponent*> colliders;
+        static AssetManager* assets;
+
+        bool getWinner();
 
 	private:
 		int counter = 0;
 		bool isRunning = false;
 		SDL_Window* window;
+
+        //true for player1 win / false for player2 win;
+        bool winner;
 };

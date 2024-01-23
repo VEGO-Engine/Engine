@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <array>
+#include <memory>
 #include <vector>
 #include "Constants.h"
 
