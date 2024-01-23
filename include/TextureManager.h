@@ -35,5 +35,6 @@ class TextureManager
         std::map<const char*, SDL_Texture*, cmp_str> texture_cache;
 
 		SDL_Texture* loadTexture(const char* fileName);
+        static std::vector<SDL_Rect> splitSpriteSheet(SDL_Texture* spriteSheet, int width, int height, int spritesOnSheet);
 		static void draw(SDL_Texture* texture, SDL_Rect src, SDL_Rect dest);
 };

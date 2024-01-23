@@ -10,3 +10,6 @@
 #define MAP_SIZE_X 25
 #define MAP_SIZE_Y 20
 
+#define IDLE	"idle"
+#define WALK	"walk"
+

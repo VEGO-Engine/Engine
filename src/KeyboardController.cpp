@@ -20,6 +20,7 @@ KeyboardController::~KeyboardController()
 
 void KeyboardController::init()
 {
+	sprite = &entity->getComponent<SpriteComponent>();
 	transform = &entity->getComponent<TransformComponent>();
 }
 
@@ -30,6 +31,7 @@ void KeyboardController::update()
 
 	if (keystates[this->up]) {
 		transform->velocity.y = -1;
+		sprite->play(WALK);
 	}
 	if (keystates[this->left]) {
 		transform->velocity.x = -1;

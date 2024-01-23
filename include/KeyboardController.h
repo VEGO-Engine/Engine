@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "ECS.h"
 #include "Components.h"
+#include "Defines.h"
 
 class KeyboardController : public Component
 {
@@ -13,6 +14,8 @@ public:
 	SDL_Scancode left;
 	SDL_Scancode right;
 	//SDL_Scancode action;
+
+	SpriteComponent* sprite;
 
 	KeyboardController();
 	KeyboardController(SDL_Scancode up, SDL_Scancode down, SDL_Scancode left, SDL_Scancode right/*, SDL_Scancode action*/);
