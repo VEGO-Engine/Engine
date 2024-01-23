@@ -8,7 +8,6 @@
 #include "ECS.h"
 
 class Manager;
-//class Component;
 
 using ComponentBitSet = std::bitset<MAX_COMPONENTS>;
 using GroupBitSet = std::bitset<MAX_GROUPS>;
@@ -59,7 +58,7 @@ private:
 	bool active = true;
 	std::vector<std::unique_ptr<Component>> components;
 
-	ComponentArray componentArray;
+	ComponentArray componentArray = {};
 	ComponentBitSet componentBitSet;
 	GroupBitSet groupBitSet;
 };

@@ -16,7 +16,7 @@ public:
 	int speed = 3;
 
 	TransformComponent();
-	TransformComponent(int scale);
+	explicit TransformComponent(int scale);
 	TransformComponent(float x, float y);
 	TransformComponent(float x, float y, int scale);
 	TransformComponent(float x, float y, int w, int h, int scale);
