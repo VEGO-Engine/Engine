@@ -1,13 +1,7 @@
 #pragma once
 
-#include <iostream>
-#include <vector>
-#include <memory>
-#include <algorithm>
-#include <bitset>
-#include <array>
+#include "Component.h"
 #include "Constants.h"
-
 
 class Component;
 class Entity;

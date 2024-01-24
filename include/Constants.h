@@ -1,5 +1,6 @@
 #pragma once
-#include <iostream>
+
+#include <cstddef>
 
 using Group = std::size_t;
 

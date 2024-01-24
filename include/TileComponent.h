@@ -1,5 +1,7 @@
 #pragma once
-#include "SDL.h"
+
+#include <SDL.h>
+
 #include "Component.h"
 #include "TextureDict.h"
 

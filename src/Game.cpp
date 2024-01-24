@@ -1,15 +1,10 @@
 #include "Game.h"
-#include "TextureManager.h"
-#include "Manager.h"
-#include "Map.h"
-#include "Entity.h"
-#include "Component.h"
-#include "TransformComponent.h"
-#include "TileComponent.h"
-#include "ColliderComponent.h"
-#include "SpriteComponent.h"
-#include "KeyboardController.h"
+
+#include "Components.h"
+
 #include "AssetManager.h"
+#include "Map.h"
+#include "TextureManager.h"
 
 Map* map;
 Manager manager;

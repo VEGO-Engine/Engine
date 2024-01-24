@@ -1,7 +1,8 @@
 #include "ColliderComponent.h"
-#include "TransformComponent.h"
+
 #include "Entity.h"
 #include "Game.h"
+#include "TransformComponent.h"
 
 ColliderComponent::ColliderComponent(const char* tag)
 {
@@ -11,10 +12,10 @@ ColliderComponent::ColliderComponent(const char* tag)
 
 void ColliderComponent::init()
 {
-	if (!entity->hasComponent<TransformComponent>())
-	{
+	if (!entity->hasComponent<TransformComponent>()) {
 		entity->addComponent<TransformComponent>();
 	}
+
 	transform = &entity->getComponent<TransformComponent>();
 	Game::colliders.push_back(this);
 }

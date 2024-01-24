@@ -1,11 +1,9 @@
 #include "AssetManager.h"
-#include "Component.h"
+
+#include "TextureManager.h"
 #include "Components.h"
-#include <cstddef>
 
-AssetManager::AssetManager(Manager* manager) : man(manager) {
-
-}
+AssetManager::AssetManager(Manager* manager) : man(manager) {}
 
 AssetManager::~AssetManager() {}
 

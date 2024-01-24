@@ -1,13 +1,15 @@
 #pragma once
+
 #include <array>
-#include <vector>
+#include <memory>
 #include <bitset>
-#include "Constants.h"
-#include "Component.h"
-#include "SpriteComponent.h"
+#include <vector>
+
 #include "ECS.h"
+#include "Constants.h"
 
 class Manager;
+class Component;
 
 using ComponentBitSet = std::bitset<MAX_COMPONENTS>;
 using GroupBitSet = std::bitset<MAX_GROUPS>;

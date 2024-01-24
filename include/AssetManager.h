@@ -1,13 +1,12 @@
+#include <SDL_render.h>
 #include <map>
 #include <string>
 
-#include "TextureManager.h"
-#include "Vector2D.h"
-#include "Components.h"
-#include "ECS.h"
+class Vector2D;
+class Manager;
 
-class AssetManager {
-
+class AssetManager
+{
 public:
 
     AssetManager(Manager* manager);

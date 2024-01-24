@@ -1,11 +1,11 @@
 #pragma once
-#include "Vector2D.h"
+
 #include "Component.h"
+#include "Vector2D.h"
 
 class TransformComponent : public Component
 {
 public:
-
 	Vector2D position;
 	Vector2D velocity;
 

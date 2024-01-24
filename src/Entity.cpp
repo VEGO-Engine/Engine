@@ -1,5 +1,5 @@
-#pragma once
 #include "Entity.h"
+
 #include "Manager.h"
 #include "Component.h"
 

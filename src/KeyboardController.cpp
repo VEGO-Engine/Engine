@@ -1,8 +1,8 @@
 #include "KeyboardController.h"
-#include "TransformComponent.h"
-#include "Entity.h"
+
+#include "Game.h"
+#include "Components.h"
 #include "AssetManager.h"
-#include "SpriteComponent.h"
 
 KeyboardController::KeyboardController(SDL_Scancode up, SDL_Scancode down, SDL_Scancode left, SDL_Scancode right, SDL_Scancode fire, Vector2D fireVelocity)
 {

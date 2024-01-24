@@ -1,12 +1,12 @@
 #pragma once
+
 #include <map>
 #include <string>
 
 class TextureDict
 {
 public:
-	const std::map<int, std::string> textureDictionary =
-	{
+	const std::map<int, std::string> textureDictionary = {
 		{1, "assets/water.png"},
 		{2, "assets/dirt.png"},
 		{3, "assets/grass.png"},

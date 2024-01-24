@@ -1,46 +1,24 @@
 #pragma once
 
-#include "ECS.h"
-#include "Components.h"
+#include "Component.h"
 #include "Vector2D.h"
 
-class ProjectileComponent : public Component {
+class TransformComponent;
 
+class ProjectileComponent : public Component
+{
     //can maybe be split in separate .cpp file
 
 public:
-
-    ProjectileComponent(int range, int speed, Vector2D velocity, bool source) : range(range), speed(speed), velocity(velocity), source(source) {
-
-    }
-
+    ProjectileComponent(int range, int speed, Vector2D velocity, bool source) : range(range), speed(speed), velocity(velocity), source(source) {}
     ~ProjectileComponent() {}
 
-    void init() override {
-        transformComponent = &entity->getComponent<TransformComponent>();
-    }
+    void init() override;
+    void update() override;
 
-    void update() override {
-
-        transformComponent->velocity = velocity;
-
-        distance += speed;
-
-        if (distance > range) {
-            entity->destroy();
-            entity->getComponent<ColliderComponent>().removeCollision();
-            //std::cout << "out of range" << std::endl;
-        }
-
-    }
-
-    bool getSource() {
-        return this->source;
-    }
-
+    bool getSource() { return this->source; }
 
 private:
-
     TransformComponent* transformComponent;
 
     int range = 0;

@@ -1,6 +1,11 @@
 #include "TileComponent.h"
+
+#include <iostream>
+
 #include "Entity.h"
 #include "TransformComponent.h"
+#include "SpriteComponent.h"
+#include "TileComponent.h"
 
 TileComponent::TileComponent(int x, int y, int w, int h, int id)
 {
@@ -11,8 +16,7 @@ TileComponent::TileComponent(int x, int y, int w, int h, int id)
 	tileID = id;
 
 	auto it = textureDict.textureDictionary.find(tileID); //every id has its own distinct texture (in texturedict.h)
-	if (it == textureDict.textureDictionary.end())
-	{
+	if (it == textureDict.textureDictionary.end()) {
 		std::cout << "it end" << std::endl;
 		return;
 	}

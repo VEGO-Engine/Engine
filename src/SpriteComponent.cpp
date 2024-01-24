@@ -1,7 +1,10 @@
-#include "AnimationHandler.h"
-#include "TransformComponent.h"
-#include "Entity.h"
+#include "SpriteComponent.h"
+
+#include <SDL_timer.h>
+
 #include "TextureManager.h"
+#include "Entity.h"
+#include "TransformComponent.h"
 
 SpriteComponent::SpriteComponent(const char* path)
 {

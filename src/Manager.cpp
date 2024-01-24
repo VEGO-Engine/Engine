@@ -1,4 +1,7 @@
 #include "Manager.h"
+
+#include <algorithm>
+
 #include "Entity.h"
 
 void Manager::update()

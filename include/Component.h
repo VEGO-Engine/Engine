@@ -17,20 +17,9 @@ class Component
 public:
 	Entity* entity;
 
-	virtual void init()
-	{
-		// implementation in derived classes (when neccessary)
-	}
-
-	virtual void update()
-	{
-		// implementation in derived classes (when neccessary)
-	}
-
-	virtual void draw()
-	{
-		// implementation in derived classes (when neccessary)
-	}
+	virtual void init() {}
+	virtual void update() {}
+	virtual void draw() {}
 
 	virtual ~Component() = default;
 };
