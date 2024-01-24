@@ -59,16 +59,58 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		return;
 	}
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+
+	SDL_Texture* backgroundTexture = TextureManager::get().loadTexture("assets/startscreen.png");
+
+	SDL_RenderClear(renderer);
+	SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
+	SDL_RenderPresent(renderer);
+
+	SDL_Event event;
+	bool hasQuit = false;
+
+	while (!hasQuit)
+	{
+		SDL_PollEvent(&event);
+		
+		if (event.type == SDL_QUIT)
+		{
+			hasQuit = true;
+			break;
+		}
+
+		if (event.type == SDL_KEYDOWN)
+		{
+			if (event.key.keysym.scancode == SDL_SCANCODE_RETURN)
+			{
+				std::cout << "Enter pressed > Game start..." << std::endl;
+				break;
+			}
+
+			if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
+			{
+				std::cout << "Escape pressed > Game quit..." << std::endl;
+				hasQuit = true;
+			}
+		}
+	}
+
+	if (hasQuit)
+	{
+		this->isRunning = false;
+		return;
+	}
+
 	this->isRunning = true;
 
 	map = new Map();
 	map->loadMap("assets/SDL_map_test.txt", 25, 20);
 
-    //adding textures to the library in AssetManager
+	//adding textures to the library in AssetManager
 
-    assets->addTexture("player1", "assets/chicken_neutral_knight.png");
-    assets->addTexture("player2", "assets/chicken_neutral.png");
-    assets->addTexture("bigEgg", "assets/bigger_egg.png");
+	assets->addTexture("player1", "assets/chicken_neutral_knight.png");
+	assets->addTexture("player2", "assets/chicken_neutral.png");
+	//assets->addTexture("bigEgg", "assets/bigger_egg.png"); // commented out cause png wasn't in assets
 
 
 	//ecs implementation
@@ -77,14 +119,14 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	player.addComponent<SpriteComponent>("assets/chicken_knight_spritesheet.png", true); //adds sprite (32x32px), path needed
 	player.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D, SDL_SCANCODE_E, Vector2D(1, 0));//custom keycontrols can be added
 	player.addComponent<ColliderComponent>("player"); //adds tag (for further use, reference tag)
-    player.addComponent<HealthComponent>(5, &manager, true);
+	player.addComponent<HealthComponent>(5, &manager, true);
 	player.addGroup((size_t)GroupLabel::PLAYERS); //tell programm what group it belongs to for rendering order
 
 	enemy.addComponent<TransformComponent>(600, 500, 2);
 	enemy.addComponent<SpriteComponent>("assets/chicken_spritesheet.png", true);
 	enemy.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT, SDL_SCANCODE_RCTRL, Vector2D(-1, 0));
 	enemy.addComponent<ColliderComponent>("enemy");
-    enemy.addComponent<HealthComponent>(5, &manager, false);
+	enemy.addComponent<HealthComponent>(5, &manager, false);
 	enemy.addGroup((size_t)GroupLabel::ENEMIES);
 
 }
@@ -129,52 +171,52 @@ void Game::update()
 		}
 	}
 
-    //checking if projectiles hit player1 or player2
-    for (auto& p : projectiles) {
-        if(SDL_HasIntersection(&enemy.getComponent<ColliderComponent>().collider, &p->getComponent<ColliderComponent>().collider)
-        && (p->getComponent<ColliderComponent>().hasCollision) && !p->getComponent<ProjectileComponent>().getSource()) {
-            //std::cout << "Enemy hit!";
-            p->getComponent<ColliderComponent>().removeCollision();
-            p->destroy();
+	//checking if projectiles hit player1 or player2
+	for (auto& p : projectiles) {
+		if(SDL_HasIntersection(&enemy.getComponent<ColliderComponent>().collider, &p->getComponent<ColliderComponent>().collider)
+		&& (p->getComponent<ColliderComponent>().hasCollision) && !p->getComponent<ProjectileComponent>().getSource()) {
+			//std::cout << "Enemy hit!";
+			p->getComponent<ColliderComponent>().removeCollision();
+			p->destroy();
 
-            enemy.getComponent<HealthComponent>().getDamage();
+			enemy.getComponent<HealthComponent>().getDamage();
 
-            //display updated health | pretty scuffed but works ig
-            for(auto h : hearts)
-                h->destroy();
+			//display updated health | pretty scuffed but works ig
+			for(auto h : hearts)
+				h->destroy();
 
-            player.getComponent<HealthComponent>().createAllHearts();
-            enemy.getComponent<HealthComponent>().createAllHearts();
+			player.getComponent<HealthComponent>().createAllHearts();
+			enemy.getComponent<HealthComponent>().createAllHearts();
 
-            if(enemy.getComponent<HealthComponent>().getHealth() < 1) {
-                std::cout << "Player1 wins!" << std::endl;
-                winner = true;
-                isRunning = false;
-            }
-        }
+			if(enemy.getComponent<HealthComponent>().getHealth() < 1) {
+				std::cout << "Player1 wins!" << std::endl;
+				winner = true;
+				isRunning = false;
+			}
+		}
 
-        if(SDL_HasIntersection(&player.getComponent<ColliderComponent>().collider, &p->getComponent<ColliderComponent>().collider)
-        && (p->getComponent<ColliderComponent>().hasCollision) && p->getComponent<ProjectileComponent>().getSource()) {
-            //std::cout << "Player hit!";
-            p->getComponent<ColliderComponent>().removeCollision();
-            p->destroy();
+		if(SDL_HasIntersection(&player.getComponent<ColliderComponent>().collider, &p->getComponent<ColliderComponent>().collider)
+		&& (p->getComponent<ColliderComponent>().hasCollision) && p->getComponent<ProjectileComponent>().getSource()) {
+			//std::cout << "Player hit!";
+			p->getComponent<ColliderComponent>().removeCollision();
+			p->destroy();
 
-            player.getComponent<HealthComponent>().getDamage();
+			player.getComponent<HealthComponent>().getDamage();
 
-            //display updated health
-            for(auto h : hearts)
-                h->destroy();
+			//display updated health
+			for(auto h : hearts)
+				h->destroy();
 
-            player.getComponent<HealthComponent>().createAllHearts();
-            enemy.getComponent<HealthComponent>().createAllHearts();
+			player.getComponent<HealthComponent>().createAllHearts();
+			enemy.getComponent<HealthComponent>().createAllHearts();
 
-            if(player.getComponent<HealthComponent>().getHealth() < 1) {
-                std::cout << "Player2 wins!" << std::endl;
-                winner = false;
-                isRunning = false;
-            }
-        }
-    }
+			if(player.getComponent<HealthComponent>().getHealth() < 1) {
+				std::cout << "Player2 wins!" << std::endl;
+				winner = false;
+				isRunning = false;
+			}
+		}
+	}
 }
 
 void Game::render()
@@ -192,11 +234,11 @@ void Game::render()
 	{
 		e->draw();
 	}
-    for (auto& p : projectiles)
-        p->draw();
+	for (auto& p : projectiles)
+		p->draw();
 
-    for (auto& h : hearts)
-        h->draw();
+	for (auto& h : hearts)
+		h->draw();
 
 	SDL_RenderPresent(renderer);
 }
@@ -223,5 +265,5 @@ bool Game::running() const
 }
 
 bool Game::getWinner() {
-    return this->winner;
+	return this->winner;
 }
