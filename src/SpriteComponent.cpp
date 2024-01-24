@@ -13,10 +13,12 @@ SpriteComponent::SpriteComponent(const char* path, bool isAnimated)
 	animated = isAnimated;
 
 	Animation* idle = new Animation((int)AnimationType::IDLE, 2, 200);
-	Animation* walk = new Animation((int)AnimationType::WALK, 2, 200);
+	Animation* walkR = new Animation((int)AnimationType::WALK_R, 2, 200);
+	Animation* walkL = new Animation((int)AnimationType::WALK_L, 2, 200);
 
 	animations.emplace(IDLE, idle);
-	animations.emplace(WALK, walk);
+	animations.emplace(WALK_R, walkR);
+	animations.emplace(WALK_L, walkL);
 
 	play(IDLE);
 
@@ -61,7 +63,7 @@ void SpriteComponent::draw()
 	TextureManager::get().draw(this->texture, this->srcRect, this->destRect);
 }
 
-void SpriteComponent::play(AnimationType type) 
+void SpriteComponent::play(AnimationType type)
 {
 	animationIndex = animations.at(type)->index;
 	frames = animations.at(type)->frames;
