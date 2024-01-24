@@ -19,15 +19,10 @@ set(ZLIB_ROOT ${PROJECT_SOURCE_DIR}/extern/zlib)
 set(ZLIB_LIBRARY zlib)
 add_subdirectory(extern/libpng EXCLUDE_FROM_ALL)
 
-include_directories(
-    ${PROJECT_INCLUDE_DIR}
-    ${SDL2_INCLUDE_DIRS}
-    ${SDL2_IMAGE_INCLUDE_DIRS}
-    ${ZLIB_INCLUDE_DIRS}
-    ${PNG_INCLUDE_DIRS})
-
 file(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp)
 add_executable(${PROJECT_NAME} ${SOURCES})
+
+target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR}/include)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     SDL2::SDL2main
