@@ -73,3 +73,5 @@ Thumbs.db
 Desktop.ini
 
 compile_commands.json
+
+*.puml
