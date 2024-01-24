@@ -1,14 +1,31 @@
 #pragma once
-#include "SDL.h"
+#include "AnimationHandler.h"
+#include "Component.h"
 #include "Game.h"
+#include <map>
 
 class TransformComponent;
 
 class SpriteComponent : public Component
 {
 	public:
+		int animationIndex = 0;
+
+		std::map<AnimationType, Animation*> animations;
+
+	private:
+		TransformComponent* transform;
+		SDL_Texture* texture;
+		SDL_Rect srcRect, destRect;
+
+		bool animated = false;
+		int frames = 0;
+		int speed = 100;
+
+	public:
 		SpriteComponent() = default;
 		SpriteComponent(const char* path);
+		SpriteComponent(const char* path, bool isAnimated);
 		~SpriteComponent();
 
 		void setTexture(const char* path);
@@ -16,10 +33,5 @@ class SpriteComponent : public Component
 		void init() override;
 		void update() override;
 		void draw() override;
-
-	private:
-		TransformComponent* transform;
-		SDL_Texture* texture;
-		SDL_Rect srcRect;
-		SDL_Rect destRect;
+		void play(AnimationType type);
 };

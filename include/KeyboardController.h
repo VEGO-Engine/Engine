@@ -1,9 +1,10 @@
 #pragma once
-#include "SDL.h"
+#include <SDL.h>
 #include "Component.h"
 #include "Vector2D.h"
 
 class TransformComponent;
+class SpriteComponent;
 
 class KeyboardController : public Component
 {
@@ -15,6 +16,8 @@ public:
 	SDL_Scancode left;
 	SDL_Scancode right;
 	SDL_Scancode fire;
+
+	SpriteComponent* sprite;
 
     //for attack cooldown in between shots
     Uint32 lastFireTime;
