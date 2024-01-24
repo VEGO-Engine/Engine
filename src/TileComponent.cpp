@@ -17,7 +17,7 @@ TileComponent::TileComponent(int x, int y, int w, int h, int id)
 		return;
 	}
 	bool test = it == textureDict.textureDictionary.end();
-	std::cout << it->second.data() << std::endl;
+	// std::cout << it->second.data() << std::endl;
 	this->path = it->second.data();
 }
 
