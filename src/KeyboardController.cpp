@@ -55,11 +55,11 @@ void KeyboardController::update()
             //TODO: adding actual projectile textures
             if(fireVelocity.x > 0) {
                 Game::assets->createProjectile(Vector2D(player->position.x, player->position.y), fireVelocity,
-                                               false,1, 180, 1, "assets/chicken_neutral_knight.png");
+                                               false,1, 180, 1, "assets/egg.png");
             }
             else {
                 Game::assets->createProjectile(Vector2D(player->position.x, player->position.y), fireVelocity,
-                                               true,1, 180, 1, "assets/chicken_neutral_knight.png");
+                                               true,1, 180, 1, "assets/egg.png");
             }
 
             lastFireTime = currentTicks;

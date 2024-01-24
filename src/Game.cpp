@@ -108,9 +108,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	//adding textures to the library in AssetManager
 
-	assets->addTexture("player1", "assets/chicken_neutral_knight.png");
-	assets->addTexture("player2", "assets/chicken_neutral.png");
-	//assets->addTexture("bigEgg", "assets/bigger_egg.png"); // commented out cause png wasn't in assets
+    assets->addTexture("player1", "assets/chicken_neutral_knight.png");
+    assets->addTexture("player2", "assets/chicken_neutral.png");
+    assets->addTexture("egg", "assets/egg.png");
 
 
 	//ecs implementation

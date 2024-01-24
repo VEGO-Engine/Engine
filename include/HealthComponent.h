@@ -28,7 +28,7 @@ public:
         if(player) {
             x = 10;
         } else {
-            x = 750;
+            x = 730;
         }
 
         for(int i = 0; i < health; i++) {
@@ -48,8 +48,8 @@ public:
     void createHeartComponents(int x) {
 
         auto& heart(manager->addEntity());
-        heart.addComponent<TransformComponent>(x,5,1);
-        heart.addComponent<SpriteComponent>("assets/chicken_neutral_knight.png");
+        heart.addComponent<TransformComponent>(x,5,2);
+        heart.addComponent<SpriteComponent>("assets/heart.png");
         heart.addGroup((size_t)GroupLabel::HEARTS);
     }
 
