@@ -18,6 +18,6 @@ struct Animation
 
 enum AnimationType
 {
-	idle = 0,
-	walk = 1
+	IDLE = 0,
+	WALK = 1
 };

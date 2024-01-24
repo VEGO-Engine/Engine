@@ -28,6 +28,7 @@ void KeyboardController::update()
 {
 	transform->velocity.x = 0;
 	transform->velocity.y = 0;
+	sprite->play(IDLE);
 
 	if (keystates[this->up]) {
 		transform->velocity.y = -1;
@@ -35,11 +36,14 @@ void KeyboardController::update()
 	}
 	if (keystates[this->left]) {
 		transform->velocity.x = -1;
+		sprite->play(WALK);
 	}
 	if (keystates[this->down]) {
 		transform->velocity.y = 1;
+		sprite->play(WALK);
 	}
 	if (keystates[this->right]) {
 		transform->velocity.x = 1;
+		sprite->play(WALK);
 	}
 }

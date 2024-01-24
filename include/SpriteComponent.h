@@ -11,8 +11,18 @@ class SpriteComponent : public Component
 	public:
 		int animationIndex = 0;
 
-		std::map<const char*, Animation> animations;
+		std::map<AnimationType, Animation*> animations;
 
+	private:
+		TransformComponent* transform;
+		SDL_Texture* texture;
+		SDL_Rect srcRect, destRect;
+
+		bool animated = false;
+		int frames = 0;
+		int speed = 100;
+
+	public:
 		SpriteComponent() = default;
 		SpriteComponent(const char* path)
 		{
@@ -23,8 +33,8 @@ class SpriteComponent : public Component
 		{
 			animated = isAnimated;
 
-			Animation idle = Animation((int)AnimationType::idle, 2, 200);
-			Animation walk = Animation((int)AnimationType::walk, 2, 200);
+			Animation* idle = new Animation((int)AnimationType::IDLE, 2, 200);
+			Animation* walk = new Animation((int)AnimationType::WALK, 2, 200);
 
 			animations.emplace(IDLE, idle);
 			animations.emplace(WALK, walk);
@@ -75,19 +85,10 @@ class SpriteComponent : public Component
 			TextureManager::get().draw(this->texture, this->srcRect, this->destRect);
 		}
 
-		void play(const char* animationName)
+		void play(AnimationType type)
 		{
-			animationIndex = animations[animationName].index;
-			frames = animations[animationName].frames;
-			speed = animations[animationName].speed;
+			animationIndex = animations.at(type)->index;
+			frames = animations.at(type)->frames;
+			speed = animations.at(type)->speed;
 		}
-
-	private:
-		TransformComponent* transform;
-		SDL_Texture* texture;
-		SDL_Rect srcRect, destRect;
-
-		bool animated = false;
-		int frames = 0;
-		int speed = 100;
 };
