@@ -11,7 +11,7 @@ class KeyboardController : public Component
 {
 public:
 	TransformComponent* transform;
-	const Uint8* keystates = SDL_GetKeyboardState(NULL);
+	const uint8_t* keystates = SDL_GetKeyboardState(NULL);
 	SDL_Scancode up;
 	SDL_Scancode down;
 	SDL_Scancode left;
@@ -20,9 +20,9 @@ public:
 
 	SpriteComponent* sprite;
 
-	//for attack cooldown in between shots
-	Uint32 lastFireTime;
-	Uint32 fireCooldown = 1000; //in ms can be adjusted to change possible attack-speed
+    //for attack cooldown in between shots
+    uint32_t lastFireTime;
+	uint32_t fireCooldown = 800; //in ms can be adjusted to change possible attack-speed
 
 	KeyboardController() = default;
 	KeyboardController(SDL_Scancode up, SDL_Scancode down, SDL_Scancode left, SDL_Scancode right, SDL_Scancode fire, Vector2D fireVelocity);

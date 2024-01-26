@@ -21,8 +21,8 @@ private:
 	SDL_Rect srcRect, destRect;
 
 	bool animated = false;
-	int frames = 0;
-	int speed = 100;
+	uint8_t frames = 0;
+	uint8_t speed = 100;
 
 public:
 	SpriteComponent() = default;
