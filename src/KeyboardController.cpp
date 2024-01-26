@@ -10,8 +10,8 @@ KeyboardController::KeyboardController(SDL_Scancode up, SDL_Scancode down, SDL_S
 	this->down = down;
 	this->left = left;
 	this->right = right;
-    this->fire = fire;
-    this->fireVelocity = fireVelocity;
+	this->fire = fire;
+	this->fireVelocity = fireVelocity;
 }
 
 void KeyboardController::init()
@@ -28,42 +28,42 @@ void KeyboardController::update()
 
 	if (keystates[this->up]) {
 		transform->velocity.y = -1;
-		sprite->play(WALK);
+		sprite->play(WALK_R);
 	}
 	if (keystates[this->left]) {
 		transform->velocity.x = -1;
-		sprite->play(WALK);
+		sprite->play(WALK_L);
 	}
 	if (keystates[this->down]) {
 		transform->velocity.y = 1;
-		sprite->play(WALK);
+		sprite->play(WALK_R);
 	}
 	if (keystates[this->right]) {
 		transform->velocity.x = 1;
-		sprite->play(WALK);
+		sprite->play(WALK_R);
 	}
 
-    if (keystates[this->fire]) {
+	if (keystates[this->fire]) {
 
-        Uint32 currentTicks = SDL_GetTicks();
+		Uint32 currentTicks = SDL_GetTicks();
 
-        if (currentTicks - lastFireTime >= fireCooldown) {
+		if (currentTicks - lastFireTime >= fireCooldown) {
 
-            player = &entity->getComponent<TransformComponent>();
+			player = &entity->getComponent<TransformComponent>();
 
-            //checks player source via the firing velocity
-            //TODO: adding actual projectile textures
-            if(fireVelocity.x > 0) {
-                Game::assets->createProjectile(Vector2D(player->position.x, player->position.y), fireVelocity,
-                                               false,1, 180, 1, "assets/egg.png");
-            }
-            else {
-                Game::assets->createProjectile(Vector2D(player->position.x, player->position.y), fireVelocity,
-                                               true,1, 180, 1, "assets/egg.png");
-            }
+			//checks player source via the firing velocity
+			//TODO: adding actual projectile textures
+			if (fireVelocity.x > 0) {
+				Game::assets->createProjectile(Vector2D(player->position.x, player->position.y), fireVelocity,
+					false, 1, 180, 1, "assets/egg.png");
+			}
+			else {
+				Game::assets->createProjectile(Vector2D(player->position.x, player->position.y), fireVelocity,
+					true, 1, 180, 1, "assets/egg.png");
+			}
 
-            lastFireTime = currentTicks;
-        }
+			lastFireTime = currentTicks;
+		}
 
-    }
+	}
 }
