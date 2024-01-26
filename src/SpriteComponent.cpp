@@ -16,14 +16,12 @@ SpriteComponent::SpriteComponent(const char* path, bool isAnimated)
 	animated = isAnimated;
 
 	Animation* idle = new Animation((int)AnimationType::IDLE, 2, 200);
-	Animation* walkR = new Animation((int)AnimationType::WALK_R, 2, 200);
-	Animation* walkL = new Animation((int)AnimationType::WALK_L, 2, 200);
+	Animation* walk = new Animation((int)AnimationType::WALK, 2, 200);
 
 	animations.emplace(IDLE, idle);
-	animations.emplace(WALK_R, walkR);
-	animations.emplace(WALK_L, walkL);
+	animations.emplace(WALK, walk);
 
-	play(IDLE);
+	playAnimation(IDLE);
 
 	setTexture(path);
 }
@@ -63,12 +61,22 @@ void SpriteComponent::update()
 
 void SpriteComponent::draw()
 {
-	TextureManager::get().draw(this->texture, this->srcRect, this->destRect);
+	TextureManager::get().draw(this->texture, this->srcRect, this->destRect, this->animated && this->flipped);
 }
 
-void SpriteComponent::play(AnimationType type)
+void SpriteComponent::playAnimation(AnimationType type)
 {
 	animationIndex = animations.at(type)->index;
 	frames = animations.at(type)->frames;
 	speed = animations.at(type)->speed;
+}
+
+void SpriteComponent::setDirection(SpriteDirection direction) 
+{
+	if (direction == RIGHT) {
+		this->flipped = true;
+		return;
+	}
+
+	this->flipped = false;	
 }
