@@ -57,10 +57,12 @@ void KeyboardController::update()
 			//checks player source via the firing velocity
 			//TODO: adding actual projectile textures
 			if (fireVelocity.x > 0) {
+				sprite->setDirection(RIGHT);
 				Game::assets->createProjectile(Vector2D(player->position.x, player->position.y), fireVelocity,
 					false, 1, 180, 1, "assets/egg.png");
 			}
 			else {
+				sprite->setDirection(LEFT);
 				Game::assets->createProjectile(Vector2D(player->position.x, player->position.y), fireVelocity,
 					true, 1, 180, 1, "assets/egg.png");
 			}
