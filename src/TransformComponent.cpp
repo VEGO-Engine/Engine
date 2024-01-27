@@ -44,12 +44,31 @@ void TransformComponent::update()
 	// if(velocity.x != 0 && velocity.y != 0)
 
 	float multiplier = velocity.x != 0 && velocity.y != 0 ? 0.707 : 1; //normalizes vector
+
 	Vector2D newPos(
 		position.x + velocity.x * speed * multiplier,
 		position.y + velocity.y * speed * multiplier
 	);
-	if (newPos.x < 0 || newPos.x + (this->width * this->scale) > SCREEN_SIZE_WIDTH || newPos.y < 0 || newPos.y + (this->height * this->scale) > SCREEN_SIZE_HEIGHT)
-		return;
+
+	if (newPos.x < 0)
+	{
+		newPos.x = 0;
+	}
+
+	if (newPos.x + (this->width * this->scale) > SCREEN_SIZE_WIDTH)
+	{
+		newPos.x = SCREEN_SIZE_WIDTH - (this->width * this->scale);
+	}
+
+	if (newPos.y < 0)
+	{
+		newPos.y = 0;
+	}
+
+	if (newPos.y + (this->height * this->scale) > SCREEN_SIZE_HEIGHT)
+	{
+		newPos.y = SCREEN_SIZE_HEIGHT - (this->height * this->scale);
+	}
 
 	position = newPos;
 }
