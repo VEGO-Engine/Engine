@@ -48,7 +48,7 @@ void TransformComponent::update()
 		position.x + velocity.x * speed * multiplier,
 		position.y + velocity.y * speed * multiplier
 	);
-	if (newPos.x < 0 || newPos.x > SCREEN_SIZE_WIDTH || newPos.y < 0 || newPos.y > SCREEN_SIZE_HEIGHT)
+	if (newPos.x < 0 || newPos.x + (this->width * this->scale) > SCREEN_SIZE_WIDTH || newPos.y < 0 || newPos.y + (this->height * this->scale) > SCREEN_SIZE_HEIGHT)
 		return;
 
 	position = newPos;

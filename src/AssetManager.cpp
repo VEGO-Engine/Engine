@@ -21,6 +21,6 @@ void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, bool source
     projectile.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, scale); //32x32 is standard size for objects
     projectile.addComponent<SpriteComponent>(texturePath);
     projectile.addComponent<ProjectileComponent>(range, speed, velocity, source);
-    projectile.addComponent<ColliderComponent>("projectile");
+    projectile.addComponent<ColliderComponent>("projectile", 0.6f);
     projectile.addGroup((size_t)GroupLabel::PROJECTILE);
 }
