@@ -158,11 +158,11 @@ void Game::update()
 	{
 		if (SDL_HasIntersection(&player.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "player") && cc->hasCollision)
 		{
-			player.getComponent<TransformComponent>().position = playerPos;
+			handleCollision(player.getComponent<TransformComponent>().position, player.getComponent<ColliderComponent>().collider, cc->collider);
 		}
 		if (SDL_HasIntersection(&enemy.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "enemy") && cc->hasCollision)
 		{
-			enemy.getComponent<TransformComponent>().position = enemyPos;
+			handleCollision(enemy.getComponent<TransformComponent>().position, enemy.getComponent<ColliderComponent>().collider, cc->collider);
 		}
 	}
 
@@ -261,4 +261,17 @@ bool Game::running() const
 
 bool Game::getWinner() {
 	return this->winner;
+}
+
+void Game::handleCollision(Vector2D& characterPos, SDL_Rect& characterCollider, SDL_Rect& componentCollider)
+{
+	// collision to right of character
+	if (characterPos.x < componentCollider.x)
+	{
+		characterPos.x = componentCollider.x - characterCollider.w;
+	}
+	else // collision to left of character
+	{
+		characterPos.x = componentCollider.x + componentCollider.w;
+	}
 }

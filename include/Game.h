@@ -4,6 +4,8 @@
 #include <SDL_image.h>
 #include <vector>
 
+#include "Vector2D.h"
+
 class AssetManager;
 class ColliderComponent;
 
@@ -28,6 +30,8 @@ public:
     static AssetManager* assets;
     
     bool getWinner();
+
+	void handleCollision(Vector2D& characterPos, SDL_Rect& characterCollider, SDL_Rect& componentCollider);
 
 private:
 	int counter = 0;
