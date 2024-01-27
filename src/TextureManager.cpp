@@ -20,5 +20,11 @@ SDL_Texture* TextureManager::loadTexture(const char* fileName)
 
 void TextureManager::draw(SDL_Texture* texture, SDL_Rect src, SDL_Rect dest)
 {
-	SDL_RenderCopy(Game::renderer, texture, &src, &dest);
+	draw(texture, src, dest, false);
+}
+
+void TextureManager::draw(SDL_Texture* texture, SDL_Rect src, SDL_Rect dest, bool flipped)
+{
+	SDL_RendererFlip flip = flipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
+	SDL_RenderCopyEx(Game::renderer, texture, &src, &dest, 0, NULL, flip);
 }

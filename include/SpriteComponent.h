@@ -8,6 +8,12 @@
 
 class TransformComponent;
 
+enum SpriteDirection
+{
+	LEFT,
+	RIGHT
+};
+
 class SpriteComponent : public Component
 {
 public:
@@ -23,6 +29,7 @@ private:
 	bool animated = false;
 	uint8_t frames = 0;
 	uint8_t speed = 100;
+	bool flipped;
 
 public:
 	SpriteComponent() = default;
@@ -35,5 +42,6 @@ public:
 	void init() override;
 	void update() override;
 	void draw() override;
-	void play(AnimationType type);
+	void playAnimation(AnimationType type);
+	void setDirection(SpriteDirection direction);
 };

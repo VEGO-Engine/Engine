@@ -19,8 +19,7 @@ struct Animation
 enum AnimationType //TODO enum class
 {
 	IDLE = 0,
-	WALK_R = 1,
-	WALK_L = 2
+	WALK = 1
 };
 
 
