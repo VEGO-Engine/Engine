@@ -20,8 +20,8 @@ public:
 
 	SpriteComponent* sprite;
 
-    //for attack cooldown in between shots
-    uint32_t lastFireTime;
+	//for attack cooldown in between shots
+	uint32_t lastFireTime;
 	uint32_t fireCooldown = 800; //in ms can be adjusted to change possible attack-speed
 
 	KeyboardController() = default;
