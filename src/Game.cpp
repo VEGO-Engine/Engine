@@ -113,14 +113,14 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	player.addComponent<TransformComponent>(80,80,2); //posx, posy, scale
 	player.addComponent<SpriteComponent>("assets/chicken_knight_spritesheet.png", true); //adds sprite (32x32px), path needed
 	player.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D, SDL_SCANCODE_E, Vector2D(1, 0));//custom keycontrols can be added
-	player.addComponent<ColliderComponent>("player"); //adds tag (for further use, reference tag)
+	player.addComponent<ColliderComponent>("player", 0.8f); //adds tag (for further use, reference tag)
 	player.addComponent<HealthComponent>(5, &manager, true);
 	player.addGroup((size_t)GroupLabel::PLAYERS); //tell programm what group it belongs to for rendering order
 
 	enemy.addComponent<TransformComponent>(600, 500, 2);
 	enemy.addComponent<SpriteComponent>("assets/chicken_spritesheet.png", true);
 	enemy.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT, SDL_SCANCODE_RCTRL, Vector2D(-1, 0));
-	enemy.addComponent<ColliderComponent>("enemy");
+	enemy.addComponent<ColliderComponent>("enemy", 0.8f);
 	enemy.addComponent<HealthComponent>(5, &manager, false);
 	enemy.addGroup((size_t)GroupLabel::ENEMIES);
 
