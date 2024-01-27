@@ -1,4 +1,5 @@
 #include "TransformComponent.h"
+#include "Constants.h"
 
 TransformComponent::TransformComponent()
 {
@@ -41,7 +42,14 @@ void TransformComponent::init()
 void TransformComponent::update()
 {
 	// if(velocity.x != 0 && velocity.y != 0)
-	double multiplier = velocity.x != 0 && velocity.y != 0 ? 0.707 : 1; //normalizes vector
-	position.x += velocity.x * speed * multiplier;
-	position.y += velocity.y * speed * multiplier;
+
+	float multiplier = velocity.x != 0 && velocity.y != 0 ? 0.707 : 1; //normalizes vector
+	Vector2D newPos(
+		position.x + velocity.x * speed * multiplier,
+		position.y + velocity.y * speed * multiplier
+	);
+	if (newPos.x < 0 || newPos.x > SCREEN_SIZE_WIDTH || newPos.y < 0 || newPos.y > SCREEN_SIZE_HEIGHT)
+		return;
+
+	position = newPos;
 }

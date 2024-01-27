@@ -15,9 +15,9 @@ SpriteComponent::SpriteComponent(const char* path, bool isAnimated)
 {
 	animated = isAnimated;
 
-	Animation* idle = new Animation((int)AnimationType::IDLE, 2, 200);
-	Animation* walkR = new Animation((int)AnimationType::WALK_R, 2, 200);
-	Animation* walkL = new Animation((int)AnimationType::WALK_L, 2, 200);
+	Animation* idle = new Animation((uint8_t)AnimationType::IDLE, 2, 200);
+	Animation* walkR = new Animation((uint8_t)AnimationType::WALK_R, 2, 200);
+	Animation* walkL = new Animation((uint8_t)AnimationType::WALK_L, 2, 200);
 
 	animations.emplace(IDLE, idle);
 	animations.emplace(WALK_R, walkR);
@@ -68,7 +68,7 @@ void SpriteComponent::draw()
 
 void SpriteComponent::play(AnimationType type)
 {
-	animationIndex = animations.at(type)->index;
-	frames = animations.at(type)->frames;
-	speed = animations.at(type)->speed;
+	this->animationIndex = animations.at(type)->index;
+	this->frames = animations.at(type)->frames;
+	this->speed = animations.at(type)->speed;
 }
