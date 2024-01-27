@@ -8,7 +8,7 @@
 ColliderComponent::ColliderComponent(const char* tag)
 {
 	this->tag = tag;
-    this->hasCollision = true;
+	this->hasCollision = true;
 	this->hitboxScale = 1;
 }
 
@@ -41,5 +41,5 @@ void ColliderComponent::update()
 
 void ColliderComponent::removeCollision()
 {
-    this->hasCollision = false;
+	this->hasCollision = false;
 }
