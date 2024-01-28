@@ -54,8 +54,7 @@ void TransformComponent::update()
 	{
 		newPos.x = 0;
 	}
-
-	if (newPos.x + (this->width * this->scale) > SCREEN_SIZE_WIDTH)
+	else if (newPos.x + (this->width * this->scale) > SCREEN_SIZE_WIDTH)
 	{
 		newPos.x = SCREEN_SIZE_WIDTH - (this->width * this->scale);
 	}
@@ -64,8 +63,7 @@ void TransformComponent::update()
 	{
 		newPos.y = 0;
 	}
-
-	if (newPos.y + (this->height * this->scale) > SCREEN_SIZE_HEIGHT)
+	else if (newPos.y + (this->height * this->scale) > SCREEN_SIZE_HEIGHT)
 	{
 		newPos.y = SCREEN_SIZE_HEIGHT - (this->height * this->scale);
 	}
