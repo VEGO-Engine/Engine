@@ -4,6 +4,8 @@
 #include <SDL_image.h>
 #include <vector>
 
+#include "Vector2D.h"
+
 class AssetManager;
 class ColliderComponent;
 

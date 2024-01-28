@@ -260,11 +260,25 @@ void Game::update()
 	{
 		if (SDL_HasIntersection(&player.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "player") && cc->hasCollision)
 		{
-			player.getComponent<TransformComponent>().position = playerPos;
+			if (!cc->isProjectile)
+			{
+				player.getComponent<ColliderComponent>().handleCollision(player.getComponent<TransformComponent>().position, player.getComponent<ColliderComponent>().collider, cc->collider);
+			}
+			else
+			{
+				player.getComponent<TransformComponent>().position = playerPos;
+			}
 		}
 		if (SDL_HasIntersection(&enemy.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "enemy") && cc->hasCollision)
 		{
-			enemy.getComponent<TransformComponent>().position = enemyPos;
+			if (!cc->isProjectile)
+			{
+				enemy.getComponent<ColliderComponent>().handleCollision(enemy.getComponent<TransformComponent>().position, enemy.getComponent<ColliderComponent>().collider, cc->collider);
+			}
+			else
+			{
+				enemy.getComponent<TransformComponent>().position = enemyPos;
+			}
 		}
 	}
 

@@ -25,6 +25,10 @@ void ColliderComponent::init()
 		entity->addComponent<TransformComponent>();
 	}
 
+	if (strcmp(this->tag, "projectile") == 0) {
+		this->isProjectile = true;
+	}
+
 	transform = &entity->getComponent<TransformComponent>();
 	Game::colliders.push_back(this);
 }
@@ -42,4 +46,17 @@ void ColliderComponent::update()
 void ColliderComponent::removeCollision()
 {
 	this->hasCollision = false;
+}
+
+void ColliderComponent::handleCollision(Vector2D& entityPos, SDL_Rect& entityCollider, SDL_Rect& componentCollider)
+{
+	// collision to right of character
+	if (entityPos.x < componentCollider.x)
+	{
+		entityPos.x = componentCollider.x - entityCollider.w;
+	}
+	else // collision to left of character
+	{
+		entityPos.x = componentCollider.x + componentCollider.w;
+	}
 }
