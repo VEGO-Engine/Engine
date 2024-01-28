@@ -8,6 +8,7 @@
 
 #include <SDL_rect.h>
 #include <bitset>
+#include <cstdio>
 
 IntersectionBitSet CollisionHandler::getIntersection(Entity* entityA, Entity* entityB) 
 {
@@ -31,17 +32,25 @@ IntersectionBitSet CollisionHandler::getIntersection(Entity* entityA, Entity* en
 	std::bitset<DIRECTION_C> intersections;
 
 	// checks all 4 directions to allow checking full overlap
-	if (colliderA->x + posModA.x < colliderB->x + colliderB->w + posModB.x)
-		intersections.set((size_t) direction::LEFT) = 1;
+	if (colliderA->x + posModA.x < colliderB->x + colliderB->w + posModB.x &&
+		colliderA->x + posModA.x > colliderB->x + posModB.x) {
+		printf("%zu left\n", (size_t) direction::LEFT);
+		intersections.set((size_t) direction::LEFT);
+	}
 
-	if (colliderA->x + colliderA->w + posModA.x > colliderB->x + posModB.x)
-		intersections.set((size_t) direction::RIGHT) = 1;
+	if (colliderA->x + colliderA->w + posModA.x < colliderB->x + colliderB->w + posModB.x &&
+		colliderA->x + colliderA->w + posModA.x > colliderB->x + posModB.x) {
+		printf("%zu right\n", (size_t) direction::RIGHT);
+		intersections.set((size_t) direction::RIGHT);
+	}
 
-	if (colliderA->y + posModA.y < colliderB->y + colliderB->h + posModB.y)
-		intersections.set((size_t) direction::UP) = 1;
+	if (colliderA->y + posModA.y < colliderB->y + colliderB->h + posModB.y &&
+		colliderA->y + posModA.y > colliderB->y + posModB.y)
+		intersections.set((size_t) direction::UP);
 
-	if (colliderA->y + colliderA->h + posModA.y > colliderB->y + posModB.y)
-		intersections.set((size_t) direction::DOWN) = 1;
+	if (colliderA->y + colliderA->h + posModA.y < colliderB->y + colliderB->h + posModB.y &&
+		colliderA->y + colliderA->h + posModA.y > colliderB->y + posModB.y)
+		intersections.set((size_t) direction::DOWN);
 
 	return intersections;
 }
