@@ -158,11 +158,25 @@ void Game::update()
 	{
 		if (SDL_HasIntersection(&player.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "player") && cc->hasCollision)
 		{
-			handleCollision(player.getComponent<TransformComponent>().position, player.getComponent<ColliderComponent>().collider, cc->collider);
+			if (!cc->isProjectile)
+			{
+				player.getComponent<ColliderComponent>().handleCollision(player.getComponent<TransformComponent>().position, player.getComponent<ColliderComponent>().collider, cc->collider);
+			}
+			else
+			{
+				player.getComponent<TransformComponent>().position = playerPos;
+			}
 		}
 		if (SDL_HasIntersection(&enemy.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "enemy") && cc->hasCollision)
 		{
-			handleCollision(enemy.getComponent<TransformComponent>().position, enemy.getComponent<ColliderComponent>().collider, cc->collider);
+			if (!cc->isProjectile)
+			{
+				enemy.getComponent<ColliderComponent>().handleCollision(enemy.getComponent<TransformComponent>().position, enemy.getComponent<ColliderComponent>().collider, cc->collider);
+			}
+			else
+			{
+				enemy.getComponent<TransformComponent>().position = enemyPos;
+			}
 		}
 	}
 
@@ -261,17 +275,4 @@ bool Game::running() const
 
 bool Game::getWinner() {
 	return this->winner;
-}
-
-void Game::handleCollision(Vector2D& characterPos, SDL_Rect& characterCollider, SDL_Rect& componentCollider)
-{
-	// collision to right of character
-	if (characterPos.x < componentCollider.x)
-	{
-		characterPos.x = componentCollider.x - characterCollider.w;
-	}
-	else // collision to left of character
-	{
-		characterPos.x = componentCollider.x + componentCollider.w;
-	}
 }
