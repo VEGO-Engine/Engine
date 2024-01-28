@@ -5,6 +5,7 @@
 #include "AssetManager.h"
 #include "Map.h"
 #include "TextureManager.h"
+#include "Constants.h"
 
 Map* map;
 Manager manager;
@@ -61,7 +62,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
 	SDL_RenderPresent(renderer);
 
-	SDL_Event event;
+	//SDL_Event event;
 	bool hasQuit = false;
 
 	while (!hasQuit)
@@ -96,7 +97,12 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		return;
 	}
 
-	this->isRunning = true;
+	// character selection
+	const char* playerSprite;
+	const char* enemySprite;
+
+	selectCharacters(playerSprite, enemySprite);
+	if (this->isRunning == false) return;
 
 	map = new Map();
 	map->loadMap("assets/SDL_map_test.txt", 25, 20);
@@ -111,19 +117,115 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	//ecs implementation
 
 	player.addComponent<TransformComponent>(80,80,2); //posx, posy, scale
-	player.addComponent<SpriteComponent>("assets/chicken_knight_spritesheet.png", true); //adds sprite (32x32px), path needed
+	player.addComponent<SpriteComponent>(playerSprite, true); //adds sprite (32x32px), path needed
 	player.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D, SDL_SCANCODE_E, Vector2D(1, 0));//custom keycontrols can be added
 	player.addComponent<ColliderComponent>("player", 0.8f); //adds tag (for further use, reference tag)
 	player.addComponent<HealthComponent>(5, &manager, true);
 	player.addGroup((size_t)GroupLabel::PLAYERS); //tell programm what group it belongs to for rendering order
 
 	enemy.addComponent<TransformComponent>(600, 500, 2);
-	enemy.addComponent<SpriteComponent>("assets/chicken_spritesheet.png", true);
+	enemy.addComponent<SpriteComponent>(enemySprite, true);
 	enemy.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT, SDL_SCANCODE_RCTRL, Vector2D(-1, 0));
 	enemy.addComponent<ColliderComponent>("enemy", 0.8f);
 	enemy.addComponent<HealthComponent>(5, &manager, false);
 	enemy.addGroup((size_t)GroupLabel::ENEMIES);
 
+}
+
+void Game::selectCharacters(const char* &playerSprite, const char* &enemySprite)
+{	
+	// TODO: move this whereever it makes sense (maybe game as a member)
+	std::map<int, std::pair<const char*, const char*>> characterSprites;
+	characterSprites[0] = std::make_pair("assets/chicken_neutral_knight.png", "assets/chicken_knight_spritesheet.png");
+	characterSprites[1] = std::make_pair("assets/chicken_neutral.png", "assets/chicken_spritesheet.png");
+	characterSprites[2] = std::make_pair("assets/chicken_neutral_wizard.png", "assets/chicken_wizard_spritesheet.png");
+	characterSprites[3] = std::make_pair("assets/chicken_neutral_mlady.png", "assets/chicken_mlady_spritesheet.png");
+
+	SDL_Rect playerCharacterRects[CHARACTER_COUNT];
+	SDL_Rect enemyCharacterRects[CHARACTER_COUNT];
+	SDL_Texture* characterTextures[CHARACTER_COUNT];
+
+	int playerSelection = 0;
+	int enemySelection = 0;
+
+	// load textures
+	for (int i = 0; i < CHARACTER_COUNT; ++i)
+	{
+		characterTextures[i] = IMG_LoadTexture(renderer, characterSprites.find(i)->second.first);
+	}
+
+	// set up initial positions for character rects
+	for (int i = 0; i < CHARACTER_COUNT; ++i)
+	{
+		playerCharacterRects[i] = { 134 + (i % 2) * 118, 272 + ((i >= 2) ? 114 : 0), 64, 64 };
+		enemyCharacterRects[i] = { 485 + (i % 2) * 118, 273 + ((i >= 2) ? 114 : 0), 64, 64 };
+	}
+
+	bool hasQuit = false;
+
+	while (!hasQuit)
+	{
+		SDL_PollEvent(&event);
+
+		if (event.type == SDL_QUIT)
+		{
+			hasQuit = true;
+		}
+
+		if (event.type == SDL_KEYDOWN)
+		{
+			if (event.key.keysym.scancode == SDL_SCANCODE_RETURN)
+			{
+				break;
+			}
+
+			switch (event.key.keysym.scancode)
+			{
+			case SDL_SCANCODE_A:
+				playerSelection = (playerSelection - 1 + CHARACTER_COUNT) % CHARACTER_COUNT;
+				break;
+			case SDL_SCANCODE_D:
+				playerSelection = (playerSelection + 1) % CHARACTER_COUNT;
+				break;
+
+			case SDL_SCANCODE_LEFT:
+				enemySelection = (enemySelection - 1 + CHARACTER_COUNT) % CHARACTER_COUNT;
+				break;
+			case SDL_SCANCODE_RIGHT:
+				enemySelection = (enemySelection + 1) % CHARACTER_COUNT;
+				break;
+
+			default:
+				break;
+			}
+		}
+
+		SDL_Texture* backgroundTexture = TextureManager::get().loadTexture("assets/characterSelection.png");
+		SDL_RenderClear(renderer);
+		SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
+
+		for (int i = 0; i < CHARACTER_COUNT; ++i)
+		{
+			SDL_RenderCopy(renderer, characterTextures[i], nullptr, &playerCharacterRects[i]);
+			SDL_RenderCopy(renderer, characterTextures[i], nullptr, &enemyCharacterRects[i]);
+		}
+
+		SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+		SDL_RenderDrawRect(renderer, &playerCharacterRects[playerSelection]);
+		SDL_RenderDrawRect(renderer, &enemyCharacterRects[enemySelection]);
+
+		SDL_RenderPresent(renderer);
+	}
+
+	if (hasQuit)
+	{
+		this->isRunning = false;
+		return;
+	}
+
+	playerSprite = characterSprites.find(playerSelection)->second.second;
+	enemySprite = characterSprites.find(enemySelection)->second.second;
+	this->isRunning = true;
 }
 
 auto& tiles(manager.getGroup((size_t)GroupLabel::MAP));

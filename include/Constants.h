@@ -4,6 +4,8 @@
 
 using Group = std::size_t;
 
+constexpr int CHARACTER_COUNT = 4;
+
 constexpr std::size_t MAX_COMPONENTS = 32;
 constexpr std::size_t MAX_GROUPS = 32;
 
@@ -16,4 +18,3 @@ constexpr int TILE_SIZE = 32;
 
 constexpr int MAP_SIZE_X = 25;
 constexpr int MAP_SIZE_Y = 20;
-
