@@ -13,6 +13,7 @@ public:
 	friend Vector2D& operator-(Vector2D& vector1, const Vector2D& vector2);
 	friend Vector2D& operator*(Vector2D& vector1, const Vector2D& vector2);
 	friend Vector2D& operator/(Vector2D& vector1, const Vector2D& vector2);
+	friend Vector2D& operator+=(Vector2D& vector1, const Vector2D& vector2);
 
 	Vector2D& operator*(const int& i);
 	Vector2D& zero();

@@ -2,17 +2,6 @@
 
 class Entity;
 
-enum class GroupLabel
-{
-	MAP,
-	PLAYERS,
-	ENEMIES,
-	COLLIDERS,
-    PROJECTILE,
-    HEARTS,
-	POWERUPS
-};
-
 class Component
 {
 public:

@@ -1,5 +1,7 @@
 #include "Powerup.h"
 
+#include "CollisionHandler.h"
+#include "Entity.h"
 #include "TextureDict.h"
 #include <SDL.h>
 #include "Constants.h"
@@ -17,7 +19,7 @@ Vector2D Powerup::calculateSpawnPosition()
 		spawnRect.x = rand() % (SCREEN_SIZE_WIDTH - spawnRect.w);
 		spawnRect.y = rand() % (SCREEN_SIZE_HEIGHT - spawnRect.h);
 		conflict = false;
-		for (auto cc : Game::colliders)
+		for (auto cc : Game::collisionHandler->getColliders(GroupLabel::MAPTILES))
 		{
 			if (SDL_HasIntersection(&spawnRect, &cc->collider) && strcmp(cc->tag, "projectile"))
 			{

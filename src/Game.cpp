@@ -1,8 +1,10 @@
 #include "Game.h"
 
+#include "CollisionHandler.h"
 #include "Components.h"
 
 #include "AssetManager.h"
+#include "Entity.h"
 #include "Map.h"
 #include "TextureManager.h"
 #include "Powerup.h"
@@ -12,14 +14,15 @@ Manager manager;
 
 AssetManager* Game::assets = new AssetManager(&manager);
 
+CollisionHandler* Game::collisionHandler = new CollisionHandler(manager);
+
 SDL_Renderer* Game::renderer = nullptr;
 
 SDL_Event Game::event;
 
-std::vector<ColliderComponent*> Game::colliders;
+auto& player1(manager.addEntity());
+auto& player2(manager.addEntity());
 
-auto& player(manager.addEntity());
-auto& enemy(manager.addEntity());
 auto& wall(manager.addEntity());
 
 Game::Game() = default;
@@ -110,25 +113,27 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	//ecs implementation
 
-	player.addComponent<TransformComponent>(80,80,2); //posx, posy, scale
-	player.addComponent<SpriteComponent>("assets/chicken_knight_spritesheet.png", true); //adds sprite (32x32px), path needed
-	player.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D, SDL_SCANCODE_E, Vector2D(1, 0));//custom keycontrols can be added
-	player.addComponent<ColliderComponent>("player", 0.8f); //adds tag (for further use, reference tag)
-	player.addComponent<HealthComponent>(5, &manager, true);
-	player.addGroup((size_t)GroupLabel::PLAYERS); //tell programm what group it belongs to for rendering order
+	player1.addComponent<TransformComponent>(80,80,2); //posx, posy, scale
+	player1.addComponent<SpriteComponent>("assets/chicken_knight_spritesheet.png", true); //adds sprite (32x32px), path needed
+	player1.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D, SDL_SCANCODE_E, Vector2D(1, 0));//custom keycontrols can be added
+	player1.addComponent<ColliderComponent>("player", 0.8f); //adds tag (for further use, reference tag)
+	player1.addComponent<HealthComponent>(5, &manager, true);
+	player1.addGroup((size_t) GroupLabel::PLAYERS); //tell programm what group it belongs to for rendering order
+	player1.setTeam(TeamLabel::BLUE);
 
-	enemy.addComponent<TransformComponent>(600, 500, 2);
-	enemy.addComponent<SpriteComponent>("assets/chicken_spritesheet.png", true);
-	enemy.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT, SDL_SCANCODE_RCTRL, Vector2D(-1, 0));
-	enemy.addComponent<ColliderComponent>("enemy", 0.8f);
-	enemy.addComponent<HealthComponent>(5, &manager, false);
-	enemy.addGroup((size_t)GroupLabel::ENEMIES);
+	player2.addComponent<TransformComponent>(600, 500, 2);
+	player2.addComponent<SpriteComponent>("assets/chicken_spritesheet.png", true);
+	player2.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT, SDL_SCANCODE_RCTRL, Vector2D(-1, 0));
+	player2.addComponent<ColliderComponent>("enemy", 0.8f);
+	player2.addComponent<HealthComponent>(5, &manager, false);
+	player2.addGroup((size_t) GroupLabel::PLAYERS);
+	player2.setTeam(TeamLabel::RED);
 
 }
 
-auto& tiles(manager.getGroup((size_t)GroupLabel::MAP));
+auto& tiles(manager.getGroup((size_t)GroupLabel::MAPTILES));
 auto& players(manager.getGroup((size_t)GroupLabel::PLAYERS));
-auto& enemies(manager.getGroup((size_t)GroupLabel::ENEMIES));
+auto& enemies(manager.getGroup((size_t)GroupLabel::PLAYERS));
 auto& projectiles(manager.getGroup((size_t)GroupLabel::PROJECTILE));
 auto& hearts(manager.getGroup((size_t)GroupLabel::HEARTS));
 auto& powerups(manager.getGroup((size_t)GroupLabel::POWERUPS));
@@ -149,8 +154,8 @@ void Game::handleEvents()
 
 void Game::update()
 {
-	Vector2D playerPos = player.getComponent<TransformComponent>().position;
-	Vector2D enemyPos = enemy.getComponent<TransformComponent>().position;
+	Vector2D playerPos = player1.getComponent<TransformComponent>().position;
+	Vector2D enemyPos = player2.getComponent<TransformComponent>().position;
 
 	int powerupSpawn = rand() % 500;
 
@@ -162,58 +167,46 @@ void Game::update()
 		assets->createPowerup(Powerup::calculateSpawnPosition(), Powerup::calculateType());
 	}
 
-	for (auto cc : colliders)
-	{
-		if (SDL_HasIntersection(&player.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "player"))
-		{
-			player.getComponent<TransformComponent>().position = playerPos;
-		}
-		if (SDL_HasIntersection(&enemy.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "enemy"))
-		{
-			enemy.getComponent<TransformComponent>().position = enemyPos;
-		}
-	}
-
 	//checking if projectiles hit player1 or player2
 	for (auto& p : projectiles) {
-		if(SDL_HasIntersection(&enemy.getComponent<ColliderComponent>().collider, &p->getComponent<ColliderComponent>().collider)
+		if(SDL_HasIntersection(&player2.getComponent<ColliderComponent>().collider, &p->getComponent<ColliderComponent>().collider)
 		&& (p->getComponent<ColliderComponent>().hasCollision) && !p->getComponent<ProjectileComponent>().getSource()) {
 			//std::cout << "Enemy hit!";
 			p->getComponent<ColliderComponent>().removeCollision();
 			p->destroy();
 
-			enemy.getComponent<HealthComponent>().getDamage();
+			player2.getComponent<HealthComponent>().getDamage();
 
 			//display updated health | pretty scuffed but works ig
 			for(auto h : hearts)
 				h->destroy();
 
-			player.getComponent<HealthComponent>().createAllHearts();
-			enemy.getComponent<HealthComponent>().createAllHearts();
+			player1.getComponent<HealthComponent>().createAllHearts();
+			player2.getComponent<HealthComponent>().createAllHearts();
 
-			if(enemy.getComponent<HealthComponent>().getHealth() < 1) {
+			if(player2.getComponent<HealthComponent>().getHealth() < 1) {
 				std::cout << "Player1 wins!" << std::endl;
 				winner = true;
 				isRunning = false;
 			}
 		}
 
-		if(SDL_HasIntersection(&player.getComponent<ColliderComponent>().collider, &p->getComponent<ColliderComponent>().collider)
+		if(SDL_HasIntersection(&player1.getComponent<ColliderComponent>().collider, &p->getComponent<ColliderComponent>().collider)
 		&& (p->getComponent<ColliderComponent>().hasCollision) && p->getComponent<ProjectileComponent>().getSource()) {
 			//std::cout << "Player hit!";
 			p->getComponent<ColliderComponent>().removeCollision();
 			p->destroy();
 
-			player.getComponent<HealthComponent>().getDamage();
+			player1.getComponent<HealthComponent>().getDamage();
 
 			//display updated health
 			for(auto h : hearts)
 				h->destroy();
 
-			player.getComponent<HealthComponent>().createAllHearts();
-			enemy.getComponent<HealthComponent>().createAllHearts();
+			player1.getComponent<HealthComponent>().createAllHearts();
+			player2.getComponent<HealthComponent>().createAllHearts();
 
-			if(player.getComponent<HealthComponent>().getHealth() < 1) {
+			if(player1.getComponent<HealthComponent>().getHealth() < 1) {
 				std::cout << "Player2 wins!" << std::endl;
 				winner = false;
 				isRunning = false;
@@ -259,7 +252,7 @@ void Game::addTile(int id, int x, int y)
 	auto& tile(manager.addEntity());
 	tile.addComponent<TileComponent>(x, y, TILE_SIZE, TILE_SIZE, id);
 	if (id == 1) tile.addComponent<ColliderComponent>("water");
-	tile.addGroup((size_t)GroupLabel::MAP);
+	tile.addGroup((size_t)GroupLabel::MAPTILES);
 }
 
 bool Game::running() const

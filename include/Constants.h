@@ -3,9 +3,11 @@
 #include <cstddef>
 
 using Group = std::size_t;
+using Team = std::size_t;
 
 constexpr std::size_t MAX_COMPONENTS = 32;
 constexpr std::size_t MAX_GROUPS = 32;
+constexpr std::size_t MAX_TEAMS = 8; // 
 
 constexpr int SCREEN_SIZE_HEIGHT = 640;
 constexpr int SCREEN_SIZE_WIDTH = 800;
