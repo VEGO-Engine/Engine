@@ -73,10 +73,5 @@ void SpriteComponent::playAnimation(AnimationType type)
 
 void SpriteComponent::setDirection(SpriteDirection direction) 
 {
-	if (direction == RIGHT) {
-		this->flipped = true;
-		return;
-	}
-
-	this->flipped = false;	
+	this->flipped = direction == RIGHT;
 }

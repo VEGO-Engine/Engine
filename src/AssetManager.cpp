@@ -24,3 +24,24 @@ void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, bool source
     projectile.addComponent<ColliderComponent>("projectile", 0.6f);
     projectile.addGroup((size_t)GroupLabel::PROJECTILE);
 }
+
+void AssetManager::createPowerup(Vector2D pos, PowerupType type) {
+    TextureDict textureDict;
+
+    auto& powerups(man->addEntity());
+    powerups.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, 1); //32x32 is standard size for objects
+    auto it = textureDict.powerupDictionary.find(type);
+    if (it == textureDict.powerupDictionary.end()) {
+        std::cout << "it end" << std::endl;
+    }
+
+    try {
+        powerups.addComponent<SpriteComponent>(it->second.data());
+    }
+    catch (std::runtime_error e) {
+        std::cout << e.what() << std::endl;
+    }
+
+    powerups.addComponent<ColliderComponent>("powerup", 0.6f);
+    powerups.addGroup((size_t)GroupLabel::POWERUPS);
+}

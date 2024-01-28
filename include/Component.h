@@ -9,7 +9,8 @@ enum class GroupLabel
 	ENEMIES,
 	COLLIDERS,
     PROJECTILE,
-    HEARTS
+    HEARTS,
+	POWERUPS
 };
 
 class Component

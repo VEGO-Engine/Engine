@@ -5,6 +5,7 @@
 #include "AssetManager.h"
 #include "Map.h"
 #include "TextureManager.h"
+#include "Powerup.h"
 
 Map* map;
 Manager manager;
@@ -20,7 +21,6 @@ std::vector<ColliderComponent*> Game::colliders;
 auto& player(manager.addEntity());
 auto& enemy(manager.addEntity());
 auto& wall(manager.addEntity());
-//auto& projectile (manager.addEntity());
 
 Game::Game() = default;
 
@@ -131,6 +131,7 @@ auto& players(manager.getGroup((size_t)GroupLabel::PLAYERS));
 auto& enemies(manager.getGroup((size_t)GroupLabel::ENEMIES));
 auto& projectiles(manager.getGroup((size_t)GroupLabel::PROJECTILE));
 auto& hearts(manager.getGroup((size_t)GroupLabel::HEARTS));
+auto& powerups(manager.getGroup((size_t)GroupLabel::POWERUPS));
 
 void Game::handleEvents()
 {
@@ -151,16 +152,23 @@ void Game::update()
 	Vector2D playerPos = player.getComponent<TransformComponent>().position;
 	Vector2D enemyPos = enemy.getComponent<TransformComponent>().position;
 
+	int powerupSpawn = rand() % 500;
+
 	manager.refresh();
 	manager.update();
 
+	if (powerupSpawn == 0)
+	{
+		assets->createPowerup(Powerup::calculateSpawnPosition(), Powerup::calculateType());
+	}
+
 	for (auto cc : colliders)
 	{
-		if (SDL_HasIntersection(&player.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "player") && cc->hasCollision)
+		if (SDL_HasIntersection(&player.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "player"))
 		{
 			player.getComponent<TransformComponent>().position = playerPos;
 		}
-		if (SDL_HasIntersection(&enemy.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "enemy") && cc->hasCollision)
+		if (SDL_HasIntersection(&enemy.getComponent<ColliderComponent>().collider, &cc->collider) && strcmp(cc->tag, "enemy"))
 		{
 			enemy.getComponent<TransformComponent>().position = enemyPos;
 		}
@@ -218,17 +226,17 @@ void Game::render()
 {
 	SDL_RenderClear(renderer);
 	for (auto& t : tiles)
-	{
 		t->draw();
-	}
-	for (auto& p : players)
-	{
+
+	for (auto& p : powerups)
 		p->draw();
-	}
+
+	for (auto& p : players)
+		p->draw();
+
 	for (auto& e : enemies)
-	{
 		e->draw();
-	}
+
 	for (auto& p : projectiles)
 		p->draw();
 

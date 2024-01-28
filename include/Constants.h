@@ -17,3 +17,5 @@ constexpr int TILE_SIZE = 32;
 constexpr int MAP_SIZE_X = 25;
 constexpr int MAP_SIZE_Y = 20;
 
+constexpr int SPAWN_ATTEMPTS = 30;
+
