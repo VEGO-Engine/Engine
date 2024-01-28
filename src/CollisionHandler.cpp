@@ -94,11 +94,18 @@ IntersectionBitSet CollisionHandler::getIntersectionWithBounds(Entity* entity, V
 	return intersections;
 }
 
-std::vector<ColliderComponent*> CollisionHandler::getColliders(GroupLabel groupLabel) 
+std::vector<ColliderComponent*> CollisionHandler::getColliders(std::initializer_list<GroupLabel> const& groupLabels) 
 {
 	std::vector<ColliderComponent*> colliders;
 
-	for (auto& entity : manager.getGroup((size_t) groupLabel)) {
+	std::bitset<MAX_GROUPS> groupBitSet;
+	for (auto& groupLabel : groupLabels) {
+		groupBitSet.set((size_t) groupLabel);
+	}
+
+	for (auto& entity : manager.getAll()) {
+		if ((groupBitSet & entity->getGroupBitSet()).none())
+			continue;
 		if (!entity->hasComponent<ColliderComponent>())
 			continue;
 		colliders.emplace_back(&entity->getComponent<ColliderComponent>());

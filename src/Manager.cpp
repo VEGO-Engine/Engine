@@ -1,8 +1,10 @@
 #include "Manager.h"
 
 #include <algorithm>
+#include <vector>
 
 #include "Constants.h"
+#include "Entity.h"
 
 void Manager::draw()
 {
@@ -64,6 +66,15 @@ void Manager::addToTeam(Entity* mEntity, Team mTeam)
 std::vector<Entity*>& Manager::getTeam(Team mTeam)
 {
 	return entitiesByTeam[mTeam];
+}
+
+std::vector<Entity*> Manager::getAll()
+{
+	std::vector<Entity*> entity_vec;
+	for (auto& entity_ptr : entities) {
+		entity_vec.emplace_back(entity_ptr.get());
+	}
+	return entity_vec;
 }
 
 Entity& Manager::addEntity()

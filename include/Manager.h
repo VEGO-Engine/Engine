@@ -20,6 +20,8 @@ public:
 	void addToTeam(Entity* mEntity, Team mTeam);
 	std::vector<Entity*>& getTeam(Team mTeam);
 
+	std::vector<Entity*> getAll();
+
 	Entity& addEntity();
 
 private:

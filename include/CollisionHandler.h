@@ -1,13 +1,17 @@
 #pragma once
 
+#include "Constants.h"
 #include "Entity.h"
 #include "SDL_rect.h"
 #include "SpriteComponent.h"
 #include "Vector2D.h"
+#include "Manager.h"
+
+#include <bitset>
+#include <initializer_list>
 #include <vector>
 
 class ColliderComponent;
-class Manager;
 class Entity;
 
 constexpr uint8_t DIRECTION_C = 4;
@@ -39,7 +43,7 @@ public:
 	static IntersectionBitSet getIntersectionWithBounds(Entity* entity);// will fail if speed high enough to switch from no collision to full overlap in one tick
 	static IntersectionBitSet getIntersectionWithBounds(Entity* entity, Vector2D posMod);
 
-	std::vector<ColliderComponent*> getColliders(GroupLabel groupLabel); // temporary function, remove once game.cpp cleaned up
+	std::vector<ColliderComponent*> getColliders(std::initializer_list<GroupLabel> const& groupLabels); // temporary function, remove once game.cpp cleaned up
 
 	void update();
 };

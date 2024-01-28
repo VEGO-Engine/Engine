@@ -47,6 +47,7 @@ public:
 	bool hasGroup(Group mGroup);
 	void addGroup(Group mGroup);
 	void delGroup(Group mGroup);
+	std::bitset<MAX_GROUPS> getGroupBitSet();
 
 	void setTeam(TeamLabel teamLabel);
 	TeamLabel getTeam();
