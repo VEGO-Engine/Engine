@@ -9,6 +9,7 @@
 #include <SDL_rect.h>
 #include <bitset>
 #include <cstdio>
+#include <memory>
 
 IntersectionBitSet CollisionHandler::getIntersection(Entity* entityA, Entity* entityB) 
 {
@@ -21,35 +22,39 @@ IntersectionBitSet CollisionHandler::getIntersection(Entity* entityA, Entity* en
 		!entityB->hasComponent<ColliderComponent>())
 		return std::bitset<DIRECTION_C>();
 
-	SDL_Rect* colliderA = &entityA->getComponent<ColliderComponent>().collider;
-	SDL_Rect* colliderB = &entityB->getComponent<ColliderComponent>().collider;
+	SDL_Rect colliderA = entityA->getComponent<ColliderComponent>().collider;
+	SDL_Rect colliderB = entityB->getComponent<ColliderComponent>().collider;
+
+	colliderA.x += posModA.x;
+	colliderA.y += posModA.y;
+
+	colliderB.x += posModB.x;
+	colliderB.y += posModB.y;
 
 	if (!SDL_HasIntersection(
-		colliderA,
-		colliderB))
+		&colliderA,
+		&colliderB))
 		return std::bitset<DIRECTION_C>();
 
 	std::bitset<DIRECTION_C> intersections;
 
 	// checks all 4 directions to allow checking full overlap
-	if (colliderA->x + posModA.x < colliderB->x + colliderB->w + posModB.x &&
-		colliderA->x + posModA.x > colliderB->x + posModB.x) {
-		printf("%zu left\n", (size_t) direction::LEFT);
+	if (colliderA.x < colliderB.x + colliderB.w &&
+		colliderA.x > colliderB.x) {
 		intersections.set((size_t) direction::LEFT);
 	}
 
-	if (colliderA->x + colliderA->w + posModA.x < colliderB->x + colliderB->w + posModB.x &&
-		colliderA->x + colliderA->w + posModA.x > colliderB->x + posModB.x) {
-		printf("%zu right\n", (size_t) direction::RIGHT);
+	if (colliderA.x + colliderA.w < colliderB.x + colliderB.w &&
+		colliderA.x + colliderA.w > colliderB.x) {
 		intersections.set((size_t) direction::RIGHT);
 	}
 
-	if (colliderA->y + posModA.y < colliderB->y + colliderB->h + posModB.y &&
-		colliderA->y + posModA.y > colliderB->y + posModB.y)
+	if (colliderA.y < colliderB.y + colliderB.h &&
+		colliderA.y > colliderB.y)
 		intersections.set((size_t) direction::UP);
 
-	if (colliderA->y + colliderA->h + posModA.y < colliderB->y + colliderB->h + posModB.y &&
-		colliderA->y + colliderA->h + posModA.y > colliderB->y + posModB.y)
+	if (colliderA.y + colliderA.h < colliderB.y + colliderB.h &&
+		colliderA.y + colliderA.h > colliderB.y)
 		intersections.set((size_t) direction::DOWN);
 
 	return intersections;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entity.h"
+#include "SDL_rect.h"
 #include "SpriteComponent.h"
 #include "Vector2D.h"
 #include <vector>
