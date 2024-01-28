@@ -12,8 +12,11 @@ set(PROJECT_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR})
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(BUILD_SHARED_LIBS FALSE)
 
+set(SDL2MIXER_VENDORED ON)
+
 add_subdirectory(extern/SDL EXCLUDE_FROM_ALL)
 add_subdirectory(extern/SDL_image EXCLUDE_FROM_ALL)
+add_subdirectory(extern/SDL_mixer EXCLUDE_FROM_ALL)
 
 file(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp)
 add_executable(${PROJECT_NAME} ${SOURCES})
@@ -24,6 +27,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     SDL2::SDL2main
     SDL2::SDL2-static
     SDL2_image::SDL2_image-static
+    SDL2_mixer::SDL2_mixer-static
 )
 
 file(COPY ${PROJECT_SOURCE_DIR}/assets DESTINATION ${PROJECT_BINARY_DIR})
