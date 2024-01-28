@@ -62,6 +62,12 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
 	SDL_RenderPresent(renderer);
 
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+	{
+		std::cout << "ERROR: Mixer couldnt be initialized!" << std::endl;
+		return;
+	}
+
 	//SDL_Event event;
 	bool hasQuit = false;
 
@@ -113,6 +119,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     assets->addTexture("player2", "assets/chicken_neutral.png");
     assets->addTexture("egg", "assets/egg.png");
 
+	// loading sounds
+	assets->addSoundEffect("throw_egg", "assets/sound/throw_egg.wav");
+	assets->addSoundEffect("steps", "assets/sound/steps.wav");
 
 	//ecs implementation
 

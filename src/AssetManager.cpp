@@ -1,6 +1,7 @@
 #include "AssetManager.h"
 
 #include "TextureManager.h"
+#include "SoundManager.h"
 #include "Components.h"
 
 AssetManager::AssetManager(Manager* manager) : man(manager) {}
@@ -11,8 +12,17 @@ void AssetManager::addTexture(std::string id, const char* path) {
     textures.emplace(id, TextureManager::get().loadTexture(path));
 }
 
+void AssetManager::addSoundEffect(std::string id, const char* path)
+{
+    soundEffects.emplace(id, SoundManager::get().loadSound(path));
+}
+
 SDL_Texture* AssetManager::getTexture(std::string id) {
     return textures.at(id);
+}
+
+Mix_Chunk* AssetManager::getSound(std::string id) {
+    return soundEffects.at(id);
 }
 
 void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, bool source, int scale, int range, int speed, const char* texturePath) {
