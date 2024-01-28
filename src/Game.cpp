@@ -5,6 +5,7 @@
 #include "AssetManager.h"
 #include "Map.h"
 #include "TextureManager.h"
+#include "Constants.h"
 
 Map* map;
 Manager manager;
@@ -132,15 +133,13 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 }
 
 void Game::selectCharacters(const char* &playerSprite, const char* &enemySprite)
-{
-	constexpr int CHARACTER_COUNT = 3;
-	
+{	
 	// TODO: move this whereever it makes sense (maybe game as a member)
 	std::map<int, std::pair<const char*, const char*>> characterSprites;
-
 	characterSprites[0] = std::make_pair("assets/chicken_neutral_knight.png", "assets/chicken_knight_spritesheet.png");
 	characterSprites[1] = std::make_pair("assets/chicken_neutral.png", "assets/chicken_spritesheet.png");
-	characterSprites[2] = std::make_pair("assets/chicken_neutral_knight.png", "assets/chicken_knight_spritesheet.png");
+	characterSprites[2] = std::make_pair("assets/chicken_neutral.png", "assets/chicken_spritesheet.png");
+	characterSprites[3] = std::make_pair("assets/chicken_neutral_knight.png", "assets/chicken_knight_spritesheet.png");
 
 	SDL_Rect playerCharacterRects[CHARACTER_COUNT];
 	SDL_Rect enemyCharacterRects[CHARACTER_COUNT];
@@ -158,8 +157,8 @@ void Game::selectCharacters(const char* &playerSprite, const char* &enemySprite)
 	// set up initial positions for character rects
 	for (int i = 0; i < CHARACTER_COUNT; ++i)
 	{
-		playerCharacterRects[i] = { 50 + i * 100, 200, 64, 64 };
-		enemyCharacterRects[i] = { 450 + i * 100, 200, 64, 64 };
+		playerCharacterRects[i] = { 134 + (i % 2) * 118, 272 + ((i >= 2) ? 114 : 0), 64, 64 };
+		enemyCharacterRects[i] = { 485 + (i % 2) * 118, 273 + ((i >= 2) ? 114 : 0), 64, 64 };
 	}
 
 	bool hasQuit = false;
@@ -201,8 +200,9 @@ void Game::selectCharacters(const char* &playerSprite, const char* &enemySprite)
 			}
 		}
 
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+		SDL_Texture* backgroundTexture = TextureManager::get().loadTexture("assets/characterSelection.png");
 		SDL_RenderClear(renderer);
+		SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
 
 		for (int i = 0; i < CHARACTER_COUNT; ++i)
 		{
