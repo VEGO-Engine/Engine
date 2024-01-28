@@ -159,24 +159,6 @@ void Game::update()
 	manager.refresh();
 	manager.update();
 
-	
-
-	/*for (auto cc : Game::collisionHandler->getColliders(GroupLabel::COLLIDERS))
-	{
-		if (cc->hasCollision &&
-			strcmp(cc->tag, "player") &&
-			SDL_HasIntersection(&player1.getComponent<ColliderComponent>().collider, &cc->collider))
-		{
-			player1.getComponent<TransformComponent>().position = playerPos;
-		}
-		if (cc->hasCollision && 
-			strcmp(cc->tag, "enemy") &&
-			SDL_HasIntersection(&player2.getComponent<ColliderComponent>().collider, &cc->collider))
-		{
-			player2.getComponent<TransformComponent>().position = enemyPos;
-		}
-	}*/
-
 	//checking if projectiles hit player1 or player2
 	for (auto& p : projectiles) {
 		if(SDL_HasIntersection(&player2.getComponent<ColliderComponent>().collider, &p->getComponent<ColliderComponent>().collider)
