@@ -75,9 +75,6 @@ void TransformComponent::update()
 			intersectionsY |= CollisionHandler::getIntersection(entity, collider->entity, Vector2D(0, positionChange.y), Vector2D(0, 0));
 		}
 
-		if (this->entity->hasGroup((size_t) GroupLabel::PLAYERS) && this->entity->getTeam() == TeamLabel::BLUE)
-			std::cout << intersectionsX << std::endl;
-
 		if (intersectionsX.test((size_t) direction::LEFT) && positionChange.x < 0)
 			positionChange.x = 0;
 
