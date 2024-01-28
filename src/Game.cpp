@@ -138,8 +138,8 @@ void Game::selectCharacters(const char* &playerSprite, const char* &enemySprite)
 	std::map<int, std::pair<const char*, const char*>> characterSprites;
 	characterSprites[0] = std::make_pair("assets/chicken_neutral_knight.png", "assets/chicken_knight_spritesheet.png");
 	characterSprites[1] = std::make_pair("assets/chicken_neutral.png", "assets/chicken_spritesheet.png");
-	characterSprites[2] = std::make_pair("assets/chicken_neutral.png", "assets/chicken_spritesheet.png");
-	characterSprites[3] = std::make_pair("assets/chicken_neutral_knight.png", "assets/chicken_knight_spritesheet.png");
+	characterSprites[2] = std::make_pair("assets/chicken_neutral_wizard.png", "assets/chicken_wizard_spritesheet.png");
+	characterSprites[3] = std::make_pair("assets/chicken_neutral_mlady.png", "assets/chicken_mlady_spritesheet.png");
 
 	SDL_Rect playerCharacterRects[CHARACTER_COUNT];
 	SDL_Rect enemyCharacterRects[CHARACTER_COUNT];
