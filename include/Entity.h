@@ -15,10 +15,28 @@ using ComponentBitSet = std::bitset<MAX_COMPONENTS>;
 using GroupBitSet = std::bitset<MAX_GROUPS>;
 using ComponentArray = std::array<Component*, MAX_COMPONENTS>;
 
+enum class GroupLabel
+{
+	MAPTILES,
+	PLAYERS,
+	ENEMIES,
+	COLLIDERS,
+    PROJECTILE,
+    HEARTS
+};
+
+enum class TeamLabel
+{
+	NONE,
+	BLUE,
+	RED
+};
+
 class Entity
 {
 public:
-	explicit Entity(Manager& mManager) : manager(mManager) { }
+	explicit Entity(Manager& mManager) :
+		manager(mManager) { };
 
 	void update() const;
 	void draw() const;
@@ -29,6 +47,11 @@ public:
 	bool hasGroup(Group mGroup);
 	void addGroup(Group mGroup);
 	void delGroup(Group mGroup);
+
+	void setTeam(TeamLabel teamLabel);
+	TeamLabel getTeam();
+
+	Manager& getManager() { return manager; };
 
 	template <typename T> bool hasComponent() const
 	{
@@ -63,4 +86,5 @@ private:
 	ComponentArray componentArray = {};
 	ComponentBitSet componentBitSet;
 	GroupBitSet groupBitSet;
+	TeamLabel teamLabel;
 };

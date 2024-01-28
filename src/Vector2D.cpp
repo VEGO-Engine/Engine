@@ -36,6 +36,12 @@ Vector2D& operator/(Vector2D& vector1, const Vector2D& vector2)
 	vector1.y /= vector2.y;
 	return vector1;
 }
+Vector2D& operator+=(Vector2D& vector1, const Vector2D& vector2)
+{
+	vector1.x += vector2.x;
+	vector1.y += vector2.y;
+	return vector1;
+}
 Vector2D& Vector2D::operator*(const int& i)
 {
 	this->x *= i;

@@ -5,7 +5,7 @@
 #include <vector>
 
 class AssetManager;
-class ColliderComponent;
+class CollisionHandler;
 
 class Game
 {
@@ -24,7 +24,7 @@ public:
 	static void addTile(int id, int x, int y);
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
-	static std::vector<ColliderComponent*> colliders;
+	static CollisionHandler* collisionHandler;
     static AssetManager* assets;
     
     bool getWinner();
