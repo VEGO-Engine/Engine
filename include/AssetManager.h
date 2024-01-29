@@ -1,3 +1,5 @@
+#include "Entity.h"
+
 #include <SDL_render.h>
 #include <map>
 #include <string>
@@ -14,7 +16,7 @@ public:
     AssetManager(Manager* manager);
     ~AssetManager();
 
-    void createProjectile(Vector2D pos, Vector2D velocity, bool source, int scale, int range, int speed, const char* texturePath);
+    void createProjectile(Vector2D pos, Vector2D velocity, bool source, int scale, int range, int speed, const char* texturePath, TeamLabel teamLabel);
     void createPowerup(Vector2D pos, PowerupType type);
 
     //texture management

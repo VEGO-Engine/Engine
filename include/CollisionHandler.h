@@ -1,13 +1,20 @@
 #pragma once
 
+#include "ColliderComponent.h"
+#include "Constants.h"
 #include "Entity.h"
 #include "SDL_rect.h"
 #include "SpriteComponent.h"
 #include "Vector2D.h"
+#include "Manager.h"
+
+#include <bitset>
+#include <initializer_list>
+#include <tuple>
+#include <utility>
 #include <vector>
 
 class ColliderComponent;
-class Manager;
 class Entity;
 
 constexpr uint8_t DIRECTION_C = 4;
@@ -33,13 +40,28 @@ public:
 		manager(mManager) { };
 	~CollisionHandler();
 
+	static IntersectionBitSet getIntersection( // intersections relative to entityA
+		Entity* entityA,
+		Entity* entityB,
+		Vector2D posModA = Vector2D(0,0),
+		Vector2D posModB = Vector2D(0,0));
+	static IntersectionBitSet getIntersectionWithBounds( // will fail to determine direction if speed high enough to switch from no collision to full overlap in one tick
+		Entity* entity,
+		Vector2D posMod = Vector2D(0,0));
 
-	static IntersectionBitSet getIntersection(Entity* entityA, Entity* entityB); // intersections relative to entityA
-	static IntersectionBitSet getIntersection(Entity* entityA, Entity* entityB, Vector2D posModA, Vector2D posModB);
-	static IntersectionBitSet getIntersectionWithBounds(Entity* entity);// will fail if speed high enough to switch from no collision to full overlap in one tick
-	static IntersectionBitSet getIntersectionWithBounds(Entity* entity, Vector2D posMod);
+	// temporary function, remove once game.cpp cleaned up
+	std::vector<ColliderComponent*> getColliders(
+		std::initializer_list<GroupLabel> const& groupLabels,
+		std::initializer_list<TeamLabel> const& teamLabels = {},
+		bool negateTeam = false);
 
-	std::vector<ColliderComponent*> getColliders(GroupLabel groupLabel); // temporary function, remove once game.cpp cleaned up
+	template<typename T>
+	T getAnyIntersection(
+		Entity* entity,
+		Vector2D posMod = {},
+		std::initializer_list<GroupLabel> const& groupLabels = {},
+		std::initializer_list<TeamLabel> const& teamLabels = {},
+		bool negateTeam = false);
 
 	void update();
 };

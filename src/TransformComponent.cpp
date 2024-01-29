@@ -6,6 +6,8 @@
 #include "Entity.h"
 #include "Game.h"
 #include "Vector2D.h"
+#include <cstdio>
+#include <initializer_list>
 #include <iostream>
 
 TransformComponent::TransformComponent()
@@ -43,48 +45,34 @@ TransformComponent::TransformComponent(float x, float y, int w, int h, int scale
 
 void TransformComponent::init()
 {
-	velocity.zero();
+	direction.zero();
 }
 
 void TransformComponent::update()
 {
 	// if(velocity.x != 0 && velocity.y != 0)
 
-	float multiplier = velocity.x != 0 && velocity.y != 0 ? 0.707 : 1; //normalizes vector
+	float multiplier = direction.x != 0 && direction.y != 0 ? 0.707 : 1; // normalizes vector; only works if directions are in increments of 45°
 	Vector2D positionChange(
-		velocity.x * speed * multiplier,
-		velocity.y * speed * multiplier
+		direction.x * speed * multiplier,
+		direction.y * speed * multiplier
 	);
 
 	// TODO: move to separate functions
 
 	if (this->entity->hasGroup((size_t) GroupLabel::PLAYERS)) {
-		IntersectionBitSet intersectionsX = CollisionHandler::getIntersectionWithBounds(entity, positionChange);
-		for (auto& collider : Game::collisionHandler->getColliders(GroupLabel::MAPTILES)) {
-			intersectionsX |= CollisionHandler::getIntersection(entity, collider->entity, Vector2D(positionChange.x, 0), Vector2D(0, 0));
-		}
-		for (auto& collider : Game::collisionHandler->getColliders(GroupLabel::COLLIDERS)) {
-			intersectionsX |= CollisionHandler::getIntersection(entity, collider->entity, Vector2D(positionChange.x, 0), Vector2D(0, 0));
-		}
+		IntersectionBitSet intersections =
+			(CollisionHandler::getIntersectionWithBounds(entity, Vector2D(positionChange.x, 0)) |
+			(Game::collisionHandler->getAnyIntersection<IntersectionBitSet>(entity, Vector2D(positionChange.x, 0), {GroupLabel::MAPTILES, GroupLabel::COLLIDERS})) &
+				IntersectionBitSet("0011")) |
+			(CollisionHandler::getIntersectionWithBounds(entity, Vector2D(0, positionChange.y)) |
+			(Game::collisionHandler->getAnyIntersection<IntersectionBitSet>(entity, Vector2D(0, positionChange.y), {GroupLabel::MAPTILES, GroupLabel::COLLIDERS})) &
+				IntersectionBitSet("1100"));
 
-		IntersectionBitSet intersectionsY = CollisionHandler::getIntersectionWithBounds(entity, positionChange);
-		for (auto& collider : Game::collisionHandler->getColliders(GroupLabel::MAPTILES)) {
-			intersectionsY |= CollisionHandler::getIntersection(entity, collider->entity, Vector2D(0, positionChange.y), Vector2D(0, 0));
-		}
-		for (auto& collider : Game::collisionHandler->getColliders(GroupLabel::COLLIDERS)) {
-			intersectionsY |= CollisionHandler::getIntersection(entity, collider->entity, Vector2D(0, positionChange.y), Vector2D(0, 0));
-		}
-
-		if (intersectionsX.test((size_t) direction::LEFT) && positionChange.x < 0)
-			positionChange.x = 0;
-
-		if (intersectionsX.test((size_t) direction::RIGHT) && positionChange.x > 0)
+		if (intersections.test((size_t) direction::LEFT) || intersections.test((size_t) direction::RIGHT))
 			positionChange.x = 0;		
 
-		if (intersectionsY.test((size_t) direction::UP) && positionChange.y < 0)
-			positionChange.y = 0;
-
-		if (intersectionsY.test((size_t) direction::DOWN) && positionChange.y > 0)
+		if (intersections.test((size_t) direction::UP) || intersections.test((size_t) direction::DOWN))
 			positionChange.y = 0;
 	}
 

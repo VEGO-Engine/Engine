@@ -30,9 +30,14 @@ void Entity::delGroup(Group mGroup)
 	groupBitSet[mGroup] = false;
 }
 
+std::bitset<MAX_GROUPS> Entity::getGroupBitSet() 
+{
+	return groupBitSet;
+}
+
 void Entity::setTeam(TeamLabel teamLabel)
 {
-	teamLabel = teamLabel;
+	this->teamLabel = teamLabel;
 	manager.addToTeam(this, (size_t) teamLabel);
 }
 

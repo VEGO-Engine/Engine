@@ -2,6 +2,7 @@
 
 #include <SDL_timer.h>
 
+#include "Direction.h"
 #include "TextureManager.h"
 #include "Entity.h"
 #include "TransformComponent.h"
@@ -71,7 +72,7 @@ void SpriteComponent::playAnimation(AnimationType type)
 	this->speed = animations.at(type)->speed;
 }
 
-void SpriteComponent::setDirection(SpriteDirection direction) 
+void SpriteComponent::setDirection(Direction direction) 
 {
-	this->flipped = direction == RIGHT;
+	this->flipped = direction == Direction::RIGHT;
 }

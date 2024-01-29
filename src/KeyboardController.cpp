@@ -23,27 +23,27 @@ void KeyboardController::init()
 
 void KeyboardController::update()
 {
-	transform->velocity.x = 0;
-	transform->velocity.y = 0;
+	transform->direction.x = 0;
+	transform->direction.y = 0;
 	sprite->playAnimation(IDLE);
 
 	if (keystates[this->up]) {
-		transform->velocity.y = -1;
+		transform->direction.y = -1;
 		sprite->playAnimation(WALK);
 	}
 	if (keystates[this->left]) {
-		transform->velocity.x = -1;
+		transform->direction.x = -1;
 		sprite->playAnimation(WALK);
-		sprite->setDirection(LEFT);
+		sprite->setDirection(Direction::LEFT);
 	}
 	if (keystates[this->down]) {
-		transform->velocity.y = 1;
+		transform->direction.y = 1;
 		sprite->playAnimation(WALK);
 	}
 	if (keystates[this->right]) {
-		transform->velocity.x = 1;
+		transform->direction.x = 1;
 		sprite->playAnimation(WALK);
-		sprite->setDirection(RIGHT);
+		sprite->setDirection(Direction::RIGHT);
 	}
 
 	if (keystates[this->fire]) {
@@ -57,14 +57,14 @@ void KeyboardController::update()
 			//checks player source via the firing velocity
 			//TODO: adding actual projectile textures
 			if (fireVelocity.x > 0) {
-				sprite->setDirection(RIGHT);
+				sprite->setDirection(Direction::RIGHT);
 				Game::assets->createProjectile(Vector2D(player->position.x, player->position.y), fireVelocity,
-					false, 1, 180, 1, "assets/egg.png");
+					false, 1, 180, 1, "assets/egg.png", this->entity->getTeam());
 			}
 			else {
-				sprite->setDirection(LEFT);
+				sprite->setDirection(Direction::LEFT);
 				Game::assets->createProjectile(Vector2D(player->position.x, player->position.y), fireVelocity,
-					true, 1, 180, 1, "assets/egg.png");
+					true, 1, 180, 1, "assets/egg.png", this->entity->getTeam());
 			}
 
 			lastFireTime = currentTicks;
