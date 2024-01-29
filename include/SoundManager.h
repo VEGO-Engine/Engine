@@ -6,6 +6,12 @@
 
 #include "TextureManager.h"
 
+enum SoundTypes
+{
+	STEPS,
+	THROW_EGG,
+};
+
 class SoundManager
 {
 	public:
@@ -15,8 +21,8 @@ class SoundManager
 			return instance;
 		}
 
-	private:
 		SoundManager() {}
+	private:
 		~SoundManager() {
 			for (auto& it : this->sound_cache) {
 				Mix_FreeChunk(it.second);
@@ -27,7 +33,8 @@ class SoundManager
 		SoundManager(SoundManager const&) = delete;
 		void operator=(SoundManager const&) = delete;
 
-		std::map<const char*, Mix_Chunk*, cmp_str> sound_cache;
+		std::map<const char*, Mix_Chunk*> sound_cache;
 
 		Mix_Chunk* loadSound(const char* fileName);
+		static void playSound(SoundTypes sound);
 };

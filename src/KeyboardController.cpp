@@ -69,6 +69,5 @@ void KeyboardController::update()
 
 			lastFireTime = currentTicks;
 		}
-
 	}
 }

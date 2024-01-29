@@ -24,7 +24,6 @@ public:
     SDL_Texture* getTexture(std::string id);
     Mix_Chunk* getSound(std::string id);
 
-
 private:
 
     Manager* man;

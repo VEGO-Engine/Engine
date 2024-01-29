@@ -41,6 +41,11 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		return;
 	}
 
+	if (Mix_Init(MIX_INIT_MP3) != MIX_INIT_MP3) {
+		std::cout << "ERROR. Subsystem couldnt be initialized!" << std::endl;
+		return;
+	}
+
 	window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
 	if (!window)
 	{
@@ -67,6 +72,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		std::cout << "ERROR: Mixer couldnt be initialized!" << std::endl;
 		return;
 	}
+
+	Mix_Volume(-1, MIX_MAX_VOLUME);
+	Mix_AllocateChannels(16);
 
 	//SDL_Event event;
 	bool hasQuit = false;
