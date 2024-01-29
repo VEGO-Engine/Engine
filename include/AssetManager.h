@@ -1,3 +1,5 @@
+#include "Entity.h"
+
 #include <SDL_render.h>
 #include <SDL_mixer.h>
 #include <map>
@@ -13,7 +15,7 @@ public:
     AssetManager(Manager* manager);
     ~AssetManager();
 
-    void createProjectile(Vector2D pos, Vector2D velocity, bool source, int scale, int range, int speed, const char* texturePath);
+    void createProjectile(Vector2D pos, Vector2D velocity, bool source, int scale, int range, int speed, const char* texturePath, TeamLabel teamLabel);
 
     //texture management
     void addTexture(std::string id, const char* path);

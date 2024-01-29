@@ -1,13 +1,10 @@
 #include "Manager.h"
 
 #include <algorithm>
+#include <vector>
 
+#include "Constants.h"
 #include "Entity.h"
-
-void Manager::update()
-{
-	for (auto& e : entities) e->update();
-}
 
 void Manager::draw()
 {
@@ -18,12 +15,23 @@ void Manager::refresh()
 {
 	for (auto i(0u); i < MAX_GROUPS; i++)
 	{
-		auto& v(groupedEntities[i]);
+		auto& v(entitiesByGroup[i]);
 		v.erase(
 			std::remove_if(std::begin(v), std::end(v),
 				[i](Entity* mEntity)
 				{
 					return !mEntity->isActive() || !mEntity->hasGroup(i);
+				}), std::end(v));
+	}
+
+	for (auto i(0u); i < MAX_TEAMS; i++)
+	{
+		auto& v(entitiesByTeam[i]);
+		v.erase(
+			std::remove_if(std::begin(v), std::end(v),
+				[i](Entity* mEntity)
+				{
+					return !mEntity->isActive() || (size_t)(mEntity->getTeam()) != i;
 				}), std::end(v));
 	}
 
@@ -35,14 +43,38 @@ void Manager::refresh()
 		std::end(entities));
 }
 
+void Manager::update()
+{
+	for (auto& e : entities) e->update();
+}
+
 void Manager::addToGroup(Entity* mEntity, Group mGroup)
 {
-	groupedEntities[mGroup].emplace_back(mEntity);
+	entitiesByGroup.at(mGroup).emplace_back(mEntity);
 }
 
 std::vector<Entity*>& Manager::getGroup(Group mGroup)
 {
-	return groupedEntities[mGroup];
+	return entitiesByGroup.at(mGroup);
+}
+
+void Manager::addToTeam(Entity* mEntity, Team mTeam)
+{
+	entitiesByTeam.at(mTeam).emplace_back(mEntity); //
+}
+
+std::vector<Entity*>& Manager::getTeam(Team mTeam)
+{
+	return entitiesByTeam.at(mTeam);
+}
+
+std::vector<Entity*> Manager::getAll()
+{
+	std::vector<Entity*> entity_vec;
+	for (auto& entity_ptr : entities) {
+		entity_vec.emplace_back(entity_ptr.get());
+	}
+	return entity_vec;
 }
 
 Entity& Manager::addEntity()

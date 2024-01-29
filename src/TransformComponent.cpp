@@ -1,5 +1,14 @@
 #include "TransformComponent.h"
+
+#include "CollisionHandler.h"
+#include "ColliderComponent.h"
 #include "Constants.h"
+#include "Entity.h"
+#include "Game.h"
+#include "Vector2D.h"
+#include <cstdio>
+#include <initializer_list>
+#include <iostream>
 
 #include "SoundManager.h"
 
@@ -38,37 +47,36 @@ TransformComponent::TransformComponent(float x, float y, int w, int h, int scale
 
 void TransformComponent::init()
 {
-	velocity.zero();
+	direction.zero();
 }
 
 void TransformComponent::update()
 {
 	// if(velocity.x != 0 && velocity.y != 0)
 
-	float multiplier = velocity.x != 0 && velocity.y != 0 ? 0.707 : 1; //normalizes vector
-
-	Vector2D newPos(
-		position.x + velocity.x * speed * multiplier,
-		position.y + velocity.y * speed * multiplier
+	float multiplier = direction.x != 0 && direction.y != 0 ? 0.707 : 1; // normalizes vector; only works if directions are in increments of 45°
+	Vector2D positionChange(
+		direction.x * speed * multiplier,
+		direction.y * speed * multiplier
 	);
 
-	if (newPos.x < 0)
-	{
-		newPos.x = 0;
-	}
-	else if (newPos.x + (this->width * this->scale) > SCREEN_SIZE_WIDTH)
-	{
-		newPos.x = SCREEN_SIZE_WIDTH - (this->width * this->scale);
+	// TODO: move to separate functions
+
+	if (this->entity->hasGroup((size_t) GroupLabel::PLAYERS)) {
+		IntersectionBitSet intersections =
+			(CollisionHandler::getIntersectionWithBounds(entity, Vector2D(positionChange.x, 0)) |
+			(Game::collisionHandler->getAnyIntersection<IntersectionBitSet>(entity, Vector2D(positionChange.x, 0), {GroupLabel::MAPTILES, GroupLabel::COLLIDERS})) &
+				IntersectionBitSet("0011")) |
+			(CollisionHandler::getIntersectionWithBounds(entity, Vector2D(0, positionChange.y)) |
+			(Game::collisionHandler->getAnyIntersection<IntersectionBitSet>(entity, Vector2D(0, positionChange.y), {GroupLabel::MAPTILES, GroupLabel::COLLIDERS})) &
+				IntersectionBitSet("1100"));
+
+		if (intersections.test((size_t) direction::LEFT) || intersections.test((size_t) direction::RIGHT))
+			positionChange.x = 0;		
+
+		if (intersections.test((size_t) direction::UP) || intersections.test((size_t) direction::DOWN))
+			positionChange.y = 0;
 	}
 
-	if (newPos.y < 0)
-	{
-		newPos.y = 0;
-	}
-	else if (newPos.y + (this->height * this->scale) > SCREEN_SIZE_HEIGHT)
-	{
-		newPos.y = SCREEN_SIZE_HEIGHT - (this->height * this->scale);
-	}
-
-	position = newPos;
-}
+	position += positionChange;
+};

@@ -2,6 +2,7 @@
 
 #include "Manager.h"
 #include "Component.h"
+#include <cstddef>
 
 void Entity::update() const
 {
@@ -27,4 +28,20 @@ void Entity::addGroup(Group mGroup)
 void Entity::delGroup(Group mGroup)
 {
 	groupBitSet[mGroup] = false;
+}
+
+std::bitset<MAX_GROUPS> Entity::getGroupBitSet() 
+{
+	return groupBitSet;
+}
+
+void Entity::setTeam(TeamLabel teamLabel)
+{
+	this->teamLabel = teamLabel;
+	manager.addToTeam(this, (size_t) teamLabel);
+}
+
+TeamLabel Entity::getTeam()
+{
+	return teamLabel;
 }

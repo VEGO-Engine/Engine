@@ -5,14 +5,9 @@
 
 #include "AnimationHandler.h"
 #include "Component.h"
+#include "Direction.h"
 
 class TransformComponent;
-
-enum SpriteDirection
-{
-	LEFT,
-	RIGHT
-};
 
 class SpriteComponent : public Component
 {
@@ -43,5 +38,5 @@ public:
 	void update() override;
 	void draw() override;
 	void playAnimation(AnimationType type);
-	void setDirection(SpriteDirection direction);
+	void setDirection(Direction direction);
 };
