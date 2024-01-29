@@ -32,9 +32,13 @@ void SoundManager::playSound(SoundTypes sound)
 	switch (sound)
 	{
 		case SoundTypes::STEPS:
+			if (Mix_Playing(-1) != 0)
+				break;
+
 			if (Mix_PlayChannel(-1, Game::assets->getSound("steps"), 0) == -1) {
 				std::cerr << "Error playing sound 'steps': " << Mix_GetError() << std::endl;
 			}
+			
 			break;
 
 		case SoundTypes::THROW_EGG:

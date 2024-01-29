@@ -30,20 +30,24 @@ void KeyboardController::update()
 	if (keystates[this->up]) {
 		transform->velocity.y = -1;
 		sprite->playAnimation(WALK);
+		SoundManager::playSound(STEPS);
 	}
 	if (keystates[this->left]) {
 		transform->velocity.x = -1;
 		sprite->playAnimation(WALK);
 		sprite->setDirection(LEFT);
+		SoundManager::playSound(STEPS);
 	}
 	if (keystates[this->down]) {
 		transform->velocity.y = 1;
 		sprite->playAnimation(WALK);
+		SoundManager::playSound(STEPS);
 	}
 	if (keystates[this->right]) {
 		transform->velocity.x = 1;
 		sprite->playAnimation(WALK);
 		sprite->setDirection(RIGHT);
+		SoundManager::playSound(STEPS);
 	}
 
 	if (keystates[this->fire]) {
