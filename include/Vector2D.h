@@ -1,5 +1,8 @@
 #pragma once
 
+#include <SDL.h>
+#include <SDL_rect.h>
+
 class Vector2D
 {
 public:
@@ -18,3 +21,5 @@ public:
 	Vector2D& operator*(const int& i);
 	Vector2D& zero();
 };
+
+SDL_Rect operator+(const SDL_Rect& rect, const Vector2D& vector2D);

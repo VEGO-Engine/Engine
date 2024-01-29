@@ -5,6 +5,7 @@
 #include <bitset>
 #include <vector>
 
+#include "ColliderComponent.h"
 #include "ECS.h"
 #include "Constants.h"
 
@@ -42,7 +43,12 @@ public:
 	void draw() const;
 
 	bool isActive() const { return this->active; }
-	void destroy() { this->active = false; }
+	void destroy() {
+		this->active = false;
+		if (this->hasComponent<ColliderComponent>()) {
+			this->getComponent<ColliderComponent>().removeCollision();
+		}
+	}
 
 	bool hasGroup(Group mGroup);
 	void addGroup(Group mGroup);

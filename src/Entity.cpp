@@ -37,7 +37,7 @@ std::bitset<MAX_GROUPS> Entity::getGroupBitSet()
 
 void Entity::setTeam(TeamLabel teamLabel)
 {
-	teamLabel = teamLabel;
+	this->teamLabel = teamLabel;
 	manager.addToTeam(this, (size_t) teamLabel);
 }
 

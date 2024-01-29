@@ -28,6 +28,7 @@ void ColliderComponent::init()
 
 	transform = &entity->getComponent<TransformComponent>();
 	//Game::collisionHandler->add(this);
+	this->update();
 }
 
 void ColliderComponent::update()
