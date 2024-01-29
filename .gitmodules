@@ -6,14 +6,6 @@
 	path = extern/SDL_image
 	url = https://github.com/libsdl-org/SDL_image.git
 	branch = release-2.8.x
-[submodule "libpng"]
-	path = extern/libpng
-	url = https://github.com/glennrp/libpng.git
-	branch = libpng16
-[submodule "zlib"]
-	path = extern/zlib
-	url = https://github.com/madler/zlib.git
-	branch = master
 [submodule "extern/SDL_mixer"]
 	path = extern/SDL_mixer
 	url = https://github.com/libsdl-org/SDL_mixer.git
