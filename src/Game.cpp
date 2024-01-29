@@ -42,6 +42,11 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		return;
 	}
 
+	if (Mix_Init(MIX_INIT_MP3) != MIX_INIT_MP3) {
+		std::cout << "ERROR. Subsystem couldnt be initialized!" << std::endl;
+		return;
+	}
+
 	window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
 	if (!window)
 	{
@@ -62,6 +67,15 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	SDL_RenderClear(renderer);
 	SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
 	SDL_RenderPresent(renderer);
+
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+	{
+		std::cout << "ERROR: Mixer couldnt be initialized!" << std::endl;
+		return;
+	}
+
+	Mix_Volume(-1, MIX_MAX_VOLUME);
+	Mix_AllocateChannels(16);
 
 	//SDL_Event event;
 	bool hasQuit = false;
@@ -114,6 +128,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     assets->addTexture("player2", "assets/chicken_neutral.png");
     assets->addTexture("egg", "assets/egg.png");
 
+	// loading sounds
+	assets->addSoundEffect("throw_egg", "assets/sound/throw_egg.wav");
+	assets->addSoundEffect("steps", "assets/sound/steps.wav");
 
 	//ecs implementation
 

@@ -1,6 +1,8 @@
 #include "TransformComponent.h"
 #include "Constants.h"
 
+#include "SoundManager.h"
+
 TransformComponent::TransformComponent()
 {
 	position.zero();

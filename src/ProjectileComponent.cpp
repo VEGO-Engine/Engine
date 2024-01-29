@@ -5,6 +5,7 @@
 void ProjectileComponent::init() 
 {
 	transformComponent = &entity->getComponent<TransformComponent>();
+    SoundManager::playSound(THROW_EGG);
 }
 
 void ProjectileComponent::update() 

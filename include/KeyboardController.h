@@ -3,6 +3,7 @@
 
 #include "Component.h"
 #include "Vector2D.h"
+#include "SoundManager.h"
 
 class TransformComponent;
 class SpriteComponent;
@@ -35,4 +36,6 @@ private:
 	//for creation of projectiles
 	TransformComponent* player; //for starting position of projectile
 	Vector2D fireVelocity; //decide source of projectile and flying direction
+	// SoundManager* soundEffect = Game::assets->getSound;
+	//SoundManager* soundEffect = new SoundManager();
 };
