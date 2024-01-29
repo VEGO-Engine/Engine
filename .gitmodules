@@ -14,3 +14,7 @@
 	path = extern/zlib
 	url = https://github.com/madler/zlib.git
 	branch = master
+[submodule "extern/SDL_ttf"]
+	path = extern/SDL_ttf
+	url = https://github.com/libsdl-org/SDL_ttf.git
+	branch = release-2.22.x

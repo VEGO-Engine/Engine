@@ -19,6 +19,8 @@ public:
     void createAllHearts();
     void createHeartComponents(int x);
 
+    void setHealth(int health) {this->health = health;}
+
 
 private:
 

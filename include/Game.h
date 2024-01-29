@@ -27,7 +27,9 @@ public:
 	static std::vector<ColliderComponent*> colliders;
     static AssetManager* assets;
     
-    bool getWinner();
+    bool getWinner() const;
+
+    void refreshPlayers();
 
 private:
 	int counter = 0;

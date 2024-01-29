@@ -47,6 +47,15 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		return;
 	}
 
+    SDL_Surface* icon = SDL_LoadBMP("assets/iconImage.bmp");
+    if(!icon)
+    {
+        std::cout << "ERROR: Couldn't create icon!" << std::endl;
+        return;
+    }
+
+    SDL_SetWindowIcon(window, icon);
+
 	renderer = SDL_CreateRenderer(window, -1, 0);
 	if (!renderer)
 	{
@@ -102,11 +111,11 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	map->loadMap("assets/SDL_map_test.txt", 25, 20);
 
 	//adding textures to the library in AssetManager
-
+    /*
     assets->addTexture("player1", "assets/chicken_neutral_knight.png");
     assets->addTexture("player2", "assets/chicken_neutral.png");
     assets->addTexture("egg", "assets/egg.png");
-
+*/
 
 	//ecs implementation
 
@@ -118,12 +127,11 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	player.addGroup((size_t)GroupLabel::PLAYERS); //tell programm what group it belongs to for rendering order
 
 	enemy.addComponent<TransformComponent>(600, 500, 2);
-	enemy.addComponent<SpriteComponent>("assets/chicken_spritesheet.png", true);
+	enemy.addComponent<SpriteComponent>("assets/chicken_wizzard_spritesheet.png", true);
 	enemy.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT, SDL_SCANCODE_RCTRL, Vector2D(-1, 0));
 	enemy.addComponent<ColliderComponent>("enemy", 0.8f);
 	enemy.addComponent<HealthComponent>(5, &manager, false);
 	enemy.addGroup((size_t)GroupLabel::ENEMIES);
-
 }
 
 auto& tiles(manager.getGroup((size_t)GroupLabel::MAP));
@@ -259,6 +267,26 @@ bool Game::running() const
 	return isRunning;
 }
 
-bool Game::getWinner() {
+bool Game::getWinner() const {
 	return this->winner;
+}
+
+void Game::refreshPlayers() {
+
+    for(auto& p : projectiles)
+        p->destroy();
+
+
+    player.getComponent<TransformComponent>().position.x = 80;
+    player.getComponent<TransformComponent>().position.y = 80;
+
+    player.getComponent<HealthComponent>().setHealth(5);
+    enemy.getComponent<HealthComponent>().setHealth(5);
+
+    player.getComponent<HealthComponent>().createAllHearts();
+    enemy.getComponent<HealthComponent>().createAllHearts();
+
+    isRunning = true;
+
+    update();
 }
