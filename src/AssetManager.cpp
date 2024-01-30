@@ -1,8 +1,18 @@
 #include "AssetManager.h"
 
-#include "Entity.h"
 #include "TextureManager.h"
 #include "Components.h"
+
+#include "TransformComponent.h"
+
+#include "CollisionHandler.h"
+#include "ColliderComponent.h"
+#include "Constants.h"
+#include "Entity.h"
+#include "Game.h"
+#include "Vector2D.h"
+#include "PowerupComponent.h"
+#include <iostream>
 
 AssetManager::AssetManager(Manager* manager) : man(manager) {}
 
@@ -45,5 +55,37 @@ void AssetManager::createPowerup(Vector2D pos, PowerupType type) {
     }
 
     powerups.addComponent<ColliderComponent>("powerup", 0.6f);
+    powerups.addComponent<PowerupComponent>(type);
     powerups.addGroup((size_t)GroupLabel::POWERUPS);
+}
+
+Vector2D AssetManager::calculateSpawnPosition()
+{
+	Vector2D spawnPos = Vector2D(-1, -1);
+	bool conflict = false;
+	for (int i = 0; i <= SPAWN_ATTEMPTS; i++)
+	{
+		SDL_Rect spawnRect;
+		spawnRect.h = spawnRect.w = 32;
+		spawnRect.x = rand() % (SCREEN_SIZE_WIDTH - spawnRect.w);
+		spawnRect.y = rand() % (SCREEN_SIZE_HEIGHT - spawnRect.h);
+		conflict = false;
+		for (auto cc : Game::collisionHandler->getColliders({ GroupLabel::MAPTILES }))
+		{
+			if (SDL_HasIntersection(&spawnRect, &cc->collider) && strcmp(cc->tag, "projectile"))
+			{
+				conflict = true;
+				break;
+			}
+		}
+		if (conflict) continue;
+		spawnPos = Vector2D(spawnRect.x, spawnRect.y);
+	}
+	return spawnPos;
+}
+
+PowerupType AssetManager::calculateType()
+{
+	PowerupType type = PowerupType(rand() % 3);
+	return type;
 }

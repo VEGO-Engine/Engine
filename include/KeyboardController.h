@@ -3,6 +3,7 @@
 
 #include "Component.h"
 #include "Vector2D.h"
+#include "Constants.h"
 
 class TransformComponent;
 class SpriteComponent;
@@ -30,6 +31,8 @@ public:
 
 	void init() override;
 	void update() override;
+
+	void modifyAtkSpeed(int8_t modifier);
 
 private:
 	//for creation of projectiles

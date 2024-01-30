@@ -72,3 +72,9 @@ void KeyboardController::update()
 
 	}
 }
+
+void KeyboardController::modifyAtkSpeed(int8_t modifier)
+{
+	this->fireCooldown -= modifier * 500;
+	std::cout << "curr fire cooldown: " << this->fireCooldown << std::endl;
+}

@@ -7,6 +7,7 @@ using Team = std::size_t;
 
 constexpr std::size_t MAX_COMPONENTS = 32;
 constexpr std::size_t MAX_GROUPS = 32;
+constexpr std::size_t MAX_STATS = 32;
 constexpr std::size_t MAX_TEAMS = 8; // 
 
 constexpr int SCREEN_SIZE_HEIGHT = 640;
@@ -20,4 +21,8 @@ constexpr int MAP_SIZE_X = 25;
 constexpr int MAP_SIZE_Y = 20;
 
 constexpr int SPAWN_ATTEMPTS = 30;
+
+constexpr int BUFF_DURATION = 5000;
+
+constexpr int BUFF_VALUE = 1;
 

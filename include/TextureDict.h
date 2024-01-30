@@ -2,7 +2,7 @@
 
 #include <map>
 #include <string>
-#include "Powerup.h"
+#include "AssetManager.h"
 
 class TextureDict
 {
