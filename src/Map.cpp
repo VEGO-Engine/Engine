@@ -30,6 +30,7 @@ bool Map::loadMap(const char* path, int sizeX, int sizeY)
 				continue;
 			Game::addTile(std::stoi(tileIDstr), x * TILE_SIZE, y * TILE_SIZE);
 			tileIDstr.clear();
+			x++;
 			if (singleChar == '\n') {
 				if (x != sizeX) {
 					SDL_SetError("Error loading map: specified x size doesn't match map file!");
@@ -39,7 +40,6 @@ bool Map::loadMap(const char* path, int sizeX, int sizeY)
 				y++;
 				continue;
 			}
-			x++;
 			continue;
 		}
 		if (!std::isdigit(singleChar)) continue;
