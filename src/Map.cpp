@@ -52,5 +52,5 @@ bool Map::loadMap(const char* path, int sizeX, int sizeY)
 
 	mapFile.close();
 
-	return success
+	return success;
 }
