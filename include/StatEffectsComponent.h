@@ -18,10 +18,10 @@ public:
 	void init() override;
 	void update() override;
 
-	void modifyStatDur(Stats stat, uint8_t duration);
+	void modifyStatDur(Stats stat, int duration);
 
 	void modifyStatValue(Stats stat, int modifier);
 
 private:
-	std::array<int8_t, MAX_STATS> buffs = { 0 };
+	std::array<int, MAX_STATS> buffs = { 0 };
 };
