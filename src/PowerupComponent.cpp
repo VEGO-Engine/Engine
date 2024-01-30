@@ -48,10 +48,10 @@ void PowerupComponent::heartEffect(Entity* player)
 
 void PowerupComponent::movementSpeedEffect(Entity* player)
 {
-    player->getComponent<StatEffectsComponent>().modifyStatDur(Stats::MOVEMENT_SPEED, (uint8_t) BUFF_DURATION);
+    player->getComponent<StatEffectsComponent>().modifyStatDur(Stats::MOVEMENT_SPEED, BUFF_DURATION);
 }
 
 void PowerupComponent::atkSpeedEffect(Entity* player)
 {
-    player->getComponent<StatEffectsComponent>().modifyStatDur(Stats::ATTACK_SPEED, (uint8_t) BUFF_DURATION);
+    player->getComponent<StatEffectsComponent>().modifyStatDur(Stats::ATTACK_SPEED, BUFF_DURATION);
 }

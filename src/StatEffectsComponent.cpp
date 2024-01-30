@@ -21,7 +21,7 @@ void StatEffectsComponent::update()
 	}
 }
 
-void StatEffectsComponent::modifyStatDur(Stats stat, uint8_t duration)
+void StatEffectsComponent::modifyStatDur(Stats stat, int duration)
 {
 	if(this->buffs.at((uint8_t)stat) == 0) this->modifyStatValue(stat, BUFF_VALUE);
 	this->buffs.at((uint8_t)stat) += duration;
