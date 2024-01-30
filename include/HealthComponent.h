@@ -17,13 +17,11 @@ public:
 
     void init() override;
 
-    void resetHearts();
+    void refreshHearts();
     void createHeartComponents(int x);
 
 private:
 
     int health;
     Direction side;
-    bool player; //true if player1 / false if player2
-
 };

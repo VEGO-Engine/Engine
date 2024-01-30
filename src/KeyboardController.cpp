@@ -63,12 +63,12 @@ void KeyboardController::update()
 			if (fireVelocity.x > 0) {
 				sprite->setDirection(Direction::RIGHT);
 				Game::assets->createProjectile(Vector2D(player->position.x, player->position.y), fireVelocity,
-					false, 1, 180, 1, "assets/egg.png", this->entity->getTeam());
+					1, 180, 1, "assets/egg.png", this->entity->getTeam());
 			}
 			else {
 				sprite->setDirection(Direction::LEFT);
 				Game::assets->createProjectile(Vector2D(player->position.x, player->position.y), fireVelocity,
-					true, 1, 180, 1, "assets/egg.png", this->entity->getTeam());
+					1, 180, 1, "assets/egg.png", this->entity->getTeam());
 			}
 
 			lastFireTime = currentTicks;

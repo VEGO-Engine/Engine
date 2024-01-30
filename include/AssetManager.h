@@ -15,7 +15,7 @@ public:
     AssetManager(Manager* manager);
     ~AssetManager();
 
-    void createProjectile(Vector2D pos, Vector2D velocity, bool source, int scale, int range, int speed, const char* texturePath, TeamLabel teamLabel);
+    void createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, const char* texturePath, TeamLabel teamLabel);
 
     //texture management
     void addTexture(std::string id, const char* path);

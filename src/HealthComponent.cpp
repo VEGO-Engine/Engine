@@ -8,16 +8,16 @@
 
 void HealthComponent::init() 
 {
-    resetHearts();
+    refreshHearts();
 }
 
 void HealthComponent::modifyHealth(int health) 
 {
     this->health += health;
-    this->resetHearts();
+    this->refreshHearts();
 }
 
-void HealthComponent::resetHearts()
+void HealthComponent::refreshHearts()
 {
     // clear hearts if exist
     for (auto& heart : this->entity->getManager().getGroup((size_t) GroupLabel::HEARTS)) {
