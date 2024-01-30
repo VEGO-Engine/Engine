@@ -34,7 +34,6 @@ void  PowerupComponent::update()
         {},
         true)) != nullptr)
     {
-        std::cout << "collided with powerup" << std::endl;
         (this->*pickupFunc)(player);
         this->entity->destroy();
     }
@@ -42,7 +41,8 @@ void  PowerupComponent::update()
 
 void PowerupComponent::heartEffect(Entity* player)
 {
-    player->getComponent<HealthComponent>().modifyHealth(1);
+    if(player->getComponent<HealthComponent>().getHealth() < 5)
+        player->getComponent<HealthComponent>().modifyHealth(1);
 }
 
 void PowerupComponent::movementSpeedEffect(Entity* player)

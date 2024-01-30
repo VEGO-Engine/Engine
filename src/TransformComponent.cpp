@@ -81,5 +81,5 @@ void TransformComponent::update()
 
 void TransformComponent::modifySpeed(int8_t modifier)
 {
-	this->speed += modifier * 2;
+	this->speed += modifier;
 }

@@ -17,8 +17,8 @@ public:
 
 
 	std::map<PowerupType, std::string> powerupDictionary = {
-		{PowerupType::HEART, "assets/heart.png"},
-		{PowerupType::WALKINGSPEED, "assets/heart.png"},
-		{PowerupType::SHOOTINGSPEED, "assets/heart.png"}
+		{PowerupType::HEART, "assets/heart_powerup.png"},
+		{PowerupType::WALKINGSPEED, "assets/movement_speed_powerup.png"},
+		{PowerupType::SHOOTINGSPEED, "assets/atk_speed_powerup.png"}
 	};
 };

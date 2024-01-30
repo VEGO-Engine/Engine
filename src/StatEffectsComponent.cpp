@@ -10,18 +10,6 @@ void StatEffectsComponent::init()
 
 void StatEffectsComponent::update()
 {
-	/*int i = 0;
-	std::transform(this->buffs.begin(), this->buffs.end(), this->buffs.begin(),
-		[this, &i](uint8_t statDuration) {
-			i++;
-			uint8_t newDur = statDuration - 1;
-			if (statDuration > 0 && newDur == 0) {
-				if (statDuration > 1)
-					std::cout << (int) statDuration << (int) newDur << std::endl;
-				this->modifyStatValue((Stats)i, BUFF_VALUE * -1);
-			}
-			return newDur;
-		});*/
 	for (int i = 0; i < MAX_STATS; i++)
 	{
 		if (this->buffs.at(i) == 0) continue;
@@ -39,7 +27,7 @@ void StatEffectsComponent::modifyStatDur(Stats stat, uint8_t duration)
 	this->buffs.at((uint8_t)stat) += duration;
 }
 
-void StatEffectsComponent::modifyStatValue(Stats stat, int modifier)
+void StatEffectsComponent::modifyStatValue(Stats stat, int modifier) //modifier is basically there so the modifyfuncs in the components know if stats should be increased or decreased
 {
 	switch (stat)
 	{
