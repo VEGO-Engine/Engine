@@ -1,7 +1,9 @@
 #include "SpriteComponent.h"
 
 #include <SDL_timer.h>
+#include <memory>
 
+#include "AnimationHandler.h"
 #include "Direction.h"
 #include "TextureManager.h"
 #include "Entity.h"
@@ -16,11 +18,8 @@ SpriteComponent::SpriteComponent(const char* path, bool isAnimated)
 {
 	animated = isAnimated;
 
-	Animation* idle = new Animation((uint8_t)AnimationType::IDLE, 2, 200);
-	Animation* walk = new Animation((uint8_t)AnimationType::WALK, 2, 200);
-
-	animations.emplace(IDLE, idle);
-	animations.emplace(WALK, walk);
+	animations.emplace(IDLE, std::make_unique<Animation>((uint8_t)AnimationType::IDLE, 2, 200));
+	animations.emplace(WALK, std::make_unique<Animation>((uint8_t)AnimationType::WALK, 2, 200));
 
 	playAnimation(IDLE);
 

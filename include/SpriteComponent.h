@@ -2,6 +2,7 @@
 
 #include <map>
 #include <SDL_render.h>
+#include <memory>
 
 #include "AnimationHandler.h"
 #include "Component.h"
@@ -14,7 +15,7 @@ class SpriteComponent : public Component
 public:
 	int animationIndex = 0;
 
-	std::map<AnimationType, Animation*> animations;
+	std::map<AnimationType, std::unique_ptr<Animation>> animations;
 
 private:
 	TransformComponent* transform;
