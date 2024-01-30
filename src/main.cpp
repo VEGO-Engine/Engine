@@ -18,7 +18,6 @@ int main(int argc, char* argv[])
 
 	game->init("No_Name_Chicken_Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_SIZE_WIDTH, SCREEN_SIZE_HEIGHT, false);
     while(playing) {
-        std::cout << "djslfsldkfj" << std::endl;
         while (game->running()) {
             frameStart = SDL_GetTicks();
 

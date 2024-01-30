@@ -276,9 +276,8 @@ void Game::refreshPlayers() {
     for(auto& p : projectiles)
         p->destroy();
 
-
-    player.getComponent<TransformComponent>().position.x = 80;
-    player.getComponent<TransformComponent>().position.y = 80;
+    player.getComponent<TransformComponent>().position = Vector2D(80, 80);
+    enemy.getComponent<TransformComponent>().position = Vector2D(600, 500);
 
     player.getComponent<HealthComponent>().setHealth(5);
     enemy.getComponent<HealthComponent>().setHealth(5);

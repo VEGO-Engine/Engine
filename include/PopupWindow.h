@@ -25,8 +25,6 @@ private:
     SDL_Window* window;
     SDL_Texture* texture;
     bool continueGame;
-
-
 };
 
 

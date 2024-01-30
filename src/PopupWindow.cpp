@@ -34,18 +34,23 @@ void PopupWindow::handleWinnerEvents() {
         {
             continueGame = false;
             interacted = true;
+            return;
         }
-        else if (e.type == SDL_KEYDOWN)
-        {
-            if (e.key.keysym.sym == SDLK_c)
-            {
-                continueGame = true;
-                interacted = true;
-            }
-            else if (e.key.keysym.sym == SDLK_q)
-            {
+
+        if(e.type != SDL_KEYDOWN)
+            continue;
+
+        switch (e.key.keysym.sym) {
+
+            case SDLK_q: {
                 continueGame = false;
                 interacted = true;
+                break;
+            }
+            case SDLK_c: {
+                continueGame =  true;
+                interacted = true;
+                break;
             }
         }
     }
@@ -59,6 +64,7 @@ void PopupWindow::renderWinnerPopup(bool winner) {
 
     SDL_RenderClear(this->renderer);
 
+    //Maybe use texture manager (changes need to be made that it does not use game::renderer automatically, but receives one instead)
     this->texture = winner ? IMG_LoadTexture(this->renderer, "assets/Player1Victory.png")
             : IMG_LoadTexture(this->renderer, "assets/Player2Victory.png");
 
