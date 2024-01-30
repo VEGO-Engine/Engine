@@ -23,7 +23,7 @@ public:
 
 	//for attack cooldown in between shots
 	uint32_t lastFireTime;
-	uint32_t fireCooldown = 800; //in ms can be adjusted to change possible attack-speed
+	uint32_t fireCooldown = 1000; //in ms can be adjusted to change possible attack-speed
 
 	KeyboardController() = default;
 	KeyboardController(SDL_Scancode up, SDL_Scancode down, SDL_Scancode left, SDL_Scancode right, SDL_Scancode fire, Vector2D fireVelocity);
