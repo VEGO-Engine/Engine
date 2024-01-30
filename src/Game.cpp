@@ -44,6 +44,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
 		std::cout << "ERROR. Subsystem couldnt be initialized! " << SDL_GetError() << std::endl;
+		SDL_ClearError();
 		return;
 	}
 
@@ -56,6 +57,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	if (!window)
 	{
 		std::cout << "ERROR: Window couldnt be created! " << SDL_GetError() << std::endl;
+		SDL_ClearError();
 		return;
 	}
 
@@ -63,6 +65,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	if (!renderer)
 	{
 		std::cout << "ERROR: Renderer couldnt be created! " << SDL_GetError() << std::endl;
+		SDL_ClearError();
 		return;
 	}
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -75,7 +78,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
 	{
-		std::cout << "ERROR: Mixer couldnt be initialized!" << std::endl;
+		std::cout << "ERROR: Mixer couldnt be initialized! " << SDL_GetError() << std::endl;
+		SDL_ClearError();
 		return;
 	}
 
@@ -125,7 +129,11 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	if (this->isRunning == false) return;
 
 	map = new Map();
-	map->loadMap("assets/SDL_map_test.txt", 25, 20);
+	if (!map->loadMap("assets/SDL_map_test.txt", 25, 20)) {
+		std::cout << "ERROR: Map couldnt be loaded! " << SDL_GetError() << std::endl;
+		SDL_ClearError();
+	};
+
 
 	//adding textures to the library in AssetManager
 
