@@ -24,12 +24,10 @@ void ProjectileComponent::update()
 
     if ((boundsIntersection | IntersectionBitSet("1100")).all() || (boundsIntersection | IntersectionBitSet("0011")).all()) {
         this->entity->destroy();
-        std::cout << "out of bounds" << std::endl;
     }
 
     if (distance > range) {
         this->entity->destroy();
-        std::cout << "out of range" << std::endl;
     }
 
     Entity* player;
