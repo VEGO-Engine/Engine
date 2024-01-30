@@ -1,5 +1,6 @@
 #include "TextureManager.h"
 
+#include <memory>
 #include <stdexcept>
 #include <string>
 
@@ -13,7 +14,7 @@ SDL_Texture* TextureManager::loadTexture(const char* fileName)
 	}
 	auto texture = IMG_LoadTexture(Game::renderer, fileName);
 	if (texture == NULL) throw std::runtime_error(std::string("Couldn't load texture '") + fileName + "'");
-	this->texture_cache.emplace(fileName, texture);
+	this->texture_cache.emplace(std::string(fileName), texture);
 	printf("Loaded texture at '%s'\n", fileName);
 	return texture;
 }

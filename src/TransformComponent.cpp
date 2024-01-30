@@ -62,21 +62,26 @@ void TransformComponent::update()
 
 	// TODO: move to separate functions
 
-	if (this->entity->hasGroup((size_t) GroupLabel::PLAYERS)) {
+	if (this->entity->hasGroup((size_t)GroupLabel::PLAYERS)) {
 		IntersectionBitSet intersections =
 			(CollisionHandler::getIntersectionWithBounds(entity, Vector2D(positionChange.x, 0)) |
-			(Game::collisionHandler->getAnyIntersection<IntersectionBitSet>(entity, Vector2D(positionChange.x, 0), {GroupLabel::MAPTILES, GroupLabel::COLLIDERS})) &
+				(Game::collisionHandler->getAnyIntersection<IntersectionBitSet>(entity, Vector2D(positionChange.x, 0), { GroupLabel::MAPTILES, GroupLabel::COLLIDERS })) &
 				IntersectionBitSet("0011")) |
 			(CollisionHandler::getIntersectionWithBounds(entity, Vector2D(0, positionChange.y)) |
-			(Game::collisionHandler->getAnyIntersection<IntersectionBitSet>(entity, Vector2D(0, positionChange.y), {GroupLabel::MAPTILES, GroupLabel::COLLIDERS})) &
+				(Game::collisionHandler->getAnyIntersection<IntersectionBitSet>(entity, Vector2D(0, positionChange.y), { GroupLabel::MAPTILES, GroupLabel::COLLIDERS })) &
 				IntersectionBitSet("1100"));
 
-		if (intersections.test((size_t) direction::LEFT) || intersections.test((size_t) direction::RIGHT))
-			positionChange.x = 0;		
+		if (intersections.test((size_t)direction::LEFT) || intersections.test((size_t)direction::RIGHT))
+			positionChange.x = 0;
 
-		if (intersections.test((size_t) direction::UP) || intersections.test((size_t) direction::DOWN))
+		if (intersections.test((size_t)direction::UP) || intersections.test((size_t)direction::DOWN))
 			positionChange.y = 0;
 	}
 
 	position += positionChange;
-};
+}
+
+void TransformComponent::modifySpeed(int8_t modifier)
+{
+	this->speed += modifier;
+}

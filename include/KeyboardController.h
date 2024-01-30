@@ -3,6 +3,7 @@
 
 #include "Component.h"
 #include "Vector2D.h"
+#include "Constants.h"
 #include "SoundManager.h"
 
 class TransformComponent;
@@ -23,14 +24,16 @@ public:
 
 	//for attack cooldown in between shots
 	uint32_t lastFireTime = 0;
-	uint32_t fireCooldown = 800; //in ms can be adjusted to change possible attack-speed
-
+	uint32_t fireCooldown = 1000; //in ms can be adjusted to change possible attack-speed
+	
 	KeyboardController() = default;
 	KeyboardController(SDL_Scancode up, SDL_Scancode down, SDL_Scancode left, SDL_Scancode right, SDL_Scancode fire, Vector2D fireVelocity);
 	~KeyboardController() = default;
 
 	void init() override;
 	void update() override;
+
+	void modifyAtkSpeed(int8_t modifier);
 
 private:
 	//for creation of projectiles

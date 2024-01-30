@@ -2,14 +2,9 @@
 
 #include <SDL_render.h>
 #include <map>
+#include <memory>
+#include <string>
 #include <vector>
-
-struct cmp_str
-{
-	bool operator()(char const *a, char const *b) const {
-		return strcmp(a, b) < 0;
-	}
-};
 
 class TextureManager
 {
@@ -21,7 +16,7 @@ class TextureManager
 			}
 		}
 
-		std::map<const char*, SDL_Texture*, cmp_str> texture_cache;
+		std::map<std::string, SDL_Texture*> texture_cache;
 
 		SDL_Texture* loadTexture(const char* fileName);
         static std::vector<SDL_Rect> splitSpriteSheet(SDL_Texture* spriteSheet, int width, int height, int spritesOnSheet);

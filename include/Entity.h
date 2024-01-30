@@ -23,7 +23,8 @@ enum class GroupLabel
 	ENEMIES,
 	COLLIDERS,
     PROJECTILE,
-    HEARTS
+    HEARTS,
+    POWERUPS
 };
 
 enum class TeamLabel
