@@ -12,7 +12,7 @@
 bool Map::loadMap(const char* path, int sizeX, int sizeY)
 {
 	std::string tileIDstr;
-	char singleChar;
+	char singleChar = 0;
 	std::ifstream mapFile;
 	mapFile.open(path);
 

@@ -15,21 +15,13 @@ enum SoundTypes
 class SoundManager
 {
 	public:
-		static SoundManager& get()
-		{
-			static SoundManager instance;
-			return instance;
-		}
-
 		SoundManager() {}
-	private:
 		~SoundManager() {
 			for (auto& it : this->sound_cache) {
 				Mix_FreeChunk(it.second);
 			}
 		}
-
-	public:
+		
 		SoundManager(SoundManager const&) = delete;
 		void operator=(SoundManager const&) = delete;
 

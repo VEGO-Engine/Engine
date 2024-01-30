@@ -18,11 +18,6 @@ SDL_Texture* TextureManager::loadTexture(const char* fileName)
 	return texture;
 }
 
-void TextureManager::draw(SDL_Texture* texture, SDL_Rect src, SDL_Rect dest)
-{
-	draw(texture, src, dest, false);
-}
-
 void TextureManager::draw(SDL_Texture* texture, SDL_Rect src, SDL_Rect dest, bool flipped)
 {
 	SDL_RendererFlip flip = flipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;

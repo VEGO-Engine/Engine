@@ -14,13 +14,6 @@ struct cmp_str
 class TextureManager
 {
 	public:
-		static TextureManager& get()
-		{
-			static TextureManager instance;
-			return instance;
-		}
-		
-	private:
 		TextureManager() {}
 		~TextureManager() {
 			for (auto& it : this->texture_cache) {
@@ -28,14 +21,9 @@ class TextureManager
 			}
 		}
 
-	public:
-		TextureManager(TextureManager const&) = delete;
-		void operator=(TextureManager const&) = delete;
-
 		std::map<const char*, SDL_Texture*, cmp_str> texture_cache;
 
 		SDL_Texture* loadTexture(const char* fileName);
         static std::vector<SDL_Rect> splitSpriteSheet(SDL_Texture* spriteSheet, int width, int height, int spritesOnSheet);
-		static void draw(SDL_Texture* texture, SDL_Rect src, SDL_Rect dest); // defaults to flipped false -> legacy
-		static void draw(SDL_Texture* texture, SDL_Rect src, SDL_Rect dest, bool flipped);
+		static void draw(SDL_Texture* texture, SDL_Rect src, SDL_Rect dest, bool flipped = false);
 };

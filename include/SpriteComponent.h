@@ -25,7 +25,7 @@ private:
 	bool animated = false;
 	uint8_t frames = 0;
 	uint8_t speed = 100;
-	bool flipped;
+	bool flipped = false;
 
 public:
 	SpriteComponent() = default;

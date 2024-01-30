@@ -8,6 +8,7 @@
 #include "TextureManager.h"
 #include "Entity.h"
 #include "TransformComponent.h"
+#include "Game.h"
 
 SpriteComponent::SpriteComponent(const char* path)
 {
@@ -33,7 +34,7 @@ SpriteComponent::~SpriteComponent()
 
 void SpriteComponent::setTexture(const char* path)
 {
-	this->texture = TextureManager::get().loadTexture(path);
+	this->texture = Game::textureManager->loadTexture(path);
 }
 
 void SpriteComponent::init()
@@ -43,6 +44,8 @@ void SpriteComponent::init()
 	this->srcRect.x = this->srcRect.y = 0;
 	this->srcRect.w = transform->width;
 	this->srcRect.h = transform->height;
+
+	this->update();
 }
 
 void SpriteComponent::update()
@@ -61,7 +64,7 @@ void SpriteComponent::update()
 
 void SpriteComponent::draw()
 {
-	TextureManager::get().draw(this->texture, this->srcRect, this->destRect, this->animated && this->flipped);
+	Game::textureManager->draw(this->texture, this->srcRect, this->destRect, this->animated && this->flipped);
 }
 
 void SpriteComponent::playAnimation(AnimationType type)

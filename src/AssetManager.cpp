@@ -4,18 +4,19 @@
 #include "TextureManager.h"
 #include "SoundManager.h"
 #include "Components.h"
+#include "Game.h"
 
 AssetManager::AssetManager(Manager* manager) : man(manager) {}
 
 AssetManager::~AssetManager() {}
 
 void AssetManager::addTexture(std::string id, const char* path) {
-    textures.emplace(id, TextureManager::get().loadTexture(path));
+    textures.emplace(id, Game::textureManager->loadTexture(path));
 }
 
 void AssetManager::addSoundEffect(std::string id, const char* path)
 {
-    soundEffects.emplace(id, SoundManager::get().loadSound(path));
+    soundEffects.emplace(id, Game::soundManager->loadSound(path));
 }
 
 SDL_Texture* AssetManager::getTexture(std::string id) {

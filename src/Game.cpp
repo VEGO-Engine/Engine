@@ -16,6 +16,8 @@ Map* map;
 Manager manager;
 
 AssetManager* Game::assets = new AssetManager(&manager);
+TextureManager* Game::textureManager = new TextureManager();
+SoundManager* Game::soundManager = new SoundManager();
 
 CollisionHandler* Game::collisionHandler = new CollisionHandler(manager);
 
@@ -70,7 +72,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	}
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-	SDL_Texture* backgroundTexture = TextureManager::get().loadTexture("assets/startscreen.png");
+	SDL_Texture* backgroundTexture = Game::textureManager->loadTexture("assets/startscreen.png");
 
 	SDL_RenderClear(renderer);
 	SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
@@ -235,7 +237,7 @@ void Game::selectCharacters(const char* &playerSprite, const char* &enemySprite)
 			}
 		}
 
-		SDL_Texture* backgroundTexture = TextureManager::get().loadTexture("assets/characterSelection.png");
+		SDL_Texture* backgroundTexture = Game::textureManager->loadTexture("assets/characterSelection.png");
 		SDL_RenderClear(renderer);
 		SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
 
@@ -320,8 +322,9 @@ void Game::render()
 
 void Game::clean()
 {
-	SDL_DestroyWindow(window);
+	delete(textureManager);
 	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
 	SDL_Quit();
 	std::cout << "Game Cleaned!" << std::endl;
 }

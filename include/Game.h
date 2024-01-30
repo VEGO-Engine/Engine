@@ -9,6 +9,8 @@
 
 class AssetManager;
 class CollisionHandler;
+class TextureManager;
+class SoundManager;
 enum class TeamLabel;
 
 class Game
@@ -31,6 +33,8 @@ public:
 	static SDL_Event event;
 	static CollisionHandler* collisionHandler;
     static AssetManager* assets;
+    static TextureManager* textureManager;
+    static SoundManager* soundManager;
 
 private:
     void setWinner(TeamLabel winningTeam);
