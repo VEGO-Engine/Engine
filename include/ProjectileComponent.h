@@ -10,13 +10,11 @@ class ProjectileComponent : public Component
     //can maybe be split in separate .cpp file
 
 public:
-    ProjectileComponent(int range, int speed, Vector2D velocity, bool source) : range(range), speed(speed), velocity(velocity), source(source) {}
+    ProjectileComponent(int range, int speed, Vector2D direction) : range(range), speed(speed), direction(direction) {}
     ~ProjectileComponent() {}
 
     void init() override;
     void update() override;
-
-    bool getSource() { return this->source; }
 
 private:
     TransformComponent* transformComponent;
@@ -25,7 +23,5 @@ private:
     int speed = 0;
     int distance = 0;
 
-    const bool source; //true if from player1 / false if from player2
-
-    Vector2D velocity;
+    Vector2D direction;
 };

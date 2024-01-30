@@ -1,5 +1,6 @@
 #include "ColliderComponent.h"
 
+#include "CollisionHandler.h"
 #include "Entity.h"
 #include "Game.h"
 #include "TransformComponent.h"
@@ -30,13 +31,14 @@ void ColliderComponent::init()
 	}
 
 	transform = &entity->getComponent<TransformComponent>();
-	Game::colliders.push_back(this);
+	//Game::collisionHandler->add(this);
+	this->update();
 }
 
 void ColliderComponent::update()
 {
-	collider.x = transform->position.x;
-	collider.y = transform->position.y;
+	collider.x = transform->position.x - (transform->width - transform->width * transform->scale * this->hitboxScale) / 2;
+	collider.y = transform->position.y - (transform->width - transform->width * transform->scale * this->hitboxScale) / 2;
 
 
 	collider.w = (transform->width * transform->scale) * this->hitboxScale;

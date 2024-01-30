@@ -30,4 +30,10 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     SDL2_mixer::SDL2_mixer-static
 )
 
+if(CMAKE_BUILD_TYPE MATCHES "Debug")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fsanitize=address -fno-omit-frame-pointer")
+    target_link_libraries(${PROJECT_NAME} PRIVATE "-fsanitize=address")
+endif()
+
+
 file(COPY ${PROJECT_SOURCE_DIR}/assets DESTINATION ${PROJECT_BINARY_DIR})

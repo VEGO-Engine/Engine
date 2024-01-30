@@ -1,4 +1,5 @@
 #include "Vector2D.h"
+#include "SDL_rect.h"
 
 Vector2D::Vector2D()
 {
@@ -36,6 +37,12 @@ Vector2D& operator/(Vector2D& vector1, const Vector2D& vector2)
 	vector1.y /= vector2.y;
 	return vector1;
 }
+Vector2D& operator+=(Vector2D& vector1, const Vector2D& vector2)
+{
+	vector1.x += vector2.x;
+	vector1.y += vector2.y;
+	return vector1;
+}
 Vector2D& Vector2D::operator*(const int& i)
 {
 	this->x *= i;
@@ -49,4 +56,12 @@ Vector2D& Vector2D::zero()
 	this->y = 0.0f;
 
 	return *this;
+}
+
+SDL_Rect operator+(const SDL_Rect& rect, const Vector2D& vector2D)
+{
+	SDL_Rect newRect = rect;
+	newRect.x += vector2D.x;
+	newRect.y += vector2D.y;
+	return newRect;
 }

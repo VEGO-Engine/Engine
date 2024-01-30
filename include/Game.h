@@ -8,7 +8,8 @@
 #include "Vector2D.h"
 
 class AssetManager;
-class ColliderComponent;
+class CollisionHandler;
+enum class TeamLabel;
 
 class Game
 {
@@ -25,19 +26,18 @@ public:
 	void clean();
 	bool running() const;
 
-	static void addTile(int id, int x, int y);
+	static void addTile(unsigned long id, int x, int y);
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
-	static std::vector<ColliderComponent*> colliders;
+	static CollisionHandler* collisionHandler;
     static AssetManager* assets;
-    
-    bool getWinner();
 
 private:
+    void setWinner(TeamLabel winningTeam);
+    TeamLabel getWinner();
+
 	int counter = 0;
 	bool isRunning = false;
 	SDL_Window* window;
-
-    //true for player1 win / false for player2 win;
-    bool winner;
+    TeamLabel winner;
 };
