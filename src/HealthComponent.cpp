@@ -17,6 +17,12 @@ void HealthComponent::modifyHealth(int health)
     this->refreshHearts();
 }
 
+void HealthComponent::setHealth(int health) 
+{
+    this->health = health;
+    this->refreshHearts();
+}
+
 void HealthComponent::refreshHearts()
 {
     // clear hearts if exist

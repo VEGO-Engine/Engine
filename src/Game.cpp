@@ -63,6 +63,15 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		return;
 	}
 
+    SDL_Surface* icon = SDL_LoadBMP("assets/iconImage.bmp");
+    if(!icon)
+    {
+        std::cout << "ERROR: Couldn't create icon!" << std::endl;
+        return;
+    }
+
+    SDL_SetWindowIcon(window, icon);
+
 	renderer = SDL_CreateRenderer(window, -1, 0);
 	if (!renderer)
 	{
@@ -139,16 +148,16 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	//adding textures to the library in AssetManager
 
+    /*
     assets->addTexture("player1", "assets/chicken_neutral_knight.png");
     assets->addTexture("player2", "assets/chicken_neutral.png");
     assets->addTexture("egg", "assets/egg.png");
-
+	*/
 	// loading sounds
 	assets->addSoundEffect("throw_egg", "assets/sound/throw_egg.wav");
 	assets->addSoundEffect("steps", "assets/sound/steps.wav");
 
 	//ecs implementation
-
 
 	player1.setTeam(TeamLabel::BLUE);
 	player1.addComponent<TransformComponent>(80,80,2); //posx, posy, scale
@@ -168,7 +177,6 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	player2.addComponent<HealthComponent>(5, Direction::RIGHT);
 	player2.addComponent<StatEffectsComponent>();
 	player2.addGroup((size_t) GroupLabel::PLAYERS);
-
 }
 
 void Game::selectCharacters(const char* &playerSprite, const char* &enemySprite)
@@ -359,7 +367,24 @@ void Game::setWinner(TeamLabel winningTeam)
 	this->isRunning = false;
 }
 
-TeamLabel Game::getWinner()
+TeamLabel Game::getWinner() const
 {
 	return this->winner;
+}
+
+void Game::refreshPlayers() {
+
+    for(auto& p : projectiles) {
+        p->destroy();
+    }
+
+    player1.getComponent<TransformComponent>().position = Vector2D(80, 80);
+    player2.getComponent<TransformComponent>().position = Vector2D(600, 500);
+
+    player1.getComponent<HealthComponent>().setHealth(5);
+    player2.getComponent<HealthComponent>().setHealth(5);
+
+    isRunning = true;
+
+    update();
 }

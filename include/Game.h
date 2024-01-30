@@ -36,9 +36,11 @@ public:
     static TextureManager* textureManager;
     static SoundManager* soundManager;
 
+    void refreshPlayers();
+    TeamLabel getWinner() const;
+
 private:
     void setWinner(TeamLabel winningTeam);
-    TeamLabel getWinner();
 
 	int counter = 0;
 	bool isRunning = false;
