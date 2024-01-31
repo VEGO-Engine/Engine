@@ -123,6 +123,7 @@ IntersectionBitSet CollisionHandler::getAnyIntersection<IntersectionBitSet>(
 	std::initializer_list<TeamLabel> const& teamLabels,
 	bool negateTeam)
 {
+	if (!entity->hasComponent<ColliderComponent>()) return std::bitset<DIRECTION_C>();
 	IntersectionBitSet intersections;
 	for (auto& collider : getColliders(groupLabels, teamLabels)) {
    		intersections |= getIntersection(entity, collider->entity, posMod);
@@ -138,6 +139,7 @@ Entity* CollisionHandler::getAnyIntersection<Entity*>(
 	std::initializer_list<TeamLabel> const& teamLabels,
 	bool negateTeam)
 {
+	if (!entity->hasComponent<ColliderComponent>()) return nullptr;
 	for (auto& collider : getColliders(groupLabels, teamLabels)) {
 		SDL_Rect rect = entity->getComponent<ColliderComponent>().collider + posMod;
    	    if (SDL_HasIntersection(&rect, &collider->collider)) {
@@ -145,4 +147,22 @@ Entity* CollisionHandler::getAnyIntersection<Entity*>(
    	    }
 	}
 	return nullptr;
+};
+
+template<>
+bool CollisionHandler::getAnyIntersection<bool>(
+	Entity* entity,
+	Vector2D posMod,
+	std::initializer_list<GroupLabel> const& groupLabels,
+	std::initializer_list<TeamLabel> const& teamLabels,
+	bool negateTeam)
+{
+	if (!entity->hasComponent<ColliderComponent>()) return false;
+	for (auto& collider : getColliders(groupLabels, teamLabels)) {
+		SDL_Rect rect = entity->getComponent<ColliderComponent>().collider + posMod;
+   	    if (SDL_HasIntersection(&rect, &collider->collider)) {
+   	    	return true;
+   	    }
+	}
+	return false;
 };

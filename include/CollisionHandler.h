@@ -55,6 +55,28 @@ public:
 		std::initializer_list<TeamLabel> const& teamLabels = {},
 		bool negateTeam = false);
 
+	/*!
+	 * 
+	 * \brief Tests entity against all entities with the specified labels for a collision
+	 * \details Tests the given entity against every other entity with the specified labels for intersections between their collison boxes.
+	 * If the primary entity has no ColliderComponent, the equivalent of no collision is returned immediately, other entities are skipped
+	 * if they don't have a ColliderComponent
+	 * \param entity The primary entity to check against. Return values will be relative to this entity
+	 * \param posMod Modifier to apply toposition before checking collisions. Example: (TODO: link player collision)
+	 * \param groupLabels Entities need to have at least one listed GroupLabels to get checked against
+	 * \param teamLabels Entities need to have one of the specified TeamLabels to get checked against
+	 * \param negateTeam If set to true, entities will only be checked against if they **don't** have one of the specified TeamLabels
+	 * \return `bool` true if any collision was found, otherwise false
+	 * \return `Entity*` returns first entity with collision found
+	 * \return `IntersectionBitSet` bitset of intersection, position `Direction` true if any part in direction collides
+	 * \see GroupLabel
+	 * \see TeamLabel
+	 * \see Entity
+	 * \see ColliderComponent
+	 * \see IntersectionBitSet
+	 * \see Direction
+	 * \see Entity::getTeam()
+	 */
 	template<typename T>
 	T getAnyIntersection(
 		Entity* entity,
