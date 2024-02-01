@@ -9,6 +9,8 @@
 #include "Entity.h"
 #include "HealthComponent.h"
 #include "Map.h"
+#include "SDL_gamecontroller.h"
+#include "SDL_joystick.h"
 #include "TextureManager.h"
 #include "StatEffectsComponent.h"
 #include "Constants.h"
@@ -21,6 +23,7 @@ TextureManager* Game::textureManager = new TextureManager();
 SoundManager* Game::soundManager = new SoundManager();
 
 CollisionHandler* Game::collisionHandler = new CollisionHandler(manager);
+std::array<SDL_GameController*, MAX_GAME_CONTROLLERS> gameControllers;
 
 SDL_Renderer* Game::renderer = nullptr;
 
@@ -37,6 +40,7 @@ Game::~Game() = default;
 
 void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
+	SDL_SetHint(SDL_HINT_JOYSTICK_ALLOW_BACKGROUND_EVENTS,"1");
 	int flags = 0;
 	if (fullscreen)
 	{
@@ -48,6 +52,15 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		std::cout << "ERROR. Subsystem couldnt be initialized! " << SDL_GetError() << std::endl;
 		SDL_ClearError();
 		return;
+	}
+
+	for (int i = 0, c = 0; i < SDL_NumJoysticks(); i++) {
+		if (SDL_IsGameController(i)) {
+			gameControllers.at(c++) = SDL_GameControllerOpen(i);
+		}
+		if (c > MAX_GAME_CONTROLLERS) {
+			break;
+		}
 	}
 
 	if (Mix_Init(MIX_INIT_MP3) != MIX_INIT_MP3) {
@@ -162,7 +175,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	player1.setTeam(TeamLabel::BLUE);
 	player1.addComponent<TransformComponent>(80,80,2); //posx, posy, scale
 	player1.addComponent<SpriteComponent>(player1Sprite, true); //adds sprite (32x32px), path needed
-	player1.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D, SDL_SCANCODE_E, Vector2D(2, 0));//custom keycontrols can be added
+	player1.addComponent<KeyboardController>(gameControllers.at(0), Vector2D(2, 0));//custom keycontrols can be added
 	player1.addComponent<ColliderComponent>("player", 0.8f); //adds tag (for further use, reference tag)
 	player1.addComponent<HealthComponent>(5, Direction::LEFT);
 	player1.addComponent<StatEffectsComponent>();
@@ -172,7 +185,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	player2.setTeam(TeamLabel::RED);
 	player2.addComponent<TransformComponent>(600, 500, 2);
 	player2.addComponent<SpriteComponent>(player2Sprite, true);
-	player2.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT, SDL_SCANCODE_RCTRL, Vector2D(-2, 0));
+	player2.addComponent<KeyboardController>(gameControllers.at(1), Vector2D(-2, 0));
 	player2.addComponent<ColliderComponent>("enemy", 0.8f);
 	player2.addComponent<HealthComponent>(5, Direction::RIGHT);
 	player2.addComponent<StatEffectsComponent>();

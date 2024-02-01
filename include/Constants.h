@@ -11,6 +11,7 @@ constexpr std::size_t MAX_COMPONENTS = 32;
 constexpr std::size_t MAX_GROUPS = 32;
 constexpr std::size_t MAX_STATS = 8;
 constexpr std::size_t MAX_TEAMS = 8;
+constexpr std::size_t MAX_GAME_CONTROLLERS = 4;
 
 constexpr int SCREEN_SIZE_HEIGHT = 640;
 constexpr int SCREEN_SIZE_WIDTH = 800;

@@ -3,15 +3,12 @@
 #include "Game.h"
 #include "Components.h"
 #include "AssetManager.h"
+#include "SDL_gamecontroller.h"
 #include "SpriteComponent.h"
 
-KeyboardController::KeyboardController(SDL_Scancode up, SDL_Scancode down, SDL_Scancode left, SDL_Scancode right, SDL_Scancode fire, Vector2D fireVelocity)
+KeyboardController::KeyboardController(SDL_GameController* gameController, Vector2D fireVelocity)
 {
-	this->up = up;
-	this->down = down;
-	this->left = left;
-	this->right = right;
-	this->fire = fire;
+	this->gameController = gameController;
 	this->fireVelocity = fireVelocity;
 }
 
@@ -27,30 +24,30 @@ void KeyboardController::update()
 	transform->direction.y = 0;
 	sprite->playAnimation(IDLE);
 
-	if (keystates[this->up]) {
+	if (SDL_JoystickGetAxis(SDL_GameControllerGetJoystick(this->gameController), 1) < MIN_JOYSTICK_INPUT * -1) { // 
 		transform->direction.y = -1;
 		sprite->playAnimation(WALK);
 		SoundManager::playSound(STEPS);
 	}
-	if (keystates[this->left]) {
+	if (SDL_JoystickGetAxis(SDL_GameControllerGetJoystick(this->gameController), 0) < MIN_JOYSTICK_INPUT * -1) {
 		transform->direction.x = -1;
 		sprite->playAnimation(WALK);
 		sprite->setDirection(Direction::LEFT);
 		SoundManager::playSound(STEPS);
 	}
-	if (keystates[this->down]) {
+	if (SDL_JoystickGetAxis(SDL_GameControllerGetJoystick(this->gameController), 1) > MIN_JOYSTICK_INPUT) {
 		transform->direction.y = 1;
 		sprite->playAnimation(WALK);
 		SoundManager::playSound(STEPS);
 	}
-	if (keystates[this->right]) {
+	if (SDL_JoystickGetAxis(SDL_GameControllerGetJoystick(this->gameController), 0) > MIN_JOYSTICK_INPUT) {
 		transform->direction.x = 1;
 		sprite->playAnimation(WALK);
 		sprite->setDirection(Direction::RIGHT);
 		SoundManager::playSound(STEPS);
 	}
 
-	if (keystates[this->fire]) {
+	if (SDL_GameControllerGetButton(this->gameController, SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_A)) {
 
 		Uint32 currentTicks = SDL_GetTicks();
 
