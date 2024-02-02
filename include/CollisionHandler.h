@@ -19,14 +19,6 @@ class Entity;
 
 constexpr uint8_t DIRECTION_C = 4;
 
-enum class direction
-{
-	LEFT = 0,
-	RIGHT,
-	UP,
-	DOWN
-};
-
 using IntersectionBitSet = std::bitset<DIRECTION_C>;
 
 class CollisionHandler

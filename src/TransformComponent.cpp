@@ -71,10 +71,10 @@ void TransformComponent::update()
 				(Game::collisionHandler->getAnyIntersection<IntersectionBitSet>(entity, Vector2D(0, positionChange.y), { GroupLabel::MAPTILES, GroupLabel::COLLIDERS })) &
 				IntersectionBitSet("1100"));
 
-		if (intersections.test((size_t)direction::LEFT) || intersections.test((size_t)direction::RIGHT))
+		if (intersections.test((size_t)Direction::LEFT) || intersections.test((size_t)Direction::RIGHT))
 			positionChange.x = 0;
 
-		if (intersections.test((size_t)direction::UP) || intersections.test((size_t)direction::DOWN))
+		if (intersections.test((size_t)Direction::UP) || intersections.test((size_t)Direction::DOWN))
 			positionChange.y = 0;
 	}
 
