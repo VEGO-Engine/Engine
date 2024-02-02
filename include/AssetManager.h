@@ -23,7 +23,7 @@ public:
     AssetManager(Manager* manager);
     ~AssetManager();
 
-    void createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, const char* texturePath, TeamLabel teamLabel);
+    void createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, const char* texturePath, Entity::TeamLabel teamLabel);
     void createPowerup(Vector2D pos, PowerupType type);
 
     Vector2D calculateSpawnPosition();

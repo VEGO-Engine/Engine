@@ -62,12 +62,12 @@ bool PopupWindow::shouldContinue() const {
     return continueGame;
 }
 
-void PopupWindow::renderWinnerPopup(TeamLabel winner) {
+void PopupWindow::renderWinnerPopup(Entity::TeamLabel winner) {
 
     SDL_RenderClear(this->renderer);
 
     //Maybe use texture manager (changes need to be made that it does not use game::renderer automatically, but receives one instead)
-    this->texture = winner == TeamLabel::BLUE ? 
+    this->texture = winner == Entity::TeamLabel::BLUE ? 
         IMG_LoadTexture(this->renderer, "assets/Player1Victory.png") :
         IMG_LoadTexture(this->renderer, "assets/Player2Victory.png");
 

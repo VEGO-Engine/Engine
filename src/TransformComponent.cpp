@@ -62,15 +62,15 @@ void TransformComponent::update()
 
 	// TODO: move to separate functions
 
-	if (this->entity->hasGroup((size_t)GroupLabel::PLAYERS)) {
+	if (this->entity->hasGroup((size_t)Entity::GroupLabel::PLAYERS)) {
 
 		// [getAnyIntersection example code]
 		IntersectionBitSet intersections =
 			(CollisionHandler::getIntersectionWithBounds(entity, Vector2D(positionChange.x, 0)) |
-				(Game::collisionHandler->getAnyIntersection<IntersectionBitSet>(entity, Vector2D(positionChange.x, 0), { GroupLabel::MAPTILES, GroupLabel::COLLIDERS })) &
+				(Game::collisionHandler->getAnyIntersection<IntersectionBitSet>(entity, Vector2D(positionChange.x, 0), { Entity::GroupLabel::MAPTILES, Entity::GroupLabel::COLLIDERS })) &
 				IntersectionBitSet("0011")) |
 			(CollisionHandler::getIntersectionWithBounds(entity, Vector2D(0, positionChange.y)) |
-				(Game::collisionHandler->getAnyIntersection<IntersectionBitSet>(entity, Vector2D(0, positionChange.y), { GroupLabel::MAPTILES, GroupLabel::COLLIDERS })) &
+				(Game::collisionHandler->getAnyIntersection<IntersectionBitSet>(entity, Vector2D(0, positionChange.y), { Entity::GroupLabel::MAPTILES, Entity::GroupLabel::COLLIDERS })) &
 				IntersectionBitSet("1100"));
 
 		if (intersections.test((size_t)Direction::LEFT) || intersections.test((size_t)Direction::RIGHT))

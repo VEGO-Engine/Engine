@@ -6,12 +6,12 @@
 #include <vector>
 
 #include "Vector2D.h"
+#include "Entity.h"
 
 class AssetManager;
 class CollisionHandler;
 class TextureManager;
 class SoundManager;
-enum class TeamLabel;
 
 class Game
 {
@@ -37,13 +37,13 @@ public:
     static SoundManager* soundManager;
 
     void refreshPlayers();
-    TeamLabel getWinner() const;
+    Entity::TeamLabel getWinner() const;
 
 private:
-    void setWinner(TeamLabel winningTeam);
+    void setWinner(Entity::TeamLabel winningTeam);
 
 	int counter = 0;
 	bool isRunning = false;
 	SDL_Window* window;
-    TeamLabel winner;
+    Entity::TeamLabel winner;
 };
