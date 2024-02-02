@@ -122,6 +122,8 @@ std::vector<ColliderComponent*> CollisionHandler::getColliders(
  * \see Direction
  * \see IntersectionBitSet
  * \snippet CollisionHandler.h IntersectionBitSet
+ * \details Example usage for IntersectionBitSet (TransformComponent::update()):
+ * \snippet{trimleft} TransformComponent.cpp getAnyIntersection example code
  * 
  */
 template<>

@@ -20,7 +20,7 @@ class Entity
 {
 public:
 
-/*! TODO */
+	/*! TODO */
 	enum class GroupLabel
 	{
 		MAPTILES,
