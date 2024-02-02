@@ -36,21 +36,21 @@ IntersectionBitSet CollisionHandler::getIntersection(Entity* entityA, Entity* en
 	// checks all 4 directions to allow checking full overlap
 	if (colliderA.x < colliderB.x + colliderB.w &&
 		colliderA.x > colliderB.x) {
-		intersections.set((size_t) direction::LEFT);
+		intersections.set((size_t) Direction::LEFT);
 	}
 
 	if (colliderA.x + colliderA.w < colliderB.x + colliderB.w &&
 		colliderA.x + colliderA.w > colliderB.x) {
-		intersections.set((size_t) direction::RIGHT);
+		intersections.set((size_t) Direction::RIGHT);
 	}
 
 	if (colliderA.y < colliderB.y + colliderB.h &&
 		colliderA.y > colliderB.y)
-		intersections.set((size_t) direction::UP);
+		intersections.set((size_t) Direction::UP);
 
 	if (colliderA.y + colliderA.h < colliderB.y + colliderB.h &&
 		colliderA.y + colliderA.h > colliderB.y)
-		intersections.set((size_t) direction::DOWN);
+		intersections.set((size_t) Direction::DOWN);
 
 	return intersections;
 }
@@ -67,20 +67,20 @@ IntersectionBitSet CollisionHandler::getIntersectionWithBounds(Entity* entity, V
 	// all 4 directions and both sides to allow checking for fully out of bounds
 	if (collider->x + posMod.x < 0 ||
 		collider->x + posMod.x > SCREEN_SIZE_WIDTH) {
-		intersections.set((size_t) direction::LEFT);
+		intersections.set((size_t) Direction::LEFT);
 	}
 
 	if (collider->x + collider->w + posMod.x < 0 ||
 		collider->x + collider->w + posMod.x > SCREEN_SIZE_WIDTH)
-		intersections.set((size_t) direction::RIGHT);
+		intersections.set((size_t) Direction::RIGHT);
 
 	if (collider->y + posMod.y < 0 ||
 		collider->y + posMod.y > SCREEN_SIZE_HEIGHT)
-		intersections.set((size_t) direction::UP);
+		intersections.set((size_t) Direction::UP);
 
 	if (collider->y + collider->h + posMod.y < 0 ||
 		collider->y + collider->h + posMod.y > SCREEN_SIZE_HEIGHT)
-		intersections.set((size_t) direction::DOWN);
+		intersections.set((size_t) Direction::DOWN);
 
 	return intersections;
 }
