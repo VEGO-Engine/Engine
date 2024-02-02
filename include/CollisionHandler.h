@@ -64,10 +64,7 @@ public:
 	 * \param groupLabels Entities need to have at least one listed GroupLabels to get checked against
 	 * \param teamLabels Entities need to have one of the specified TeamLabels to get checked against
 	 * \param negateTeam If set to true, entities will only be checked against if they **don't** have one of the specified TeamLabels
-	 * \see TeamLabel
-	 * \see Entity
 	 * \see ColliderComponent
-	 * \see Entity::getTeam()
 	 * 
 	 */
 	template<typename T>
