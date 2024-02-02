@@ -26,6 +26,8 @@ DOT_TRANSPARENT        = YES
 # Source files
 INPUT                  = ./include ./src
 FILE_PATTERNS          = *.cpp *.h *.hpp
+EXAMPLE_PATH           = ./include ./src
+EXAMPLE_PATTERNS       = *.cpp *.h *.hpp
 
 # Output formats
 GENERATE_XML           = YES
@@ -58,3 +60,4 @@ GENERATE_TREEVIEW      = YES
 HTML_COLLABORATION     = YES
 
 # idk everything else
+TAB_SIZE               = 4

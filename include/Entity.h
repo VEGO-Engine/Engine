@@ -16,6 +16,7 @@ using ComponentBitSet = std::bitset<MAX_COMPONENTS>;
 using GroupBitSet = std::bitset<MAX_GROUPS>;
 using ComponentArray = std::array<Component*, MAX_COMPONENTS>;
 
+/*! TODO */
 enum class GroupLabel
 {
 	MAPTILES,
@@ -57,6 +58,7 @@ public:
 	std::bitset<MAX_GROUPS> getGroupBitSet();
 
 	void setTeam(TeamLabel teamLabel);
+	/*! TODO */
 	TeamLabel getTeam();
 
 	Manager& getManager() { return manager; };

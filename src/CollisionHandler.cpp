@@ -115,6 +115,15 @@ std::vector<ColliderComponent*> CollisionHandler::getColliders(
 	return colliders;
 }
 
+/*!
+ * 
+ * \details Refer to getAnyIntersection() for more details
+ * \return A bitset of intersections, describing the directions of intersection. Position `Direction` in bitset true if edge in that direction collides
+ * \see Direction
+ * \see IntersectionBitSet
+ * \snippet CollisionHandler.h IntersectionBitSet
+ * 
+ */
 template<>
 IntersectionBitSet CollisionHandler::getAnyIntersection<IntersectionBitSet>(
 	Entity* entity,
@@ -131,6 +140,13 @@ IntersectionBitSet CollisionHandler::getAnyIntersection<IntersectionBitSet>(
 	return intersections;
 };
 
+/*!
+ * 
+ * \details Refer to getAnyIntersection() for more details
+ * \return The first entity with collision found
+ * \see Entity
+ * 
+ */
 template<>
 Entity* CollisionHandler::getAnyIntersection<Entity*>(
 	Entity* entity,
@@ -149,6 +165,12 @@ Entity* CollisionHandler::getAnyIntersection<Entity*>(
 	return nullptr;
 };
 
+/*!
+ * 
+ * \details Refer to getAnyIntersection() for more details
+ * \return True if any collision was found, otherwise false
+ * 
+ */
 template<>
 bool CollisionHandler::getAnyIntersection<bool>(
 	Entity* entity,
