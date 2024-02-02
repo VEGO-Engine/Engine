@@ -3,8 +3,9 @@
 #include <SDL_ttf.h>
 #include <string>
 
+#include "Entity.h"
+
 class Game;
-enum class TeamLabel;
 
 class PopupWindow {
 
@@ -17,7 +18,7 @@ public:
 
     bool interacted;
 
-    void renderWinnerPopup(TeamLabel winner);
+    void renderWinnerPopup(Entity::TeamLabel winner);
 
 private:
     SDL_Renderer* renderer;

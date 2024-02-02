@@ -86,8 +86,8 @@ IntersectionBitSet CollisionHandler::getIntersectionWithBounds(Entity* entity, V
 }
 
 std::vector<ColliderComponent*> CollisionHandler::getColliders(
-	std::initializer_list<GroupLabel> const& groupLabels,
-	std::initializer_list<TeamLabel> const& teamLabels,
+	std::initializer_list<Entity::GroupLabel> const& groupLabels,
+	std::initializer_list<Entity::TeamLabel> const& teamLabels,
 	bool negateTeam) 
 {
 	std::vector<ColliderComponent*> colliders;
@@ -119,8 +119,8 @@ template<>
 IntersectionBitSet CollisionHandler::getAnyIntersection<IntersectionBitSet>(
 	Entity* entity,
 	Vector2D posMod,
-	std::initializer_list<GroupLabel> const& groupLabels,
-	std::initializer_list<TeamLabel> const& teamLabels,
+	std::initializer_list<Entity::GroupLabel> const& groupLabels,
+	std::initializer_list<Entity::TeamLabel> const& teamLabels,
 	bool negateTeam)
 {
 	IntersectionBitSet intersections;
@@ -134,8 +134,8 @@ template<>
 Entity* CollisionHandler::getAnyIntersection<Entity*>(
 	Entity* entity,
 	Vector2D posMod,
-	std::initializer_list<GroupLabel> const& groupLabels,
-	std::initializer_list<TeamLabel> const& teamLabels,
+	std::initializer_list<Entity::GroupLabel> const& groupLabels,
+	std::initializer_list<Entity::TeamLabel> const& teamLabels,
 	bool negateTeam)
 {
 	for (auto& collider : getColliders(groupLabels, teamLabels)) {

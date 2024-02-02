@@ -26,7 +26,7 @@ void HealthComponent::setHealth(int health)
 void HealthComponent::refreshHearts()
 {
     // clear hearts if exist
-    for (auto& heart : this->entity->getManager().getGroup((size_t) GroupLabel::HEARTS)) {
+    for (auto& heart : this->entity->getManager().getGroup((size_t) Entity::GroupLabel::HEARTS)) {
         if (heart->getTeam() == this->entity->getTeam()) {
             heart->destroy();
         }
@@ -59,6 +59,6 @@ void HealthComponent::createHeartComponents(int x)
     auto& heart(this->entity->getManager().addEntity());
     heart.addComponent<TransformComponent>(x,5,2);
     heart.addComponent<SpriteComponent>("assets/heart.png");
-    heart.addGroup((size_t)GroupLabel::HEARTS);
+    heart.addGroup((size_t)Entity::GroupLabel::HEARTS);
     heart.setTeam(this->entity->getTeam());
 }

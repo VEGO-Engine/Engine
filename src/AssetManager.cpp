@@ -37,14 +37,14 @@ Mix_Chunk* AssetManager::getSound(std::string id) {
     return soundEffects.at(id);
 }
 
-void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, const char* texturePath, TeamLabel teamLabel) {
+void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, const char* texturePath, Entity::TeamLabel teamLabel) {
 
     auto& projectile(man->addEntity());
     projectile.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, scale); //32x32 is standard size for objects
     projectile.addComponent<SpriteComponent>(texturePath);
     projectile.addComponent<ProjectileComponent>(range, speed, velocity);
     projectile.addComponent<ColliderComponent>("projectile", 0.6f);
-    projectile.addGroup((size_t)GroupLabel::PROJECTILE);
+    projectile.addGroup((size_t)Entity::GroupLabel::PROJECTILE);
     projectile.setTeam(teamLabel);
 }
 
@@ -67,7 +67,7 @@ void AssetManager::createPowerup(Vector2D pos, PowerupType type) {
 
     powerups.addComponent<ColliderComponent>("powerup", 0.6f);
     powerups.addComponent<PowerupComponent>(type);
-    powerups.addGroup((size_t)GroupLabel::POWERUPS);
+    powerups.addGroup((size_t)Entity::GroupLabel::POWERUPS);
 }
 
 Vector2D AssetManager::calculateSpawnPosition()
@@ -81,7 +81,7 @@ Vector2D AssetManager::calculateSpawnPosition()
 		spawnRect.x = rand() % (SCREEN_SIZE_WIDTH - spawnRect.w);
 		spawnRect.y = rand() % (SCREEN_SIZE_HEIGHT - spawnRect.h);
 		conflict = false;
-		for (auto cc : Game::collisionHandler->getColliders({ GroupLabel::MAPTILES }))
+		for (auto cc : Game::collisionHandler->getColliders({ Entity::GroupLabel::MAPTILES }))
 		{
 			if (SDL_HasIntersection(&spawnRect, &cc->collider) && strcmp(cc->tag, "projectile"))
 			{

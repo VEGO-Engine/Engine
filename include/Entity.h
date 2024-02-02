@@ -16,27 +16,29 @@ using ComponentBitSet = std::bitset<MAX_COMPONENTS>;
 using GroupBitSet = std::bitset<MAX_GROUPS>;
 using ComponentArray = std::array<Component*, MAX_COMPONENTS>;
 
-enum class GroupLabel
-{
-	MAPTILES,
-	PLAYERS,
-	ENEMIES,
-	COLLIDERS,
-    PROJECTILE,
-    HEARTS,
-    POWERUPS
-};
-
-enum class TeamLabel
-{
-	NONE,
-	BLUE,
-	RED
-};
-
 class Entity
 {
 public:
+
+/*! TODO */
+	enum class GroupLabel
+	{
+		MAPTILES,
+		PLAYERS,
+		ENEMIES,
+		COLLIDERS,
+	    PROJECTILE,
+	    HEARTS,
+	    POWERUPS
+	};
+
+	enum class TeamLabel
+	{
+		NONE, //!< No team
+		BLUE, //!< Team blue
+		RED //!< Team red
+	};
+
 	explicit Entity(Manager& mManager) :
 		manager(mManager) { };
 

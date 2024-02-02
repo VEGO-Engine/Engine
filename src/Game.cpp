@@ -159,24 +159,24 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	//ecs implementation
 
-	player1.setTeam(TeamLabel::BLUE);
+	player1.setTeam(Entity::TeamLabel::BLUE);
 	player1.addComponent<TransformComponent>(80,80,2); //posx, posy, scale
 	player1.addComponent<SpriteComponent>(player1Sprite, true); //adds sprite (32x32px), path needed
 	player1.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D, SDL_SCANCODE_E, Vector2D(2, 0));//custom keycontrols can be added
 	player1.addComponent<ColliderComponent>("player", 0.8f); //adds tag (for further use, reference tag)
 	player1.addComponent<HealthComponent>(5, Direction::LEFT);
 	player1.addComponent<StatEffectsComponent>();
-	player1.addGroup((size_t) GroupLabel::PLAYERS); //tell programm what group it belongs to for rendering order
+	player1.addGroup((size_t) Entity::GroupLabel::PLAYERS); //tell programm what group it belongs to for rendering order
 
 
-	player2.setTeam(TeamLabel::RED);
+	player2.setTeam(Entity::TeamLabel::RED);
 	player2.addComponent<TransformComponent>(600, 500, 2);
 	player2.addComponent<SpriteComponent>(player2Sprite, true);
 	player2.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT, SDL_SCANCODE_RCTRL, Vector2D(-2, 0));
 	player2.addComponent<ColliderComponent>("enemy", 0.8f);
 	player2.addComponent<HealthComponent>(5, Direction::RIGHT);
 	player2.addComponent<StatEffectsComponent>();
-	player2.addGroup((size_t) GroupLabel::PLAYERS);
+	player2.addGroup((size_t) Entity::GroupLabel::PLAYERS);
 }
 
 void Game::selectCharacters(const char* &playerSprite, const char* &enemySprite)
@@ -275,11 +275,11 @@ void Game::selectCharacters(const char* &playerSprite, const char* &enemySprite)
 	this->isRunning = true;
 }
 
-auto& tiles(manager.getGroup((size_t)GroupLabel::MAPTILES));
-auto& players(manager.getGroup((size_t)GroupLabel::PLAYERS));
-auto& projectiles(manager.getGroup((size_t)GroupLabel::PROJECTILE));
-auto& hearts(manager.getGroup((size_t)GroupLabel::HEARTS));
-auto& powerups(manager.getGroup((size_t)GroupLabel::POWERUPS));
+auto& tiles(manager.getGroup((size_t)Entity::GroupLabel::MAPTILES));
+auto& players(manager.getGroup((size_t)Entity::GroupLabel::PLAYERS));
+auto& projectiles(manager.getGroup((size_t)Entity::GroupLabel::PROJECTILE));
+auto& hearts(manager.getGroup((size_t)Entity::GroupLabel::HEARTS));
+auto& powerups(manager.getGroup((size_t)Entity::GroupLabel::POWERUPS));
 
 void Game::handleEvents()
 {
@@ -311,7 +311,7 @@ void Game::update()
 	}
 
 	// needs to be in game.cpp to have access to internal functions
-	for (auto& player : manager.getGroup((size_t) GroupLabel::PLAYERS)) {
+	for (auto& player : manager.getGroup((size_t) Entity::GroupLabel::PLAYERS)) {
 		if (player->getComponent<HealthComponent>().getHealth() <= 0) {
 			this->setWinner(player->getTeam());
 		}
@@ -353,7 +353,7 @@ void Game::addTile(unsigned long id, int x, int y)
 	auto& tile(manager.addEntity());
 	tile.addComponent<TileComponent>(x, y, TILE_SIZE, TILE_SIZE, id);
 	if (id == 1) tile.addComponent<ColliderComponent>("water");
-	tile.addGroup((size_t)GroupLabel::MAPTILES);
+	tile.addGroup((size_t)Entity::GroupLabel::MAPTILES);
 }
 
 bool Game::running() const
@@ -361,13 +361,13 @@ bool Game::running() const
 	return isRunning;
 }
 
-void Game::setWinner(TeamLabel winningTeam)
+void Game::setWinner(Entity::TeamLabel winningTeam)
 {
 	this->winner = winningTeam;
 	this->isRunning = false;
 }
 
-TeamLabel Game::getWinner() const
+Entity::TeamLabel Game::getWinner() const
 {
 	return this->winner;
 }

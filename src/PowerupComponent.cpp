@@ -31,7 +31,7 @@ void  PowerupComponent::update()
     if ((player = Game::collisionHandler->getAnyIntersection<Entity*>(
         entity,
         Vector2D(0, 0),
-        { GroupLabel::PLAYERS },
+        { Entity::GroupLabel::PLAYERS },
         {},
         true)) != nullptr)
     {

@@ -35,9 +35,9 @@ int main(int argc, char* argv[])
                 SDL_Delay(frameDelay - frameTime);
             }
         }
-        TeamLabel winner = game->getWinner();
+        Entity::TeamLabel winner = game->getWinner();
 
-        PopupWindow popupWindow("Game over", winner == TeamLabel::BLUE ?
+        PopupWindow popupWindow("Game over", winner == Entity::TeamLabel::BLUE ?
             "Player1 won! Press 'C' to continue or 'Q' to quit." :
             "Player2 won! Press 'C' to continue or 'Q' to quit.");
 
