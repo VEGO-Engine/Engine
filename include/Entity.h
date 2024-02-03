@@ -40,7 +40,7 @@ public:
 	{
 		MAPTILES, //!< Entity using TileComponent
 		PLAYERS, //!< Primary entity in player controll
-		ENEMIES, //!< \deprecated All players now grouped as player
+		ENEMIES, //!< \deprecated All players now grouped as Entity::PLAYERS
 		COLLIDERS, //!< Fixed collider entity, e.g. a wall
 	    PROJECTILE, //!< \todo Document
 	    HEARTS, //!< \todo Document
