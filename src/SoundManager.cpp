@@ -27,7 +27,7 @@ Mix_Chunk* SoundManager::loadSound(const char* fileName)
 	return sound;
 }
 
-void SoundManager::playSound(SoundTypes sound)
+void SoundManager::playSound(Game* game, SoundTypes sound)
 {
 	switch (sound)
 	{
@@ -35,14 +35,14 @@ void SoundManager::playSound(SoundTypes sound)
 			if (Mix_Playing(-1) != 0)
 				break;
 
-			if (Mix_PlayChannel(-1, Game::assets->getSound("steps"), 0) == -1) {
+			if (Mix_PlayChannel(-1, game->assets->getSound("steps"), 0) == -1) {
 				std::cerr << "Error playing sound 'steps': " << Mix_GetError() << std::endl;
 			}
 			
 			break;
 
 		case SoundTypes::THROW_EGG:
-			if (Mix_PlayChannel(-1, Game::assets->getSound("throw_egg"), 0) == -1) {
+			if (Mix_PlayChannel(-1, game->assets->getSound("throw_egg"), 0) == -1) {
 				std::cerr << "Error playing sound 'throw_egg': " << Mix_GetError() << std::endl;
 			}
 			break;

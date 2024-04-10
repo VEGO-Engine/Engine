@@ -9,7 +9,7 @@
 #include "Game.h"
 #include "SDL_error.h"
 
-bool Map::loadMap(const char* path, int sizeX, int sizeY)
+bool Map::loadMap(const char* path, int sizeX, int sizeY, Game* game /* backreference */)
 {
 	std::string tileIDstr;
 	char singleChar = 0;
@@ -28,7 +28,7 @@ bool Map::loadMap(const char* path, int sizeX, int sizeY)
 		if (singleChar == ',' || singleChar == '\n') {
 			if (tileIDstr.empty())
 				continue;
-			Game::addTile(std::stoi(tileIDstr), x * TILE_SIZE, y * TILE_SIZE);
+			game->addTile(std::stoi(tileIDstr), x * TILE_SIZE, y * TILE_SIZE);
 			tileIDstr.clear();
 			x++;
 			if (singleChar == '\n') {

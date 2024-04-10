@@ -13,14 +13,14 @@ void ProjectileComponent::init()
 {
 	transformComponent = &entity->getComponent<TransformComponent>();
     transformComponent->direction = direction;
-    SoundManager::playSound(THROW_EGG);
+    SoundManager::playSound(this->entity->getManager().getGame(), THROW_EGG);
 }
 
 void ProjectileComponent::update() 
 {
     distance += speed;
 
-    IntersectionBitSet boundsIntersection = Game::collisionHandler->getIntersectionWithBounds(entity);
+    IntersectionBitSet boundsIntersection = this->entity->getManager().getGame()->collisionHandler->getIntersectionWithBounds(entity);
 
     if ((boundsIntersection | IntersectionBitSet("1100")).all() || (boundsIntersection | IntersectionBitSet("0011")).all()) {
         this->entity->destroy();
@@ -31,7 +31,7 @@ void ProjectileComponent::update()
     }
 
     Entity* player;
-    if ((player = Game::collisionHandler->getAnyIntersection<Entity*>(
+    if ((player = this->entity->getManager().getGame()->collisionHandler->getAnyIntersection<Entity*>(
         entity,
         Vector2D(0,0),
         {Entity::GroupLabel::PLAYERS},

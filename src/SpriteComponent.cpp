@@ -1,6 +1,7 @@
 #include "SpriteComponent.h"
 
 #include <SDL_timer.h>
+#include <cstring>
 #include <memory>
 
 #include "AnimationHandler.h"
@@ -9,10 +10,11 @@
 #include "Entity.h"
 #include "TransformComponent.h"
 #include "Game.h"
+#include "Manager.h"
 
 SpriteComponent::SpriteComponent(const char* path)
 {
-	setTexture(path);
+	this->texturePath = path;
 }
 
 SpriteComponent::SpriteComponent(const char* path, bool isAnimated)
@@ -24,7 +26,7 @@ SpriteComponent::SpriteComponent(const char* path, bool isAnimated)
 
 	playAnimation(IDLE);
 
-	setTexture(path);
+	this->texturePath = path;
 }
 
 SpriteComponent::~SpriteComponent()
@@ -34,11 +36,13 @@ SpriteComponent::~SpriteComponent()
 
 void SpriteComponent::setTexture(const char* path)
 {
-	this->texture = Game::textureManager->loadTexture(path);
+	this->texture = this->entity->getManager().getGame()->textureManager->loadTexture(path);
 }
 
 void SpriteComponent::init()
 {
+	setTexture(this->texturePath);
+
 	this->transform = &entity->getComponent<TransformComponent>();
 
 	this->srcRect.x = this->srcRect.y = 0;
@@ -64,7 +68,7 @@ void SpriteComponent::update()
 
 void SpriteComponent::draw()
 {
-	Game::textureManager->draw(this->texture, this->srcRect, this->destRect, this->animated && this->flipped);
+	this->entity->getManager().getGame()->textureManager->draw(this->entity->getManager().getGame()->renderer, this->texture, this->srcRect, this->destRect, this->animated && this->flipped);
 }
 
 void SpriteComponent::playAnimation(AnimationType type)

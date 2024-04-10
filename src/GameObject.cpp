@@ -1,11 +1,15 @@
 #include "GameObject.h"
 
+#include "SDL_error.h"
 #include "TextureManager.h"
 #include "Game.h"
 
 GameObject::GameObject(const char* texturesheet, int x, int y)
 {
-	this->objTexture = Game::textureManager->loadTexture(texturesheet);
+	// seems not to be used, and was using deprecated functionality
+	SDL_SetError("GameObject not implemented");
+
+	// this->objTexture = Game::textureManager->loadTexture(texturesheet);
 	this->xPos = x;
 	this->yPos = y;
 }
@@ -28,5 +32,6 @@ void GameObject::update()
 
 void GameObject::render()
 {
-	SDL_RenderCopy(Game::renderer, objTexture, &srcRect, &destRect);
+	SDL_SetError("GameObject not implemented");
+	// SDL_RenderCopy(Game::renderer, objTexture, &srcRect, &destRect);
 }

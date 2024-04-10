@@ -1,5 +1,6 @@
 #pragma once
 
+class Game;
 class Map
 {
 public:
@@ -17,5 +18,5 @@ public:
 	 * \return Boolean for success
 	 * 
 	 */
-	static bool loadMap(const char* path, int sizeX, int sizeY);
+	static bool loadMap(const char* path, int sizeX, int sizeY, Game* game /* backreference */);
 };

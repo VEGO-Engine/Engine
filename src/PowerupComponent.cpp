@@ -28,7 +28,7 @@ PowerupComponent::PowerupComponent(PowerupType type)
 void  PowerupComponent::update()
 {
     Entity* player;
-    if ((player = Game::collisionHandler->getAnyIntersection<Entity*>(
+    if ((player = this->entity->getManager().getGame()->collisionHandler->getAnyIntersection<Entity*>(
         entity,
         Vector2D(0, 0),
         { Entity::GroupLabel::PLAYERS },

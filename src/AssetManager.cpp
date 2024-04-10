@@ -21,12 +21,12 @@ AssetManager::AssetManager(Manager* manager) : man(manager) {}
 AssetManager::~AssetManager() {}
 
 void AssetManager::addTexture(std::string id, const char* path) {
-    textures.emplace(id, Game::textureManager->loadTexture(path));
+    textures.emplace(id, this->man->getGame()->textureManager->loadTexture(path));
 }
 
 void AssetManager::addSoundEffect(std::string id, const char* path)
 {
-    soundEffects.emplace(id, Game::soundManager->loadSound(path));
+    soundEffects.emplace(id, this->man->getGame()->soundManager->loadSound(path));
 }
 
 SDL_Texture* AssetManager::getTexture(std::string id) {
@@ -81,7 +81,7 @@ Vector2D AssetManager::calculateSpawnPosition()
 		spawnRect.x = rand() % (SCREEN_SIZE_WIDTH - spawnRect.w);
 		spawnRect.y = rand() % (SCREEN_SIZE_HEIGHT - spawnRect.h);
 		conflict = false;
-		for (auto cc : Game::collisionHandler->getColliders({ Entity::GroupLabel::MAPTILES }))
+		for (auto cc : this->man->getGame()->collisionHandler->getColliders({ Entity::GroupLabel::MAPTILES }))
 		{
 			if (SDL_HasIntersection(&spawnRect, &cc->collider) && strcmp(cc->tag, "projectile"))
 			{

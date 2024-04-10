@@ -4,6 +4,7 @@
 #include <map>
 #include <vector>
 
+#include "ECS.h"
 #include "TextureManager.h"
 
 enum SoundTypes
@@ -12,6 +13,7 @@ enum SoundTypes
 	THROW_EGG,
 };
 
+class Game;
 class SoundManager
 {
 	public:
@@ -28,5 +30,6 @@ class SoundManager
 		std::map<const char*, Mix_Chunk*> sound_cache;
 
 		Mix_Chunk* loadSound(const char* fileName);
-		static void playSound(SoundTypes sound);
+		static void playSound(Game* game, SoundTypes sound);
+	private:
 };

@@ -30,24 +30,24 @@ void KeyboardController::update()
 	if (keystates[this->up]) {
 		transform->direction.y = -1;
 		sprite->playAnimation(WALK);
-		SoundManager::playSound(STEPS);
+		SoundManager::playSound(this->entity->getManager().getGame(), STEPS);
 	}
 	if (keystates[this->left]) {
 		transform->direction.x = -1;
 		sprite->playAnimation(WALK);
 		sprite->setDirection(Direction::LEFT);
-		SoundManager::playSound(STEPS);
+		SoundManager::playSound(this->entity->getManager().getGame(), STEPS);
 	}
 	if (keystates[this->down]) {
 		transform->direction.y = 1;
 		sprite->playAnimation(WALK);
-		SoundManager::playSound(STEPS);
+		SoundManager::playSound(this->entity->getManager().getGame(), STEPS);
 	}
 	if (keystates[this->right]) {
 		transform->direction.x = 1;
 		sprite->playAnimation(WALK);
 		sprite->setDirection(Direction::RIGHT);
-		SoundManager::playSound(STEPS);
+		SoundManager::playSound(this->entity->getManager().getGame(), STEPS);
 	}
 
 	if (keystates[this->fire]) {
@@ -62,12 +62,12 @@ void KeyboardController::update()
 			//TODO: adding actual projectile textures
 			if (fireVelocity.x > 0) {
 				sprite->setDirection(Direction::RIGHT);
-				Game::assets->createProjectile(Vector2D(player->position.x, player->position.y), fireVelocity,
+				this->entity->getManager().getGame()->assets->createProjectile(Vector2D(player->position.x, player->position.y), fireVelocity,
 					1, 180, 2, "assets/egg.png", this->entity->getTeam());
 			}
 			else {
 				sprite->setDirection(Direction::LEFT);
-				Game::assets->createProjectile(Vector2D(player->position.x, player->position.y), fireVelocity,
+				this->entity->getManager().getGame()->assets->createProjectile(Vector2D(player->position.x, player->position.y), fireVelocity,
 					1, 180, 2, "assets/egg.png", this->entity->getTeam());
 			}
 

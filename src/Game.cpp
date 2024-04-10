@@ -13,30 +13,28 @@
 #include "StatEffectsComponent.h"
 #include "Constants.h"
 
-Map* map;
-Manager manager;
-
-AssetManager* Game::assets = new AssetManager(&manager);
-TextureManager* Game::textureManager = new TextureManager();
-SoundManager* Game::soundManager = new SoundManager();
-
-CollisionHandler* Game::collisionHandler = new CollisionHandler(manager);
-
-SDL_Renderer* Game::renderer = nullptr;
-
-SDL_Event Game::event;
-
-auto& player1(manager.addEntity());
-auto& player2(manager.addEntity());
-
-auto& wall(manager.addEntity());
-
-Game::Game() = default;
+Game::Game() :
+	manager(this),
+	tiles(manager.getGroup((size_t)Entity::GroupLabel::MAPTILES)), 
+	players(manager.getGroup((size_t)Entity::GroupLabel::PLAYERS)),
+	projectiles(manager.getGroup((size_t)Entity::GroupLabel::PROJECTILE)),
+	hearts(manager.getGroup((size_t)Entity::GroupLabel::HEARTS)),
+	powerups(manager.getGroup((size_t)Entity::GroupLabel::POWERUPS)),
+	player1(manager.addEntity()),
+	player2(manager.addEntity()),
+	wall(manager.addEntity())
+{
+};
 
 Game::~Game() = default;
 
 void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
+	Game::assets = new AssetManager(&manager);
+	Game::textureManager = new TextureManager(&manager);
+	Game::soundManager = new SoundManager();
+	Game::collisionHandler = new CollisionHandler(manager); // why does this use a referrence, but AssetManager a pointer?
+	
 	int flags = 0;
 	if (fullscreen)
 	{
@@ -140,7 +138,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	if (this->isRunning == false) return;
 
 	map = new Map();
-	if (!map->loadMap("assets/SDL_map_test.txt", 25, 20)) {
+	if (!map->loadMap("assets/SDL_map_test.txt", 25, 20, this)) {
 		std::cout << "ERROR: Map couldnt be loaded! " << SDL_GetError() << std::endl;
 		SDL_ClearError();
 	};
@@ -275,12 +273,6 @@ void Game::selectCharacters(const char* &playerSprite, const char* &enemySprite)
 	this->isRunning = true;
 }
 
-auto& tiles(manager.getGroup((size_t)Entity::GroupLabel::MAPTILES));
-auto& players(manager.getGroup((size_t)Entity::GroupLabel::PLAYERS));
-auto& projectiles(manager.getGroup((size_t)Entity::GroupLabel::PROJECTILE));
-auto& hearts(manager.getGroup((size_t)Entity::GroupLabel::HEARTS));
-auto& powerups(manager.getGroup((size_t)Entity::GroupLabel::POWERUPS));
-
 void Game::handleEvents()
 {
 	SDL_PollEvent(&event);
@@ -348,7 +340,7 @@ void Game::clean()
 	std::cout << "Game Cleaned!" << std::endl;
 }
 
-void Game::addTile(unsigned long id, int x, int y)
+void Game::addTile(unsigned long id, int x, int y) // tile entity
 {
 	auto& tile(manager.addEntity());
 	tile.addComponent<TileComponent>(x, y, TILE_SIZE, TILE_SIZE, id);
