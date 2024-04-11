@@ -130,6 +130,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		return;
 	}
 
+	engine::init();
+
 	// character selection
 	const char* player1Sprite;
 	const char* player2Sprite;
@@ -296,6 +298,8 @@ void Game::update()
 
 	manager.refresh();
 	manager.update();
+
+	engine::update(); // TODO: this might have to be split up into two update functions, before and after manager...
 
 	if (powerupSpawn == 0)
 	{

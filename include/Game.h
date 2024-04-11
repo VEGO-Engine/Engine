@@ -3,17 +3,25 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
+#include <functional>
 #include <vector>
 
 #include "Manager.h"
 #include "Vector2D.h"
 #include "Entity.h"
 
+typedef std::function<void()> gamefunction;
+
 class AssetManager;
 class CollisionHandler;
 class TextureManager;
 class SoundManager;
 class Map;
+
+namespace engine {
+	extern gamefunction init;
+	extern gamefunction update;
+}
 
 class Game
 {
