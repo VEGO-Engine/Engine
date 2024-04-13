@@ -21,6 +21,8 @@ class Map;
 namespace engine {
 	extern gamefunction init;
 	extern gamefunction update;
+
+	extern Game* game; // this is a temporary fix to remove artifacts of chicken_game from the engine while the API is not yet finalized
 }
 
 class Game
@@ -64,9 +66,9 @@ public:
 
     void refreshPlayers();
     Entity::TeamLabel getWinner() const;
+    void setWinner(Entity::TeamLabel winningTeam);
 
 private:
-    void setWinner(Entity::TeamLabel winningTeam);
 
 	int counter = 0;
 	bool isRunning = false;

@@ -13,6 +13,8 @@
 #include "StatEffectsComponent.h"
 #include "Constants.h"
 
+Game* engine::game = nullptr; // will be initialized in constructor
+
 Game::Game() :
 	manager(this),
 	tiles(manager.getGroup((size_t)Entity::GroupLabel::MAPTILES)), 
@@ -24,6 +26,7 @@ Game::Game() :
 	player2(manager.addEntity()),
 	wall(manager.addEntity())
 {
+	engine::game = this;
 };
 
 Game::~Game() = default;
@@ -291,27 +294,10 @@ void Game::handleEvents()
 
 void Game::update()
 {
-	Vector2D playerPos = player1.getComponent<TransformComponent>().position;
-	Vector2D enemyPos = player2.getComponent<TransformComponent>().position;
-
-	int powerupSpawn = rand() % 500;
-
 	manager.refresh();
 	manager.update();
 
 	engine::update(); // TODO: this might have to be split up into two update functions, before and after manager...
-
-	if (powerupSpawn == 0)
-	{
-		assets->createPowerup(assets->calculateSpawnPosition(), assets->calculateType());
-	}
-
-	// needs to be in game.cpp to have access to internal functions
-	for (auto& player : manager.getGroup((size_t) Entity::GroupLabel::PLAYERS)) {
-		if (player->getComponent<HealthComponent>().getHealth() <= 0) {
-			this->setWinner(player->getTeam());
-		}
-	}
 }
 
 void Game::render()
