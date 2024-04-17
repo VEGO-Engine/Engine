@@ -1,8 +1,9 @@
 on:
   push:
-    branches:
-      - main
-      - documentation
+    branches: [ main, documentation ]
+  pull_request:
+    branches: [ main ]
+  
 permissions:
   contents: write
 
@@ -12,12 +13,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Action Doxygen and GitHub Pages
-        id: ghaction
-        uses: AgarwalSaurav/ghaction-doxygen-ghpages@v2.0.0
+        with:
+          submodules: 'true' # might need recursive, tbd
+      - name: Doxygen Action
+        uses: mattnotmitt/doxygen-action@v1.1.0
+        # defaults to ./Doxygen
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          doxyfile-path: Doxyfile
-          working-directory: .
-          html-output-folder: docs/html
-          branch: gh-pages
+          publish_dir: ./docs/html
