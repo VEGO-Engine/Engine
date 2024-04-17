@@ -76,4 +76,6 @@ compile_commands.json
 
 *.puml
 
-docs/
+docs/latex/
+docs/html/
+docs/diagrams/
