@@ -1,0 +1,22 @@
+<map id="SpriteComponent" name="SpriteComponent">
+<area shape="rect" id="Node000001" title=" " alt="" coords="71,379,192,405"/>
+<area shape="rect" id="Node000002" href="$classComponent.html" title=" " alt="" coords="5,283,93,309"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="71,318,123,377,119,381,67,322"/>
+<area shape="rect" id="Node000003" href="$classEntity.html" title="Main class for any object in game, stores associations, labeling and components." alt="" coords="22,185,76,211"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="52,226,52,283,46,283,46,226"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="117,276,317,316"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="191,329,144,381,140,377,187,326"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="112,185,298,211"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="211,226,217,275,212,275,206,227"/>
+<area shape="rect" id="Node000006" href="$structAnimation.html" title=" " alt="" coords="33,94,113,120"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="105,126,189,182,186,187,102,131"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="137,94,273,120"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="208,135,208,185,202,185,202,135"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="222,5,260,31"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="226,45,220,56,209,94,204,93,215,54,221,43"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="296,94,413,120"/>
+<area shape="poly" id="edge10_Node000009_Node000008" title=" " alt="" coords="264,40,295,68,332,91,329,96,291,72,260,44"/>
+<area shape="poly" id="edge8_Node000004_Node000009" title=" " alt="" coords="348,135,333,173,311,214,295,235,275,254,246,277,243,273,271,250,291,232,307,211,328,171,344,133"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="335,5,374,31"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="357,47,357,94,352,94,352,47"/>
+</map>

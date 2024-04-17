@@ -1,0 +1,9 @@
+<map id="TransformComponent" name="TransformComponent">
+<area shape="rect" id="Node000001" title=" " alt="" coords="55,198,201,223"/>
+<area shape="rect" id="Node000002" href="$classComponent.html" title=" " alt="" coords="5,94,93,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="70,131,120,196,116,199,66,134"/>
+<area shape="rect" id="Node000003" href="$classEntity.html" title="Main class for any object in game, stores associations, labeling and components." alt="" coords="22,5,76,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="52,47,52,94,46,94,46,47"/>
+<area shape="rect" id="Node000004" href="$classVector2D.html" title=" " alt="" coords="117,94,192,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="150,135,133,198,128,197,145,134"/>
+</map>

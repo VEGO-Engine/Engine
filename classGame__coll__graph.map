@@ -1,0 +1,26 @@
+<map id="Game" name="Game">
+<area shape="rect" id="Node000001" title=" " alt="" coords="220,405,277,431"/>
+<area shape="rect" id="Node000002" href="$classCollisionHandler.html" title=" " alt="" coords="5,316,121,342"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,351,121,379,173,399,221,410,219,415,171,404,119,383,82,355"/>
+<area shape="rect" id="Node000003" href="$classAssetManager.html" title=" " alt="" coords="145,316,250,342"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="215,354,244,403,239,406,210,357"/>
+<area shape="rect" id="Node000004" href="$classTextureManager.html" title=" " alt="" coords="274,316,388,342"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="311,355,262,406,258,403,307,352"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="252,213,394,253"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="329,268,333,316,327,316,323,269"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="255,109,332,135"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="294,150,298,188,310,211,305,213,293,189,289,151"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="232,5,355,46"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="296,61,296,109,291,109,291,61"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="388,109,504,135"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="381,143,355,161,338,186,329,213,324,212,333,184,351,157,378,139"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="418,213,559,253"/>
+<area shape="poly" id="edge12_Node000012_Node000008" title=" " alt="" coords="458,148,483,211,478,213,453,150"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="393,13,432,39"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="417,53,425,84,438,107,434,110,420,86,412,55"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="456,13,494,39"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="469,54,452,109,447,108,464,52"/>
+<area shape="rect" id="Node000011" href="$classSoundManager.html" title=" " alt="" coords="428,316,536,342"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="452,353,393,383,332,403,277,414,276,409,330,398,391,379,450,348"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="489,269,485,316,480,316,483,269"/>
+</map>

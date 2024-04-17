@@ -1,0 +1,30 @@
+<map id="KeyboardController" name="KeyboardController">
+<area shape="rect" id="Node000001" title=" " alt="" coords="124,483,254,509"/>
+<area shape="rect" id="Node000002" href="$classComponent.html" title=" " alt="" coords="143,283,230,309"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,324,192,483,186,483,184,324"/>
+<area shape="rect" id="Node000004" href="$classTransformComponent.html" title=" " alt="" coords="5,394,152,420"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="174,324,157,348,136,372,103,396,100,392,133,368,153,345,170,321"/>
+<area shape="rect" id="Node000006" href="$classSpriteComponent.html" title=" " alt="" coords="227,394,349,420"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="210,318,279,392,275,396,206,322"/>
+<area shape="rect" id="Node000003" href="$classEntity.html" title="Main class for any object in game, stores associations, labeling and components." alt="" coords="160,185,213,211"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="189,226,189,283,184,283,184,226"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="93,432,114,457,133,470,154,480,152,485,131,475,111,461,89,435"/>
+<area shape="rect" id="Node000005" href="$classVector2D.html" title=" " alt="" coords="41,283,116,309"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="81,324,81,394,76,394,76,324"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="264,432,205,485,201,481,261,428"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="255,276,454,316"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="337,331,297,395,293,393,333,328"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="250,185,435,211"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="349,226,355,275,349,275,343,227"/>
+<area shape="rect" id="Node000009" href="$structAnimation.html" title=" " alt="" coords="171,94,250,120"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="242,126,326,182,323,187,239,131"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="275,94,410,120"/>
+<area shape="poly" id="edge11_Node000008_Node000010" title=" " alt="" coords="345,135,345,185,340,185,340,135"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="359,5,398,31"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="363,45,358,56,347,94,342,93,353,54,358,43"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="434,94,550,120"/>
+<area shape="poly" id="edge15_Node000012_Node000011" title=" " alt="" coords="401,40,432,68,470,91,467,96,429,72,398,44"/>
+<area shape="poly" id="edge13_Node000007_Node000012" title=" " alt="" coords="486,135,471,173,449,214,432,235,412,254,384,277,380,273,409,250,428,232,444,211,466,171,481,133"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="473,5,511,31"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="495,47,495,94,489,94,489,47"/>
+</map>
