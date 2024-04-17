@@ -17,7 +17,7 @@ jobs:
         uses: AgarwalSaurav/ghaction-doxygen-ghpages@v2.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          doxyfile-path: Doxyfile
           working-directory: .
-          doxyfile-path: ./Doxyfile
           html-output-folder: docs/html
           branch: gh-pages
