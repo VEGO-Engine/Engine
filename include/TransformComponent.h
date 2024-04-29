@@ -24,5 +24,6 @@ public:
 
 	void init() override;
 	void update() override;
+    void setPositionAfterCollision(Vector2D& positionChange);
 	void modifySpeed(int8_t modifier);
 };
