@@ -3,6 +3,7 @@
 #include <SDL_mixer.h>
 #include <map>
 #include <string>
+#include <functional>
 
 #include "Entity.h"
 
@@ -24,7 +25,7 @@ public:
     ~AssetManager();
 
     void createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, const char* texturePath, Entity::TeamLabel teamLabel);
-    void createPowerup(Vector2D pos, PowerupType type);
+    void createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, std::string texturePath);
 
     Vector2D calculateSpawnPosition();
     PowerupType calculateType();

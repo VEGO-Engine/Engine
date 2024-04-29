@@ -7,22 +7,9 @@
 #include "Constants.h"
 #include <cstdint>
 
-PowerupComponent::PowerupComponent(PowerupType type)
+PowerupComponent::PowerupComponent(std::function<void (Entity*)> func)
 {
-    switch (type)
-    {
-    case PowerupType::HEART:
-        this->pickupFunc = (&PowerupComponent::heartEffect);
-        break;
-    case PowerupType::WALKINGSPEED:
-        this->pickupFunc = (&PowerupComponent::movementSpeedEffect);
-        break;
-    case PowerupType::SHOOTINGSPEED:
-        this->pickupFunc = (&PowerupComponent::atkSpeedEffect);
-        break;
-    default:
-        break;
-    }
+    this->pickupFunc = func;
 }
 
 void  PowerupComponent::update()
@@ -35,23 +22,7 @@ void  PowerupComponent::update()
         {},
         true)) != nullptr)
     {
-        (this->*pickupFunc)(player);
+        (this->pickupFunc)(player);
         this->entity->destroy();
     }
-}
-
-void PowerupComponent::heartEffect(Entity* player)
-{
-    if(player->getComponent<HealthComponent>().getHealth() < 5)
-        player->getComponent<HealthComponent>().modifyHealth(1);
-}
-
-void PowerupComponent::movementSpeedEffect(Entity* player)
-{
-    player->getComponent<StatEffectsComponent>().modifyStatDur(Stats::MOVEMENT_SPEED, BUFF_DURATION);
-}
-
-void PowerupComponent::atkSpeedEffect(Entity* player)
-{
-    player->getComponent<StatEffectsComponent>().modifyStatDur(Stats::ATTACK_SPEED, BUFF_DURATION);
 }

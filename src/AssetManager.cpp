@@ -48,25 +48,21 @@ void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, 
     projectile.setTeam(teamLabel);
 }
 
-void AssetManager::createPowerup(Vector2D pos, PowerupType type) {
+void AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, std::string texturePath) {
     TextureDict textureDict;
 
     auto& powerups(man->addEntity());
     powerups.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, 1); //32x32 is standard size for objects
-    auto it = textureDict.powerupDictionary.find(type);
-    if (it == textureDict.powerupDictionary.end()) {
-        std::cout << "it end" << std::endl;
-    }
 
     try {
-        powerups.addComponent<SpriteComponent>(it->second.data());
+        powerups.addComponent<SpriteComponent>(texturePath.c_str());
     }
     catch (std::runtime_error e) {
         std::cout << e.what() << std::endl;
     }
 
     powerups.addComponent<ColliderComponent>("powerup", 0.6f);
-    powerups.addComponent<PowerupComponent>(type);
+    powerups.addComponent<PowerupComponent>(pickupFunc);
     powerups.addGroup((size_t)Entity::GroupLabel::POWERUPS);
 }
 
