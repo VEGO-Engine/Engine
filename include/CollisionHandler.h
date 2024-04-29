@@ -30,7 +30,7 @@ public:
 
 	CollisionHandler(Manager& mManager) :
 		manager(mManager) { };
-	~CollisionHandler();
+	~CollisionHandler() {};
 
 	static IntersectionBitSet getIntersection( // intersections relative to entityA
 		Entity* entityA,
