@@ -354,19 +354,19 @@ Entity::TeamLabel Game::getWinner() const
 	return this->winner;
 }
 
-void Game::refreshPlayers() {
-
-    for(auto& p : projectiles) {
-        p->destroy();
-    }
-
-    player1.getComponent<TransformComponent>().position = Vector2D(80, 80);
-    player2.getComponent<TransformComponent>().position = Vector2D(600, 500);
-
-    player1.getComponent<HealthComponent>().setHealth(5);
-    player2.getComponent<HealthComponent>().setHealth(5);
-
-    isRunning = true;
-
-    update();
-}
+//void Game::refreshPlayers() {
+//
+//    for(auto& p : projectiles) {
+//        p->destroy();
+//    }
+//
+//    player1.getComponent<TransformComponent>().position = Vector2D(80, 80);
+//    player2.getComponent<TransformComponent>().position = Vector2D(600, 500);
+//
+//    player1.getComponent<HealthComponent>().setHealth(5);
+//    player2.getComponent<HealthComponent>().setHealth(5);
+//
+//    isRunning = true;
+//
+//    update();
+//}
