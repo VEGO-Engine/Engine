@@ -36,13 +36,14 @@ target_link_libraries(${PROJECT_NAME} PUBLIC # should be private when all SDL fu
 )
 
 if(CMAKE_BUILD_TYPE MATCHES "Debug")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fsanitize=address -fno-omit-frame-pointer")
-    target_link_libraries(${PROJECT_NAME} PRIVATE "-fsanitize=address")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 endif()
 
 # link/copy compile commands to root dir
-file(CREATE_LINK
-    ${PROJECT_BINARY_DIR}/compile_commands.json
-    ${PROJECT_SOURCE_DIR}/compile_commands.json
-    COPY_ON_ERROR SYMBOLIC
-)
+if(EXISTS ${PROJECT_BINARY_DIR}/compile_commands.json)
+    file(CREATE_LINK
+        ${PROJECT_BINARY_DIR}/compile_commands.json
+        ${PROJECT_SOURCE_DIR}/compile_commands.json
+        COPY_ON_ERROR SYMBOLIC
+    )
+endif()
