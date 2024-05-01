@@ -55,7 +55,6 @@ build/
 
 # Sublime Text
 *.sublime-workspace
-*.sublime-project
 
 # Created by https://www.gitignore.io/api/visualstudiocode
 # Edit at https://www.gitignore.io/?templates=visualstudiocode

@@ -1,6 +1,5 @@
 {
     "cmake.configureOnOpen": true,
-    "files.associations": {
-        "iostream": "cpp"
-    }
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
 }
