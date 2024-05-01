@@ -3,8 +3,10 @@
 #include <SDL_error.h>
 
 #include "CollisionHandler.h"
-#include "Components.h"
 #include "AssetManager.h"
+#include "SoundManager.h"
+#include "KeyboardController.h"
+#include "TileComponent.h"
 #include "Direction.h"
 #include "Entity.h"
 #include "HealthComponent.h"

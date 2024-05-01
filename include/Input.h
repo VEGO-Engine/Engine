@@ -1,22 +1,6 @@
 #include <SDL.h>
 #include <map>
 
-class Input
-{
-public:
-    Input();
-    ~Input();
-
-    void pollEvents();
-    bool isKeyDown(Key key);
-
-private:
-    const Uint8* m_keyStates;
-    SDL_Scancode mapKeyToSDL(Key key);
-    std::map<Key, SDL_Scancode> m_keyMappings;
-    void InitKeyMappings();
-};
-
 enum class Key
 {
     UP,
@@ -98,4 +82,20 @@ enum class Key
     SLASH,
     BACKSLASH,
     GRAVE
+};
+
+class Input
+{
+public:
+    Input();
+    ~Input();
+
+    void pollEvents();
+    bool isKeyDown(Key key);
+
+private:
+    const Uint8* m_keyStates;
+    SDL_Scancode mapKeyToSDL(Key key);
+    std::map<Key, SDL_Scancode> m_keyMappings;
+    void InitKeyMappings();
 };

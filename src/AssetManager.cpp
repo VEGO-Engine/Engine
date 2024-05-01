@@ -2,8 +2,9 @@
 
 #include "TextureManager.h"
 #include "SoundManager.h"
-#include "Components.h"
+#include "ProjectileComponent.h"
 #include "Game.h"
+#include "TextureDict.h"
 
 #include "TransformComponent.h"
 
