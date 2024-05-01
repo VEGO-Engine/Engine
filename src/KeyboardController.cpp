@@ -1,82 +1,86 @@
 #include "KeyboardController.h"
 
 #include "Game.h"
-#include "Components.h"
+#include "TransformComponent.h"
 #include "AssetManager.h"
 #include "SpriteComponent.h"
 
-KeyboardController::KeyboardController(SDL_Scancode up, SDL_Scancode down, SDL_Scancode left, SDL_Scancode right, SDL_Scancode fire, Vector2D fireVelocity)
-{
-	this->up = up;
-	this->down = down;
-	this->left = left;
-	this->right = right;
-	this->fire = fire;
-	this->fireVelocity = fireVelocity;
-}
+KeyboardController::KeyboardController(Input* input, Key up, Key down, Key left, Key right, Key fire, Vector2D fireVelocity)
+    : m_input(input), m_up(up), m_down(down), m_left(left), m_right(right), m_fire(fire) {}
 
 void KeyboardController::init()
 {
-	sprite = &entity->getComponent<SpriteComponent>();
-	transform = &entity->getComponent<TransformComponent>();
+	m_sprite = &entity->getComponent<SpriteComponent>();
+	m_transform = &entity->getComponent<TransformComponent>();
 }
 
 void KeyboardController::update()
 {
-	transform->direction.x = 0;
-	transform->direction.y = 0;
-	sprite->playAnimation(IDLE);
+	m_transform->direction.x = 0;
+	m_transform->direction.y = 0;
+	m_sprite->playAnimation(IDLE);
 
-	if (keystates[this->up]) {
-		transform->direction.y = -1;
-		sprite->playAnimation(WALK);
-		SoundManager::playSound(this->entity->getManager().getGame(), STEPS);
-	}
-	if (keystates[this->left]) {
-		transform->direction.x = -1;
-		sprite->playAnimation(WALK);
-		sprite->setDirection(Direction::LEFT);
-		SoundManager::playSound(this->entity->getManager().getGame(), STEPS);
-	}
-	if (keystates[this->down]) {
-		transform->direction.y = 1;
-		sprite->playAnimation(WALK);
-		SoundManager::playSound(this->entity->getManager().getGame(), STEPS);
-	}
-	if (keystates[this->right]) {
-		transform->direction.x = 1;
-		sprite->playAnimation(WALK);
-		sprite->setDirection(Direction::RIGHT);
+	if (m_input->isKeyDown(m_left))
+	{
+		m_transform->direction.x = -1;
+		m_sprite->playAnimation(WALK);
+		m_sprite->setDirection(Direction::LEFT);
 		SoundManager::playSound(this->entity->getManager().getGame(), STEPS);
 	}
 
-	if (keystates[this->fire]) {
+	if (m_input->isKeyDown(m_right))
+	{
+		m_transform->direction.x = 1;
+		m_sprite->playAnimation(WALK);
+		m_sprite->setDirection(Direction::RIGHT);
+		SoundManager::playSound(this->entity->getManager().getGame(), STEPS);
+	}
 
+	if (m_input->isKeyDown(m_up))
+	{
+		m_transform->direction.y = -1;
+		m_sprite->playAnimation(WALK);
+		SoundManager::playSound(this->entity->getManager().getGame(), STEPS);
+	}
+
+	if (m_input->isKeyDown(m_down))
+	{
+		m_transform->direction.y = 1;
+		m_sprite->playAnimation(WALK);
+		SoundManager::playSound(this->entity->getManager().getGame(), STEPS);
+	}
+
+	if (m_input->isKeyDown(m_fire))
+	{
 		Uint32 currentTicks = SDL_GetTicks();
 
-		if (currentTicks - lastFireTime >= fireCooldown) {
+		if (currentTicks - m_lastFireTime >= m_fireCooldown)
+		{
 
-			player = &entity->getComponent<TransformComponent>();
+			m_player = &entity->getComponent<TransformComponent>();
 
 			//checks player source via the firing velocity
 			//TODO: adding actual projectile textures
-			if (fireVelocity.x > 0) {
-				sprite->setDirection(Direction::RIGHT);
-				this->entity->getManager().getGame()->assets->createProjectile(Vector2D(player->position.x, player->position.y), fireVelocity,
-					1, 180, 2, "assets/egg.png", this->entity->getTeam());
-			}
-			else {
-				sprite->setDirection(Direction::LEFT);
-				this->entity->getManager().getGame()->assets->createProjectile(Vector2D(player->position.x, player->position.y), fireVelocity,
+			if (m_fireVelocity.x > 0)
+			{
+				m_sprite->setDirection(Direction::RIGHT);
+				this->entity->getManager().getGame()->assets->createProjectile(Vector2D(m_player->position.x, m_player->position.y), m_fireVelocity,
 					1, 180, 2, "assets/egg.png", this->entity->getTeam());
 			}
 
-			lastFireTime = currentTicks;
+			else
+			{
+				m_sprite->setDirection(Direction::LEFT);
+				this->entity->getManager().getGame()->assets->createProjectile(Vector2D(m_player->position.x, m_player->position.y), m_fireVelocity,
+					1, 180, 2, "assets/egg.png", this->entity->getTeam());
+			}
+
+			m_lastFireTime = currentTicks;
 		}
 	}
 }
 
 void KeyboardController::modifyAtkSpeed(int8_t modifier)
 {
-	this->fireCooldown -= modifier * 400;
+	this->m_fireCooldown -= modifier * 400;
 }
