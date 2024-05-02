@@ -40,7 +40,6 @@ public:
 	void clean();
 	bool running() const;
 
-	void addTile(unsigned long id, int x, int y);
 	/* static */ SDL_Renderer* renderer = nullptr;
 	/* static */ SDL_Event event;
 	/* static */ CollisionHandler* collisionHandler;

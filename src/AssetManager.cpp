@@ -49,7 +49,6 @@ void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, 
 }
 
 void AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, std::string texturePath) {
-    TextureDict textureDict;
 
     auto& powerups(man->addEntity());
     powerups.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, 1); //32x32 is standard size for objects

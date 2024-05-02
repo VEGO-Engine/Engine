@@ -143,10 +143,6 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	if (this->isRunning == false) return;
 
 	map = new Map();
-	if (!map->loadMap("assets/SDL_map_test.txt", 25, 20, this)) {
-		std::cout << "ERROR: Map couldnt be loaded! " << SDL_GetError() << std::endl;
-		SDL_ClearError();
-	};
 
 
 	//adding textures to the library in AssetManager
@@ -328,14 +324,6 @@ void Game::clean()
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 	std::cout << "Game Cleaned!" << std::endl;
-}
-
-void Game::addTile(unsigned long id, int x, int y) // tile entity
-{
-	auto& tile(manager.addEntity());
-	tile.addComponent<TileComponent>(x, y, TILE_SIZE, TILE_SIZE, id);
-	if (id == 1) tile.addComponent<ColliderComponent>("water");
-	tile.addGroup((size_t)Entity::GroupLabel::MAPTILES);
 }
 
 bool Game::running() const

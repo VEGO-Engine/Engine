@@ -1,5 +1,8 @@
 #pragma once
 
+#include <map>
+#include <string>
+
 class Game;
 class Map
 {
@@ -18,5 +21,6 @@ public:
 	 * \return Boolean for success
 	 * 
 	 */
-	static bool loadMap(const char* path, int sizeX, int sizeY, Game* game /* backreference */);
+	static void loadMap(const char* path, int sizeX, int sizeY, Game* game, const std::map<int, std::pair<std::string, bool>>* textureDict /* backreference */);
+	static void addTile(unsigned long id, int x, int y, Game* game, const std::map<int, std::pair<std::string, bool>>* textureDict);
 };
