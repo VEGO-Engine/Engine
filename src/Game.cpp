@@ -163,7 +163,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	player1.addComponent<SpriteComponent>(player1Sprite, true); //adds sprite (32x32px), path needed
 	player1.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D, SDL_SCANCODE_E, Vector2D(2, 0));//custom keycontrols can be added
 	player1.addComponent<ColliderComponent>("player", 0.8f); //adds tag (for further use, reference tag)
-	player1.addComponent<HealthComponent>(5, Direction::LEFT);
+	player1.addComponent<HealthComponent>(5, Direction::LEFT, "assets/heart.png");
 	player1.addComponent<StatEffectsComponent>();
 	player1.addGroup((size_t) Entity::GroupLabel::PLAYERS); //tell programm what group it belongs to for rendering order
 
@@ -173,7 +173,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	player2.addComponent<SpriteComponent>(player2Sprite, true);
 	player2.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT, SDL_SCANCODE_RCTRL, Vector2D(-2, 0));
 	player2.addComponent<ColliderComponent>("enemy", 0.8f);
-	player2.addComponent<HealthComponent>(5, Direction::RIGHT);
+	player2.addComponent<HealthComponent>(5, Direction::RIGHT, "assets/heart.png");
 	player2.addComponent<StatEffectsComponent>();
 	player2.addGroup((size_t) Entity::GroupLabel::PLAYERS);
 }

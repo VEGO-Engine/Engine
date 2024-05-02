@@ -56,8 +56,8 @@ void TransformComponent::update()
 
 	float multiplier = direction.x != 0 && direction.y != 0 ? 0.707 : 1; // normalizes vector; only works if directions are in increments of 45°
 	Vector2D positionChange(
-		direction.x * speed * multiplier,
-		direction.y * speed * multiplier
+		direction.x * this->getSpeed() * multiplier,
+		direction.y * this->getSpeed() * multiplier
 	);
 
 	if (this->entity->hasGroup((size_t)Entity::GroupLabel::PLAYERS)){
@@ -69,7 +69,7 @@ void TransformComponent::update()
 
 void TransformComponent::modifySpeed(int8_t modifier)
 {
-	this->speed += modifier;
+	this->speedMod += modifier;
 }
 
 void TransformComponent::setPositionAfterCollision(Vector2D& positionChange)

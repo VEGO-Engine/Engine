@@ -54,7 +54,7 @@ void KeyboardController::update()
 
 		Uint32 currentTicks = SDL_GetTicks();
 
-		if (currentTicks - lastFireTime >= fireCooldown) {
+		if (currentTicks - lastFireTime >= this->getFireCooldown()) {
 
 			player = &entity->getComponent<TransformComponent>();
 
@@ -78,5 +78,10 @@ void KeyboardController::update()
 
 void KeyboardController::modifyAtkSpeed(int8_t modifier)
 {
-	this->fireCooldown -= modifier * 400;
+	this->fireCooldownMod -= modifier * 400;
+}
+
+void KeyboardController::resetAtkSpeedMod()
+{
+	this->fireCooldownMod = 0;
 }

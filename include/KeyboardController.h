@@ -24,7 +24,6 @@ public:
 
 	//for attack cooldown in between shots
 	uint32_t lastFireTime = 0;
-	uint32_t fireCooldown = 1000; //in ms can be adjusted to change possible attack-speed
 	
 	KeyboardController() = default;
 	KeyboardController(SDL_Scancode up, SDL_Scancode down, SDL_Scancode left, SDL_Scancode right, SDL_Scancode fire, Vector2D fireVelocity);
@@ -33,7 +32,10 @@ public:
 	void init() override;
 	void update() override;
 
+	uint32_t getFireCooldown() { return this->fireCooldown + this->fireCooldownMod > 0 ? this->fireCooldown + this->fireCooldownMod : 0; };
+
 	void modifyAtkSpeed(int8_t modifier);
+	void resetAtkSpeedMod();
 
 private:
 	//for creation of projectiles
@@ -41,4 +43,7 @@ private:
 	Vector2D fireVelocity; //decide source of projectile and flying direction
 	// SoundManager* soundEffect = Game::assets->getSound;
 	//SoundManager* soundEffect = new SoundManager();
+
+	uint32_t fireCooldown = 1000; //in ms can be adjusted to change possible attack-speed
+	int32_t fireCooldownMod = 0;
 };

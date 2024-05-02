@@ -24,7 +24,3 @@ constexpr int MAP_SIZE_Y = 20;
 
 constexpr int SPAWN_ATTEMPTS = 20;
 
-constexpr int BUFF_DURATION = 240;
-
-constexpr int BUFF_VALUE = 1;
-
