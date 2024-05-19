@@ -1,0 +1,63 @@
+# Doxyfile
+
+# Project information
+PROJECT_NAME           = "SDL Minigame"
+PROJECT_NUMBER         = "1.0"
+PROJECT_ICON           = assets/chicken_neutral_knight.png
+OUTPUT_DIRECTORY       = docs
+
+OPTIMIZE_OUTPUT_FOR_C  = YES
+EXTRACT_ALL            = NO
+EXTRACT_LOCAL_CLASSES  = YES
+
+CLASS_DIAGRAMS         = YES
+
+HIDE_UNDOC_RELATIONS   = YES
+HAVE_DOT               = YES
+DOT_PATH               = /usr/bin/dot
+
+CLASS_GRAPH            = YES
+COLLABORATION_GRAPH    = YES
+UML_LOOK               = YES
+UML_LIMIT_NUM_FIELDS   = 50
+TEMPLATE_RELATIONS     = YES
+DOT_TRANSPARENT        = YES
+
+# Source files
+INPUT                  = ./include ./src
+FILE_PATTERNS          = *.cpp *.h *.hpp
+EXAMPLE_PATH           = ./include ./src
+EXAMPLE_PATTERNS       = *.cpp *.h *.hpp
+
+# Output formats
+GENERATE_XML           = YES
+GENERATE_HTML          = YES
+DOT_IMAGE_FORMAT       = SVG
+COLLABORATION_GRAPH    = YES
+GENERATE_LATEX         = NO
+
+# Extra settings
+USE_MATHJAX            = YES
+CALL_GRAPH             = YES
+CALLER_GRAPH           = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+EXTRACT_LOCAL_CLASSES  = YES
+EXTRACT_LOCAL_METHODS  = YES
+EXTRACT_ANON_NSPACES   = YES
+SHOW_FILES             = YES
+SHOW_INCLUDE_FILES     = YES
+SHOW_USED_FILES        = YES
+RECURSIVE              = YES
+
+# Class diagram options
+INCLUDE_GRAPH          = YES
+INCLUDED_BY_GRAPH      = YES
+GRAPHICAL_HIERARCHY    = YES
+DIRECTORY_GRAPH        = YES
+DISABLE_INDEX          = YES 
+GENERATE_TREEVIEW      = YES
+HTML_COLLABORATION     = YES
+
+# idk everything else
+TAB_SIZE               = 4

@@ -115,6 +115,17 @@ std::vector<ColliderComponent*> CollisionHandler::getColliders(
 	return colliders;
 }
 
+/*!
+ * 
+ * \details Refer to getAnyIntersection() for more details
+ * \return A bitset of intersections, describing the directions of intersection. Position `Direction` in bitset true if edge in that direction collides
+ * \see Direction
+ * \see IntersectionBitSet
+ * \snippet CollisionHandler.h IntersectionBitSet
+ * \details Example usage for IntersectionBitSet (TransformComponent::update()):
+ * \snippet{trimleft} TransformComponent.cpp getAnyIntersection example code
+ * 
+ */
 template<>
 IntersectionBitSet CollisionHandler::getAnyIntersection<IntersectionBitSet>(
 	Entity* entity,
@@ -123,6 +134,7 @@ IntersectionBitSet CollisionHandler::getAnyIntersection<IntersectionBitSet>(
 	std::initializer_list<Entity::TeamLabel> const& teamLabels,
 	bool negateTeam)
 {
+	if (!entity->hasComponent<ColliderComponent>()) return std::bitset<DIRECTION_C>();
 	IntersectionBitSet intersections;
 	for (auto& collider : getColliders(groupLabels, teamLabels)) {
    		intersections |= getIntersection(entity, collider->entity, posMod);
@@ -130,6 +142,13 @@ IntersectionBitSet CollisionHandler::getAnyIntersection<IntersectionBitSet>(
 	return intersections;
 };
 
+/*!
+ * 
+ * \details Refer to getAnyIntersection() for more details
+ * \return The first entity with collision found
+ * \see Entity
+ * 
+ */
 template<>
 Entity* CollisionHandler::getAnyIntersection<Entity*>(
 	Entity* entity,
@@ -138,6 +157,7 @@ Entity* CollisionHandler::getAnyIntersection<Entity*>(
 	std::initializer_list<Entity::TeamLabel> const& teamLabels,
 	bool negateTeam)
 {
+	if (!entity->hasComponent<ColliderComponent>()) return nullptr;
 	for (auto& collider : getColliders(groupLabels, teamLabels)) {
 		SDL_Rect rect = entity->getComponent<ColliderComponent>().collider + posMod;
    	    if (SDL_HasIntersection(&rect, &collider->collider)) {
@@ -145,4 +165,28 @@ Entity* CollisionHandler::getAnyIntersection<Entity*>(
    	    }
 	}
 	return nullptr;
+};
+
+/*!
+ * 
+ * \details Refer to getAnyIntersection() for more details
+ * \return True if any collision was found, otherwise false
+ * 
+ */
+template<>
+bool CollisionHandler::getAnyIntersection<bool>(
+	Entity* entity,
+	Vector2D posMod,
+	std::initializer_list<Entity::GroupLabel> const& groupLabels,
+	std::initializer_list<Entity::TeamLabel> const& teamLabels,
+	bool negateTeam)
+{
+	if (!entity->hasComponent<ColliderComponent>()) return false;
+	for (auto& collider : getColliders(groupLabels, teamLabels)) {
+		SDL_Rect rect = entity->getComponent<ColliderComponent>().collider + posMod;
+   	    if (SDL_HasIntersection(&rect, &collider->collider)) {
+   	    	return true;
+   	    }
+	}
+	return false;
 };

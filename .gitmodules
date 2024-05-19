@@ -14,3 +14,6 @@
 	path = extern/SDL_ttf
 	url = https://github.com/libsdl-org/SDL_ttf.git
 	branch = release-2.22.x
+[submodule "docs/doxygen-awesome-css"]
+	path = docs/doxygen-awesome-css
+	url = https://github.com/jothepro/doxygen-awesome-css.git

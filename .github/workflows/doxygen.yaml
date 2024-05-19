@@ -1,0 +1,23 @@
+on:
+  push:
+    branches: [ main ]
+  
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: 'true' # might need recursive, tbd
+      - name: Doxygen Action
+        uses: mattnotmitt/doxygen-action@v1.1.0
+        # defaults to ./Doxygen
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/html

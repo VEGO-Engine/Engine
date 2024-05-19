@@ -63,6 +63,8 @@ void TransformComponent::update()
 	// TODO: move to separate functions
 
 	if (this->entity->hasGroup((size_t)Entity::GroupLabel::PLAYERS)) {
+
+		// [getAnyIntersection example code]
 		IntersectionBitSet intersections =
 			(CollisionHandler::getIntersectionWithBounds(entity, Vector2D(positionChange.x, 0)) |
 				(Game::collisionHandler->getAnyIntersection<IntersectionBitSet>(entity, Vector2D(positionChange.x, 0), { Entity::GroupLabel::MAPTILES, Entity::GroupLabel::COLLIDERS })) &
@@ -76,6 +78,7 @@ void TransformComponent::update()
 
 		if (intersections.test((size_t)Direction::UP) || intersections.test((size_t)Direction::DOWN))
 			positionChange.y = 0;
+		// [getAnyIntersection example code]
 	}
 
 	position += positionChange;
