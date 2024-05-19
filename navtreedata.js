@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "SDL Minigame", "index.html", [
+  [ "VEGO-Engine", "index.html", [
     [ "Todo List", "todo.html", null ],
     [ "Deprecated List", "deprecated.html", null ],
     [ "Classes", "annotated.html", [
