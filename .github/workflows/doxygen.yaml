@@ -15,7 +15,8 @@ jobs:
           submodules: 'true' # might need recursive, tbd
       - name: Doxygen Action
         uses: mattnotmitt/doxygen-action@v1.1.0
-        # defaults to ./Doxygen
+        with:
+          doxyfile-path: 'docs/Doxyfile'
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
