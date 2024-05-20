@@ -30,7 +30,7 @@ void Entity::delGroup(Group mGroup)
 	groupBitSet[mGroup] = false;
 }
 
-std::bitset<MAX_GROUPS> Entity::getGroupBitSet() 
+std::bitset<MAX_GROUPS> Entity::getGroupBitSet()
 {
 	return groupBitSet;
 }

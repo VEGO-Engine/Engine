@@ -17,14 +17,13 @@ Game* engine::game = nullptr; // will be initialized in constructor
 
 Game::Game() :
 	manager(this),
-	tiles(manager.getGroup((size_t)Entity::GroupLabel::MAPTILES)), 
+	tiles(manager.getGroup((size_t)Entity::GroupLabel::MAPTILES)),
 	players(manager.getGroup((size_t)Entity::GroupLabel::PLAYERS)),
 	projectiles(manager.getGroup((size_t)Entity::GroupLabel::PROJECTILE)),
 	hearts(manager.getGroup((size_t)Entity::GroupLabel::HEARTS)),
-	powerups(manager.getGroup((size_t)Entity::GroupLabel::POWERUPS)),
-	player1(manager.addEntity()),
-	player2(manager.addEntity()),
-	wall(manager.addEntity())
+	powerups(manager.getGroup((size_t)Entity::GroupLabel::POWERUPS))
+	//player1(manager.addEntity()),
+	//player2(manager.addEntity())
 {
 	engine::game = this;
 };
@@ -37,7 +36,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	Game::textureManager = new TextureManager(&manager);
 	Game::soundManager = new SoundManager();
 	Game::collisionHandler = new CollisionHandler(manager); // why does this use a referrence, but AssetManager a pointer?
-	
+
 	int flags = 0;
 	if (fullscreen)
 	{
@@ -104,7 +103,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	while (!hasQuit)
 	{
 		SDL_PollEvent(&event);
-		
+
 		if (event.type == SDL_QUIT)
 		{
 			hasQuit = true;
@@ -129,7 +128,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	if (hasQuit)
 	{
-		this->isRunning = false;
+		this->setRunning(false);
 		return;
 	}
 
@@ -140,7 +139,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	const char* player2Sprite;
 
 	selectCharacters(player1Sprite, player2Sprite);
-	if (this->isRunning == false) return;
+	if (this->isRunning() == false) return;
 
 	map = new Map();
 
@@ -158,28 +157,28 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	//ecs implementation
 
-	player1.setTeam(Entity::TeamLabel::BLUE);
-	player1.addComponent<TransformComponent>(80,80,2); //posx, posy, scale
-	player1.addComponent<SpriteComponent>(player1Sprite, true); //adds sprite (32x32px), path needed
-	player1.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D, SDL_SCANCODE_E, Vector2D(2, 0));//custom keycontrols can be added
-	player1.addComponent<ColliderComponent>("player", 0.8f); //adds tag (for further use, reference tag)
-	player1.addComponent<HealthComponent>(5, Direction::LEFT, "assets/heart.png");
-	player1.addComponent<StatEffectsComponent>();
-	player1.addGroup((size_t) Entity::GroupLabel::PLAYERS); //tell programm what group it belongs to for rendering order
+	// player1.setTeam(Entity::TeamLabel::BLUE);
+	// player1.addComponent<TransformComponent>(80,80,2); //posx, posy, scale
+	// player1.addComponent<SpriteComponent>(player1Sprite, true); //adds sprite (32x32px), path needed
+	// player1.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D, SDL_SCANCODE_E, Vector2D(2, 0));//custom keycontrols can be added
+	// player1.addComponent<ColliderComponent>("player", 0.8f); //adds tag (for further use, reference tag)
+	// player1.addComponent<HealthComponent>(5, Direction::LEFT, "assets/heart.png");
+	// player1.addComponent<StatEffectsComponent>();
+	// player1.addGroup((size_t) Entity::GroupLabel::PLAYERS); //tell programm what group it belongs to for rendering order
 
 
-	player2.setTeam(Entity::TeamLabel::RED);
-	player2.addComponent<TransformComponent>(600, 500, 2);
-	player2.addComponent<SpriteComponent>(player2Sprite, true);
-	player2.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT, SDL_SCANCODE_RCTRL, Vector2D(-2, 0));
-	player2.addComponent<ColliderComponent>("enemy", 0.8f);
-	player2.addComponent<HealthComponent>(5, Direction::RIGHT, "assets/heart.png");
-	player2.addComponent<StatEffectsComponent>();
-	player2.addGroup((size_t) Entity::GroupLabel::PLAYERS);
+	// player2.setTeam(Entity::TeamLabel::RED);
+	// player2.addComponent<TransformComponent>(600, 500, 2);
+	// player2.addComponent<SpriteComponent>(player2Sprite, true);
+	// player2.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT, SDL_SCANCODE_RCTRL, Vector2D(-2, 0));
+	// player2.addComponent<ColliderComponent>("enemy", 0.8f);
+	// player2.addComponent<HealthComponent>(5, Direction::RIGHT, "assets/heart.png");
+	// player2.addComponent<StatEffectsComponent>();
+	// player2.addGroup((size_t) Entity::GroupLabel::PLAYERS);
 }
 
 void Game::selectCharacters(const char* &playerSprite, const char* &enemySprite)
-{	
+{
 	// TODO: move this whereever it makes sense (maybe game as a member)
 	std::map<int, std::pair<const char*, const char*>> characterSprites;
 	characterSprites[0] = std::make_pair("assets/chicken_neutral_knight.png", "assets/chicken_knight_spritesheet.png");
@@ -265,13 +264,13 @@ void Game::selectCharacters(const char* &playerSprite, const char* &enemySprite)
 
 	if (hasQuit)
 	{
-		this->isRunning = false;
+		this->setRunning(false);
 		return;
 	}
 
 	playerSprite = characterSprites.find(playerSelection)->second.second;
 	enemySprite = characterSprites.find(enemySelection)->second.second;
-	this->isRunning = true;
+	this->setRunning(true);
 }
 
 void Game::handleEvents()
@@ -280,7 +279,7 @@ void Game::handleEvents()
 
 	switch (event.type)
 	{
-		case SDL_QUIT: this->isRunning = false;
+		case SDL_QUIT: this->setRunning(false);
 			break;
 
 		default:
@@ -307,7 +306,7 @@ void Game::render()
 
 	for (auto& p : players)
 		p->draw();
-	
+
 	for (auto& p : projectiles)
 		p->draw();
 
@@ -326,15 +325,20 @@ void Game::clean()
 	std::cout << "Game Cleaned!" << std::endl;
 }
 
-bool Game::running() const
+bool Game::isRunning() const
 {
-	return isRunning;
+	return running;
+}
+
+void Game::setRunning(bool running)
+{
+	this->running = running;
 }
 
 void Game::setWinner(Entity::TeamLabel winningTeam)
 {
 	this->winner = winningTeam;
-	this->isRunning = false;
+	this->setRunning(false);
 }
 
 Entity::TeamLabel Game::getWinner() const

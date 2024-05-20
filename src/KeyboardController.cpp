@@ -25,27 +25,27 @@ void KeyboardController::update()
 {
 	transform->direction.x = 0;
 	transform->direction.y = 0;
-	sprite->playAnimation(IDLE);
+	sprite->playAnimation("IDLE");
 
 	if (keystates[this->up]) {
 		transform->direction.y = -1;
-		sprite->playAnimation(WALK);
+		sprite->playAnimation("WALK");
 		SoundManager::playSound(this->entity->getManager().getGame(), STEPS);
 	}
 	if (keystates[this->left]) {
 		transform->direction.x = -1;
-		sprite->playAnimation(WALK);
+		sprite->playAnimation("WALK");
 		sprite->setDirection(Direction::LEFT);
 		SoundManager::playSound(this->entity->getManager().getGame(), STEPS);
 	}
 	if (keystates[this->down]) {
 		transform->direction.y = 1;
-		sprite->playAnimation(WALK);
+		sprite->playAnimation("WALK");
 		SoundManager::playSound(this->entity->getManager().getGame(), STEPS);
 	}
 	if (keystates[this->right]) {
 		transform->direction.x = 1;
-		sprite->playAnimation(WALK);
+		sprite->playAnimation("WALK");
 		sprite->setDirection(Direction::RIGHT);
 		SoundManager::playSound(this->entity->getManager().getGame(), STEPS);
 	}

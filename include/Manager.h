@@ -14,7 +14,7 @@ class Manager
 {
 public:
 	Manager(Game* game) : game(game) {};
-	
+
 	void update();
 	void draw();
 	void refresh();
