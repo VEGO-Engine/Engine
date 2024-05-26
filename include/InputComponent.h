@@ -1,5 +1,8 @@
+#pragma once
 #include <SDL.h>
 #include <map>
+
+#include "Component.h"
 
 enum class Key
 {
@@ -7,7 +10,7 @@ enum class Key
     DOWN,
     LEFT,
     RIGHT,
-    FIRE,
+    SPACE,
     ENTER,
     ESCAPE,
     TAB,
@@ -84,13 +87,16 @@ enum class Key
     GRAVE
 };
 
-class Input
+class InputComponent : public Component
 {
 public:
-    Input();
-    ~Input();
+    InputComponent();
+    ~InputComponent();
 
-    void pollEvents();
+    void init() override;
+	void update() override;
+
+    // void pollEvents();
     bool isKeyDown(Key key);
 
 private:

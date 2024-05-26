@@ -1,24 +1,30 @@
-#include "Input.h"
+#include "InputComponent.h"
 
-Input::Input()
+InputComponent::InputComponent()
 {
     m_keyStates = SDL_GetKeyboardState(NULL);
     InitKeyMappings();
 }
 
-Input::~Input() = default;
+InputComponent::~InputComponent() = default;
 
-void Input::pollEvents()
+void InputComponent::init()
+{
+    // m_keyStates = SDL_GetKeyboardState(NULL);
+    // InitKeyMappings();
+}
+
+void InputComponent::update()
 {
     SDL_PumpEvents();
 }
 
-bool Input::isKeyDown(Key key)
+bool InputComponent::isKeyDown(Key key)
 {
     return m_keyStates[mapKeyToSDL(key)];
 }
 
-SDL_Scancode Input::mapKeyToSDL(Key key)
+SDL_Scancode InputComponent::mapKeyToSDL(Key key)
 {
     auto it = m_keyMappings.find(key);
     if (it == m_keyMappings.end())
@@ -28,7 +34,7 @@ SDL_Scancode Input::mapKeyToSDL(Key key)
     return it->second;
 }
 
-void Input::InitKeyMappings()
+void InputComponent::InitKeyMappings()
 {
     m_keyMappings =
     {
@@ -36,7 +42,7 @@ void Input::InitKeyMappings()
         {Key::DOWN, SDL_SCANCODE_DOWN},
         {Key::LEFT, SDL_SCANCODE_LEFT},
         {Key::RIGHT, SDL_SCANCODE_RIGHT},
-        {Key::FIRE, SDL_SCANCODE_SPACE},
+        {Key::SPACE, SDL_SCANCODE_SPACE},
         {Key::ENTER, SDL_SCANCODE_RETURN},
         {Key::ESCAPE, SDL_SCANCODE_ESCAPE},
         {Key::TAB, SDL_SCANCODE_TAB},
