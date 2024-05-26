@@ -7,6 +7,26 @@
 #include "Game.h"
 #include "AssetManager.h"
 
+Mix_Music* SoundManager::loadMusic(const char* fileName)
+{
+	auto it = this->music_cache.find(fileName);
+
+	if (it != this->music_cache.end()) {
+		return it->second;
+	}
+
+	auto music = Mix_LoadMUS(fileName);
+
+	if (music == NULL) 
+		throw std::runtime_error(std::string("Couldn't load music '") + fileName + "'");
+	
+	this->music_cache.emplace(fileName, music);
+	
+	printf("Loaded music at '%s'\n", fileName);
+	
+	return music;
+}
+
 Mix_Chunk* SoundManager::loadSound(const char* fileName)
 {
 	auto it = this->sound_cache.find(fileName);
@@ -27,7 +47,7 @@ Mix_Chunk* SoundManager::loadSound(const char* fileName)
 	return sound;
 }
 
-void SoundManager::playSound(Game* game, SoundTypes sound)
+void SoundManager::playSound(Game* game, SoundTypes sound, int loops)
 {
 	switch (sound)
 	{
@@ -35,14 +55,14 @@ void SoundManager::playSound(Game* game, SoundTypes sound)
 			if (Mix_Playing(-1) != 0)
 				break;
 
-			if (Mix_PlayChannel(-1, game->assets->getSound("steps"), 0) == -1) {
+			if (Mix_PlayChannel(-1, game->assets->getSound("steps"), loops) == -1) {
 				std::cerr << "Error playing sound 'steps': " << Mix_GetError() << std::endl;
 			}
 			
 			break;
 
 		case SoundTypes::THROW_EGG:
-			if (Mix_PlayChannel(-1, game->assets->getSound("throw_egg"), 0) == -1) {
+			if (Mix_PlayChannel(-1, game->assets->getSound("throw_egg"), loops) == -1) {
 				std::cerr << "Error playing sound 'throw_egg': " << Mix_GetError() << std::endl;
 			}
 			break;

@@ -30,24 +30,24 @@ void KeyboardController::update()
 	if (keystates[this->up]) {
 		transform->direction.y = -1;
 		sprite->playAnimation(WALK);
-		SoundManager::playSound(this->entity->getManager().getGame(), STEPS);
+		SoundManager::playSound(this->entity->getManager().getGame(), STEPS, 0);
 	}
 	if (keystates[this->left]) {
 		transform->direction.x = -1;
 		sprite->playAnimation(WALK);
 		sprite->setDirection(Direction::LEFT);
-		SoundManager::playSound(this->entity->getManager().getGame(), STEPS);
+		SoundManager::playSound(this->entity->getManager().getGame(), STEPS, 0);
 	}
 	if (keystates[this->down]) {
 		transform->direction.y = 1;
 		sprite->playAnimation(WALK);
-		SoundManager::playSound(this->entity->getManager().getGame(), STEPS);
+		SoundManager::playSound(this->entity->getManager().getGame(), STEPS, 0);
 	}
 	if (keystates[this->right]) {
 		transform->direction.x = 1;
 		sprite->playAnimation(WALK);
 		sprite->setDirection(Direction::RIGHT);
-		SoundManager::playSound(this->entity->getManager().getGame(), STEPS);
+		SoundManager::playSound(this->entity->getManager().getGame(), STEPS, 0);
 	}
 
 	if (keystates[this->fire]) {
