@@ -31,6 +31,7 @@ jobs:
           ignore: 'docs  | build'
           thread-comments: ${{ github.event_name == 'pull_request' && 'update' }}
           database: 'build'
+          extra-args: '-xc++'
           tidy-review: true
           format-review: true
 
