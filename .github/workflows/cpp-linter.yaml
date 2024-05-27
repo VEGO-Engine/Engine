@@ -18,6 +18,10 @@ jobs:
           build-dir: 'build'
           run-build: false
           options: 'CMAKE_EXPORT_COMPILE_COMMANDS=1'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: compile_commands
+          path: /home/runner/work/Engine/Engine/build
       - uses: cpp-linter/cpp-linter-action@main
         id: linter
         continue-on-error: true
@@ -36,7 +40,7 @@ jobs:
           format-review: true
 
       - name: Fail fast?!
-        if: steps.linter.outputs.checks-failed != 0
+        if: steps.linter.outputs.checks-failed > 0
         run: |
           echo "some linter checks failed. ${{ steps.linter.outputs.checks-failed }}"
         # for actual deployment
