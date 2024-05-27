@@ -2,10 +2,10 @@ on:
   push:
   pull_request:
 
-    permissions:
-      pull-requests: write
-      metadata: read
-      contents: write 
+permissions:
+  pull-requests: write
+  metadata: read
+  contents: write 
 
 jobs:
   cpp-linter:
