@@ -26,11 +26,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          database: 'build'
           style: 'file'
           tidy-checks: ''
+          version: 18
           files-changed-only: false
+          ignore: 'docs  | build'
           thread-comments: ${{ github.event_name == 'pull_request' && 'update' }}
+          database: 'build'
           tidy-review: true
           format-review: true
 
