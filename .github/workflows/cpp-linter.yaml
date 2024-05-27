@@ -1,10 +1,9 @@
 on:
   push:
     paths:
-      - "docs/examples/demo/*"
+    paths: ['**.c', '**.cpp', '**.h', '**.hpp', '**.cxx', '**.hxx', '**.cc', '**.hh', '**CMakeLists.txt', 'meson.build', '**.cmake']
   pull_request:
-    paths:
-      - "docs/examples/demo/*"
+    paths: ['**.c', '**.cpp', '**.h', '**.hpp', '**.cxx', '**.hxx', '**.cc', '**.hh', '**CMakeLists.txt', 'meson.build', '**.cmake']
 
     permissions:
       pull-requests: write
