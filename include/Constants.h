@@ -28,3 +28,6 @@ constexpr int BUFF_DURATION = 240;
 
 constexpr int BUFF_VALUE = 1;
 
+constexpr int PLAY_LOOPED = -1;
+constexpr int PLAY_ONCE = 0;
+

@@ -6,12 +6,12 @@
 
 #include "ECS.h"
 #include "TextureManager.h"
-
-enum SoundTypes
-{
-	STEPS,
-	THROW_EGG,
-};
+ 
+// enum SoundTypes
+// {
+// 	STEPS,
+// 	THROW_EGG,
+// };
 
 class Game;
 class SoundManager
@@ -37,7 +37,7 @@ class SoundManager
 		Mix_Music* loadMusic(const char* fileName);
 		Mix_Chunk* loadSound(const char* fileName);
 
-		static void playSound(Game* game, SoundTypes sound, int loops);
+		static void playSound(Game* game, /*SoundTypes sound*/ std::string sound, bool canOverlap, int loops);
 		// static void playMusic(...);
 	private:
 };

@@ -47,24 +47,26 @@ Mix_Chunk* SoundManager::loadSound(const char* fileName)
 	return sound;
 }
 
-void SoundManager::playSound(Game* game, SoundTypes sound, int loops)
+// void SoundManager::playMusic(...)
+
+// TODO: using a string here is probably... a less than stellar method, figure out how to change this
+void SoundManager::playSound(Game* game, /*SoundTypes sound*/ std::string sound, bool canOverlap, int loops)
 {
-	switch (sound)
+	if(!canOverlap)
 	{
-		case SoundTypes::STEPS:
-			if (Mix_Playing(-1) != 0)
-				break;
+		if (Mix_Playing(-1) != 0)
+			return;
+	}
 
-			if (Mix_PlayChannel(-1, game->assets->getSound("steps"), loops) == -1) {
-				std::cerr << "Error playing sound 'steps': " << Mix_GetError() << std::endl;
-			}
-			
-			break;
-
-		case SoundTypes::THROW_EGG:
-			if (Mix_PlayChannel(-1, game->assets->getSound("throw_egg"), loops) == -1) {
-				std::cerr << "Error playing sound 'throw_egg': " << Mix_GetError() << std::endl;
-			}
-			break;
+	if (Mix_PlayChannel(-1, game->assets->getSound(sound), loops) == -1) 
+	{
+		std::cerr << "Error playing sound '" << sound << "': " << Mix_GetError() << std::endl;
 	}
 }
+
+// TODO:
+// functions to 
+// 1. free music and sound
+// 2. pause/halt music and sound
+// 3. restart music and sound
+// 4. control volume
