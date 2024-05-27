@@ -2,13 +2,12 @@ on:
   push:
   pull_request:
 
-permissions:
-  pull-requests: write
-  metadata: read
-  contents: write 
-
 jobs:
   cpp-linter:
+    permissions:
+      pull-requests: write
+      metadata: read
+      contents: write 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
