@@ -12,16 +12,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: 'true'
+      - name: Generate compile-commands
+        uses: threeal/cmake-action@main
+        with:
+          build-dir: 'build'
+          run-build: false
+          options: 'CMAKE_EXPORT_COMPILE_COMMANDS=1'
       - uses: cpp-linter/cpp-linter-action@main
         id: linter
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          database: 'build'
           style: 'file'
           tidy-checks: ''
           files-changed-only: false
-          thread-comments: false #${{ github.event_name == 'pull_request' && 'update' }}
+          thread-comments: ${{ github.event_name == 'pull_request' && 'update' }}
           tidy-review: true
           format-review: true
 
