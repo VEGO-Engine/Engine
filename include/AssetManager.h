@@ -36,12 +36,16 @@ public:
     // sound management
     void addSoundEffect(std::string id, const char* path);
 
+    void addMusic(std::string id, const char* path);
+
     SDL_Texture* getTexture(std::string id);
     Mix_Chunk* getSound(std::string id);
+    Mix_Music* getMusic(std::string id);
 
 private:
 
     Manager* man;
     std::map<std::string, SDL_Texture*> textures;
     std::map<std::string, Mix_Chunk*> soundEffects;
+    std::map<std::string, Mix_Music*> music;
 };

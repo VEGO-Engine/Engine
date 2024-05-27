@@ -47,8 +47,6 @@ Mix_Chunk* SoundManager::loadSound(const char* fileName)
 	return sound;
 }
 
-// void SoundManager::playMusic(...)
-
 // TODO: using a string here is probably... a less than stellar method, figure out how to change this
 void SoundManager::playSound(Game* game, /*SoundTypes sound*/ std::string sound, bool canOverlap, int loops)
 {
@@ -61,6 +59,17 @@ void SoundManager::playSound(Game* game, /*SoundTypes sound*/ std::string sound,
 	if (Mix_PlayChannel(-1, game->assets->getSound(sound), loops) == -1) 
 	{
 		std::cerr << "Error playing sound '" << sound << "': " << Mix_GetError() << std::endl;
+	}
+}
+
+void SoundManager::playMusic(Game* game, std::string music, int loops)
+{
+	if (Mix_PlayingMusic() != 0)
+		return;
+
+	if (Mix_PlayMusic(game->assets->getMusic(music), loops) == -1) 
+	{
+		std::cerr << "Error playing music '" << music << "': " << Mix_GetError() << std::endl;
 	}
 }
 

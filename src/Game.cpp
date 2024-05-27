@@ -156,6 +156,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	assets->addSoundEffect("throw_egg", "assets/sound/throw_egg.wav");
 	assets->addSoundEffect("steps", "assets/sound/steps.wav");
 
+	// loading music
+	assets->addMusic("background_music", "assets/sound/background_music.mp3");
+
 	//ecs implementation
 
 	player1.setTeam(Entity::TeamLabel::BLUE);

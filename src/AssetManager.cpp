@@ -29,12 +29,22 @@ void AssetManager::addSoundEffect(std::string id, const char* path)
     soundEffects.emplace(id, this->man->getGame()->soundManager->loadSound(path));
 }
 
+void AssetManager::addMusic(std::string id, const char* path)
+{
+    music.emplace(id, this->man->getGame()->soundManager->loadMusic(path));
+}
+
 SDL_Texture* AssetManager::getTexture(std::string id) {
     return textures.at(id);
 }
 
 Mix_Chunk* AssetManager::getSound(std::string id) {
     return soundEffects.at(id);
+}
+
+Mix_Music* AssetManager::getMusic(std::string id)
+{
+	return music.at(id);
 }
 
 void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, const char* texturePath, Entity::TeamLabel teamLabel) {

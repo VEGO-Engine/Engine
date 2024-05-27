@@ -38,6 +38,6 @@ class SoundManager
 		Mix_Chunk* loadSound(const char* fileName);
 
 		static void playSound(Game* game, /*SoundTypes sound*/ std::string sound, bool canOverlap, int loops);
-		// static void playMusic(...);
+		static void playMusic(Game* game, std::string sound, int loops);
 	private:
 };
