@@ -1,7 +1,7 @@
 #include "StatEffectsComponent.h"
 #include "Entity.h"
 #include "TransformComponent.h"
-#include "KeyboardController.h"
+// #include "KeyboardController.h"
 #include <algorithm>
 #include <iostream>
 
@@ -35,7 +35,7 @@ void StatEffectsComponent::modifyStatValue(Stats stat, int modifier) //modifier 
 		this->entity->getComponent<TransformComponent>().modifySpeed(modifier);
 		break;
 	case Stats::ATTACK_SPEED:
-		this->entity->getComponent<KeyboardController>().modifyAtkSpeed(modifier);
+		// this->entity->getComponent<KeyboardController>().modifyAtkSpeed(modifier);
 		break;
 	default: break;
 	}

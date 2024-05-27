@@ -1,7 +1,8 @@
 #include "ProjectileComponent.h"
 
 #include "CollisionHandler.h"
-#include "Components.h"
+#include "SoundManager.h"
+#include "TransformComponent.h"
 #include "Entity.h"
 #include "Game.h"
 #include "HealthComponent.h"

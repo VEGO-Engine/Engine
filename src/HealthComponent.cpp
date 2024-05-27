@@ -1,6 +1,5 @@
 #include "HealthComponent.h"
 
-#include "Components.h"
 #include "Direction.h"
 #include "Entity.h"
 #include "Game.h"

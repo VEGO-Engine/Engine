@@ -2,7 +2,7 @@
 
 #include "TextureManager.h"
 #include "SoundManager.h"
-#include "Components.h"
+#include "ProjectileComponent.h"
 #include "Game.h"
 
 #include "TransformComponent.h"
