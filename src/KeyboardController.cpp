@@ -22,9 +22,9 @@ void KeyboardController::init()
 }
 
 void KeyboardController::update()
-{#
+{
 	// TODO: move this, this is definitely the wrong place to put this but i wanted to put it somewhere to test it
-	SoundManager::playMusic(this->entity->getManager().getGame(), "background_music", PLAY_LOOPED);
+	SoundManager::playMusic(this->entity->getManager().getGame(), "background_music", PLAY_LOOPED, 25);
 
 	transform->direction.x = 0;
 	transform->direction.y = 0;
@@ -33,24 +33,24 @@ void KeyboardController::update()
 	if (keystates[this->up]) {
 		transform->direction.y = -1;
 		sprite->playAnimation(WALK);
-		SoundManager::playSound(this->entity->getManager().getGame(), "steps", false, PLAY_ONCE);
+		SoundManager::playSound(this->entity->getManager().getGame(), "steps", false, PLAY_ONCE, MAX_VOLUME);
 	}
 	if (keystates[this->left]) {
 		transform->direction.x = -1;
 		sprite->playAnimation(WALK);
 		sprite->setDirection(Direction::LEFT);
-		SoundManager::playSound(this->entity->getManager().getGame(), "steps", false, PLAY_ONCE);
+		SoundManager::playSound(this->entity->getManager().getGame(), "steps", false, PLAY_ONCE, MAX_VOLUME);
 	}
 	if (keystates[this->down]) {
 		transform->direction.y = 1;
 		sprite->playAnimation(WALK);
-		SoundManager::playSound(this->entity->getManager().getGame(), "steps", false, PLAY_ONCE);
+		SoundManager::playSound(this->entity->getManager().getGame(), "steps", false, PLAY_ONCE, MAX_VOLUME);
 	}
 	if (keystates[this->right]) {
 		transform->direction.x = 1;
 		sprite->playAnimation(WALK);
 		sprite->setDirection(Direction::RIGHT);
-		SoundManager::playSound(this->entity->getManager().getGame(), "steps", false, PLAY_ONCE);
+		SoundManager::playSound(this->entity->getManager().getGame(), "steps", false, PLAY_ONCE, MAX_VOLUME);
 	}
 
 	if (keystates[this->fire]) {
