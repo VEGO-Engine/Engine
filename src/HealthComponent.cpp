@@ -2,7 +2,7 @@
 
 #include "Direction.h"
 #include "Entity.h"
-#include "Game.h"
+#include "GameInternal.h"
 #include <cstdio>
 
 void HealthComponent::init() 

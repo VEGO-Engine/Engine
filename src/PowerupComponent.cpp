@@ -1,5 +1,5 @@
 #include "PowerupComponent.h"
-#include "Game.h"
+#include "GameInternal.h"
 #include "CollisionHandler.h"
 #include "Entity.h"
 #include "HealthComponent.h"

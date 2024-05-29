@@ -22,14 +22,14 @@ namespace engine {
 	extern gamefunction init;
 	extern gamefunction update;
 
-	extern Game* game; // this is a temporary fix to remove artifacts of chicken_game from the engine while the API is not yet finalized
+	extern GameInternal* game; // this is a temporary fix to remove artifacts of chicken_game from the engine while the API is not yet finalized
 }
 
-class Game
+class GameInternal
 {
 public:
-	Game();
-	~Game();
+	GameInternal();
+	~GameInternal();
 
 	void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
 	void selectCharacters(const char* &playerSprite, const char* &enemySprite);

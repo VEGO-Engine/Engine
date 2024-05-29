@@ -9,11 +9,11 @@
 #include "Constants.h"
 #include "Entity.h"
 
-class Game;
+class GameInternal;
 class Manager
 {
 public:
-	Manager(Game* game) : game(game) {};
+	Manager(GameInternal* game) : game(game) {};
 	
 	void update();
 	void draw();
@@ -29,10 +29,10 @@ public:
 
 	Entity& addEntity();
 
-	Game* getGame() { return this->game; };
+	GameInternal* getGame() { return this->game; };
 
 private:
-	Game* game;
+	GameInternal* game;
 	std::vector<std::unique_ptr<Entity>> entities;
 	std::array<std::vector<Entity*>, MAX_GROUPS> entitiesByGroup;
 	std::array<std::vector<Entity*>, MAX_TEAMS> entitiesByTeam;

@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 
-#include "Game.h"
+#include "GameInternal.h"
 #include "AssetManager.h"
 
 Mix_Chunk* SoundManager::loadSound(const char* fileName)
@@ -27,7 +27,7 @@ Mix_Chunk* SoundManager::loadSound(const char* fileName)
 	return sound;
 }
 
-void SoundManager::playSound(Game* game, SoundTypes sound)
+void SoundManager::playSound(GameInternal* game, SoundTypes sound)
 {
 	switch (sound)
 	{

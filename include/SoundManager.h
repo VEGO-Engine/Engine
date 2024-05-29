@@ -13,7 +13,7 @@ enum SoundTypes
 	THROW_EGG,
 };
 
-class Game;
+class GameInternal;
 class SoundManager
 {
 	public:
@@ -30,6 +30,6 @@ class SoundManager
 		std::map<const char*, Mix_Chunk*> sound_cache;
 
 		Mix_Chunk* loadSound(const char* fileName);
-		static void playSound(Game* game, SoundTypes sound);
+		static void playSound(GameInternal* game, SoundTypes sound);
 	private:
 };
