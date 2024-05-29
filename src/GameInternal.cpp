@@ -14,8 +14,8 @@
 #include "TextureManager.h"
 #include "StatEffectsComponent.h"
 #include "Constants.h"
-
-GameInternal* engine::game = nullptr; // will be initialized in constructor
+#include "Game.h"
+#include "GameFactory.h"
 
 GameInternal::GameInternal() :
 	manager(this),
@@ -27,9 +27,7 @@ GameInternal::GameInternal() :
 	player1(manager.addEntity()),
 	player2(manager.addEntity()),
 	wall(manager.addEntity())
-{
-	engine::game = this;
-};
+{};
 
 GameInternal::~GameInternal() = default;
 
@@ -181,7 +179,8 @@ void GameInternal::init(const char* title, int xpos, int ypos, int width, int he
 	player2.addComponent<StatEffectsComponent>();
 	player2.addGroup((size_t) Entity::GroupLabel::PLAYERS);
 
-	engine::init();
+	this->gameInstance = GameFactory::instance().create(this);
+	this->gameInstance->init();
 }
 
 void GameInternal::selectCharacters(const char* &playerSprite, const char* &enemySprite)
@@ -299,7 +298,7 @@ void GameInternal::update()
 	manager.refresh();
 	manager.update();
 
-	engine::update(); // TODO: this might have to be split up into two update functions, before and after manager...
+	this->gameInstance->update(); // TODO: this might have to be split up into two update functions, before and after manager...
 }
 
 void GameInternal::render()

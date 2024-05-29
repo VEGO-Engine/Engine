@@ -17,13 +17,7 @@ class CollisionHandler;
 class TextureManager;
 class SoundManager;
 class Map;
-
-namespace engine {
-	extern gamefunction init;
-	extern gamefunction update;
-
-	extern GameInternal* game; // this is a temporary fix to remove artifacts of chicken_game from the engine while the API is not yet finalized
-}
+class Game;
 
 class GameInternal
 {
@@ -68,6 +62,8 @@ public:
     void setWinner(Entity::TeamLabel winningTeam);
 
 private:
+
+	Game* gameInstance;
 
 	int counter = 0;
 	bool isRunning = false;
