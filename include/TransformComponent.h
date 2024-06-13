@@ -14,7 +14,8 @@ public:
 	int width = 32;
 	int scale = 1;
 
-	int speed = 3;
+	int getSpeed() { return speed + speedMod; };
+	void resetSpeedMod() { speedMod = 0; };
 
 	TransformComponent();
 	explicit TransformComponent(int scale);
@@ -26,4 +27,8 @@ public:
 	void update() override;
     void setPositionAfterCollision(Vector2D& positionChange);
 	void modifySpeed(int8_t modifier);
+
+private:
+	int speed = 3;
+	int speedMod = 0;
 };
