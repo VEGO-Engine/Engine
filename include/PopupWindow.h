@@ -5,7 +5,7 @@
 
 #include "Entity.h"
 
-class Game;
+class GameInternal;
 
 class PopupWindow {
 

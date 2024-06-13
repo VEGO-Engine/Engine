@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "GameInternal.h"
 
 #include <SDL_error.h>
 
@@ -14,10 +14,10 @@
 #include "TextureManager.h"
 #include "StatEffectsComponent.h"
 #include "Constants.h"
+#include "Game.h"
+#include "GameFactory.h"
 
-Game* engine::game = nullptr; // will be initialized in constructor
-
-Game::Game() :
+GameInternal::GameInternal() :
 	manager(this),
 	tiles(manager.getGroup((size_t)Entity::GroupLabel::MAPTILES)), 
 	players(manager.getGroup((size_t)Entity::GroupLabel::PLAYERS)),
@@ -27,18 +27,16 @@ Game::Game() :
 	player1(manager.addEntity()),
 	player2(manager.addEntity()),
 	wall(manager.addEntity())
-{
-	engine::game = this;
-};
+{};
 
-Game::~Game() = default;
+GameInternal::~GameInternal() = default;
 
-void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
+void GameInternal::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
-	Game::assets = new AssetManager(&manager);
-	Game::textureManager = new TextureManager(&manager);
-	Game::soundManager = new SoundManager();
-	Game::collisionHandler = new CollisionHandler(manager); // why does this use a referrence, but AssetManager a pointer?
+	GameInternal::assets = new AssetManager(&manager);
+	GameInternal::textureManager = new TextureManager(&manager);
+	GameInternal::soundManager = new SoundManager();
+	GameInternal::collisionHandler = new CollisionHandler(manager); // why does this use a referrence, but AssetManager a pointer?
 	
 	int flags = 0;
 	if (fullscreen)
@@ -84,7 +82,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	}
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-	SDL_Texture* backgroundTexture = Game::textureManager->loadTexture("assets/startscreen.png");
+	SDL_Texture* backgroundTexture = GameInternal::textureManager->loadTexture("assets/startscreen.png");
 
 	SDL_RenderClear(renderer);
 	SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
@@ -181,10 +179,11 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	player2.addComponent<StatEffectsComponent>();
 	player2.addGroup((size_t) Entity::GroupLabel::PLAYERS);
 
-	engine::init();
+	this->gameInstance = GameFactory::instance().create("Chickengame", this); //!< \todo Should be specified via a config file
+	this->gameInstance->init();
 }
 
-void Game::selectCharacters(const char* &playerSprite, const char* &enemySprite)
+void GameInternal::selectCharacters(const char* &playerSprite, const char* &enemySprite)
 {	
 	// TODO: move this whereever it makes sense (maybe game as a member)
 	std::map<int, std::pair<const char*, const char*>> characterSprites;
@@ -252,7 +251,7 @@ void Game::selectCharacters(const char* &playerSprite, const char* &enemySprite)
 			}
 		}
 
-		SDL_Texture* backgroundTexture = Game::textureManager->loadTexture("assets/characterSelection.png");
+		SDL_Texture* backgroundTexture = GameInternal::textureManager->loadTexture("assets/characterSelection.png");
 		SDL_RenderClear(renderer);
 		SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
 
@@ -280,7 +279,7 @@ void Game::selectCharacters(const char* &playerSprite, const char* &enemySprite)
 	this->isRunning = true;
 }
 
-void Game::handleEvents()
+void GameInternal::handleEvents()
 {
 	SDL_PollEvent(&event);
 
@@ -294,15 +293,15 @@ void Game::handleEvents()
 	}
 }
 
-void Game::update()
+void GameInternal::update()
 {
 	manager.refresh();
 	manager.update();
 
-	engine::update(); // TODO: this might have to be split up into two update functions, before and after manager...
+	this->gameInstance->update(); // TODO: this might have to be split up into two update functions, before and after manager...
 }
 
-void Game::render()
+void GameInternal::render()
 {
 	SDL_RenderClear(renderer);
 	for (auto& t : tiles)
@@ -323,7 +322,7 @@ void Game::render()
 	SDL_RenderPresent(renderer);
 }
 
-void Game::clean()
+void GameInternal::clean()
 {
 	delete(textureManager);
 	SDL_DestroyRenderer(renderer);
@@ -332,18 +331,18 @@ void Game::clean()
 	std::cout << "Game Cleaned!" << std::endl;
 }
 
-bool Game::running() const
+bool GameInternal::running() const
 {
 	return isRunning;
 }
 
-void Game::setWinner(Entity::TeamLabel winningTeam)
+void GameInternal::setWinner(Entity::TeamLabel winningTeam)
 {
 	this->winner = winningTeam;
 	this->isRunning = false;
 }
 
-Entity::TeamLabel Game::getWinner() const
+Entity::TeamLabel GameInternal::getWinner() const
 {
 	return this->winner;
 }

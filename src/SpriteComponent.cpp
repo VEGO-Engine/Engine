@@ -9,7 +9,7 @@
 #include "TextureManager.h"
 #include "Entity.h"
 #include "TransformComponent.h"
-#include "Game.h"
+#include "GameInternal.h"
 #include "Manager.h"
 
 SpriteComponent::SpriteComponent(const char* path)

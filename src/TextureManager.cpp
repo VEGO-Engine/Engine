@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include <string>
 
-#include "Game.h"
+#include "GameInternal.h"
 
 SDL_Texture* TextureManager::loadTexture(const char* fileName)
 {

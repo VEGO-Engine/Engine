@@ -4,7 +4,7 @@
 #include "ColliderComponent.h"
 #include "Constants.h"
 #include "Entity.h"
-#include "Game.h"
+#include "GameInternal.h"
 #include "Vector2D.h"
 #include <cstdio>
 #include <initializer_list>

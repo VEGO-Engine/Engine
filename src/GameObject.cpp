@@ -2,7 +2,7 @@
 
 #include "SDL_error.h"
 #include "TextureManager.h"
-#include "Game.h"
+#include "GameInternal.h"
 
 GameObject::GameObject(const char* texturesheet, int x, int y)
 {
