@@ -19,47 +19,36 @@ public:
         return factory;
     }
 
-    void registerClass(CreateFunc createFunc) {
-        this->creator = createFunc;
-    }
-
-    Game* get() {
+    /*Game* get() {
         assert(this->gameInstance != nullptr);
         return this->gameInstance;
-    }
+    }*/
 
-    Game* create(GameInternal* gameInternal) {
+    /*Game* create(GameInternal* gameInternal) {
         Game* game = this->gameInstance == nullptr ? this->creator() : this->gameInstance; // TODO: error handling
         game->gameInternal = gameInternal;
         this->gameInstance = game;
         return game;
-    }
+    }*/
 
-    /* named game instances for future use
     void registerClass(const std::string& className, CreateFunc createFunc) {
         this->creators[className] = createFunc;
     }
 
-    Game* create(const std::string& className) {
+    Game* create(const std::string& className, GameInternal* gameInternal) {
         auto it = this->creators.find(className);
         if (it != creators.end()) {
-            return it->second();
+            Game* game = it->second();
+            game->gameInternal = gameInternal;
+            return game;
         }
         return nullptr;
     }
-    */
 
 private:
     CreateFunc creator;
-    Game* gameInstance = nullptr; //!< \depricated
-    // std::map<std::string, CreateFunc> creators;
+    std::map<std::string, CreateFunc> creators;
 };
-
-#define REGISTER_GAME(className) \
-    static bool registered_##className = []() { \
-        GameFactory::instance().registerClass([]() -> Game* { return new className; }); \
-        return true; \
-    }();
 
 /*
 #define REGISTER_GAME(className) \

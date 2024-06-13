@@ -179,7 +179,7 @@ void GameInternal::init(const char* title, int xpos, int ypos, int width, int he
 	player2.addComponent<StatEffectsComponent>();
 	player2.addGroup((size_t) Entity::GroupLabel::PLAYERS);
 
-	this->gameInstance = GameFactory::instance().create(this);
+	this->gameInstance = GameFactory::instance().create("Chickengame", this); //!< \todo Should be specified via a config file
 	this->gameInstance->init();
 }
 
