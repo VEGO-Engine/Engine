@@ -48,11 +48,11 @@ Mix_Chunk* SoundManager::loadSound(const char* fileName)
 }
 
 // TODO: using a string here is probably... a less than stellar method, figure out how to change this
-void SoundManager::playSound(Game* game, std::string sound, bool canOverlap, int loops, int volume)
+void SoundManager::playSound(Game* game, std::string sound, bool canOverlap, int loops, int volume, int channel)
 {
 	if(!canOverlap)
 	{
-		if (Mix_Playing(-1) != 0)
+		if (Mix_Playing(channel) != 0)
 			return;
 	}
 
@@ -61,7 +61,7 @@ void SoundManager::playSound(Game* game, std::string sound, bool canOverlap, int
 		std::cerr << "Error adjusting volume: " << Mix_GetError() << std::endl;
 	}
 
-	if (Mix_PlayChannel(-1, game->assets->getSound(sound), loops) == -1) 
+	if (Mix_PlayChannel(channel, game->assets->getSound(sound), loops) == -1) 
 	{
 		std::cerr << "Error playing sound '" << sound << "': " << Mix_GetError() << std::endl;
 	}
@@ -89,14 +89,19 @@ void SoundManager::playMusic(Game* game, std::string music, int loops, int volum
 	}
 }
 
-void SoundManager::setVolume(int volume)
+void SoundManager::setSoundVolume(int volume, int channel)
 {
-	Mix_Volume(-1, volume);
+	Mix_Volume(channel, volume);
 }
 
-void SoundManager::pauseSound()
+void SoundManager::setMusicVolume(int volume)
 {
-	Mix_Pause(-1);
+	Mix_VolumeMusic(volume);
+}
+
+void SoundManager::pauseSound(int channel)
+{
+	Mix_Pause(channel);
 }
 
 void SoundManager::pauseMusic()
@@ -104,9 +109,9 @@ void SoundManager::pauseMusic()
 	Mix_PauseMusic();
 }
 
-void SoundManager::restartSound()
+void SoundManager::restartSound(int channel)
 {
-	Mix_Resume(-1);
+	Mix_Resume(channel);
 }
 
 void SoundManager::restartMusic()

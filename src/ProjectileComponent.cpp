@@ -13,7 +13,7 @@ void ProjectileComponent::init()
 {
 	transformComponent = &entity->getComponent<TransformComponent>();
     transformComponent->direction = direction;
-    SoundManager::playSound(this->entity->getManager().getGame(), "throw_egg", true, PLAY_ONCE, MAX_VOLUME);
+    SoundManager::playSound(this->entity->getManager().getGame(), "throw_egg", true, PLAY_ONCE, MAX_VOLUME, -1);
 }
 
 void ProjectileComponent::update() 

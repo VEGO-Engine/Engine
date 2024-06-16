@@ -48,17 +48,18 @@ class SoundManager
 		//! \returns a pointer to Mix_Chunk, which is added to a map in the AssetManager
 		//! \sa AssetManager::AddSound(std::string id, const char* path)
 
-		static void playSound(Game* game, std::string sound, bool canOverlap, int loops, int volume); //!< Plays sound effects
+		static void playSound(Game* game, std::string sound, bool canOverlap, int loops, int volume, int channel); //!< Plays sound effects
 		//! handles if sounds can overlap, how often they can loop, as well as the volume at which the specified sound effect should play
 		static void playMusic(Game* game, std::string sound, int loops, int volume, int ms); //<! Plays music
 		//! handles how often the track should loop, as well as the volume at which the specified track should play
 
-		static void setVolume(int volume); //!< Volume handling for the entire program
+		static void setSoundVolume(int volume, int channel); //!< Volume handling for the entire program
+		static void setMusicVolume(int volume);
 
-		static void pauseSound();
+		static void pauseSound(int channel);
 		static void pauseMusic();
 
-		static void restartSound();
+		static void restartSound(int channel);
 		static void restartMusic();
 
 		static void fadeOutMusic(int ms);
