@@ -24,7 +24,7 @@ void KeyboardController::init()
 void KeyboardController::update()
 {
 	// TODO: move this, this is definitely the wrong place to put this but i wanted to put it somewhere to test it
-	SoundManager::playMusic(this->entity->getManager().getGame(), "background_music", PLAY_LOOPED, 25);
+	SoundManager::playMusic(this->entity->getManager().getGame(), "background_music", PLAY_LOOPED, 10, 15000);
 
 	transform->direction.x = 0;
 	transform->direction.y = 0;

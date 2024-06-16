@@ -14,6 +14,13 @@
 // };
 
 class Game;
+
+/*!
+ *
+ * \brief Handles music and sound.
+ * \details SoundManager handles loading in music and sound effects from files, playing music and sound effects and toggling the audio volume.
+ * 
+ */
 class SoundManager
 {
 	public:
@@ -34,14 +41,27 @@ class SoundManager
 		std::map<const char*, Mix_Music*> music_cache;
 		std::map<const char*, Mix_Chunk*> sound_cache;
 
-		Mix_Music* loadMusic(const char* fileName);
-		Mix_Chunk* loadSound(const char* fileName);
+		Mix_Music* loadMusic(const char* fileName); //!< Loads music from a file (mp3)
+		//! \returns a pointer to Mix_Music, which is added to a map in the AssetManager
+		//! \sa AssetManager::AddMusic(std::string id, const char* path)
+		Mix_Chunk* loadSound(const char* fileName); //!< Loads sound effects from a file (wav)
+		//! \returns a pointer to Mix_Chunk, which is added to a map in the AssetManager
+		//! \sa AssetManager::AddSound(std::string id, const char* path)
 
-		static void playSound(Game* game, std::string sound, bool canOverlap, int loops, int volume);
-		static void playMusic(Game* game, std::string sound, int loops, int volume);
+		static void playSound(Game* game, std::string sound, bool canOverlap, int loops, int volume); //!< Plays sound effects
+		//! handles if sounds can overlap, how often they can loop, as well as the volume at which the specified sound effect should play
+		static void playMusic(Game* game, std::string sound, int loops, int volume, int ms); //<! Plays music
+		//! handles how often the track should loop, as well as the volume at which the specified track should play
 
-		// set general volume
-		static void setVolume(int volume);
+		static void setVolume(int volume); //!< Volume handling for the entire program
+
+		static void pauseSound();
+		static void pauseMusic();
+
+		static void restartSound();
+		static void restartMusic();
+
+		static void fadeOutMusic(int ms);
 
 	private:
 };

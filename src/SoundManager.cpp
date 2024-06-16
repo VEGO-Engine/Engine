@@ -67,10 +67,16 @@ void SoundManager::playSound(Game* game, std::string sound, bool canOverlap, int
 	}
 }
 
-void SoundManager::playMusic(Game* game, std::string music, int loops, int volume)
+void SoundManager::playMusic(Game* game, std::string music, int loops, int volume, int ms)
 {
-	if (Mix_PlayingMusic() != 0)
+	if (Mix_PlayingMusic() != 0 || Mix_Fading() == Mix_Fading::MIX_FADING_IN)
 		return;
+
+	if(ms > 0)
+	{
+		Mix_FadeInMusic(game->assets->getMusic(music), loops, ms);
+		return;
+	}
 
 	if(Mix_VolumeMusic(volume) == -1)
 	{
@@ -88,8 +94,30 @@ void SoundManager::setVolume(int volume)
 	Mix_Volume(-1, volume);
 }
 
-// TODO:
-// functions to 
-// 1. free music and sound
-// 2. pause/halt music and sound
-// 3. restart music and sound
+void SoundManager::pauseSound()
+{
+	Mix_Pause(-1);
+}
+
+void SoundManager::pauseMusic()
+{
+	Mix_PauseMusic();
+}
+
+void SoundManager::restartSound()
+{
+	Mix_Resume(-1);
+}
+
+void SoundManager::restartMusic()
+{
+	Mix_ResumeMusic();
+}
+
+void SoundManager::fadeOutMusic(int ms)
+{
+	if(Mix_Fading() == Mix_Fading::MIX_FADING_OUT)
+		return;
+
+	Mix_FadeOutMusic(ms);
+}
