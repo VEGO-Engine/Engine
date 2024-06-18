@@ -156,7 +156,7 @@ void GameInternal::init(const char* title, int xpos, int ypos, int width, int he
 	assets->addSoundEffect("steps", "assets/sound/steps.wav");
 
 	// loading music
-	assets->addMusic("background_music", "assets/sound/background_music.mp3");
+	// assets->addMusic("background_music", "assets/sound/background_music.mp3");
 
 	//ecs implementation
 
