@@ -9,7 +9,7 @@
 #include "TextureManager.h"
 #include "Entity.h"
 #include "TransformComponent.h"
-#include "Game.h"
+#include "GameInternal.h"
 #include "Manager.h"
 
 SpriteComponent::SpriteComponent(const char* path)
@@ -17,14 +17,17 @@ SpriteComponent::SpriteComponent(const char* path)
 	this->texturePath = path;
 }
 
-SpriteComponent::SpriteComponent(const char* path, bool isAnimated)
+SpriteComponent::SpriteComponent(
+	const char* path,
+	bool isAnimated,
+	std::map<std::string, std::unique_ptr<Animation>>* animationMap,
+	std::string defaultAnimation)
 {
 	animated = isAnimated;
 
-	animations.emplace(IDLE, std::make_unique<Animation>((uint8_t)AnimationType::IDLE, 2, 200));
-	animations.emplace(WALK, std::make_unique<Animation>((uint8_t)AnimationType::WALK, 2, 200));
+	animations = animationMap;
 
-	playAnimation(IDLE);
+	playAnimation(defaultAnimation);
 
 	this->texturePath = path;
 }
@@ -71,14 +74,14 @@ void SpriteComponent::draw()
 	this->entity->getManager().getGame()->textureManager->draw(this->entity->getManager().getGame()->renderer, this->texture, this->srcRect, this->destRect, this->animated && this->flipped);
 }
 
-void SpriteComponent::playAnimation(AnimationType type)
+void SpriteComponent::playAnimation(std::string type)
 {
-	this->animationIndex = animations.at(type)->index;
-	this->frames = animations.at(type)->frames;
-	this->speed = animations.at(type)->speed;
+	this->animationIndex = animations->at(type)->index;
+	this->frames = animations->at(type)->frames;
+	this->speed = animations->at(type)->speed;
 }
 
-void SpriteComponent::setDirection(Direction direction) 
+void SpriteComponent::setDirection(Direction direction)
 {
 	this->flipped = direction == Direction::RIGHT;
 }

@@ -1,9 +1,8 @@
 #include "HealthComponent.h"
 
-#include "Components.h"
 #include "Direction.h"
 #include "Entity.h"
-#include "Game.h"
+#include "GameInternal.h"
 #include <cstdio>
 
 void HealthComponent::init() 
@@ -58,7 +57,7 @@ void HealthComponent::createHeartComponents(int x)
 {
     auto& heart(this->entity->getManager().addEntity());
     heart.addComponent<TransformComponent>(x,5,2);
-    heart.addComponent<SpriteComponent>("assets/heart.png");
+    heart.addComponent<SpriteComponent>(this->healthTexture.data());
     heart.addGroup((size_t)Entity::GroupLabel::HEARTS);
     heart.setTeam(this->entity->getTeam());
 }

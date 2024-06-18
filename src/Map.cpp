@@ -6,11 +6,11 @@
 #include <utility>
 
 #include "Constants.h"
-#include "Game.h"
+#include "GameInternal.h"
 #include "SDL_error.h"
 #include "TileComponent.h"
 
-void Map::loadMap(const char* path, int sizeX, int sizeY, Game* game, const std::map<int, std::pair<std::string, bool>>* textureDict /* backreference */)
+void Map::loadMap(const char* path, int sizeX, int sizeY, GameInternal* game, const std::map<int, std::pair<std::string, bool>>* textureDict /* backreference */)
 {
 	std::string tileIDstr;
 	char singleChar = 0;
@@ -56,7 +56,7 @@ void Map::loadMap(const char* path, int sizeX, int sizeY, Game* game, const std:
 	mapFile.close();
 }
 
-void Map::addTile(unsigned long id, int x, int y, Game* game, const std::map<int, std::pair<std::string, bool>>* textureDict) // tile entity
+void Map::addTile(unsigned long id, int x, int y, GameInternal* game, const std::map<int, std::pair<std::string, bool>>* textureDict) // tile entity
 {
 	auto& tile(game->manager.addEntity());
 	tile.addComponent<TileComponent>(x, y, TILE_SIZE, TILE_SIZE, id, textureDict);

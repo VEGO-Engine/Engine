@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 
-#include "Game.h"
+#include "GameInternal.h"
 #include "AssetManager.h"
 
 Mix_Music* SoundManager::loadMusic(const char* fileName)
@@ -48,7 +48,7 @@ Mix_Chunk* SoundManager::loadSound(const char* fileName)
 }
 
 // TODO: using a string here is probably... a less than stellar method, figure out how to change this
-void SoundManager::playSound(Game* game, std::string sound, bool canOverlap, int loops, int volume, int channel)
+void SoundManager::playSound(GameInternal* game, std::string sound, bool canOverlap, int loops, int volume, int channel)
 {
 	if(!canOverlap)
 	{
@@ -67,7 +67,7 @@ void SoundManager::playSound(Game* game, std::string sound, bool canOverlap, int
 	}
 }
 
-void SoundManager::playMusic(Game* game, std::string music, int loops, int volume, int ms)
+void SoundManager::playMusic(GameInternal* game, std::string music, int loops, int volume, int ms)
 {
 	if (Mix_PlayingMusic() != 0 || Mix_Fading() == Mix_Fading::MIX_FADING_IN)
 		return;

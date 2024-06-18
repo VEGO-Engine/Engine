@@ -4,7 +4,7 @@
 #include "Entity.h"
 #include "PopupWindow.h"
 #include "TextureManager.h"
-#include "Game.h"
+#include "GameInternal.h"
 
 PopupWindow::PopupWindow(const char* title, const std::string &message) :
 continueGame(false), interacted(false) {

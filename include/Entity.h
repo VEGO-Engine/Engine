@@ -9,6 +9,13 @@
 #include "ECS.h"
 #include "Constants.h"
 
+// TODO: remove here if possible
+// temporary fix: addComponent function template doesnt know TransformComponent -> error undefined type
+// #include "KeyboardController.h"
+#include "InputComponent.h"
+#include "TransformComponent.h"
+#include "SpriteComponent.h"
+
 class Manager;
 class Component;
 

@@ -2,8 +2,8 @@
 
 #include "TextureManager.h"
 #include "SoundManager.h"
-#include "Components.h"
-#include "Game.h"
+#include "ProjectileComponent.h"
+#include "GameInternal.h"
 
 #include "TransformComponent.h"
 
@@ -11,7 +11,6 @@
 #include "ColliderComponent.h"
 #include "Constants.h"
 #include "Entity.h"
-#include "Game.h"
 #include "Vector2D.h"
 #include "PowerupComponent.h"
 #include <iostream>

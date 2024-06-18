@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include "Direction.h"
 #include "Component.h"
 
@@ -9,7 +10,7 @@ class HealthComponent : public Component
 {
 public:
 
-    HealthComponent(int health, Direction side) : health(health), side(side) {}
+    HealthComponent(int health, Direction side, std::string healthTexture) : health(health), side(side), healthTexture(healthTexture) {}
     ~HealthComponent() {}
 
     void modifyHealth(int health = -1);
@@ -26,4 +27,5 @@ private:
 
     int health;
     Direction side;
+    std::string healthTexture;
 };
