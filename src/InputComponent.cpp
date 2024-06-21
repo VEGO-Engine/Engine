@@ -10,8 +10,7 @@ InputComponent::~InputComponent() = default;
 
 void InputComponent::init()
 {
-    // m_keyStates = SDL_GetKeyboardState(NULL);
-    // InitKeyMappings();
+    // function intentionally left empty
 }
 
 void InputComponent::update()
