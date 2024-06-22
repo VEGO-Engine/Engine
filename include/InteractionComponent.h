@@ -14,8 +14,8 @@ public:
     void init() override;
     void update() override;
 
-    Entity* getClosestInteractableEntity(/*last direction key input*/ std::vector<Entity*> entities);
-    bool interact(Entity* interactee);
+    Entity* getClosestInteractableEntity(Key directionKey, Entity* interactor, std::vector<Entity*> entities);
+    bool interact(Entity* interactor, Entity* interactee);
     
 private:
     bool canInteract;
