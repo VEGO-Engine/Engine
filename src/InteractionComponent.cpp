@@ -1,9 +1,10 @@
 #include "InteractionComponent.h"
 
-InteractionComponent::InteractionComponent(bool canInteract, bool isInteractable)
+InteractionComponent::InteractionComponent(bool canInteract, bool isInteractable, int reach)
 {
     this->canInteract = canInteract;
     this->isInteractable = isInteractable;
+    this->reach = reach; // ofc that can be set individually, but its probably also okay if you just pass your entities width as its reach here methinks
 }
 
 InteractionComponent::~InteractionComponent() = default;
@@ -18,26 +19,53 @@ void InteractionComponent::update()
 
 }
 
-Entity* getClosestInteractableEntity(Key directionKey, Entity* interactor, std::vector<Entity*> entities)
+Entity* InteractionComponent::getClosestInteractableEntity(Key directionKey, Entity* interactor, std::vector<Entity*> entities)
 {
-    for(auto e : entities)
+    // first kicking all the entities passed here that don't have the ability to be interacted with
+    for (auto it = entities.begin(); it != entities.end();)
     {
-        if(!e->hasComponent<InteractionComponent>() || !e->getComponent<InteractionComponent>().isInteractable)
+        if (!(*it)->hasComponent<InteractionComponent>() || !(*it)->getComponent<InteractionComponent>().isInteractable)
         {
-            auto it = std::remove(entities.begin(), entities.end(), e);
-            entities.erase(it, entities.end());
+            it = entities.erase(it);
+            continue;
         }
+
+        it++;
     }
 
+    // quick check if entities isn't empty
     if(entities.empty())
     {
         return nullptr;
     }
 
-    for(auto e : entities)
+    // to reduce the amount of accesses to transformcomponent via getComponent()
+    auto& interactorT = interactor->getComponent<TransformComponent>();
+
+    // kicking all entities that are too far away, disgusting code that i dont even know if it works just yet but oh well
+    for (auto it = entities.begin(); it != entities.end();)
     {
-        if(e->getComponent<TransformComponent>().position.x)
+        auto& entityT = (*it)->getComponent<TransformComponent>();
+
+        if(((entityT.position.x >= interactorT.position.x) && !isEntityCloseEnoughRight(interactorT.position, entityT.position, interactorT.width)) ||
+           ((entityT.position.x <= interactorT.position.x) && !isEntityCloseEnoughLeft(interactorT.position, entityT.position, entityT.width)) ||
+           ((entityT.position.y <= interactorT.position.y) && !isEntityCloseEnoughUp(interactorT.position, entityT.position, entityT.height)) ||
+           ((entityT.position.y >= interactorT.position.y) && !isEntityCloseEnoughDown(interactorT.position, entityT.position, interactorT.height)))
+        {
+            it = entities.erase(it);
+            continue;
+        }
+
+        it++;
     }
+
+    // check if entities is empty
+    if(entities.empty())
+    {
+        return nullptr;
+    }
+
+    // then check whichever entitiy is closer, based on direction i guess? so if direction left then the entity on the left, if direction down then entity on down???? i guess?????
 }
 
 bool InteractionComponent::interact(Entity* interactor, Entity* interactee)
@@ -52,14 +80,45 @@ bool InteractionComponent::interact(Entity* interactor, Entity* interactee)
         return false;
     }
 
+    return true;
+}
+
+bool InteractionComponent::isEntityCloseEnoughRight(Vector2D iPos, Vector2D ePos, int iWidth)
+{
+    if(ePos.x > ((int)iPos.x + (iWidth + reach)))
+    {
+        return false;
+    }
 
     return true;
 }
 
-// TODO:
-// - get the last saved key input => if two interactible entities, favour the one closer to last input/
-//   maybe only make the one in direction of last input interactible, or if two entities are ex. left and right and the last
-//   input was down, then either try to calc the closer one or if theyre the same distance away, favour one side automatically
-// - add toggleable marker to show last direction => like stardew? (probably only possible once tmx + layers properly implemented)
-// - add key input e for interact/maybe alt gr for other person?
+bool InteractionComponent::isEntityCloseEnoughLeft(Vector2D iPos, Vector2D ePos, int eWidth)
+{
+    if(ePos.x < ((int)iPos.x - (reach - eWidth)))
+    {
+        return false;
+    }
+    
+    return true;
+}
 
+bool InteractionComponent::isEntityCloseEnoughUp(Vector2D iPos, Vector2D ePos, int eHeight)
+{
+    if(ePos.y < ((int)iPos.y - (reach - eHeight)))
+    {
+        return false;
+    }
+
+    return true;
+}
+
+bool InteractionComponent::isEntityCloseEnoughDown(Entity* i, Entity* e)
+{
+    if(ePos.y > ((int)iPos.y + (iHeight + reach)))
+    {
+        return false;
+    }
+
+    return true;
+}
