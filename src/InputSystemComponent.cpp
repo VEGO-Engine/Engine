@@ -11,17 +11,17 @@ void InputSystemComponent::update()
     handleActions();
 }
 
-void InputSystemComponent::bindAction(const std::string& actionName, Key key, std::function<void()> callback)
-{
-    if (m_actions.find(actionName) == m_actions.end())
-    {
-        m_actions[actionName] = InputAction(actionName, callback);
-    }
+// void InputSystemComponent::bindAction(const std::string& actionName, Key key, std::function<void()> callback)
+// {
+//     if (m_actions.find(actionName) == m_actions.end())
+//     {
+//         m_actions[actionName] = InputAction(actionName, callback);
+//     }
 
-    m_actions[actionName].keys.push_back(key);
-    m_keyToActionsMap[key].push_back(m_actions[actionName]);
+//     m_actions[actionName].keys.push_back(key);
+//     m_keyToActionsMap[key].push_back(m_actions[actionName]);
 
-}
+// }
 
 void InputSystemComponent::unbindAction(const std::string& actionName, Key key)
 {
