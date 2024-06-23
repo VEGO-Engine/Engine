@@ -63,7 +63,7 @@ void InputSystemComponent::unbindAction(const std::string& actionName, const std
             auto& action = actionIt->second;
             action.keys.erase(std::remove(action.keys.begin(), action.keys.end(), key), action.keys.end());
             m_keyToActionsMap[key].erase(std::remove_if(m_keyToActionsMap[key].begin(), m_keyToActionsMap[key].end(),
-                [&](const InputAction& a) { return a.actionName == actionName; }), m_keyToActionsMap[key].end());
+                [&](const InputAction& a) { return a.name == actionName; }), m_keyToActionsMap[key].end());
         }
     }
 }
