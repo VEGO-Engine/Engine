@@ -34,22 +34,23 @@ public:
     //     (m_keyToActionsMap[keys].push_back(m_actions[actionName]), ...);
     // }
 
-    // void unbindAction(const std::string& actionName, Key key);
+    void unbindAction(const std::string& actionName, Key key);
+    void unbindAction(const std::string& actionName, std::vector<Key> key);
 
-    template<typename... Keys>
-    void unbindAction(const std::string& actionName, Keys... keys)
-    {
-        static_assert((std::is_same<Keys, Key>::value && ...), "A passed argument for 'Keys' is not of type 'Key'");
+    // template<typename... Keys>
+    // void unbindAction(const std::string& actionName, Keys... keys)
+    // {
+    //     static_assert((std::is_same<Keys, Key>::value && ...), "A passed argument for 'Keys' is not of type 'Key'");
 
-        auto actionIt = m_actions.find(actionName);
-        if (actionIt != m_actions.end())
-        {
-            auto& action = actionIt->second;
-            (action.keys.erase(std::remove(action.keys.begin(), action.keys.end(), keys), action.keys.end()), ...);
-            (m_keyToActionsMap[keys].erase(std::remove_if(m_keyToActionsMap[keys].begin(), m_keyToActionsMap[keys].end(),
-                [&](const InputAction& a) { return a.actionName == actionName; }), m_keyToActionsMap[keys].end()), ...);
-        }
-    }
+    //     auto actionIt = m_actions.find(actionName);
+    //     if (actionIt != m_actions.end())
+    //     {
+    //         auto& action = actionIt->second;
+    //         (action.keys.erase(std::remove(action.keys.begin(), action.keys.end(), keys), action.keys.end()), ...);
+    //         (m_keyToActionsMap[keys].erase(std::remove_if(m_keyToActionsMap[keys].begin(), m_keyToActionsMap[keys].end(),
+    //             [&](const InputAction& a) { return a.actionName == actionName; }), m_keyToActionsMap[keys].end()), ...);
+    //     }
+    // }
 
 private:
     InputComponent* m_inputComponent;
