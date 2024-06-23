@@ -11,7 +11,7 @@ void InputSystemComponent::update()
     handleActions();
 }
 
-// alternative to template function
+// alternative to bindAction template
 void InputSystemComponent::bindAction(const std::string& actionName, Key key, std::function<void()> callback)
 {
     if (m_actions.find(actionName) == m_actions.end())
@@ -24,7 +24,7 @@ void InputSystemComponent::bindAction(const std::string& actionName, Key key, st
 
 }
 
-// alternative to template function
+// alternative to bindAction template
 void InputSystemComponent::bindAction(const std::string& actionName, std::vector<Key> keys, std::function<void()> callback)
 {
     if (m_actions.find(actionName) == m_actions.end())
@@ -39,17 +39,17 @@ void InputSystemComponent::bindAction(const std::string& actionName, std::vector
     }
 }
 
-void InputSystemComponent::unbindAction(const std::string& actionName, Key key)
-{
-    auto actionIt = m_actions.find(actionName);
-    if (actionIt != m_actions.end())
-    {
-        auto& action = actionIt->second;
-        action.keys.erase(std::remove(action.keys.begin(), action.keys.end(), key), action.keys.end());
-        m_keyToActionsMap[key].erase(std::remove_if(m_keyToActionsMap[key].begin(), m_keyToActionsMap[key].end(),
-            [&](const InputAction& a) { return a.name == actionName; }), m_keyToActionsMap[key].end());
-    }
-}
+// void InputSystemComponent::unbindAction(const std::string& actionName, Key key)
+// {
+//     auto actionIt = m_actions.find(actionName);
+//     if (actionIt != m_actions.end())
+//     {
+//         auto& action = actionIt->second;
+//         action.keys.erase(std::remove(action.keys.begin(), action.keys.end(), key), action.keys.end());
+//         m_keyToActionsMap[key].erase(std::remove_if(m_keyToActionsMap[key].begin(), m_keyToActionsMap[key].end(),
+//             [&](const InputAction& a) { return a.name == actionName; }), m_keyToActionsMap[key].end());
+//     }
+// }
 
 void InputSystemComponent::handleActions()
 {
