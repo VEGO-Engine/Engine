@@ -18,11 +18,11 @@ Mix_Music* SoundManager::loadMusic(const char* fileName)
 	auto music = Mix_LoadMUS(fileName);
 
 	if (music == NULL) 
-		throw std::runtime_error(std::string("Couldn't load music '") + fileName + "'");
+		std::cerr << "Couldn't load music '" << fileName << "'" << std::endl;
 	
 	this->music_cache.emplace(fileName, music);
 	
-	printf("Loaded music at '%s'\n", fileName);
+	std::cout << "Loaded music at " << fileName << std::endl;
 	
 	return music;
 }
@@ -38,22 +38,21 @@ Mix_Chunk* SoundManager::loadSound(const char* fileName)
 	auto sound = Mix_LoadWAV(fileName);
 
 	if (sound == NULL) 
-		throw std::runtime_error(std::string("Couldn't load sound '") + fileName + "'");
+		std::cerr << "Couldn't load sound '" << fileName << "'" << std::endl;
 	
 	this->sound_cache.emplace(fileName, sound);
 	
-	printf("Loaded sound at '%s'\n", fileName);
+	std::cout << "Loaded sound at " << fileName << std::endl;
 	
 	return sound;
 }
 
-// TODO: using a string here is probably... a less than stellar method, figure out how to change this
 void SoundManager::playSound(GameInternal* game, std::string sound, bool canOverlap, int loops, int volume, int channel)
 {
 	if(!canOverlap)
 	{
 		if (Mix_Playing(channel) != 0)
-			return;
+			Mix_HaltChannel(channel);
 	}
 
 	if(Mix_VolumeChunk(game->assets->getSound(sound), volume) == -1)
