@@ -1,5 +1,8 @@
 #include "InteractionComponent.h"
 
+#include <algorithm>
+#include <limits>
+
 InteractionComponent::InteractionComponent(bool canInteract, bool isInteractable, int reach)
 {
     this->canInteract = canInteract;
@@ -19,18 +22,16 @@ void InteractionComponent::update()
 
 }
 
-Entity* InteractionComponent::getClosestInteractableEntity(Key directionKey, Entity* interactor, std::vector<Entity*> entities)
+Entity* InteractionComponent::getClosestInteractableEntity(Direction direction, Entity* interactor, std::vector<Entity*> entities)
 {
     // first kicking all the entities passed here that don't have the ability to be interacted with
-    for (auto it = entities.begin(); it != entities.end();)
+    for (auto it = entities.begin(); it != entities.end(); it++)
     {
         if (!(*it)->hasComponent<InteractionComponent>() || !(*it)->getComponent<InteractionComponent>().isInteractable)
         {
             it = entities.erase(it);
             continue;
         }
-
-        it++;
     }
 
     // quick check if entities isn't empty
@@ -42,30 +43,25 @@ Entity* InteractionComponent::getClosestInteractableEntity(Key directionKey, Ent
     // to reduce the amount of accesses to transformcomponent via getComponent()
     auto& interactorT = interactor->getComponent<TransformComponent>();
 
-    // kicking all entities that are too far away, disgusting code that i dont even know if it works just yet but oh well
-    for (auto it = entities.begin(); it != entities.end();)
+    // kick all entities that are either too far away or in the opposite direction, then calc distance and find closest entity that way
+    Entity* entityToInteract = nullptr;
+
+    switch(direction)
     {
-        auto& entityT = (*it)->getComponent<TransformComponent>();
+        case Direction::LEFT: entityToInteract = findClosestEntityLeft(entities, interactorT);
+            break;
 
-        if(((entityT.position.x >= interactorT.position.x) && !isEntityCloseEnoughRight(interactorT.position, entityT.position, interactorT.width)) ||
-           ((entityT.position.x <= interactorT.position.x) && !isEntityCloseEnoughLeft(interactorT.position, entityT.position, entityT.width)) ||
-           ((entityT.position.y <= interactorT.position.y) && !isEntityCloseEnoughUp(interactorT.position, entityT.position, entityT.height)) ||
-           ((entityT.position.y >= interactorT.position.y) && !isEntityCloseEnoughDown(interactorT.position, entityT.position, interactorT.height)))
-        {
-            it = entities.erase(it);
-            continue;
-        }
+        case Direction::RIGHT: entityToInteract = findClosestEntityRight(entities, interactorT);
+            break;
 
-        it++;
+        case Direction::UP: entityToInteract = findClosestEntityUp(entities, interactorT);
+            break;
+
+        case Direction::DOWN: entityToInteract = findClosestEntityDown(entities, interactorT);
+            break;
     }
 
-    // check if entities is empty
-    if(entities.empty())
-    {
-        return nullptr;
-    }
-
-    // then check whichever entitiy is closer, based on direction i guess? so if direction left then the entity on the left, if direction down then entity on down???? i guess?????
+    return entityToInteract;
 }
 
 bool InteractionComponent::interact(Entity* interactor, Entity* interactee)
@@ -81,6 +77,115 @@ bool InteractionComponent::interact(Entity* interactor, Entity* interactee)
     }
 
     return true;
+}
+
+Entity* InteractionComponent::findClosestEntityLeft(std::vector<Entity*>& entities, TransformComponent& interactorT)
+{
+    Entity* closestEntity = nullptr;
+    float closestDistance = std::numeric_limits<float>::max();
+
+    for(auto it = entities.begin(); it != entities.end(); it++)
+    {
+        auto& entityT = (*it)->getComponent<TransformComponent>();
+        if(entityT.position.x > interactorT.position.x || !isEntityCloseEnoughLeft(interactorT.position, entityT.position, entityT.width))
+        {
+            it = entities.erase(it);
+            continue;
+        }
+
+        float distance = calculateDistance(interactorT.position, entityT.position);
+
+        if (distance < closestDistance) 
+        {
+            closestDistance = distance;
+            closestEntity = *it;
+        }
+    }
+    
+    return closestEntity;
+}
+
+Entity* InteractionComponent::findClosestEntityRight(std::vector<Entity*>& entities, TransformComponent& interactorT)
+{
+    Entity* closestEntity = nullptr;
+    float closestDistance = std::numeric_limits<float>::max();
+
+    for(auto it = entities.begin(); it != entities.end(); it++)
+    {
+        auto& entityT = (*it)->getComponent<TransformComponent>();
+        if(entityT.position.x < interactorT.position.x || !isEntityCloseEnoughRight(interactorT.position, entityT.position, interactorT.width))
+        {
+            it = entities.erase(it);
+            continue;
+        }
+
+        float distance = calculateDistance(interactorT.position, entityT.position);
+
+        if (distance < closestDistance) 
+        {
+            closestDistance = distance;
+            closestEntity = *it;
+        }
+    }
+
+    return closestEntity;
+}
+
+Entity* InteractionComponent::findClosestEntityUp(std::vector<Entity*>& entities, TransformComponent& interactorT)
+{
+    Entity* closestEntity = nullptr;
+    float closestDistance = std::numeric_limits<float>::max();
+
+    for(auto it = entities.begin(); it != entities.end(); it++)
+    {
+        auto& entityT = (*it)->getComponent<TransformComponent>();
+        if(entityT.position.y < interactorT.position.y || !isEntityCloseEnoughUp(interactorT.position, entityT.position, entityT.height))
+        {
+            it = entities.erase(it);
+            continue;
+        }
+
+        float distance = calculateDistance(interactorT.position, entityT.position);
+
+        if (distance < closestDistance) 
+        {
+            closestDistance = distance;
+            closestEntity = *it;
+        }
+    }
+
+    return closestEntity;
+}
+
+Entity* InteractionComponent::findClosestEntityDown(std::vector<Entity*>& entities, TransformComponent& interactorT)
+{
+    Entity* closestEntity = nullptr;
+    float closestDistance = std::numeric_limits<float>::max();
+
+    for(auto it = entities.begin(); it != entities.end(); it++)
+    {
+        auto& entityT = (*it)->getComponent<TransformComponent>();
+        if(entityT.position.y > interactorT.position.y || !isEntityCloseEnoughDown(interactorT.position, entityT.position, interactorT.height))
+        {
+            it = entities.erase(it);
+            continue;
+        }
+
+        float distance = calculateDistance(interactorT.position, entityT.position);
+
+        if (distance < closestDistance) 
+        {
+            closestDistance = distance;
+            closestEntity = *it;
+        }
+    }
+
+    return closestEntity;
+}
+
+float InteractionComponent::calculateDistance(Vector2D iPos, Vector2D ePos)
+{
+    return std::abs(ePos.x - iPos.x) + std::abs(ePos.y - iPos.y);
 }
 
 bool InteractionComponent::isEntityCloseEnoughRight(Vector2D iPos, Vector2D ePos, int iWidth)
@@ -113,7 +218,7 @@ bool InteractionComponent::isEntityCloseEnoughUp(Vector2D iPos, Vector2D ePos, i
     return true;
 }
 
-bool InteractionComponent::isEntityCloseEnoughDown(Entity* i, Entity* e)
+bool InteractionComponent::isEntityCloseEnoughDown(Vector2D iPos, Vector2D ePos, int iHeight)
 {
     if(ePos.y > ((int)iPos.y + (iHeight + reach)))
     {
