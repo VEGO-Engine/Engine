@@ -5,6 +5,7 @@
 #include <map>
 #include <functional>
 #include <string>
+#include <stdexcept>
 
 #include "Game.h"
 
@@ -36,8 +37,10 @@ public:
     }
 
     Game* create(GameInternal* gameInternal) {
-        if (this->creatorFunc == nullptr)
+        if (this->creatorFunc == nullptr) {
+            throw std::runtime_error("No game implementation registered!");
             return nullptr;
+        }
         Game* game = (this->creatorFunc)();
         game->gameInternal = gameInternal;
         return game;
