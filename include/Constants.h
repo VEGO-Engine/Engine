@@ -24,3 +24,8 @@ constexpr int MAP_SIZE_Y = 20;
 
 constexpr int SPAWN_ATTEMPTS = 20;
 
+constexpr int PLAY_LOOPED = -1;
+constexpr int PLAY_ONCE = 0;
+
+constexpr int MAX_VOLUME = 128;
+
