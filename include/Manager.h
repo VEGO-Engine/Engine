@@ -22,8 +22,8 @@ public:
 	void addToGroup(Entity* mEntity, Group mGroup);
 	std::vector<Entity*>& getGroup(Group mGroup);
 
-	void addToTeam(Entity* mEntity, Team mTeam);
-	std::vector<Entity*>& getTeam(Team mTeam);
+	//void addToTeam(Entity* mEntity, Team mTeam);
+	//std::vector<Entity*>& getTeam(Team mTeam);
 
 	std::vector<Entity*> getAll();
 
@@ -35,5 +35,5 @@ private:
 	GameInternal* game;
 	std::vector<std::unique_ptr<Entity>> entities;
 	std::array<std::vector<Entity*>, MAX_GROUPS> entitiesByGroup;
-	std::array<std::vector<Entity*>, MAX_TEAMS> entitiesByTeam;
+	//std::array<std::vector<Entity*>, MAX_TEAMS> entitiesByTeam;
 };

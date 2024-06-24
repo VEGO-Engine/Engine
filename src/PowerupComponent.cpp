@@ -18,9 +18,7 @@ void  PowerupComponent::update()
     if ((player = this->entity->getManager().getGame()->collisionHandler->getAnyIntersection<Entity*>(
         entity,
         Vector2D(0, 0),
-        { Entity::GroupLabel::PLAYERS },
-        {},
-        true)) != nullptr)
+        { Entity::GroupLabel::PLAYERS })) != nullptr)
     {
         (this->pickupFunc)(player);
         this->entity->destroy();

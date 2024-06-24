@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <vector>
+
 #include "Direction.h"
 #include "Component.h"
 
@@ -28,4 +30,6 @@ private:
     int health;
     Direction side;
     std::string healthTexture;
+
+    std::vector<Entity*> heartElements;
 };

@@ -35,13 +35,13 @@ std::bitset<MAX_GROUPS> Entity::getGroupBitSet()
 	return groupBitSet;
 }
 
-void Entity::setTeam(Entity::TeamLabel teamLabel)
-{
-	this->teamLabel = teamLabel;
-	manager.addToTeam(this, (size_t) teamLabel);
-}
-
-Entity::TeamLabel Entity::getTeam()
-{
-	return teamLabel;
-}
+//void Entity::setTeam(Entity::TeamLabel teamLabel)
+//{
+//	this->teamLabel = teamLabel;
+//	manager.addToTeam(this, (size_t) teamLabel);
+//}
+//
+//Entity::TeamLabel Entity::getTeam()
+//{
+//	return teamLabel;
+//}

@@ -39,12 +39,12 @@ public:
 	    POWERUPS
 	};
 
-	enum class TeamLabel
-	{
-		NONE, //!< No team
-		BLUE, //!< Team blue
-		RED //!< Team red
-	};
+	//enum class TeamLabel
+	//{
+	//	NONE, //!< No team
+	//	BLUE, //!< Team blue
+	//	RED //!< Team red
+	//};
 
 	explicit Entity(Manager& mManager) :
 		manager(mManager) { };
@@ -65,8 +65,8 @@ public:
 	void delGroup(Group mGroup);
 	std::bitset<MAX_GROUPS> getGroupBitSet();
 
-	void setTeam(TeamLabel teamLabel);
-	TeamLabel getTeam();
+	//void setTeam(TeamLabel teamLabel);
+	//TeamLabel getTeam();
 
 	Manager& getManager() { return manager; };
 
@@ -103,5 +103,5 @@ private:
 	ComponentArray componentArray = {};
 	ComponentBitSet componentBitSet;
 	GroupBitSet groupBitSet;
-	TeamLabel teamLabel;
+	//TeamLabel teamLabel;
 };

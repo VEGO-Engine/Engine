@@ -135,146 +135,117 @@ void GameInternal::init(const char* title, int xpos, int ypos, int width, int he
 	// engine::init(); // temporarily moved down to access groups at engine init call
 
 	// character selection
-	const char* player1Sprite;
-	const char* player2Sprite;
+	//const char* player1Sprite;
+	//const char* player2Sprite;
 
-	selectCharacters(player1Sprite, player2Sprite);
+	//selectCharacters(player1Sprite, player2Sprite);
 	if (this->isRunning() == false) return;
 
 	map = new Map();
 
-
-	//adding textures to the library in AssetManager
-
-    /*
-    assets->addTexture("player1", "assets/chicken_neutral_knight.png");
-    assets->addTexture("player2", "assets/chicken_neutral.png");
-    assets->addTexture("egg", "assets/egg.png");
-	*/
 	// loading sounds
 	assets->addSoundEffect("throw_egg", "assets/sound/throw_egg.wav");
 	assets->addSoundEffect("steps", "assets/sound/steps.wav");
-
-	//ecs implementation
-
-	// player1.setTeam(Entity::TeamLabel::BLUE);
-	// player1.addComponent<TransformComponent>(80,80,2); //posx, posy, scale
-	// player1.addComponent<SpriteComponent>(player1Sprite, true); //adds sprite (32x32px), path needed
-	// player1.addComponent<KeyboardController>(SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_A, SDL_SCANCODE_D, SDL_SCANCODE_E, Vector2D(2, 0));//custom keycontrols can be added
-	// player1.addComponent<ColliderComponent>("player", 0.8f); //adds tag (for further use, reference tag)
-	// player1.addComponent<HealthComponent>(5, Direction::LEFT, "assets/heart.png");
-	// player1.addComponent<StatEffectsComponent>();
-	// player1.addGroup((size_t) Entity::GroupLabel::PLAYERS); //tell programm what group it belongs to for rendering order
-
-
-	// player2.setTeam(Entity::TeamLabel::RED);
-	// player2.addComponent<TransformComponent>(600, 500, 2);
-	// player2.addComponent<SpriteComponent>(player2Sprite, true);
-	// player2.addComponent<KeyboardController>(SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT, SDL_SCANCODE_RCTRL, Vector2D(-2, 0));
-	// player2.addComponent<ColliderComponent>("enemy", 0.8f);
-	// player2.addComponent<HealthComponent>(5, Direction::RIGHT, "assets/heart.png");
-	// player2.addComponent<StatEffectsComponent>();
-	// player2.addGroup((size_t) Entity::GroupLabel::PLAYERS);
 
 	this->gameInstance = GameFactory::instance().create(this);
 	this->gameInstance->init();
 }
 
-void GameInternal::selectCharacters(const char* &playerSprite, const char* &enemySprite)
-{	
-	// TODO: move this whereever it makes sense (maybe game as a member)
-	std::map<int, std::pair<const char*, const char*>> characterSprites;
-	characterSprites[0] = std::make_pair("assets/chicken_neutral_knight.png", "assets/chicken_knight_spritesheet.png");
-	characterSprites[1] = std::make_pair("assets/chicken_neutral.png", "assets/chicken_spritesheet.png");
-	characterSprites[2] = std::make_pair("assets/chicken_neutral_wizard.png", "assets/chicken_wizard_spritesheet.png");
-	characterSprites[3] = std::make_pair("assets/chicken_neutral_mlady.png", "assets/chicken_mlady_spritesheet.png");
-
-	SDL_Rect playerCharacterRects[CHARACTER_COUNT];
-	SDL_Rect enemyCharacterRects[CHARACTER_COUNT];
-	SDL_Texture* characterTextures[CHARACTER_COUNT];
-
-	int playerSelection = 0;
-	int enemySelection = 0;
-
-	// load textures
-	for (int i = 0; i < CHARACTER_COUNT; ++i)
-	{
-		characterTextures[i] = IMG_LoadTexture(renderer, characterSprites.find(i)->second.first);
-	}
-
-	// set up initial positions for character rects
-	for (int i = 0; i < CHARACTER_COUNT; ++i)
-	{
-		playerCharacterRects[i] = { 134 + (i % 2) * 118, 272 + ((i >= 2) ? 114 : 0), 64, 64 };
-		enemyCharacterRects[i] = { 485 + (i % 2) * 118, 273 + ((i >= 2) ? 114 : 0), 64, 64 };
-	}
-
-	bool hasQuit = false;
-
-	while (!hasQuit)
-	{
-		SDL_PollEvent(&event);
-
-		if (event.type == SDL_QUIT)
-		{
-			hasQuit = true;
-		}
-
-		if (event.type == SDL_KEYDOWN)
-		{
-			if (event.key.keysym.scancode == SDL_SCANCODE_RETURN)
-			{
-				break;
-			}
-
-			switch (event.key.keysym.scancode)
-			{
-			case SDL_SCANCODE_A:
-				playerSelection = (playerSelection - 1 + CHARACTER_COUNT) % CHARACTER_COUNT;
-				break;
-			case SDL_SCANCODE_D:
-				playerSelection = (playerSelection + 1) % CHARACTER_COUNT;
-				break;
-
-			case SDL_SCANCODE_LEFT:
-				enemySelection = (enemySelection - 1 + CHARACTER_COUNT) % CHARACTER_COUNT;
-				break;
-			case SDL_SCANCODE_RIGHT:
-				enemySelection = (enemySelection + 1) % CHARACTER_COUNT;
-				break;
-
-			default:
-				break;
-			}
-		}
-
-		SDL_Texture* backgroundTexture = GameInternal::textureManager->loadTexture("assets/characterSelection.png");
-		SDL_RenderClear(renderer);
-		SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
-
-		for (int i = 0; i < CHARACTER_COUNT; ++i)
-		{
-			SDL_RenderCopy(renderer, characterTextures[i], nullptr, &playerCharacterRects[i]);
-			SDL_RenderCopy(renderer, characterTextures[i], nullptr, &enemyCharacterRects[i]);
-		}
-
-		SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-		SDL_RenderDrawRect(renderer, &playerCharacterRects[playerSelection]);
-		SDL_RenderDrawRect(renderer, &enemyCharacterRects[enemySelection]);
-
-		SDL_RenderPresent(renderer);
-	}
-
-	if (hasQuit)
-	{
-		this->setRunning(false);
-		return;
-	}
-
-	playerSprite = characterSprites.find(playerSelection)->second.second;
-	enemySprite = characterSprites.find(enemySelection)->second.second;
-	this->setRunning(true);
-}
+//void GameInternal::selectCharacters(const char* &playerSprite, const char* &enemySprite)
+//{	
+//	// TODO: move this whereever it makes sense (maybe game as a member)
+//	std::map<int, std::pair<const char*, const char*>> characterSprites;
+//	characterSprites[0] = std::make_pair("assets/chicken_neutral_knight.png", "assets/chicken_knight_spritesheet.png");
+//	characterSprites[1] = std::make_pair("assets/chicken_neutral.png", "assets/chicken_spritesheet.png");
+//	characterSprites[2] = std::make_pair("assets/chicken_neutral_wizard.png", "assets/chicken_wizard_spritesheet.png");
+//	characterSprites[3] = std::make_pair("assets/chicken_neutral_mlady.png", "assets/chicken_mlady_spritesheet.png");
+//
+//	SDL_Rect playerCharacterRects[CHARACTER_COUNT];
+//	SDL_Rect enemyCharacterRects[CHARACTER_COUNT];
+//	SDL_Texture* characterTextures[CHARACTER_COUNT];
+//
+//	int playerSelection = 0;
+//	int enemySelection = 0;
+//
+//	// load textures
+//	for (int i = 0; i < CHARACTER_COUNT; ++i)
+//	{
+//		characterTextures[i] = IMG_LoadTexture(renderer, characterSprites.find(i)->second.first);
+//	}
+//
+//	// set up initial positions for character rects
+//	for (int i = 0; i < CHARACTER_COUNT; ++i)
+//	{
+//		playerCharacterRects[i] = { 134 + (i % 2) * 118, 272 + ((i >= 2) ? 114 : 0), 64, 64 };
+//		enemyCharacterRects[i] = { 485 + (i % 2) * 118, 273 + ((i >= 2) ? 114 : 0), 64, 64 };
+//	}
+//
+//	bool hasQuit = false;
+//
+//	while (!hasQuit)
+//	{
+//		SDL_PollEvent(&event);
+//
+//		if (event.type == SDL_QUIT)
+//		{
+//			hasQuit = true;
+//		}
+//
+//		if (event.type == SDL_KEYDOWN)
+//		{
+//			if (event.key.keysym.scancode == SDL_SCANCODE_RETURN)
+//			{
+//				break;
+//			}
+//
+//			switch (event.key.keysym.scancode)
+//			{
+//			case SDL_SCANCODE_A:
+//				playerSelection = (playerSelection - 1 + CHARACTER_COUNT) % CHARACTER_COUNT;
+//				break;
+//			case SDL_SCANCODE_D:
+//				playerSelection = (playerSelection + 1) % CHARACTER_COUNT;
+//				break;
+//
+//			case SDL_SCANCODE_LEFT:
+//				enemySelection = (enemySelection - 1 + CHARACTER_COUNT) % CHARACTER_COUNT;
+//				break;
+//			case SDL_SCANCODE_RIGHT:
+//				enemySelection = (enemySelection + 1) % CHARACTER_COUNT;
+//				break;
+//
+//			default:
+//				break;
+//			}
+//		}
+//
+//		SDL_Texture* backgroundTexture = GameInternal::textureManager->loadTexture("assets/characterSelection.png");
+//		SDL_RenderClear(renderer);
+//		SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
+//
+//		for (int i = 0; i < CHARACTER_COUNT; ++i)
+//		{
+//			SDL_RenderCopy(renderer, characterTextures[i], nullptr, &playerCharacterRects[i]);
+//			SDL_RenderCopy(renderer, characterTextures[i], nullptr, &enemyCharacterRects[i]);
+//		}
+//
+//		SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+//		SDL_RenderDrawRect(renderer, &playerCharacterRects[playerSelection]);
+//		SDL_RenderDrawRect(renderer, &enemyCharacterRects[enemySelection]);
+//
+//		SDL_RenderPresent(renderer);
+//	}
+//
+//	if (hasQuit)
+//	{
+//		this->setRunning(false);
+//		return;
+//	}
+//
+//	playerSprite = characterSprites.find(playerSelection)->second.second;
+//	enemySprite = characterSprites.find(enemySelection)->second.second;
+//	this->setRunning(true);
+//}
 
 void GameInternal::handleEvents()
 {
@@ -333,21 +304,25 @@ bool GameInternal::isRunning() const
 	return running;
 }
 
-void GameInternal::setRunning(bool running)
+void GameInternal::setRunning(bool running) //TODO: might be depracted
 {
 	this->running = running;
 }
 
-void GameInternal::setWinner(Entity::TeamLabel winningTeam)
+void GameInternal::stopGame()
 {
-	this->winner = winningTeam;
-	this->setRunning(false);
+	this->running = false;
 }
-
-Entity::TeamLabel GameInternal::getWinner() const
-{
-	return this->winner;
-}
+//void GameInternal::setWinner(Entity::TeamLabel winningTeam)
+//{
+//	this->winner = winningTeam;
+//	this->setRunning(false);
+//}
+//
+//Entity::TeamLabel GameInternal::getWinner() const
+//{
+//	return this->winner;
+//}
 
 //void Game::refreshPlayers() {
 //

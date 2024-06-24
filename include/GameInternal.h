@@ -26,14 +26,15 @@ public:
 	~GameInternal();
 
 	void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
-	void selectCharacters(const char* &playerSprite, const char* &enemySprite);
+	//void selectCharacters(const char* &playerSprite, const char* &enemySprite);
 
 	void handleEvents();
 	void update();
 	void render();
 	void clean();
 	bool isRunning() const;
-	void setRunning(bool running);
+	void setRunning(bool running); // TODO: should be private/not accesible for game dev
+	void stopGame();
 
 	/* static */ SDL_Renderer* renderer = nullptr;
 	/* static */ SDL_Event event;
@@ -54,15 +55,15 @@ public:
 	// end moved globals
 
     void refreshPlayers();
-    Entity::TeamLabel getWinner() const;
-    void setWinner(Entity::TeamLabel winningTeam);
+    //Entity::TeamLabel getWinner() const;
+    //void setWinner(Entity::TeamLabel winningTeam);
 
 private:
 
 	Game* gameInstance;
 
 	int counter = 0;
-	bool running = false;
+	bool running = true;
 	SDL_Window* window;
-    Entity::TeamLabel winner;
+    //Entity::TeamLabel winner;
 };

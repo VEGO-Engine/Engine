@@ -3,7 +3,6 @@
 #include <cstddef>
 
 using Group = std::size_t;
-using Team = std::size_t;
 
 constexpr int CHARACTER_COUNT = 4;
 

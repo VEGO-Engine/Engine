@@ -5,6 +5,8 @@
 
 #include "Entity.h"
 
+/*
+
 class GameInternal;
 
 class PopupWindow {
@@ -26,3 +28,5 @@ private:
     SDL_Texture* texture;
     bool continueGame;
 };
+
+*/

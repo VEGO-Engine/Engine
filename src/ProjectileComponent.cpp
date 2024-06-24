@@ -36,8 +36,7 @@ void ProjectileComponent::update()
         entity,
         Vector2D(0,0),
         {Entity::GroupLabel::PLAYERS},
-        {entity->getTeam()},
-        true)) != nullptr) {
+        {this->owner})) != nullptr) {
         player->getComponent<HealthComponent>().modifyHealth();
         this->entity->destroy();
     }

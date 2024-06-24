@@ -6,6 +6,8 @@
 #include "TextureManager.h"
 #include "GameInternal.h"
 
+/*
+
 PopupWindow::PopupWindow(const char* title, const std::string &message) :
 continueGame(false), interacted(false) {
     this->window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 400, 250, 0);
@@ -83,3 +85,5 @@ void PopupWindow::renderWinnerPopup(Entity::TeamLabel winner) {
     }
 
 }
+
+*/
