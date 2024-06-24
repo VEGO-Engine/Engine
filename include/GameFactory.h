@@ -31,23 +31,20 @@ public:
         return game;
     }*/
 
-    void registerClass(const std::string& className, CreateFunc createFunc) {
-        this->creators[className] = createFunc;
+    void registerClass(CreateFunc createFunc) {
+        this->creatorFunc = createFunc;
     }
 
-    Game* create(const std::string& className, GameInternal* gameInternal) {
-        auto it = this->creators.find(className);
-        if (it != creators.end()) {
-            Game* game = it->second();
-            game->gameInternal = gameInternal;
-            return game;
-        }
-        return nullptr;
+    Game* create(GameInternal* gameInternal) {
+        if (this->creatorFunc == nullptr)
+            return nullptr;
+        Game* game = (this->creatorFunc)();
+        game->gameInternal = gameInternal;
+        return game;
     }
 
 private:
-    CreateFunc creator;
-    std::map<std::string, CreateFunc> creators;
+    CreateFunc creatorFunc = nullptr;
 };
 
 /*
