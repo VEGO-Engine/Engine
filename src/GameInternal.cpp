@@ -152,8 +152,8 @@ void GameInternal::init(const char* title, int xpos, int ypos, int width, int he
     assets->addTexture("egg", "assets/egg.png");
 	*/
 	// loading sounds
-	assets->addSoundEffect("throw_egg", "assets/sound/throw_egg.wav");
-	assets->addSoundEffect("steps", "assets/sound/steps.wav");
+	// assets->addSoundEffect("throw_egg", "assets/sound/throw_egg.wav");
+	// assets->addSoundEffect("steps", "assets/sound/steps.wav");
 
 	// loading music
 	// assets->addMusic("background_music", "assets/sound/background_music.mp3");

@@ -51,8 +51,16 @@ void SoundManager::playSound(GameInternal* game, std::string sound, bool canOver
 {
 	if(!canOverlap)
 	{
-		if (Mix_Playing(channel) != 0)
-			Mix_HaltChannel(channel);
+		// dev needs to specify a channel for this check to work, if they set it to -1 and let sdl pick the first available
+		// channel mix_getchunk() won't work
+		if (Mix_Playing(channel) != 0 && 
+			Mix_GetChunk(channel) == game->assets->getSound(sound) && 
+			channel != -1)
+		{
+			return;
+		}
+		
+		Mix_HaltChannel(channel);
 	}
 
 	if(Mix_VolumeChunk(game->assets->getSound(sound), volume) == -1)
