@@ -44,16 +44,14 @@ public:
 	// temporary function, remove once game.cpp cleaned up
 	std::vector<ColliderComponent*> getColliders(
 		std::initializer_list<Entity::GroupLabel> const& groupLabels,
-		std::initializer_list<Entity::TeamLabel> const& teamLabels = {},
-		bool negateTeam = false);
+		std::initializer_list<Entity*> const& excludedEntities = {});
 
 	template<typename T>
 	T getAnyIntersection(
 		Entity* entity,
 		Vector2D posMod = {},
 		std::initializer_list<Entity::GroupLabel> const& groupLabels = {},
-		std::initializer_list<Entity::TeamLabel> const& teamLabels = {},
-		bool negateTeam = false);
+		std::initializer_list<Entity*> const& excludedEntities = {});
 
 	void update();
 };

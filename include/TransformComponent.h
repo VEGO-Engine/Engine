@@ -7,7 +7,7 @@
 class TransformComponent : public Component
 {
 public:
-	Vector2D position; // TODO: change to int to safe CPU time -> possibly subpixel coordinates
+	Vector2D position; // TODO: change to int to save CPU time -> possibly subpixel coordinates
 	Vector2D direction;
 
 	int height = 32;

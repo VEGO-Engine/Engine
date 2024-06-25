@@ -11,7 +11,6 @@
 
 // TODO: remove here if possible
 // temporary fix: addComponent function template doesnt know TransformComponent -> error undefined type
-// #include "KeyboardController.h"
 #include "InputComponent.h"
 #include "TransformComponent.h"
 #include "SpriteComponent.h"
@@ -39,13 +38,6 @@ public:
 	    POWERUPS
 	};
 
-	enum class TeamLabel
-	{
-		NONE, //!< No team
-		BLUE, //!< Team blue
-		RED //!< Team red
-	};
-
 	explicit Entity(Manager& mManager) :
 		manager(mManager) { };
 
@@ -64,9 +56,6 @@ public:
 	void addGroup(Group mGroup);
 	void delGroup(Group mGroup);
 	std::bitset<MAX_GROUPS> getGroupBitSet();
-
-	void setTeam(TeamLabel teamLabel);
-	TeamLabel getTeam();
 
 	Manager& getManager() { return manager; };
 
@@ -103,5 +92,4 @@ private:
 	ComponentArray componentArray = {};
 	ComponentBitSet componentBitSet;
 	GroupBitSet groupBitSet;
-	TeamLabel teamLabel;
 };

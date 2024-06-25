@@ -25,11 +25,11 @@ void HealthComponent::setHealth(int health)
 void HealthComponent::refreshHearts()
 {
     // clear hearts if exist
-    for (auto& heart : this->entity->getManager().getGroup((size_t) Entity::GroupLabel::HEARTS)) {
-        if (heart->getTeam() == this->entity->getTeam()) {
-            heart->destroy();
-        }
+    for (auto& heart : this->heartElements) {
+        heart->destroy();
     }
+
+    this->heartElements.clear();
 
     int x; //starting position for first health icon
 
@@ -59,5 +59,5 @@ void HealthComponent::createHeartComponents(int x)
     heart.addComponent<TransformComponent>(x,5,2);
     heart.addComponent<SpriteComponent>(this->healthTexture.data());
     heart.addGroup((size_t)Entity::GroupLabel::HEARTS);
-    heart.setTeam(this->entity->getTeam());
+    this->heartElements.emplace_back(&heart);
 }

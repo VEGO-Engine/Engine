@@ -4,7 +4,6 @@
 #include "Entity.h"
 #include "GameInternal.h"
 #include "Constants.h"
-#include "PopupWindow.h"
 
 GameInternal* game = nullptr;
 
