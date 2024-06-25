@@ -12,7 +12,7 @@ class HealthComponent : public Component
 {
 public:
 
-    HealthComponent(int health, Direction side, std::string healthTexture) : health(health), side(side), healthTexture(healthTexture) {}
+    HealthComponent(int health) : health(health) {}
     ~HealthComponent() {}
 
     void modifyHealth(int health = -1);
@@ -28,8 +28,4 @@ public:
 private:
 
     int health;
-    Direction side;
-    std::string healthTexture;
-
-    std::vector<Entity*> heartElements;
 };
