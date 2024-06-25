@@ -52,8 +52,6 @@ void TransformComponent::init()
 
 void TransformComponent::update()
 {
-	// if(velocity.x != 0 && velocity.y != 0)
-
 	float multiplier = direction.x != 0 && direction.y != 0 ? 0.707 : 1; // normalizes vector; only works if directions are in increments of 45°
 	Vector2D positionChange(
 		direction.x * this->getSpeed() * multiplier,

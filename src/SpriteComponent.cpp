@@ -32,10 +32,7 @@ SpriteComponent::SpriteComponent(
 	this->texturePath = path;
 }
 
-SpriteComponent::~SpriteComponent()
-{
-	// SDL_DestroyTexture(this->texture);
-}
+SpriteComponent::~SpriteComponent() {}
 
 void SpriteComponent::setTexture(const char* path)
 {

@@ -96,7 +96,6 @@ public:
     void init() override;
 	void update() override;
 
-    // void pollEvents();
     bool isKeyDown(Key key);
 
 private:

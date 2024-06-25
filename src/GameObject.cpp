@@ -9,7 +9,6 @@ GameObject::GameObject(const char* texturesheet, int x, int y)
 	// seems not to be used, and was using deprecated functionality
 	SDL_SetError("GameObject not implemented");
 
-	// this->objTexture = Game::textureManager->loadTexture(texturesheet);
 	this->xPos = x;
 	this->yPos = y;
 }

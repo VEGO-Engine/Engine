@@ -26,7 +26,6 @@ public:
 	~GameInternal();
 
 	void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
-	//void selectCharacters(const char* &playerSprite, const char* &enemySprite);
 
 	void handleEvents();
 	void update();
@@ -55,8 +54,6 @@ public:
 	// end moved globals
 
     void refreshPlayers();
-    //Entity::TeamLabel getWinner() const;
-    //void setWinner(Entity::TeamLabel winningTeam);
 
 private:
 
@@ -65,5 +62,4 @@ private:
 	int counter = 0;
 	bool running = true;
 	SDL_Window* window;
-    //Entity::TeamLabel winner;
 };

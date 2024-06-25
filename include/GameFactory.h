@@ -20,18 +20,6 @@ public:
         return factory;
     }
 
-    /*Game* get() {
-        assert(this->gameInstance != nullptr);
-        return this->gameInstance;
-    }*/
-
-    /*Game* create(GameInternal* gameInternal) {
-        Game* game = this->gameInstance == nullptr ? this->creator() : this->gameInstance; // TODO: error handling
-        game->gameInternal = gameInternal;
-        this->gameInstance = game;
-        return game;
-    }*/
-
     void registerClass(CreateFunc createFunc) {
         this->creatorFunc = createFunc;
     }
@@ -49,11 +37,3 @@ public:
 private:
     CreateFunc creatorFunc = nullptr;
 };
-
-/*
-#define REGISTER_GAME(className) \
-    static bool registered_##className = []() { \
-        GameFactory::instance().registerClass(#className, []() -> Game* { return new className; }); \
-        return true; \
-    }();
-*/
