@@ -28,6 +28,8 @@ public:
     void setPositionAfterCollision(Vector2D& positionChange);
 	void modifySpeed(int8_t modifier);
 
+	std::string componentName() override { return "TransformComponent"; }
+
 private:
 	int speed = 3;
 	int speedMod = 0;

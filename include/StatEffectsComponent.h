@@ -23,6 +23,8 @@ public:
 	void modifyStatValue(Stats stat, int modifier);
 	void resetStatValue(Stats stat);
 
+	std::string componentName() override { return "StatEffectsComponent"; }
+
 private:
 	std::array<int, MAX_STATS> buffs = { 0 };
 };

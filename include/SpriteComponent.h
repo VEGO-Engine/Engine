@@ -18,6 +18,8 @@ public:
 
 	std::map<std::string, std::unique_ptr<Animation>>* animations = nullptr;
 
+	std::string componentName() override { return "SpriteComponent"; }
+
 private:
 	TransformComponent* transform;
 	SDL_Texture* texture;

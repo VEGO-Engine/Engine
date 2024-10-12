@@ -11,6 +11,8 @@ public:
 
 	void update() override;
 
+	std::string componentName() override { return "PowerupComponent"; }
+
 private:
 	std::function<void (Entity*)> pickupFunc;
 };

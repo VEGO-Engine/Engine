@@ -17,6 +17,8 @@ public:
 
     bool isKeyDown(Key key);
 
+	std::string componentName() override { return "InputComponent"; }
+
 private:
     const Uint8* m_keyStates;
     SDL_Scancode mapKeyToSDL(Key key);

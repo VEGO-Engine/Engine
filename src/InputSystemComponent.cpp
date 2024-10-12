@@ -12,11 +12,11 @@ void InputSystemComponent::update()
 }
 
 // alternative to bindAction template
-void InputSystemComponent::bindAction(const std::string& actionName, Key key, std::function<void()> callback)
+void InputSystemComponent::bindAction(const std::string& actionName, Key key, std::function<void()> callback, InputActionType type)
 {
     if (m_actions.find(actionName) == m_actions.end())
     {
-        m_actions[actionName] = InputAction(actionName, callback);
+        m_actions[actionName] = InputAction(actionName, callback, type);
     }
 
     m_actions[actionName].keys.push_back(key);
@@ -25,11 +25,11 @@ void InputSystemComponent::bindAction(const std::string& actionName, Key key, st
 }
 
 // alternative to bindAction template
-void InputSystemComponent::bindAction(const std::string& actionName, std::vector<Key> keys, std::function<void()> callback)
+void InputSystemComponent::bindAction(const std::string& actionName, std::vector<Key> keys, std::function<void()> callback, InputActionType type)
 {
     if (m_actions.find(actionName) == m_actions.end())
     {
-        m_actions[actionName] = InputAction(actionName, callback);
+        m_actions[actionName] = InputAction(actionName, callback, type);
     }
 
     for (Key key : keys)
@@ -73,15 +73,46 @@ void InputSystemComponent::handleActions()
     for (auto& keyActionsPair : m_keyToActionsMap)
     {
         Key key = keyActionsPair.first;
-        if (isKeyDown(key))
+        bool keyDown = isKeyDown(key);
+
+        for (auto& action : keyActionsPair.second)
         {
-            for (auto& action : keyActionsPair.second)
+            switch (action.get().type)
             {
-                if (action.callback)
-                {
-                    action.callback();
-                }
+                case InputActionType::Boolean:
+                    std::get<bool>(action.get().value) = keyDown;
+                    break;
+
+                case InputActionType::Float:
+                    float& floatValue = std::get<float>(action.get().value);
+                    if (keyDown && floatValue < 1.0f)
+                    {
+                        floatValue += m_floatChangeRate;
+                    }
+
+                    else
+                    {
+                        if (floatValue > 0.1f)
+                        {
+                            floatValue -= m_floatChangeRate;
+                        }
+                    }
+                    break;
+            }
+
+            if (keyDown && action.get().callback)
+            {
+                action.get().callback();
             }
         }
     }
+}
+
+InputValue InputSystemComponent::getValue(const std::string& actionName)
+{
+    if (m_actions.find(actionName) != m_actions.end())
+    {
+        return m_actions[actionName].value;
+    }
+    return InputValue();
 }

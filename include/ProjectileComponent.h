@@ -17,6 +17,8 @@ public:
     void init() override;
     void update() override;
 
+	std::string componentName() override { return "ProjectileComponent"; }
+
 private:
     TransformComponent* transformComponent;
 

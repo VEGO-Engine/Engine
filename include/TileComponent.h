@@ -27,6 +27,9 @@ public:
 
 	bool hasCollision(){return this->collision;}
 	std::string getName(){return this->tileName;}
+
+	std::string componentName() override { return "TileComponent"; }
+	
 private:
 	bool collision;
 	std::string tileName;

@@ -6,7 +6,10 @@
 
 void Entity::update() const
 {
-	for (auto const& c : components) c->update();
+	for (auto const& c : components){
+		std::cout << "whoop info: " << c->componentName() << std::endl;
+ 		c->update();
+	}
 }
 
 void Entity::draw() const

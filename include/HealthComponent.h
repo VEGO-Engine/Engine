@@ -22,6 +22,7 @@ public:
     void refreshHearts();
     void createHeartComponents(int x);
 
+	std::string componentName() override { return "HealthComponent"; }
 
 private:
 
