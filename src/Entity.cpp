@@ -9,11 +9,6 @@ void Entity::update() const
 	for (auto const& c : components) c->update();
 }
 
-void Entity::draw() const
-{
-	for (auto const& c : components) c->draw();
-}
-
 bool Entity::hasGroup(Group mGroup)
 {
 	return groupBitSet[mGroup];

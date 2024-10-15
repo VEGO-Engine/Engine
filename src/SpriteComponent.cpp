@@ -6,13 +6,16 @@
 
 #include "AnimationHandler.h"
 #include "Direction.h"
+#include "ProjectileComponent.h"
+#include "RenderObject.h"
 #include "TextureManager.h"
 #include "Entity.h"
 #include "TransformComponent.h"
 #include "GameInternal.h"
 #include "Manager.h"
+#include "VEGO.h"
 
-SpriteComponent::SpriteComponent(const char* path)
+SpriteComponent::SpriteComponent(const char* path, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager)
 {
 	this->texturePath = path;
 }
@@ -21,7 +24,8 @@ SpriteComponent::SpriteComponent(
 	const char* path,
 	bool isAnimated,
 	std::map<std::string, std::unique_ptr<Animation>>* animationMap,
-	std::string defaultAnimation)
+	std::string defaultAnimation,
+	int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager)
 {
 	animated = isAnimated;
 
@@ -36,7 +40,7 @@ SpriteComponent::~SpriteComponent() {}
 
 void SpriteComponent::setTexture(const char* path)
 {
-	this->texture = this->entity->getManager().getGame()->textureManager->loadTexture(path);
+	this->texture = VEGO_Game().textureManager->loadTexture(path);
 }
 
 void SpriteComponent::init()
@@ -68,7 +72,7 @@ void SpriteComponent::update()
 
 void SpriteComponent::draw()
 {
-	this->entity->getManager().getGame()->textureManager->draw(this->entity->getManager().getGame()->renderer, this->texture, this->srcRect, this->destRect, this->animated && this->flipped);
+	this->entity->getManager().getGame()->textureManager->draw(VEGO_Game().renderer, this->texture, this->srcRect, this->destRect, this->animated && this->flipped);
 }
 
 void SpriteComponent::playAnimation(std::string type)
