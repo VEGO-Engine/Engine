@@ -7,6 +7,8 @@
 #include "SpriteComponent.h"
 #include "TileComponent.h"
 
+#include "TextureEnumBase.h"
+
 TileComponent::TileComponent(int x, int y, int w, int h, int id, const std::map<int, std::pair<std::string, bool>>* textureDict)
 {
 	this->tileRect.x = x;

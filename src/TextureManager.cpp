@@ -6,17 +6,32 @@
 
 #include "GameInternal.h"
 
-SDL_Texture* TextureManager::loadTexture(const char* fileName)
-{
-	auto it = this->texture_cache.find(fileName);
-	if (it != this->texture_cache.end()) {
-		return it->second;
+
+void TextureManager::addSingleTexture(TexturesEnum texture, const char* filePath) {
+	auto sdlTexture = IMG_LoadTexture(this->manager->getGame()->renderer, filePath);
+
+	if (sdlTexture == nullptr)
+		throw std::runtime_error(std::string("Couldn't load texture '") + filePath + "'");
+
+	this->texture_cache.emplace(texture, sdlTexture);
+	std::cout << "Loaded texture at " << filePath << std::endl;
+}
+
+void TextureManager::addTextures(const std::map<TexturesEnum, const char*> &textures) {
+	for (auto texture : textures) {
+		addSingleTexture(texture.first, texture.second);
 	}
-	auto texture = IMG_LoadTexture(this->manager->getGame()->renderer, fileName);
-	if (texture == NULL) throw std::runtime_error(std::string("Couldn't load texture '") + fileName + "'");
-	this->texture_cache.emplace(std::string(fileName), texture);
-	printf("Loaded texture at '%s'\n", fileName);
-	return texture;
+}
+
+
+SDL_Texture* TextureManager::loadTexture(TexturesEnum texture) {
+	auto it = this->texture_cache.find(texture);
+
+	if (it != this->texture_cache.end())
+		return it->second;
+
+	std::cout << "ERROR: Couldn't load texture!" << std::endl;
+	return nullptr;
 }
 
 void TextureManager::draw(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect src, SDL_Rect dest, bool flipped)

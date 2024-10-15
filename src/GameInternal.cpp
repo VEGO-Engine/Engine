@@ -78,10 +78,11 @@ void GameInternal::init(const char* title, int xpos, int ypos, int width, int he
 	}
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-	SDL_Texture* backgroundTexture = GameInternal::textureManager->loadTexture("assets/startscreen.png");
+
+	//SDL_Texture* backgroundTexture = GameInternal::textureManager->loadTexture("assets/startscreen.png");
 
 	SDL_RenderClear(renderer);
-	SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
+	//SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
 	SDL_RenderPresent(renderer);
 
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)

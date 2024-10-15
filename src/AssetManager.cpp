@@ -15,12 +15,15 @@
 #include "PowerupComponent.h"
 #include <iostream>
 
+#include "TextureEnumBase.h"
+
 AssetManager::AssetManager(Manager* manager) : man(manager) {}
 
 AssetManager::~AssetManager() {}
 
+//seems to not be used anymore
 void AssetManager::addTexture(std::string id, const char* path) {
-    textures.emplace(id, this->man->getGame()->textureManager->loadTexture(path));
+    //textures.emplace(id, this->man->getGame()->textureManager->loadTexture(path));
 }
 
 void AssetManager::addSoundEffect(std::string id, const char* path)
@@ -46,11 +49,11 @@ Mix_Music* AssetManager::getMusic(std::string id)
 	return music.at(id);
 }
 
-void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, const char* texturePath, Entity* owner) {
+void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, TexturesEnum textureEnum, Entity* owner) {
 
     auto& projectile(man->addEntity());
     projectile.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, scale); //32x32 is standard size for objects
-    projectile.addComponent<SpriteComponent>(texturePath);
+    projectile.addComponent<SpriteComponent>(textureEnum);
     projectile.addComponent<ProjectileComponent>(range, speed, velocity, owner);
     projectile.addComponent<ColliderComponent>("projectile", 0.6f);
     projectile.addGroup((size_t)Entity::GroupLabel::PROJECTILE);
