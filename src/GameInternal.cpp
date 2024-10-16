@@ -4,6 +4,7 @@
 
 #include "CollisionHandler.h"
 #include "AssetManager.h"
+#include "RenderManager.h"
 #include "SoundManager.h"
 #include "TileComponent.h"
 #include "Direction.h"
@@ -18,6 +19,7 @@
 
 GameInternal::GameInternal() :
 	manager(this),
+	renderManager(),
 	tiles(manager.getGroup((size_t)Entity::GroupLabel::MAPTILES)),
 	players(manager.getGroup((size_t)Entity::GroupLabel::PLAYERS)),
 	projectiles(manager.getGroup((size_t)Entity::GroupLabel::PROJECTILE)),
@@ -169,21 +171,7 @@ void GameInternal::update()
 void GameInternal::render()
 {
 	SDL_RenderClear(renderer);
-	for (auto& t : tiles)
-		t->draw();
-
-	for (auto& p : powerups)
-		p->draw();
-
-	for (auto& p : players)
-		p->draw();
-
-	for (auto& p : projectiles)
-		p->draw();
-
-	for (auto& h : hearts)
-		h->draw();
-
+	this->renderManager.renderAll();
 	SDL_RenderPresent(renderer);
 }
 

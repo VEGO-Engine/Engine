@@ -42,7 +42,6 @@ public:
 		manager(mManager) { };
 
 	void update() const;
-	void draw() const;
 
 	bool isActive() const { return this->active; }
 	void destroy() {

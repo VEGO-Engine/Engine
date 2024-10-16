@@ -1,11 +1,12 @@
 #include <iostream>
 #include <ctime>
 
+#include "VEGO.h"
 #include "Entity.h"
 #include "GameInternal.h"
 #include "Constants.h"
 
-GameInternal* game = nullptr;
+GameInternal* vego::game = nullptr;
 
 int main(int argc, char* argv[])
 {
@@ -17,15 +18,15 @@ int main(int argc, char* argv[])
 	Uint32 frameStart;
 	int frameTime;
 
-	game = new GameInternal();
+	vego::game = new GameInternal();
 
-	game->init("No_Name_Chicken_Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_SIZE_WIDTH, SCREEN_SIZE_HEIGHT, false);
-        while (game->isRunning()) {
+	vego::game->init("No_Name_Chicken_Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_SIZE_WIDTH, SCREEN_SIZE_HEIGHT, false);
+        while (vego::game->isRunning()) {
             frameStart = SDL_GetTicks();
 
-            game->handleEvents();
-            game->update();
-            game->render();
+            vego::game->handleEvents();
+            vego::game->update();
+            vego::game->render();
 
             frameTime = SDL_GetTicks() - frameStart;
 
@@ -34,7 +35,7 @@ int main(int argc, char* argv[])
             }
         }
 
-    game->clean();
+    vego::game->clean();
 
 	return 0;
 }

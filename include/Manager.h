@@ -16,7 +16,6 @@ public:
 	Manager(GameInternal* game) : game(game) {};
 	
 	void update();
-	void draw();
 	void refresh();
 
 	void addToGroup(Entity* mEntity, Group mGroup);
