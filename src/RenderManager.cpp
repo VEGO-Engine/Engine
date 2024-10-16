@@ -2,15 +2,14 @@
 #include "RenderObject.h"
 #include <algorithm>
 
-
 void RenderManager::renderAll()
 {
 	if (!this->isSorted) {
 		std::ranges::sort(this->renderObjects, RenderObject::ZIndexComparator());
 	}
-	std::ranges::for_each(this->renderObjects, [](RenderObject* obj) {
+	for (RenderObject* obj : this->renderObjects) {
 		obj->draw();
-	});
+	}
 }
 
 void RenderManager::add(RenderObject* renderObject) {
