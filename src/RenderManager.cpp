@@ -2,6 +2,7 @@
 #include "RenderObject.h"
 #include <algorithm>
 
+
 void RenderManager::renderAll()
 {
 	if (!this->isSorted) {
