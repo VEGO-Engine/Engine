@@ -23,4 +23,6 @@ public:
 	 */
 	static void loadMap(const char* path, int sizeX, int sizeY, GameInternal* game, const std::map<int, std::pair<std::string, bool>>* textureDict /* backreference */);
 	static void addTile(unsigned long id, int x, int y, GameInternal* game, const std::map<int, std::pair<std::string, bool>>* textureDict);
+
+	static void loadMapTmx(const char* path);
 };
