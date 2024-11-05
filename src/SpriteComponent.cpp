@@ -64,6 +64,13 @@ void SpriteComponent::init()
 
 void SpriteComponent::update()
 {
+	// This code is not compatible for animated tiles
+	if (animated) {
+		srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
+
+		srcRect.y = animationIndex * transform->height;
+	}
+
 	this->destRect.x = this->transform->position.x;
 	this->destRect.y = this->transform->position.y;
 	this->destRect.w = transform->width * transform->scale;
