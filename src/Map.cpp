@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cctype>
+#include <cstdio>
 #include <iostream>
 #include <fstream>
 #include <type_traits>
@@ -72,8 +73,6 @@ void Map::loadMap(const char* path, int sizeX, int sizeY, GameInternal* game, co
 
 void Map::addTile(unsigned long id, int x, int y, GameInternal* game, const std::map<int, std::pair<std::string, bool>>* textureDict) // tile entity
 {
-	printf("X: %d, Y: %d", x, y);
-
 	auto& tile(game->manager.addEntity());
 	tile.addComponent<TileComponent>(x, y, TILE_SIZE, TILE_SIZE, id, textureDict);
 	
@@ -83,85 +82,89 @@ void Map::addTile(unsigned long id, int x, int y, GameInternal* game, const std:
 
 void Map::loadMapTmx(const char* path)
 {
-	tmx::Map map;
-	if (!map.load(path)) {
-		// TODO: log to console
-	}
+    tmx::Map map;
+    if (!map.load(path)) {
+        // TODO: log to console
+    }
 
-	const std::vector<tmx::Tileset>& tileSets = map.getTilesets();
+    const std::vector<tmx::Tileset>& tileSets = map.getTilesets();
 
-	const std::vector<tmx::Layer::Ptr>& mapLayers = map.getLayers();
-	const auto mapSize = map.getTileCount();
+    const std::vector<tmx::Layer::Ptr>& mapLayers = map.getLayers();
+    const auto mapSize = map.getTileCount();
     const auto mapTileSize = map.getTileSize();
 
     std::vector<std::string> texturePaths = {};
 
     for (auto tileSet : tileSets) {
-    	texturePaths.emplace_back(tileSet.getImagePath());
+        texturePaths.emplace_back(tileSet.getImagePath());
     }
 
-	for (auto& layer : mapLayers) {
+    for (auto& layer : mapLayers) {
 
-		if (layer->getType() == tmx::Layer::Type::Tile) {
-			auto& tileLayer = layer->getLayerAs<tmx::TileLayer>();
+        if (layer->getType() == tmx::Layer::Type::Tile) {
+            auto& tileLayer = layer->getLayerAs<tmx::TileLayer>();
 
-			int zIndex = 0;
+            int zIndex = 0;
 
-			const std::vector<tmx::Property>& properties = layer->getProperties();
-			auto zIndexIterator = std::find_if(properties.begin(), properties.end(), [](const tmx::Property& property) {
-				return property.getName() == "zIndex";
-			});
+            const std::vector<tmx::Property>& properties = layer->getProperties();
+            auto zIndexIterator = std::find_if(properties.begin(), properties.end(), [](const tmx::Property& property) {
+                return property.getName() == "zIndex";
+            });
 
-			if (zIndexIterator != properties.end() && std::is_same<decltype(zIndexIterator->getType()), int>::value) {
-				zIndex = zIndexIterator->getIntValue();
-			}
+            if (zIndexIterator != properties.end() && std::is_same<decltype(zIndexIterator->getType()), int>::value) {
+                zIndex = zIndexIterator->getIntValue();
+            }
 
-			const auto& tiles = tileLayer.getTiles();
-			
-			for (auto i = 0u; i < tileSets.size(); i++) {
-				auto tilesetTexture = VEGO_Game().textureManager->loadTexture(texturePaths.at(i).c_str());
-				int texX, texY;
-				SDL_QueryTexture(tilesetTexture, nullptr, nullptr, &texX, &texY);
+            const auto& tiles = tileLayer.getTiles();
+            
+            for (auto i = 0u; i < tileSets.size(); i++) {
+                auto tilesetTexture = VEGO_Game().textureManager->loadTexture(texturePaths.at(i).c_str());
+                int texX, texY;
+                SDL_QueryTexture(tilesetTexture, nullptr, nullptr, &texX, &texY);
 
-        		const auto tileCountX = texX / mapTileSize.x;
-        		const auto tileCountY = texY / mapTileSize.y;
+                const auto tileCountX = texX / mapTileSize.x;
+                const auto tileCountY = texY / mapTileSize.y;
 
-				for (auto y = 0u; y < mapSize.y; ++y) {
-					for (auto x = 0u; x < mapSize.x; ++x) {
-						const auto idx = y * mapSize.x + x;
-						if (idx < tiles.size() && tiles[idx].ID >= tileSets.at(i).getFirstGID()
-							&& tiles[idx].ID < (tileSets.at(i).getFirstGID() + tileSets.at(i).getTileCount())) {
+                for (auto idx = 0ul; idx < mapSize.x * mapSize.y; idx++) {
 
-                    		auto idIndex = (tiles[idx].ID - tileSets.at(i).getFirstGID());
+                    if (!(idx < tiles.size() && tiles[idx].ID >= tileSets.at(i).getFirstGID()
+                        && tiles[idx].ID < (tileSets.at(i).getFirstGID() + tileSets.at(i).getTileCount()))) {
+                        continue;
+                    }
 
-                    		int u = idIndex % tileCountX;
-                    		int v = idIndex / tileCountY;
-                    		u *= mapTileSize.x; //TODO we should be using the tile set size, as this may be different from the map's grid size
-                    		v *= mapTileSize.y;
+                    const auto x = idx % mapSize.x;
+                    const auto y = idx / mapSize.x;
+                    
+                    auto idIndex = (tiles[idx].ID - tileSets.at(i).getFirstGID());
 
-                    		//normalise the UV
-                    		u /= texX;
-                    		v /= texY;
+                    int u = idIndex % tileCountX;
+                    int v = idIndex / tileCountY;
+                    u *= mapTileSize.x; //TODO we should be using the tile set size, as this may be different from the map's grid size
+                    v *= mapTileSize.y;
 
-                    		//vert pos
-                    		const float tilePosX = static_cast<float>(x) * mapTileSize.x;
-                    		const float tilePosY = (static_cast<float>(y) * mapTileSize.y);
+                    //normalise the UV
+                    u /= texX;
+                    v /= texY;
 
-							auto& tile(VEGO_Game().manager.addEntity());
+                    //vert pos
+                    const float tilePosX = static_cast<float>(x) * mapTileSize.x;
+                    const float tilePosY = (static_cast<float>(y) * mapTileSize.y);
 
-							tile.addComponent<TransformComponent>(tilePosX, tilePosY, mapTileSize.x, mapTileSize.y, 1);
-							tile.addComponent<SpriteComponent>(texturePaths.at(i).c_str(), v, u, zIndex); // why does uv need to be reversed?
+                    Map::addTile(tilePosX, tilePosY, mapTileSize, u, v, zIndex, texturePaths.at(i).c_str());
+                }
+            }
+            if (layer->getType() == tmx::Layer::Type::Object) {
+                // spawn objects
+                continue;
+            }
+        }
+    }
+}
 
-						}
-					}
-				}
-			}
+void Map::addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int v, int zIndex, const char* texturePath)
+{
+    auto& tile(VEGO_Game().manager.addEntity());
 
-			continue;
-		}
-		if (layer->getType() == tmx::Layer::Type::Object) {
-			// spawn objects
-			continue;
-		}
-	}
+    tile.addComponent<TransformComponent>(x, y, mapTileSize.x, mapTileSize.y, 1);
+    tile.addComponent<SpriteComponent>(texturePath, v, u, zIndex); // why does uv need to be reversed?
 }
