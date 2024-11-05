@@ -24,6 +24,7 @@
 #include "TextureManager.h"
 #include "TileComponent.h"
 #include "VEGO.h"
+#include "tmxlite/Types.hpp"
 
 void Map::loadMap(const char* path, int sizeX, int sizeY, GameInternal* game, const std::map<int, std::pair<std::string, bool>>* textureDict /* backreference */)
 {
@@ -111,7 +112,7 @@ void Map::loadMapTmx(const char* path)
                 return property.getName() == "zIndex";
             });
 
-            if (zIndexIterator != properties.end() && std::is_same<decltype(zIndexIterator->getType()), int>::value) {
+            if (zIndexIterator != properties.end() && std::is_nothrow_convertible<decltype(zIndexIterator->getType()), int>::value) {
                 zIndex = zIndexIterator->getIntValue();
             }
 
@@ -119,16 +120,16 @@ void Map::loadMapTmx(const char* path)
             
             for (auto i = 0u; i < tileSets.size(); i++) {
                 auto tilesetTexture = VEGO_Game().textureManager->loadTexture(texturePaths.at(i).c_str());
-                int texX, texY;
-                SDL_QueryTexture(tilesetTexture, nullptr, nullptr, &texX, &texY);
+                tmx::Vector2i textureSize;
+                SDL_QueryTexture(tilesetTexture, nullptr, nullptr, &(textureSize.x), &(textureSize.y));
 
-                const auto tileCountX = texX / mapTileSize.x;
-                const auto tileCountY = texY / mapTileSize.y;
+                const auto tileCountX = textureSize.x / mapTileSize.x;
+                const auto tileCountY = textureSize.y / mapTileSize.y;
 
                 for (auto idx = 0ul; idx < mapSize.x * mapSize.y; idx++) {
 
-                    if (!(idx < tiles.size() && tiles[idx].ID >= tileSets.at(i).getFirstGID()
-                        && tiles[idx].ID < (tileSets.at(i).getFirstGID() + tileSets.at(i).getTileCount()))) {
+                    if (idx >= tiles.size() || tiles[idx].ID < tileSets.at(i).getFirstGID()
+                        || tiles[idx].ID >= (tileSets.at(i).getFirstGID() + tileSets.at(i).getTileCount())) {
                         continue;
                     }
 
@@ -143,8 +144,8 @@ void Map::loadMapTmx(const char* path)
                     v *= mapTileSize.y;
 
                     //normalise the UV
-                    u /= texX;
-                    v /= texY;
+                    u /= textureSize.x;
+                    v /= textureSize.y;
 
                     //vert pos
                     const float tilePosX = static_cast<float>(x) * mapTileSize.x;
