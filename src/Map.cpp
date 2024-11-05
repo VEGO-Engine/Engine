@@ -61,6 +61,6 @@ void Map::addTile(unsigned long id, int x, int y, GameInternal* game, const std:
 	auto& tile(game->manager.addEntity());
 	tile.addComponent<TileComponent>(x, y, TILE_SIZE, TILE_SIZE, id, textureDict);
 	
-	if(tile.getComponent<TileComponent>().hasCollision()) tile.addComponent<ColliderComponent>(tile.getComponent<TileComponent>().getName().data());
+	if(tile.getComponent<TileComponent>().hasCollision()) tile.addComponent<ColliderComponent>("tile"/*tile.getComponent<TileComponent>().getName().data()*/);
 	tile.addGroup((size_t)Entity::GroupLabel::MAPTILES);
 }
