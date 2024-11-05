@@ -31,8 +31,12 @@ private:
 	uint8_t speed = 100;
 	bool flipped = false;
 
+	int textureXOffset;
+	int textureYOffset;
+
 public:
 	SpriteComponent(const char* path, int zIndex);
+	SpriteComponent(const char* path, int xOffset, int yOffset, int zIndex);
 	SpriteComponent(
 		const char* path,
 		bool isAnimated,

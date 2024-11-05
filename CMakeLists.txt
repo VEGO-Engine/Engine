@@ -17,10 +17,13 @@ set(SDL2TTF_VENDORED ON)
 
 set(SDL2_SOURCE_DIR “${ENGINE_SOURCE_DIR}/extern/SDL”)
 
+set(TMXLITE_STATIC_LIB TRUE)
+
 add_subdirectory(extern/SDL EXCLUDE_FROM_ALL)
 add_subdirectory(extern/SDL_image EXCLUDE_FROM_ALL)
 add_subdirectory(extern/SDL_mixer EXCLUDE_FROM_ALL)
 add_subdirectory(extern/SDL_ttf EXCLUDE_FROM_ALL)
+add_subdirectory(extern/tmxlite/tmxlite EXCLUDE_FROM_ALL)
 
 file(GLOB_RECURSE SOURCES ${ENGINE_SOURCE_DIR}/src/*.cpp)
 add_library(${PROJECT_NAME} ${SOURCES})
@@ -33,6 +36,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC # should be private when all SDL fu
     SDL2_image::SDL2_image-static
     SDL2_mixer::SDL2_mixer-static
     SDL2_ttf::SDL2_ttf-static
+    tmxlite
 )
 
 if(CMAKE_BUILD_TYPE MATCHES "Debug")

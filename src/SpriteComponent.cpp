@@ -15,7 +15,12 @@
 #include "Manager.h"
 #include "VEGO.h"
 
-SpriteComponent::SpriteComponent(const char* path, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager)
+SpriteComponent::SpriteComponent(const char* path, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(0), textureYOffset(0)
+{
+	this->texturePath = path;
+}
+
+SpriteComponent::SpriteComponent(const char* path, int xOffset, int yOffset, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(xOffset), textureYOffset(yOffset)
 {
 	this->texturePath = path;
 }
@@ -25,7 +30,7 @@ SpriteComponent::SpriteComponent(
 	bool isAnimated,
 	std::map<std::string, std::unique_ptr<Animation>>* animationMap,
 	std::string defaultAnimation,
-	int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager)
+	int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(0), textureYOffset(0)
 {
 	animated = isAnimated;
 
@@ -49,20 +54,22 @@ void SpriteComponent::init()
 
 	this->transform = &entity->getComponent<TransformComponent>();
 
-	this->srcRect.x = this->srcRect.y = 0;
 	this->srcRect.w = transform->width;
 	this->srcRect.h = transform->height;
+	this->srcRect.x = this->textureXOffset * this->srcRect.w;
+	this->srcRect.y = this->textureYOffset * this->srcRect.h;;
 
 	this->update();
 }
 
 void SpriteComponent::update()
 {
+	// This code is not compatible for animated tiles
 	if (animated) {
 		srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
-	}
 
-	srcRect.y = animationIndex * transform->height;
+		srcRect.y = animationIndex * transform->height;
+	}
 
 	this->destRect.x = this->transform->position.x;
 	this->destRect.y = this->transform->position.y;
