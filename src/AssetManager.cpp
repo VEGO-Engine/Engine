@@ -98,8 +98,9 @@ Vector2D AssetManager::calculateSpawnPosition()
 	return spawnPos;
 }
 
-PowerupType AssetManager::calculateType()
+template <typename T>
+T AssetManager::calculateType(int amount)
 {
-	PowerupType type = PowerupType(rand() % 3);
-	return type;
+    T type = T(rand() % amount);
+    return type;
 }

@@ -28,7 +28,7 @@ public:
     void createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, std::string texturePath);
 
     Vector2D calculateSpawnPosition();
-    PowerupType calculateType();
+    template <typename T> T calculateType(int amount);
 
     //texture management
     void addTexture(std::string id, const char* path);
