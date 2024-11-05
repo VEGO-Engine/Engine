@@ -5,6 +5,7 @@
 #include "CollisionHandler.h"
 #include "AssetManager.h"
 #include "RenderManager.h"
+#include "SDL_mixer.h"
 #include "SoundManager.h"
 #include "TileComponent.h"
 #include "Direction.h"
@@ -62,11 +63,11 @@ void GameInternal::init(const char* title, int xpos, int ypos, int width, int he
 		return;
 	}
 
-    SDL_Surface* icon = SDL_LoadBMP("assets/iconImage.bmp");
-    if(!icon)
+    // bad
+    SDL_Surface* icon;
+    if((icon = SDL_LoadBMP("assets/iconImage.bmp")))
     {
-        std::cout << "ERROR: Couldn't create icon!" << std::endl;
-        return;
+    	SDL_SetWindowIcon(window, icon);
     }
 
     SDL_SetWindowIcon(window, icon);
@@ -80,12 +81,6 @@ void GameInternal::init(const char* title, int xpos, int ypos, int width, int he
 	}
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-	SDL_Texture* backgroundTexture = GameInternal::textureManager->loadTexture("assets/startscreen.png");
-
-	SDL_RenderClear(renderer);
-	SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
-	SDL_RenderPresent(renderer);
-
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
 	{
 		std::cout << "ERROR: Mixer couldnt be initialized! " << SDL_GetError() << std::endl;
@@ -95,43 +90,6 @@ void GameInternal::init(const char* title, int xpos, int ypos, int width, int he
 
 	Mix_Volume(-1, MIX_MAX_VOLUME);
 	Mix_AllocateChannels(16);
-
-	//SDL_Event event;
-	bool hasQuit = false;
-
-	while (!hasQuit)
-	{
-		SDL_PollEvent(&event);
-
-		if (event.type == SDL_QUIT)
-		{
-			hasQuit = true;
-			break;
-		}
-
-		if (event.type == SDL_KEYDOWN)
-		{
-			if (event.key.keysym.scancode == SDL_SCANCODE_RETURN)
-			{
-				std::cout << "Enter pressed > Game start..." << std::endl;
-				break;
-			}
-
-			if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
-			{
-				std::cout << "Escape pressed > Game quit..." << std::endl;
-				hasQuit = true;
-			}
-		}
-	}
-
-	if (hasQuit)
-	{
-		this->setRunning(false);
-		return;
-	}
-
-	if (this->isRunning() == false) return;
 
 	map = new Map();
 
