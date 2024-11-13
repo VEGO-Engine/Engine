@@ -9,11 +9,6 @@ void Entity::update() const
 	for (auto const& c : components) c->update();
 }
 
-void Entity::draw() const
-{
-	for (auto const& c : components) c->draw();
-}
-
 bool Entity::hasGroup(Group mGroup)
 {
 	return groupBitSet[mGroup];
@@ -30,18 +25,7 @@ void Entity::delGroup(Group mGroup)
 	groupBitSet[mGroup] = false;
 }
 
-std::bitset<MAX_GROUPS> Entity::getGroupBitSet() 
+std::bitset<MAX_GROUPS> Entity::getGroupBitSet()
 {
 	return groupBitSet;
-}
-
-void Entity::setTeam(Entity::TeamLabel teamLabel)
-{
-	this->teamLabel = teamLabel;
-	manager.addToTeam(this, (size_t) teamLabel);
-}
-
-Entity::TeamLabel Entity::getTeam()
-{
-	return teamLabel;
 }

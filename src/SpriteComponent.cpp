@@ -1,60 +1,75 @@
 #include "SpriteComponent.h"
 
 #include <SDL_timer.h>
+#include <cstring>
 #include <memory>
 
 #include "AnimationHandler.h"
 #include "Direction.h"
+#include "ProjectileComponent.h"
+#include "RenderObject.h"
 #include "TextureManager.h"
 #include "Entity.h"
 #include "TransformComponent.h"
-#include "Game.h"
+#include "GameInternal.h"
+#include "Manager.h"
+#include "VEGO.h"
 
-SpriteComponent::SpriteComponent(const char* path)
+SpriteComponent::SpriteComponent(const char* path, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(0), textureYOffset(0)
 {
-	setTexture(path);
+	this->texturePath = path;
 }
 
-SpriteComponent::SpriteComponent(const char* path, bool isAnimated)
+SpriteComponent::SpriteComponent(const char* path, int xOffset, int yOffset, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(xOffset), textureYOffset(yOffset)
+{
+	this->texturePath = path;
+}
+
+SpriteComponent::SpriteComponent(
+	const char* path,
+	bool isAnimated,
+	std::map<std::string, std::unique_ptr<Animation>>* animationMap,
+	std::string defaultAnimation,
+	int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(0), textureYOffset(0)
 {
 	animated = isAnimated;
 
-	animations.emplace(IDLE, std::make_unique<Animation>((uint8_t)AnimationType::IDLE, 2, 200));
-	animations.emplace(WALK, std::make_unique<Animation>((uint8_t)AnimationType::WALK, 2, 200));
+	animations = animationMap;
 
-	playAnimation(IDLE);
+	playAnimation(defaultAnimation);
 
-	setTexture(path);
+	this->texturePath = path;
 }
 
-SpriteComponent::~SpriteComponent()
-{
-	// SDL_DestroyTexture(this->texture);
-}
+SpriteComponent::~SpriteComponent() {}
 
 void SpriteComponent::setTexture(const char* path)
 {
-	this->texture = Game::textureManager->loadTexture(path);
+	this->texture = VEGO_Game().textureManager->loadTexture(path);
 }
 
 void SpriteComponent::init()
 {
+	setTexture(this->texturePath);
+
 	this->transform = &entity->getComponent<TransformComponent>();
 
-	this->srcRect.x = this->srcRect.y = 0;
 	this->srcRect.w = transform->width;
 	this->srcRect.h = transform->height;
+	this->srcRect.x = this->textureXOffset * this->srcRect.w;
+	this->srcRect.y = this->textureYOffset * this->srcRect.h;;
 
 	this->update();
 }
 
 void SpriteComponent::update()
 {
+	// This code is not compatible for animated tiles
 	if (animated) {
 		srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
-	}
 
-	srcRect.y = animationIndex * transform->height;
+		srcRect.y = animationIndex * transform->height;
+	}
 
 	this->destRect.x = this->transform->position.x;
 	this->destRect.y = this->transform->position.y;
@@ -64,17 +79,17 @@ void SpriteComponent::update()
 
 void SpriteComponent::draw()
 {
-	Game::textureManager->draw(this->texture, this->srcRect, this->destRect, this->animated && this->flipped);
+	this->entity->getManager().getGame()->textureManager->draw(VEGO_Game().renderer, this->texture, this->srcRect, this->destRect, this->animated && this->flipped);
 }
 
-void SpriteComponent::playAnimation(AnimationType type)
+void SpriteComponent::playAnimation(std::string type)
 {
-	this->animationIndex = animations.at(type)->index;
-	this->frames = animations.at(type)->frames;
-	this->speed = animations.at(type)->speed;
+	this->animationIndex = animations->at(type)->index;
+	this->frames = animations->at(type)->frames;
+	this->speed = animations->at(type)->speed;
 }
 
-void SpriteComponent::setDirection(Direction direction) 
+void SpriteComponent::setDirection(Direction direction)
 {
 	this->flipped = direction == Direction::RIGHT;
 }

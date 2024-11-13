@@ -16,11 +16,5 @@ struct Animation
 	}
 };
 
-enum AnimationType //TODO enum class
-{
-	IDLE = 0,
-	WALK = 1
-};
-
 
 

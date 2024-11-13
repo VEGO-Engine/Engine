@@ -7,14 +7,15 @@
 class TransformComponent : public Component
 {
 public:
-	Vector2D position; // TODO: change to int to safe CPU time -> possibly subpixel coordinates
+	Vector2D position; // TODO: change to int to save CPU time -> possibly subpixel coordinates
 	Vector2D direction;
 
 	int height = 32;
 	int width = 32;
 	int scale = 1;
 
-	int speed = 3;
+	int getSpeed() { return speed + speedMod; };
+	void resetSpeedMod() { speedMod = 0; };
 
 	TransformComponent();
 	explicit TransformComponent(int scale);
@@ -25,5 +26,10 @@ public:
 	void init() override;
 	/*! TODO: document usage of collision handler */
 	void update() override;
+    void setPositionAfterCollision(Vector2D& positionChange);
 	void modifySpeed(int8_t modifier);
+
+private:
+	int speed = 3;
+	int speedMod = 0;
 };

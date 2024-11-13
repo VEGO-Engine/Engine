@@ -2,8 +2,8 @@
 
 #include "TextureManager.h"
 #include "SoundManager.h"
-#include "Components.h"
-#include "Game.h"
+#include "ProjectileComponent.h"
+#include "GameInternal.h"
 
 #include "TransformComponent.h"
 
@@ -11,7 +11,6 @@
 #include "ColliderComponent.h"
 #include "Constants.h"
 #include "Entity.h"
-#include "Game.h"
 #include "Vector2D.h"
 #include "PowerupComponent.h"
 #include <iostream>
@@ -21,12 +20,17 @@ AssetManager::AssetManager(Manager* manager) : man(manager) {}
 AssetManager::~AssetManager() {}
 
 void AssetManager::addTexture(std::string id, const char* path) {
-    textures.emplace(id, Game::textureManager->loadTexture(path));
+    textures.emplace(id, this->man->getGame()->textureManager->loadTexture(path));
 }
 
 void AssetManager::addSoundEffect(std::string id, const char* path)
 {
-    soundEffects.emplace(id, Game::soundManager->loadSound(path));
+    soundEffects.emplace(id, this->man->getGame()->soundManager->loadSound(path));
+}
+
+void AssetManager::addMusic(std::string id, const char* path)
+{
+    music.emplace(id, this->man->getGame()->soundManager->loadMusic(path));
 }
 
 SDL_Texture* AssetManager::getTexture(std::string id) {
@@ -37,36 +41,35 @@ Mix_Chunk* AssetManager::getSound(std::string id) {
     return soundEffects.at(id);
 }
 
-void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, const char* texturePath, Entity::TeamLabel teamLabel) {
+Mix_Music* AssetManager::getMusic(std::string id)
+{
+	return music.at(id);
+}
+
+void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, const char* texturePath, Entity* owner) {
 
     auto& projectile(man->addEntity());
     projectile.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, scale); //32x32 is standard size for objects
-    projectile.addComponent<SpriteComponent>(texturePath);
-    projectile.addComponent<ProjectileComponent>(range, speed, velocity);
+    projectile.addComponent<SpriteComponent>(texturePath, 4);
+    projectile.addComponent<ProjectileComponent>(range, speed, velocity, owner);
     projectile.addComponent<ColliderComponent>("projectile", 0.6f);
     projectile.addGroup((size_t)Entity::GroupLabel::PROJECTILE);
-    projectile.setTeam(teamLabel);
 }
 
-void AssetManager::createPowerup(Vector2D pos, PowerupType type) {
-    TextureDict textureDict;
+void AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, std::string texturePath) {
 
     auto& powerups(man->addEntity());
     powerups.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, 1); //32x32 is standard size for objects
-    auto it = textureDict.powerupDictionary.find(type);
-    if (it == textureDict.powerupDictionary.end()) {
-        std::cout << "it end" << std::endl;
-    }
 
     try {
-        powerups.addComponent<SpriteComponent>(it->second.data());
+        powerups.addComponent<SpriteComponent>(texturePath.c_str(), 3);
     }
     catch (std::runtime_error e) {
         std::cout << e.what() << std::endl;
     }
 
     powerups.addComponent<ColliderComponent>("powerup", 0.6f);
-    powerups.addComponent<PowerupComponent>(type);
+    powerups.addComponent<PowerupComponent>(pickupFunc);
     powerups.addGroup((size_t)Entity::GroupLabel::POWERUPS);
 }
 
@@ -81,7 +84,7 @@ Vector2D AssetManager::calculateSpawnPosition()
 		spawnRect.x = rand() % (SCREEN_SIZE_WIDTH - spawnRect.w);
 		spawnRect.y = rand() % (SCREEN_SIZE_HEIGHT - spawnRect.h);
 		conflict = false;
-		for (auto cc : Game::collisionHandler->getColliders({ Entity::GroupLabel::MAPTILES }))
+		for (auto cc : this->man->getGame()->collisionHandler->getColliders({ Entity::GroupLabel::MAPTILES }))
 		{
 			if (SDL_HasIntersection(&spawnRect, &cc->collider) && strcmp(cc->tag, "projectile"))
 			{

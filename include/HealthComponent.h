@@ -1,5 +1,8 @@
 #pragma once
 
+#include <string>
+#include <vector>
+
 #include "Direction.h"
 #include "Component.h"
 
@@ -9,7 +12,7 @@ class HealthComponent : public Component
 {
 public:
 
-    HealthComponent(int health, Direction side) : health(health), side(side) {}
+    HealthComponent(int health) : health(health) {}
     ~HealthComponent() {}
 
     void modifyHealth(int health = -1);
@@ -25,5 +28,4 @@ public:
 private:
 
     int health;
-    Direction side;
 };
