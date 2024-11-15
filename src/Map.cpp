@@ -5,6 +5,7 @@
 #include <cstdio>
 #include <iostream>
 #include <fstream>
+#include <optional>
 #include <type_traits>
 #include <utility>
 #include <vector>
@@ -18,6 +19,7 @@
 #include <tmxlite/Property.hpp>
 #include <tmxlite/TileLayer.hpp>
 
+#include "ColliderComponent.h"
 #include "Constants.h"
 #include "GameInternal.h"
 #include "SpriteComponent.h"
@@ -81,6 +83,31 @@ void Map::addTile(unsigned long id, int x, int y, GameInternal* game, const std:
 	tile.addGroup((size_t)Entity::GroupLabel::MAPTILES);
 }
 
+
+template<> std::optional<bool> Map::getLayerProperty<bool>(const std::vector<tmx::Property>& properties, std::string propertyName) {
+    auto zIndexIterator = std::ranges::find_if(properties, [propertyName](const tmx::Property& property) {
+        return property.getName().compare(propertyName) == 0;
+    });
+
+    if (zIndexIterator != properties.end() && zIndexIterator->getType() == tmx::Property::Type::Boolean) {
+        return zIndexIterator->getBoolValue();
+    }
+
+    return std::nullopt;
+}
+
+template<> std::optional<int> Map::getLayerProperty<int>(const std::vector<tmx::Property>& properties, std::string propertyName) {
+    auto zIndexIterator = std::ranges::find_if(properties, [propertyName](const tmx::Property& property) {
+        return property.getName().compare(propertyName) == 0;
+    });
+
+    if (zIndexIterator != properties.end() && zIndexIterator->getType() == tmx::Property::Type::Int) {
+        return zIndexIterator->getIntValue();
+    }
+
+    return std::nullopt;
+}
+
 void Map::loadMapTmx(const char* path)
 {
     tmx::Map map;
@@ -105,16 +132,11 @@ void Map::loadMapTmx(const char* path)
         if (layer->getType() == tmx::Layer::Type::Tile) {
             auto& tileLayer = layer->getLayerAs<tmx::TileLayer>();
 
-            int zIndex = 0;
-
             const std::vector<tmx::Property>& properties = layer->getProperties();
-            auto zIndexIterator = std::find_if(properties.begin(), properties.end(), [](const tmx::Property& property) {
-                return property.getName() == "zIndex";
-            });
+            int zIndex = getLayerProperty<int>(properties, "zIndex").value_or(0);
+            bool collision = getLayerProperty<bool>(properties, "collision").value_or(false);
 
-            if (zIndexIterator != properties.end() && std::is_nothrow_convertible<decltype(zIndexIterator->getType()), int>::value) {
-                zIndex = zIndexIterator->getIntValue();
-            }
+            printf("z-index: %d, collision: %d\n", zIndex, collision);
 
             const auto& tiles = tileLayer.getTiles();
             
@@ -151,7 +173,7 @@ void Map::loadMapTmx(const char* path)
                     const float tilePosX = static_cast<float>(x) * mapTileSize.x;
                     const float tilePosY = (static_cast<float>(y) * mapTileSize.y);
 
-                    Map::addTile(tilePosX, tilePosY, mapTileSize, u, v, zIndex, texturePaths.at(i).c_str());
+                    Map::addTile(tilePosX, tilePosY, mapTileSize, u, v, zIndex, texturePaths.at(i).c_str(), collision);
                 }
             }
             if (layer->getType() == tmx::Layer::Type::Object) {
@@ -162,10 +184,15 @@ void Map::loadMapTmx(const char* path)
     }
 }
 
-void Map::addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int v, int zIndex, const char* texturePath)
+void Map::addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int v, int zIndex, const char* texturePath, bool hasCollision)
 {
     auto& tile(VEGO_Game().manager.addEntity());
 
     tile.addComponent<TransformComponent>(x, y, mapTileSize.x, mapTileSize.y, 1);
     tile.addComponent<SpriteComponent>(texturePath, v, u, zIndex); // why does uv need to be reversed?
+
+    if (hasCollision) {
+        tile.addComponent<ColliderComponent>("hello I am a collider of a tile!");
+        tile.addGroup((size_t)Entity::GroupLabel::MAPTILES);
+    }
 }

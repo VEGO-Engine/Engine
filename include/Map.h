@@ -1,8 +1,11 @@
 #pragma once
 
+#include <tmxlite/Property.hpp>
+#include <optional>
 #include <tmxlite/Types.hpp>
 #include <map>
 #include <string>
+#include <vector>
 
 class GameInternal;
 class Map
@@ -32,5 +35,7 @@ public:
 	 */
 	static void loadMapTmx(const char* path);
 private:
-	static void addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int v, int zIndex, const char* texturePath);
+	static void addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int v, int zIndex, const char* texturePath, bool hasCollision);
+	template<typename T>
+	static std::optional<T> getLayerProperty(const std::vector<tmx::Property>& properties, std::string propertyName) { return std::nullopt; };
 };
