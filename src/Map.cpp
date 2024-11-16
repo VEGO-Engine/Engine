@@ -2,10 +2,14 @@
 
 #include <algorithm>
 #include <cctype>
+#include <cstdint>
 #include <cstdio>
+#include <functional>
 #include <iostream>
 #include <fstream>
 #include <optional>
+#include <ranges>
+#include <tuple>
 #include <type_traits>
 #include <utility>
 #include <vector>
@@ -28,160 +32,133 @@
 #include "VEGO.h"
 #include "tmxlite/Types.hpp"
 
-void Map::loadMap(const char* path, int sizeX, int sizeY, GameInternal* game, const std::map<int, std::pair<std::string, bool>>* textureDict /* backreference */)
-{
-	std::string tileIDstr;
-	char singleChar = 0;
-	std::ifstream mapFile;
-	mapFile.open(path);
-
-	if (!mapFile.is_open()) {
-		SDL_SetError("Error loading map: Couldn't open map file!");
-		std::cout << "ERROR: Map couldnt be loaded! " << SDL_GetError() << std::endl;
-		SDL_ClearError();
-	}
-
-	int x = 0, y = 0; // needed outside for-loop for error handling
-	for (; !mapFile.eof(); mapFile.get(singleChar))
-	{
-		if (singleChar == ',' || singleChar == '\n') {
-			if (tileIDstr.empty())
-				continue;
-			Map::addTile(std::stoi(tileIDstr), x * TILE_SIZE, y * TILE_SIZE, game, textureDict);
-			tileIDstr.clear();
-			x++;
-			if (singleChar == '\n') {
-				if (x != sizeX) {
-					SDL_SetError("Error loading map: specified x size doesn't match map file!");
-					std::cout << "ERROR: Map couldnt be loaded! " << SDL_GetError() << std::endl;
-					SDL_ClearError();
-				}
-				x = 0;
-				y++;
-				continue;
-			}
-			continue;
-		}
-		if (!std::isdigit(singleChar)) continue;
-		tileIDstr += singleChar;
-	}
-	if (y != sizeY) {
-		SDL_SetError("Error loading map: specified y size doesn't match map file!");
-		std::cout << "ERROR: Map couldnt be loaded! " << SDL_GetError() << std::endl;
-		SDL_ClearError();
-	}
-
-	mapFile.close();
-}
-
-void Map::addTile(unsigned long id, int x, int y, GameInternal* game, const std::map<int, std::pair<std::string, bool>>* textureDict) // tile entity
-{
-	auto& tile(game->manager.addEntity());
-	tile.addComponent<TileComponent>(x, y, TILE_SIZE, TILE_SIZE, id, textureDict);
-	
-	if(tile.getComponent<TileComponent>().hasCollision()) tile.addComponent<ColliderComponent>(tile.getComponent<TileComponent>().getName().data());
-	tile.addGroup((size_t)Entity::GroupLabel::MAPTILES);
-}
-
-
 template<> std::optional<bool> Map::getLayerProperty<bool>(const std::vector<tmx::Property>& properties, std::string propertyName) {
-    auto zIndexIterator = std::ranges::find_if(properties, [propertyName](const tmx::Property& property) {
-        return property.getName().compare(propertyName) == 0;
-    });
+auto zIndexIterator = std::ranges::find_if(properties, [propertyName](const tmx::Property& property) {
+    return property.getName().compare(propertyName) == 0;
+});
 
-    if (zIndexIterator != properties.end() && zIndexIterator->getType() == tmx::Property::Type::Boolean) {
-        return zIndexIterator->getBoolValue();
-    }
+if (zIndexIterator != properties.end() && zIndexIterator->getType() == tmx::Property::Type::Boolean) {
+    return zIndexIterator->getBoolValue();
+}
 
-    return std::nullopt;
+return std::nullopt;
 }
 
 template<> std::optional<int> Map::getLayerProperty<int>(const std::vector<tmx::Property>& properties, std::string propertyName) {
-    auto zIndexIterator = std::ranges::find_if(properties, [propertyName](const tmx::Property& property) {
-        return property.getName().compare(propertyName) == 0;
-    });
+auto zIndexIterator = std::ranges::find_if(properties, [propertyName](const tmx::Property& property) {
+    return property.getName().compare(propertyName) == 0;
+});
 
-    if (zIndexIterator != properties.end() && zIndexIterator->getType() == tmx::Property::Type::Int) {
-        return zIndexIterator->getIntValue();
-    }
-
-    return std::nullopt;
+if (zIndexIterator != properties.end() && zIndexIterator->getType() == tmx::Property::Type::Int) {
+    return zIndexIterator->getIntValue();
 }
 
-void Map::loadMapTmx(const char* path)
+return std::nullopt;
+}
+
+Map::Map(const char* path)
 {
-    tmx::Map map;
-    if (!map.load(path)) {
+    if (!this->map.load(path)) {
         // TODO: log to console
+        // TODO: error handling
     }
-
-    const std::vector<tmx::Tileset>& tileSets = map.getTilesets();
-
-    const std::vector<tmx::Layer::Ptr>& mapLayers = map.getLayers();
-    const auto mapSize = map.getTileCount();
-    const auto mapTileSize = map.getTileSize();
 
     std::vector<std::string> texturePaths = {};
 
-    for (auto tileSet : tileSets) {
+    for (auto tileSet : map.getTilesets()) {
         texturePaths.emplace_back(tileSet.getImagePath());
     }
 
-    for (auto& layer : mapLayers) {
+    this->mapData = {
+        &map.getTilesets(),
+        &map.getLayers(),
+        &map.getTileCount(),
+        &map.getTileSize(),
+        &texturePaths
+    };
+
+
+    for (auto& layer : *this->mapData.mapLayers) {
 
         if (layer->getType() == tmx::Layer::Type::Tile) {
-            auto& tileLayer = layer->getLayerAs<tmx::TileLayer>();
-
-            const std::vector<tmx::Property>& properties = layer->getProperties();
-            int zIndex = getLayerProperty<int>(properties, "zIndex").value_or(0);
-            bool collision = getLayerProperty<bool>(properties, "collision").value_or(false);
-
-            printf("z-index: %d, collision: %d\n", zIndex, collision);
-
-            const auto& tiles = tileLayer.getTiles();
-            
-            for (auto i = 0u; i < tileSets.size(); i++) {
-                auto tilesetTexture = VEGO_Game().textureManager->loadTexture(texturePaths.at(i).c_str());
-                tmx::Vector2i textureSize;
-                SDL_QueryTexture(tilesetTexture, nullptr, nullptr, &(textureSize.x), &(textureSize.y));
-
-                const auto tileCountX = textureSize.x / mapTileSize.x;
-                const auto tileCountY = textureSize.y / mapTileSize.y;
-
-                for (auto idx = 0ul; idx < mapSize.x * mapSize.y; idx++) {
-
-                    if (idx >= tiles.size() || tiles[idx].ID < tileSets.at(i).getFirstGID()
-                        || tiles[idx].ID >= (tileSets.at(i).getFirstGID() + tileSets.at(i).getTileCount())) {
-                        continue;
-                    }
-
-                    const auto x = idx % mapSize.x;
-                    const auto y = idx / mapSize.x;
-                    
-                    auto idIndex = (tiles[idx].ID - tileSets.at(i).getFirstGID());
-
-                    int u = idIndex % tileCountX;
-                    int v = idIndex / tileCountY;
-                    u *= mapTileSize.x; //TODO we should be using the tile set size, as this may be different from the map's grid size
-                    v *= mapTileSize.y;
-
-                    //normalise the UV
-                    u /= textureSize.x;
-                    v /= textureSize.y;
-
-                    //vert pos
-                    const float tilePosX = static_cast<float>(x) * mapTileSize.x;
-                    const float tilePosY = (static_cast<float>(y) * mapTileSize.y);
-
-                    Map::addTile(tilePosX, tilePosY, mapTileSize, u, v, zIndex, texturePaths.at(i).c_str(), collision);
-                }
-            }
-            if (layer->getType() == tmx::Layer::Type::Object) {
-                // spawn objects
-                continue;
-            }
+            loadTileLayer(layer->getLayerAs<tmx::TileLayer>());
+            continue;
+        }
+        if (layer->getType() == tmx::Layer::Type::Object) {
+            // spawn objects
+            continue;
         }
     }
+}
+
+void Map::loadTileLayer(const tmx::TileLayer& layer)
+{
+    const std::vector<tmx::Property>& properties = layer.getProperties();
+    int zIndex = getLayerProperty<int>(properties, "zIndex").value_or(0);
+    bool collision = getLayerProperty<bool>(properties, "collision").value_or(false);
+
+    const auto& tiles = layer.getTiles();
+
+    auto tileConstructorRange = std::views::iota(0)
+    | std::views::take(this->mapData.tileSets->size())
+    | std::views::transform([&](uint16_t i) {
+        const char* texturePath = this->mapData.texturePaths->at(i).c_str();
+
+        tmx::Vector2i textureSize;
+        SDL_QueryTexture(
+            VEGO_Game().textureManager->loadTexture(texturePath),
+            nullptr,
+            nullptr,
+            &(textureSize.x),
+            &(textureSize.y)
+        );
+
+        tmx::Vector2u tileCount2D = { textureSize.x / this->mapData.mapTileSize->x, textureSize.y / this->mapData.mapTileSize->y };
+
+        uint32_t tileCount = this->mapData.tileSets->at(i).getTileCount();
+        uint32_t firstGID = this->mapData.tileSets->at(i).getFirstGID();
+
+        return TileSetData { texturePath, textureSize, tileCount, tileCount2D, firstGID };
+    })
+    | std::views::transform([=, this](const TileSetData& data) {
+        return std::views::iota(0)
+        | std::views::take(this->mapData.mapSize->x * this->mapData.mapSize->y)
+        | std::views::filter([=](uint16_t idx) {
+            return
+                idx < tiles.size()
+                && tiles[idx].ID >= data.firstGID
+                && tiles[idx].ID < (data.firstGID + data.tileCount);
+        })
+        | std::views::transform([=, this](uint16_t idx) {
+            const auto x = idx % this->mapData.mapSize->x;
+            const auto y = idx / this->mapData.mapSize->x;
+
+            const auto idIndex = (tiles[idx].ID - data.firstGID);
+
+            uint32_t u = idIndex % data.tileCount2D.x;
+            uint32_t v = idIndex / data.tileCount2D.y;
+            u *= this->mapData.mapTileSize->x; // TODO: we should be using the tile set size, as this may be different from the map's grid size
+            v *= this->mapData.mapTileSize->y;
+
+            // normalise the UV
+            u /= data.textureSize.x;
+            v /= data.textureSize.y;
+
+            // vert pos
+            const float tilePosX = static_cast<float>(x) * this->mapData.mapTileSize->x;
+            const float tilePosY = (static_cast<float>(y) * this->mapData.mapTileSize->y);
+
+            return std::function<void()>(
+                [tilePosX, tilePosY, capture0 = *this->mapData.mapTileSize, u, v, zIndex, capture1 = data.texturePath, collision] {
+                    Map::addTile(tilePosX, tilePosY, capture0, u, v, zIndex, capture1, collision);
+                }
+            );
+        });
+    })
+    | std::views::join
+    | std::ranges::to<std::vector>();
+
+    this->tileConstructors.insert(this->tileConstructors.end(), tileConstructorRange.begin(), tileConstructorRange.end());
 }
 
 void Map::addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int v, int zIndex, const char* texturePath, bool hasCollision)
@@ -189,10 +166,17 @@ void Map::addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int
     auto& tile(VEGO_Game().manager.addEntity());
 
     tile.addComponent<TransformComponent>(x, y, mapTileSize.x, mapTileSize.y, 1);
-    tile.addComponent<SpriteComponent>(texturePath, v, u, zIndex); // why does uv need to be reversed?
+    tile.addComponent<SpriteComponent>("assets/grassy-river-tiles.png" /*texturePath*/, v, u, zIndex); // why does uv need to be reversed?
 
     if (hasCollision) {
         tile.addComponent<ColliderComponent>("hello I am a collider of a tile!");
         tile.addGroup((size_t)Entity::GroupLabel::MAPTILES);
     }
+}
+
+void Map::generateTiles() 
+{
+    std::ranges::for_each(this->tileConstructors, [](auto& function) {
+        function();
+    });
 }

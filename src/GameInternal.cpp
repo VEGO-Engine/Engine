@@ -133,8 +133,6 @@ void GameInternal::init(const char* title, int xpos, int ypos, int width, int he
 
 	if (this->isRunning() == false) return;
 
-	map = new Map();
-
 	// loading sounds
 	// assets->addSoundEffect("throw_egg", "assets/sound/throw_egg.wav");
 	// assets->addSoundEffect("steps", "assets/sound/steps.wav");
