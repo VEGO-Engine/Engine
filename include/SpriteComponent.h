@@ -4,15 +4,16 @@
 #include <SDL_render.h>
 #include <memory>
 #include <string>
-#include <TextureEnumBase.h>
 
+#include "TextureEnumBase.h"
 #include "AnimationHandler.h"
 #include "Component.h"
 #include "Direction.h"
+#include "RenderObject.h"
 
 class TransformComponent;
 
-class SpriteComponent : public Component
+class SpriteComponent : public Component, public RenderObject
 {
 public:
 	int animationIndex = 0;
@@ -31,14 +32,18 @@ private:
 	uint8_t speed = 100;
 	bool flipped = false;
 
+	int textureXOffset;
+	int textureYOffset;
+
 public:
-	SpriteComponent() = default;
-	SpriteComponent(Textures textureEnum);
+	SpriteComponent(Textures texture, int zIndex);
+	SpriteComponent(Textures texture, int xOffset, int yOffset, int zIndex);
 	SpriteComponent(
-		Textures textureEnum,
+		Textures texture,
 		bool isAnimated,
 		std::map<std::string, std::unique_ptr<Animation>>* animationList,
-		std::string defaultAnimation);
+		std::string defaultAnimation,
+		int zIndex);
 	~SpriteComponent();
 
 	void setTexture(Textures texture);

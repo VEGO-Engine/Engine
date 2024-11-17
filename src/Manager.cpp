@@ -6,11 +6,6 @@
 #include "Constants.h"
 #include "Entity.h"
 
-void Manager::draw()
-{
-	for (auto& e : entities) e->draw();
-}
-
 void Manager::refresh()
 {
 	for (auto i(0u); i < MAX_GROUPS; i++)

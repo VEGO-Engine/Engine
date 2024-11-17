@@ -72,7 +72,8 @@ void TransformComponent::modifySpeed(int8_t modifier)
 
 void TransformComponent::setPositionAfterCollision(Vector2D& positionChange)
 {
-	std::initializer_list colliders = { Entity::GroupLabel::MAPTILES, Entity::GroupLabel::COLLIDERS };
+	std::initializer_list<Entity::GroupLabel> colliders = { Entity::GroupLabel::MAPTILES, Entity::GroupLabel::COLLIDERS };
+	// [getAnyIntersection example code]
 	IntersectionBitSet intersections =
 		(CollisionHandler::getIntersectionWithBounds(entity, Vector2D(positionChange.x, 0)) |
 			(this->entity->getManager()
@@ -88,4 +89,5 @@ void TransformComponent::setPositionAfterCollision(Vector2D& positionChange)
 
 	if (intersections.test((size_t)Direction::UP) || intersections.test((size_t)Direction::DOWN))
 		positionChange.y = 0;
+	// [getAnyIntersection example code]
 }

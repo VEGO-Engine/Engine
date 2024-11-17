@@ -14,6 +14,12 @@
 	path = extern/SDL_ttf
 	url = https://github.com/libsdl-org/SDL_ttf.git
 	branch = release-2.22.x
+[submodule "extern/tmxlite"]
+	path = extern/tmxlite
+	url = https://github.com/fallahn/tmxlite.git
+[submodule "docs/doxygen-awesome-css"]
+	path = docs/doxygen-awesome-css
+	url = https://github.com/jothepro/doxygen-awesome-css.git
 [submodule "extern/magic_enum"]
 	path = extern/magic_enum
 	url = https://github.com/Neargye/magic_enum.git

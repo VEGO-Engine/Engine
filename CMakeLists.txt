@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 
 project(engine)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(ENGINE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
@@ -17,10 +17,13 @@ set(SDL2TTF_VENDORED ON)
 
 set(SDL2_SOURCE_DIR “${ENGINE_SOURCE_DIR}/extern/SDL”)
 
+set(TMXLITE_STATIC_LIB TRUE)
+
 add_subdirectory(extern/SDL EXCLUDE_FROM_ALL)
 add_subdirectory(extern/SDL_image EXCLUDE_FROM_ALL)
 add_subdirectory(extern/SDL_mixer EXCLUDE_FROM_ALL)
 add_subdirectory(extern/SDL_ttf EXCLUDE_FROM_ALL)
+add_subdirectory(extern/tmxlite/tmxlite EXCLUDE_FROM_ALL)
 add_subdirectory(extern/magic_enum EXCLUDE_FROM_ALL)
 
 file(GLOB_RECURSE SOURCES ${ENGINE_SOURCE_DIR}/src/*.cpp)
@@ -35,10 +38,12 @@ target_link_libraries(${PROJECT_NAME} PUBLIC # should be private when all SDL fu
     SDL2_mixer::SDL2_mixer-static
     SDL2_ttf::SDL2_ttf-static
     magic_enum::magic_enum
+    tmxlite
 )
 
 if(CMAKE_BUILD_TYPE MATCHES "Debug")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g") # -fsanitize=address -fno-omit-frame-pointer")
+    #target_link_libraries(${PROJECT_NAME} PRIVATE "-fsanitize=address")
 endif()
 
 # link/copy compile commands to root dir

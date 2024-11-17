@@ -32,7 +32,7 @@ void TileComponent::init()
 	this->entity->addComponent<TransformComponent>(this->tileRect.x, this->tileRect.y, this->tileRect.w, this->tileRect.h, 1);
 	this->transform = &entity->getComponent<TransformComponent>();
 
-	this->entity->addComponent<SpriteComponent>(this->texture);
+	this->entity->addComponent<SpriteComponent>(this->texture, 0);
 	this->sprite = &entity->getComponent<SpriteComponent>();
 }
 

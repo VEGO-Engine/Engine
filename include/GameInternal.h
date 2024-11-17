@@ -9,6 +9,7 @@
 #include "Manager.h"
 #include "Vector2D.h"
 #include "Entity.h"
+#include "RenderManager.h"
 
 typedef std::function<void()> gamefunction;
 
@@ -42,8 +43,8 @@ public:
     /* static */ TextureManager* textureManager;
     /* static */ SoundManager* soundManager;
 
-    // moved globals
     Manager manager;
+    RenderManager renderManager;
     Map* map; // game specific, might not be needed for all types of games
 
 	std::vector<Entity*>& tiles;

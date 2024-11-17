@@ -48,7 +48,7 @@ void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, 
 
     auto& projectile(man->addEntity());
     projectile.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, scale); //32x32 is standard size for objects
-    projectile.addComponent<SpriteComponent>(textureEnum);
+    projectile.addComponent<SpriteComponent>(textureEnum, 4);
     projectile.addComponent<ProjectileComponent>(range, speed, velocity, owner);
     projectile.addComponent<ColliderComponent>("projectile", 0.6f);
     projectile.addGroup((size_t)Entity::GroupLabel::PROJECTILE);
@@ -60,7 +60,7 @@ void AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pic
     powerups.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, 1); //32x32 is standard size for objects
 
     try {
-        powerups.addComponent<SpriteComponent>(texture);
+        powerups.addComponent<SpriteComponent>(texture, 3);
     }
     catch (std::runtime_error e) {
         std::cout << e.what() << std::endl;
