@@ -21,11 +21,6 @@ AssetManager::AssetManager(Manager* manager) : man(manager) {}
 
 AssetManager::~AssetManager() {}
 
-//seems to not be used anymore
-void AssetManager::addTexture(std::string id, const char* path) {
-    //textures.emplace(id, this->man->getGame()->textureManager->loadTexture(path));
-}
-
 void AssetManager::addSoundEffect(std::string id, const char* path)
 {
     soundEffects.emplace(id, this->man->getGame()->soundManager->loadSound(path));
@@ -49,7 +44,7 @@ Mix_Music* AssetManager::getMusic(std::string id)
 	return music.at(id);
 }
 
-void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, TexturesEnum textureEnum, Entity* owner) {
+void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, Textures textureEnum, Entity* owner) {
 
     auto& projectile(man->addEntity());
     projectile.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, scale); //32x32 is standard size for objects
@@ -59,13 +54,13 @@ void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, 
     projectile.addGroup((size_t)Entity::GroupLabel::PROJECTILE);
 }
 
-void AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, std::string texturePath) {
+void AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, Textures texture) {
 
     auto& powerups(man->addEntity());
     powerups.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, 1); //32x32 is standard size for objects
 
     try {
-        powerups.addComponent<SpriteComponent>(texturePath.c_str());
+        powerups.addComponent<SpriteComponent>(texture);
     }
     catch (std::runtime_error e) {
         std::cout << e.what() << std::endl;

@@ -24,14 +24,12 @@ public:
     AssetManager(Manager* manager);
     ~AssetManager();
 
-    void createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, TexturesEnum textureEnum, Entity* owner);
-    void createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, std::string texturePath);
+    void createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, Textures textureEnum, Entity* owner);
+    void createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, Textures texture);
 
     Vector2D calculateSpawnPosition();
     PowerupType calculateType();
 
-    //texture management
-    void addTexture(std::string id, const char* path);
 
     // sound management
     void addSoundEffect(std::string id, const char* path);

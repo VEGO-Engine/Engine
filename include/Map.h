@@ -2,6 +2,7 @@
 
 #include <map>
 #include <string>
+#include <TextureEnumBase.h>
 
 class GameInternal;
 class Map
@@ -21,6 +22,6 @@ public:
 	 * \return Boolean for success
 	 * 
 	 */
-	static void loadMap(const char* path, int sizeX, int sizeY, GameInternal* game, const std::map<int, std::pair<std::string, bool>>* textureDict /* backreference */);
-	static void addTile(unsigned long id, int x, int y, GameInternal* game, const std::map<int, std::pair<std::string, bool>>* textureDict);
+	static void loadMap(const char* path, int sizeX, int sizeY, GameInternal* game, const std::map<int, std::pair<Textures, bool>>* textureDict /* backreference */);
+	static void addTile(unsigned long id, int x, int y, GameInternal* game, const std::map<int, std::pair<Textures, bool>>* textureDict);
 };

@@ -10,7 +10,7 @@
 #include "SDL_error.h"
 #include "TileComponent.h"
 
-void Map::loadMap(const char* path, int sizeX, int sizeY, GameInternal* game, const std::map<int, std::pair<std::string, bool>>* textureDict /* backreference */)
+void Map::loadMap(const char* path, int sizeX, int sizeY, GameInternal* game, const std::map<int, std::pair<Textures, bool>>* textureDict /* backreference */)
 {
 	std::string tileIDstr;
 	char singleChar = 0;
@@ -56,11 +56,13 @@ void Map::loadMap(const char* path, int sizeX, int sizeY, GameInternal* game, co
 	mapFile.close();
 }
 
-void Map::addTile(unsigned long id, int x, int y, GameInternal* game, const std::map<int, std::pair<std::string, bool>>* textureDict) // tile entity
+void Map::addTile(unsigned long id, int x, int y, GameInternal* game, const std::map<int, std::pair<Textures, bool>>* textureDict) // tile entity
 {
 	auto& tile(game->manager.addEntity());
 	tile.addComponent<TileComponent>(x, y, TILE_SIZE, TILE_SIZE, id, textureDict);
 	
-	if(tile.getComponent<TileComponent>().hasCollision()) tile.addComponent<ColliderComponent>(tile.getComponent<TileComponent>().getName().data());
+	if(tile.getComponent<TileComponent>().hasCollision())
+		tile.addComponent<ColliderComponent>(tile.getComponent<TileComponent>().getName().data());
+
 	tile.addGroup((size_t)Entity::GroupLabel::MAPTILES);
 }

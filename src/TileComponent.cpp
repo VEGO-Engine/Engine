@@ -9,7 +9,7 @@
 
 #include "TextureEnumBase.h"
 
-TileComponent::TileComponent(int x, int y, int w, int h, int id, const std::map<int, std::pair<std::string, bool>>* textureDict)
+TileComponent::TileComponent(int x, int y, int w, int h, int id, const std::map<int, std::pair<Textures, bool>>* textureDict)
 {
 	this->tileRect.x = x;
 	this->tileRect.y = y;
@@ -24,8 +24,7 @@ TileComponent::TileComponent(int x, int y, int w, int h, int id, const std::map<
 	}
 	
 	this->collision = it->second.second;
-	this->tileName = it->second.first;
-	this->path = it->second.first.data();
+	this->texture = it->second.first;
 }
 
 void TileComponent::init()
@@ -33,7 +32,7 @@ void TileComponent::init()
 	this->entity->addComponent<TransformComponent>(this->tileRect.x, this->tileRect.y, this->tileRect.w, this->tileRect.h, 1);
 	this->transform = &entity->getComponent<TransformComponent>();
 
-	this->entity->addComponent<SpriteComponent>(this->path);
+	this->entity->addComponent<SpriteComponent>(this->texture);
 	this->sprite = &entity->getComponent<SpriteComponent>();
 }
 

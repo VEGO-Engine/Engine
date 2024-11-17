@@ -1,3 +1,3 @@
 #pragma once
 
-enum class TexturesEnum;
+enum class Textures;

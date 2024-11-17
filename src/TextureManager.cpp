@@ -7,7 +7,7 @@
 #include "GameInternal.h"
 
 
-void TextureManager::addSingleTexture(TexturesEnum texture, const char* filePath) {
+void TextureManager::addSingleTexture(Textures texture, const char* filePath) {
 	auto sdlTexture = IMG_LoadTexture(this->manager->getGame()->renderer, filePath);
 
 	if (sdlTexture == nullptr)
@@ -17,14 +17,14 @@ void TextureManager::addSingleTexture(TexturesEnum texture, const char* filePath
 	std::cout << "Loaded texture at " << filePath << std::endl;
 }
 
-void TextureManager::addTextures(const std::map<TexturesEnum, const char*> &textures) {
+void TextureManager::addTextures(const std::map<Textures, const char*> &textures) {
 	for (auto texture : textures) {
 		addSingleTexture(texture.first, texture.second);
 	}
 }
 
 
-SDL_Texture* TextureManager::loadTexture(TexturesEnum texture) {
+SDL_Texture* TextureManager::loadTexture(Textures texture) {
 	auto it = this->texture_cache.find(texture);
 
 	if (it != this->texture_cache.end())

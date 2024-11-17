@@ -9,7 +9,6 @@
 #include "AnimationHandler.h"
 #include "Component.h"
 #include "Direction.h"
-#include "TextureEnumBase.h"
 
 class TransformComponent;
 
@@ -25,7 +24,7 @@ private:
 	SDL_Texture* texture;
 	SDL_Rect srcRect, destRect;
 
-	TexturesEnum textureEnum;
+	Textures textureEnum;
 
 	bool animated = false;
 	uint8_t frames = 0;
@@ -34,15 +33,15 @@ private:
 
 public:
 	SpriteComponent() = default;
-	SpriteComponent(TexturesEnum textureEnum);
+	SpriteComponent(Textures textureEnum);
 	SpriteComponent(
-		TexturesEnum textureEnum,
+		Textures textureEnum,
 		bool isAnimated,
 		std::map<std::string, std::unique_ptr<Animation>>* animationList,
 		std::string defaultAnimation);
 	~SpriteComponent();
 
-	void setTexture(TexturesEnum texture);
+	void setTexture(Textures texture);
 
 	void init() override;
 	void update() override;

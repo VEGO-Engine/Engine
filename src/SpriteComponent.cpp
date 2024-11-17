@@ -12,13 +12,13 @@
 #include "GameInternal.h"
 #include "Manager.h"
 
-SpriteComponent::SpriteComponent(TexturesEnum textureEnum)
+SpriteComponent::SpriteComponent(Textures textureEnum)
 {
 	this->textureEnum = textureEnum;
 }
 
 SpriteComponent::SpriteComponent(
-	TexturesEnum textureEnum,
+	Textures textureEnum,
 	bool isAnimated,
 	std::map<std::string, std::unique_ptr<Animation>>* animationMap,
 	std::string defaultAnimation)
@@ -34,7 +34,7 @@ SpriteComponent::SpriteComponent(
 
 SpriteComponent::~SpriteComponent() {}
 
-void SpriteComponent::setTexture(TexturesEnum texture)
+void SpriteComponent::setTexture(Textures texture)
 {
 	this->texture = this->entity->getManager().getGame()->textureManager->loadTexture(texture);
 }
