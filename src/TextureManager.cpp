@@ -3,12 +3,14 @@
 #include <memory>
 #include <stdexcept>
 #include <string>
+#include <VEGO.h>
+#include <linux/soundcard.h>
 
 #include "GameInternal.h"
 
 
 void TextureManager::addSingleTexture(Textures texture, const char* filePath) {
-	auto sdlTexture = IMG_LoadTexture(this->manager->getGame()->renderer, filePath);
+	auto sdlTexture = IMG_LoadTexture(VEGO_Game().renderer, filePath);
 
 	if (sdlTexture == nullptr)
 		throw std::runtime_error(std::string("Couldn't load texture '") + filePath + "'");
@@ -38,4 +40,17 @@ void TextureManager::draw(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect
 {
 	SDL_RendererFlip flip = flipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
 	SDL_RenderCopyEx(renderer, texture, &src, &dest, 0, NULL, flip);
+}
+
+SDL_Texture* TextureManager::loadMapTileTexture(const char *path) {
+
+	//returns tile if it exists already
+	if(mapTile_texture_cache.contains(std::string(path)))
+		return mapTile_texture_cache.at(std::string(path));
+
+	auto newTexture = IMG_LoadTexture(VEGO_Game().renderer, path);
+
+	this->mapTile_texture_cache.emplace(std::string(path), newTexture);
+
+	return newTexture;
 }

@@ -104,7 +104,7 @@ void Map::loadTileLayer(const tmx::TileLayer& layer)
 
         tmx::Vector2i textureSize;
         SDL_QueryTexture(
-            VEGO_Game().textureManager->loadTexture(texturePath),
+            VEGO_Game().textureManager->loadMapTileTexture(texturePath),
             nullptr,
             nullptr,
             &(textureSize.x),
@@ -170,6 +170,7 @@ void Map::addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int
 
     tile.addComponent<TransformComponent>(x, y, mapTileSize.x, mapTileSize.y, 1);
     tile.addComponent<SpriteComponent>(texturePath.c_str(), v, u, zIndex); // why does uv need to be reversed?
+    //TODO: also implement updated map stuff for this
 
     if (hasCollision) {
         // tag currently does not have a clear purposes, TODO: figure out appropriate tag name
