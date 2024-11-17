@@ -91,8 +91,6 @@ void GameInternal::init(const char* title, int xpos, int ypos, int width, int he
 	Mix_Volume(-1, MIX_MAX_VOLUME);
 	Mix_AllocateChannels(16);
 
-	map = new Map();
-
 	// loading sounds
 	// assets->addSoundEffect("throw_egg", "assets/sound/throw_egg.wav");
 	// assets->addSoundEffect("steps", "assets/sound/steps.wav");
