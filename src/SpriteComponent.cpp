@@ -25,6 +25,11 @@ SpriteComponent::SpriteComponent(Textures texture, int xOffset, int yOffset, int
 	this->textureEnum = texture;
 }
 
+SpriteComponent::SpriteComponent(const char* path, int xOffset, int yOffset, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(xOffset), textureYOffset(yOffset) {
+
+	this->path = path;
+}
+
 SpriteComponent::SpriteComponent(
 	Textures texture,
 	bool isAnimated,

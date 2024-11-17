@@ -35,9 +35,13 @@ private:
 	int textureXOffset;
 	int textureYOffset;
 
+	//should be changed in the future as this is only for the tiles
+	const char* path;
+
 public:
 	SpriteComponent(Textures texture, int zIndex);
 	SpriteComponent(Textures texture, int xOffset, int yOffset, int zIndex);
+	SpriteComponent(const char* path, int xOffset, int yOffset, int zIndex);
 	SpriteComponent(
 		Textures texture,
 		bool isAnimated,
