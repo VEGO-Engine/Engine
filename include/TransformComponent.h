@@ -24,6 +24,7 @@ public:
 	TransformComponent(float x, float y, int w, int h, int scale);
 
 	void init() override;
+	/*! TODO: document usage of collision handler */
 	void update() override;
     void setPositionAfterCollision(Vector2D& positionChange);
 	void modifySpeed(int8_t modifier);
