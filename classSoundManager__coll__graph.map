@@ -1,11 +1,14 @@
 <map id="SoundManager" name="SoundManager">
-<area shape="rect" id="Node000001" title=" " alt="" coords="22,301,130,327"/>
+<area shape="rect" id="Node000001" title="Handles music and sound." alt="" coords="103,301,212,327"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,198,147,238"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="79,254,79,301,73,301,73,254"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="18,94,134,120"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="79,135,79,197,73,197,73,135"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="26,5,65,31"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="47,46,51,69,66,92,62,95,46,71,42,47"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="89,5,127,31"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="101,47,83,95,78,93,96,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,250,119,276,144,299,140,303,115,279,95,253"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="99,94,216,120"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="116,130,98,145,86,171,80,198,75,197,81,170,94,142,112,126"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="171,198,312,238"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="192,127,207,142,225,169,237,196,232,198,220,172,203,145,188,131"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="107,5,146,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="128,46,132,69,147,92,143,95,128,71,123,47"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="170,5,209,31"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="182,47,164,95,159,93,177,45"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="221,253,199,279,174,303,171,299,195,276,217,249"/>
 </map>

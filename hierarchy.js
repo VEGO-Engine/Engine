@@ -6,7 +6,7 @@ var hierarchy =
     [ "Component", "classComponent.html", [
       [ "ColliderComponent", "classColliderComponent.html", null ],
       [ "HealthComponent", "classHealthComponent.html", null ],
-      [ "KeyboardController", "classKeyboardController.html", null ],
+      [ "InputComponent", "classInputComponent.html", null ],
       [ "PlayerComponent", "classPlayerComponent.html", null ],
       [ "PowerupComponent", "classPowerupComponent.html", null ],
       [ "ProjectileComponent", "classProjectileComponent.html", null ],
@@ -17,12 +17,17 @@ var hierarchy =
     ] ],
     [ "Entity", "classEntity.html", null ],
     [ "Game", "classGame.html", null ],
-    [ "GameObject", "classGameObject.html", null ],
+    [ "GameFactory", "classGameFactory.html", null ],
+    [ "GameInternal", "classGameInternal.html", null ],
+    [ "vego::GameRegistryHelper< T >", "classvego_1_1GameRegistryHelper.html", null ],
     [ "Manager", "classManager.html", null ],
     [ "Map", "classMap.html", null ],
-    [ "PopupWindow", "classPopupWindow.html", null ],
+    [ "RenderManager", "classRenderManager.html", null ],
+    [ "RenderObject", "classRenderObject.html", [
+      [ "SpriteComponent", "classSpriteComponent.html", null ]
+    ] ],
     [ "SoundManager", "classSoundManager.html", null ],
-    [ "TextureDict", "classTextureDict.html", null ],
     [ "TextureManager", "classTextureManager.html", null ],
-    [ "Vector2D", "classVector2D.html", null ]
+    [ "Vector2D", "classVector2D.html", null ],
+    [ "RenderObject::ZIndexComparator", "structRenderObject_1_1ZIndexComparator.html", null ]
 ];

@@ -1,23 +1,25 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classComponent.html" title=" " alt="" coords="5,228,93,254"/>
-<area shape="rect" id="Node000001" href="$classColliderComponent.html" title=" " alt="" coords="151,5,282,31"/>
-<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="53,212,63,174,80,128,105,81,139,40,155,29,158,34,142,44,109,84,85,130,68,175,58,213"/>
-<area shape="rect" id="Node000002" href="$classHealthComponent.html" title=" " alt="" coords="154,55,279,80"/>
-<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="58,212,88,151,111,118,139,89,157,79,160,83,142,94,115,121,92,153,62,215"/>
-<area shape="rect" id="Node000003" href="$classKeyboardController.html" title=" " alt="" coords="151,104,282,130"/>
-<area shape="poly" id="edge3_Node000000_Node000003" title=" " alt="" coords="65,214,97,175,139,139,161,128,163,133,142,143,101,179,69,217"/>
-<area shape="rect" id="Node000004" href="$classPlayerComponent.html" title=" " alt="" coords="155,153,278,179"/>
-<area shape="poly" id="edge4_Node000000_Node000004" title=" " alt="" coords="83,217,140,188,168,177,169,182,142,193,85,222"/>
-<area shape="rect" id="Node000005" href="$classPowerupComponent.html" title=" " alt="" coords="147,203,286,228"/>
-<area shape="poly" id="edge5_Node000000_Node000005" title=" " alt="" coords="108,229,146,223,147,229,108,235"/>
-<area shape="rect" id="Node000006" href="$classProjectileComponent.html" title=" " alt="" coords="146,252,287,278"/>
-<area shape="poly" id="edge6_Node000000_Node000006" title=" " alt="" coords="108,247,146,252,145,257,108,252"/>
-<area shape="rect" id="Node000007" href="$classSpriteComponent.html" title=" " alt="" coords="156,301,277,327"/>
-<area shape="poly" id="edge7_Node000000_Node000007" title=" " alt="" coords="86,259,142,288,170,298,168,303,140,293,84,264"/>
-<area shape="rect" id="Node000008" href="$classStatEffectsComponent.html" title=" " alt="" coords="141,351,292,376"/>
-<area shape="poly" id="edge8_Node000000_Node000008" title=" " alt="" coords="70,265,101,302,142,337,163,348,161,352,139,342,97,306,66,268"/>
-<area shape="rect" id="Node000009" href="$classTileComponent.html" title=" " alt="" coords="162,400,271,426"/>
-<area shape="poly" id="edge9_Node000000_Node000009" title=" " alt="" coords="63,267,93,328,115,360,142,387,163,399,161,403,139,391,111,363,88,330,58,270"/>
-<area shape="rect" id="Node000010" href="$classTransformComponent.html" title=" " alt="" coords="143,449,290,475"/>
-<area shape="poly" id="edge10_Node000000_Node000010" title=" " alt="" coords="58,268,68,306,85,351,109,397,142,436,158,447,155,451,139,440,105,400,80,353,63,308,53,270"/>
+<area shape="rect" id="Node000000" href="$classComponent.html" title=" " alt="" coords="12,228,99,254"/>
+<area shape="rect" id="Node000001" href="$classColliderComponent.html" title=" " alt="" coords="164,5,294,31"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="61,212,72,173,90,127,117,81,152,40,169,29,172,34,155,44,121,84,95,130,77,175,66,213"/>
+<area shape="rect" id="Node000002" href="$classHealthComponent.html" title=" " alt="" coords="167,55,292,80"/>
+<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="65,212,98,151,123,118,152,89,171,79,173,83,155,94,127,121,103,153,70,215"/>
+<area shape="rect" id="Node000003" href="$classInputComponent.html" title=" " alt="" coords="171,104,288,130"/>
+<area shape="poly" id="edge3_Node000000_Node000003" title=" " alt="" coords="73,214,107,175,152,139,174,128,177,133,155,143,111,179,77,217"/>
+<area shape="rect" id="Node000004" href="$classPlayerComponent.html" title=" " alt="" coords="168,153,291,179"/>
+<area shape="poly" id="edge4_Node000000_Node000004" title=" " alt="" coords="92,218,153,188,181,177,183,182,155,193,94,222"/>
+<area shape="rect" id="Node000005" href="$classPowerupComponent.html" title=" " alt="" coords="160,203,298,228"/>
+<area shape="poly" id="edge5_Node000000_Node000005" title=" " alt="" coords="114,230,159,223,160,228,115,235"/>
+<area shape="rect" id="Node000006" href="$classProjectileComponent.html" title=" " alt="" coords="159,252,300,278"/>
+<area shape="poly" id="edge6_Node000000_Node000006" title=" " alt="" coords="115,246,159,252,158,258,114,252"/>
+<area shape="rect" id="Node000007" href="$classSpriteComponent.html" title=" " alt="" coords="169,449,290,475"/>
+<area shape="poly" id="edge7_Node000000_Node000007" title=" " alt="" coords="66,268,77,306,95,351,121,397,155,436,172,447,169,451,152,440,117,400,90,354,72,308,61,270"/>
+<area shape="rect" id="Node000009" href="$classStatEffectsComponent.html" title=" " alt="" coords="154,301,305,327"/>
+<area shape="poly" id="edge8_Node000000_Node000009" title=" " alt="" coords="95,259,155,288,183,298,181,303,153,293,93,264"/>
+<area shape="rect" id="Node000010" href="$classTileComponent.html" title=" " alt="" coords="175,351,284,376"/>
+<area shape="poly" id="edge9_Node000000_Node000010" title=" " alt="" coords="77,264,111,302,155,337,177,348,174,352,152,342,108,306,74,268"/>
+<area shape="rect" id="Node000011" href="$classTransformComponent.html" title=" " alt="" coords="156,400,302,426"/>
+<area shape="poly" id="edge10_Node000000_Node000011" title=" " alt="" coords="70,267,103,327,127,359,155,387,173,397,171,402,152,391,123,363,98,330,65,269"/>
+<area shape="rect" id="Node000008" href="$classRenderObject.html" title=" " alt="" coords="5,449,106,475"/>
+<area shape="poly" id="edge11_Node000008_Node000007" title=" " alt="" coords="121,460,169,460,169,465,121,465"/>
 </map>

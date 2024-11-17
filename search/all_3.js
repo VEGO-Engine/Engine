@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['delgroup_0',['delGroup',['../classEntity.html#ae3902aa921b519ed2c25cf4676c9cb5d',1,'Entity']]],
-  ['deprecated_20list_1',['Deprecated List',['../deprecated.html',1,'']]],
-  ['destroy_2',['destroy',['../classEntity.html#a691dbe5f9ec930c27af2af0b97907a9e',1,'Entity']]],
-  ['draw_3',['draw',['../classEntity.html#ae68fc12f1c715bf17a20f0e4a754ae50',1,'Entity::draw()'],['../classManager.html#ad688d8d92b4d0c1049913500ca9ba9f3',1,'Manager::draw()']]]
+  ['enemies_0',['ENEMIES',['../classEntity.html#a9449a7a0ad2c9ae5ee85ef2401382f2baf0d62ea6bc0a041d009322e77e1253c0',1,'Entity']]],
+  ['entity_1',['Entity',['../classEntity.html',1,'Entity'],['../classEntity.html#aad34087e815ec2da644b86ae2357039b',1,'Entity::Entity()']]]
 ];

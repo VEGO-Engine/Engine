@@ -1,12 +1,12 @@
 <map id="ColliderComponent" name="ColliderComponent">
-<area shape="rect" id="Node000001" title=" " alt="" coords="73,286,204,312"/>
-<area shape="rect" id="Node000002" href="$classComponent.html" title=" " alt="" coords="148,94,236,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="197,135,196,196,190,230,178,264,158,288,154,284,174,261,185,229,191,195,192,135"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="68,286,198,312"/>
+<area shape="rect" id="Node000002" href="$classComponent.html" title=" " alt="" coords="143,94,230,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,135,191,196,185,230,173,264,152,288,148,284,168,261,180,229,185,195,186,135"/>
 <area shape="rect" id="Node000004" href="$classTransformComponent.html" title=" " alt="" coords="5,198,152,223"/>
-<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="176,134,138,176,103,199,100,195,134,172,172,130"/>
-<area shape="rect" id="Node000003" href="$classEntity.html" title="Main class for any object in game, stores associations, labeling and components." alt="" coords="165,5,219,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="195,47,195,94,189,94,189,47"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="98,235,132,284,128,288,93,238"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="172,134,136,176,103,199,99,195,133,172,168,131"/>
+<area shape="rect" id="Node000003" href="$classEntity.html" title="Main class for any object in game, stores associations, labeling and components." alt="" coords="160,5,213,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="189,47,189,94,184,94,184,47"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="97,235,128,285,123,287,92,238"/>
 <area shape="rect" id="Node000005" href="$classVector2D.html" title=" " alt="" coords="41,94,116,120"/>
 <area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="81,135,81,197,76,197,76,135"/>
 </map>

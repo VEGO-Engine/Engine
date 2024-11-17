@@ -9,24 +9,16 @@ var classEntity =
       [ "HEARTS", "classEntity.html#a9449a7a0ad2c9ae5ee85ef2401382f2bad52d2d4c0b7218c48897d2e69e156ba4", null ],
       [ "POWERUPS", "classEntity.html#a9449a7a0ad2c9ae5ee85ef2401382f2ba5262638eb9e1d1af560f3d0f9ad133e4", null ]
     ] ],
-    [ "TeamLabel", "classEntity.html#ac6bf07a435aa8148464dd36e8ba11df7", [
-      [ "NONE", "classEntity.html#ac6bf07a435aa8148464dd36e8ba11df7ab50339a10e1de285ac99d4c3990b8693", null ],
-      [ "BLUE", "classEntity.html#ac6bf07a435aa8148464dd36e8ba11df7a1b3e1ee9bff86431dea6b181365ba65f", null ],
-      [ "RED", "classEntity.html#ac6bf07a435aa8148464dd36e8ba11df7aa2d9547b5d3dd9f05984475f7c926da0", null ]
-    ] ],
     [ "Entity", "classEntity.html#aad34087e815ec2da644b86ae2357039b", null ],
     [ "addComponent", "classEntity.html#ae587a44fd803d7918a45dbfe531c962d", null ],
     [ "addGroup", "classEntity.html#a712c05a013e928943c26c3a5b1467f01", null ],
     [ "delGroup", "classEntity.html#ae3902aa921b519ed2c25cf4676c9cb5d", null ],
     [ "destroy", "classEntity.html#a691dbe5f9ec930c27af2af0b97907a9e", null ],
-    [ "draw", "classEntity.html#ae68fc12f1c715bf17a20f0e4a754ae50", null ],
     [ "getComponent", "classEntity.html#ad5ce9d4246498a5a2ffd163a2d38c98f", null ],
     [ "getGroupBitSet", "classEntity.html#adf88082fc18a9ee0294072a0e028453d", null ],
     [ "getManager", "classEntity.html#acdf7c696ee39da0d8ebddb1976ea0abe", null ],
-    [ "getTeam", "classEntity.html#af24dd98377b44895122ae39aab5f4147", null ],
     [ "hasComponent", "classEntity.html#aa622a8d79153a90d0e3b9b992ca2d38b", null ],
     [ "hasGroup", "classEntity.html#acfb6240560624c026ffc24af4d469b68", null ],
     [ "isActive", "classEntity.html#aea1c1568b4123d989c5310697030ad77", null ],
-    [ "setTeam", "classEntity.html#adfef727ff63b3779c7f9d7e2467e4d18", null ],
     [ "update", "classEntity.html#af4e16c727ddfe4d27fe0edeb4b9261aa", null ]
 ];

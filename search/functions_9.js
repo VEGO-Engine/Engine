@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['update_0',['update',['../classEntity.html#af4e16c727ddfe4d27fe0edeb4b9261aa',1,'Entity::update()'],['../classManager.html#af43da42550bd9746c5ea61a6aeee80de',1,'Manager::update()'],['../classTransformComponent.html#a2a5fefaf80674dbd9854e7d0386a64e7',1,'TransformComponent::update()']]]
+  ['refresh_0',['refresh',['../classManager.html#adc5c66704fd1b0a9b9d38de8fdcb3748',1,'Manager']]],
+  ['renderall_1',['renderAll',['../classRenderManager.html#ac26def932c9624d73f03af4bd84b20ef',1,'RenderManager']]],
+  ['restartmusic_2',['restartMusic',['../classSoundManager.html#aaca970232ead83c6c107331f3d9ee0db',1,'SoundManager']]],
+  ['restartsound_3',['restartSound',['../classSoundManager.html#ac24dc06983603020f6556273d3c78df3',1,'SoundManager']]]
 ];

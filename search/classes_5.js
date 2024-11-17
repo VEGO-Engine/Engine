@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['keyboardcontroller_0',['KeyboardController',['../classKeyboardController.html',1,'']]]
+  ['inputcomponent_0',['InputComponent',['../classInputComponent.html',1,'']]]
 ];
