@@ -5,13 +5,8 @@
 #include <cstdint>
 #include <cstdio>
 #include <functional>
-#include <iostream>
-#include <fstream>
 #include <optional>
 #include <ranges>
-#include <tuple>
-#include <type_traits>
-#include <utility>
 #include <vector>
 
 #include <SDL_error.h>
@@ -22,39 +17,14 @@
 #include <tmxlite/Tileset.hpp>
 #include <tmxlite/Property.hpp>
 #include <tmxlite/TileLayer.hpp>
+#include <tmxlite/Types.hpp>
 
 #include "ColliderComponent.h"
-#include "Constants.h"
 #include "GameInternal.h"
 #include "SpriteComponent.h"
 #include "TextureManager.h"
 #include "TileComponent.h"
 #include "VEGO.h"
-#include "tmxlite/Types.hpp"
-
-template<> std::optional<bool> Map::getLayerProperty<bool>(const std::vector<tmx::Property>& properties, std::string propertyName) {
-auto zIndexIterator = std::ranges::find_if(properties, [propertyName](const tmx::Property& property) {
-    return property.getName().compare(propertyName) == 0;
-});
-
-if (zIndexIterator != properties.end() && zIndexIterator->getType() == tmx::Property::Type::Boolean) {
-    return zIndexIterator->getBoolValue();
-}
-
-return std::nullopt;
-}
-
-template<> std::optional<int> Map::getLayerProperty<int>(const std::vector<tmx::Property>& properties, std::string propertyName) {
-auto zIndexIterator = std::ranges::find_if(properties, [propertyName](const tmx::Property& property) {
-    return property.getName().compare(propertyName) == 0;
-});
-
-if (zIndexIterator != properties.end() && zIndexIterator->getType() == tmx::Property::Type::Int) {
-    return zIndexIterator->getIntValue();
-}
-
-return std::nullopt;
-}
 
 Map::Map(const char* path)
 {
@@ -65,7 +35,7 @@ Map::Map(const char* path)
 
     std::vector<std::string> texturePaths = {};
 
-    for (auto tileSet : map.getTilesets()) {
+    for (const auto& tileSet : map.getTilesets()) {
         texturePaths.emplace_back(tileSet.getImagePath());
     }
 
@@ -99,8 +69,10 @@ void Map::loadTileLayer(const tmx::TileLayer& layer)
 
     const auto& tiles = layer.getTiles();
 
+    // for each tile set
     auto tileConstructorRange = std::views::iota(0)
     | std::views::take(this->mapData.tileSets->size())
+    // return the tile set metadata
     | std::views::transform([&](uint16_t i) {
         const char* texturePath = this->mapData.texturePaths->at(i).c_str();
 
@@ -121,14 +93,17 @@ void Map::loadTileLayer(const tmx::TileLayer& layer)
         return TileSetData { texturePath, textureSize, tileCount, tileCount2D, firstGID };
     })
     | std::views::transform([=, this](const TileSetData& data) {
+        // for each tile on the tile set
         return std::views::iota(0)
         | std::views::take(this->mapData.mapSize->x * this->mapData.mapSize->y)
+        // only take tiles that are on the ID range of the tile set
         | std::views::filter([=](uint16_t idx) {
             return
                 idx < tiles.size()
                 && tiles[idx].ID >= data.firstGID
                 && tiles[idx].ID < (data.firstGID + data.tileCount);
         })
+        // extract tile data
         | std::views::transform([=, this](uint16_t idx) {
             const auto x = idx % this->mapData.mapSize->x;
             const auto y = idx / this->mapData.mapSize->x;
@@ -148,6 +123,7 @@ void Map::loadTileLayer(const tmx::TileLayer& layer)
             const float tilePosX = static_cast<float>(x) * this->mapData.mapTileSize->x;
             const float tilePosY = (static_cast<float>(y) * this->mapData.mapTileSize->y);
 
+            // return tile data as a function to spawn said tile
             return std::function<void()>(
                 [tilePosX, tilePosY, capture0 = *this->mapData.mapTileSize, u, v, zIndex, capture1 = data.texturePath, collision] {
                     Map::addTile(tilePosX, tilePosY, capture0, u, v, zIndex, capture1, collision);
@@ -155,6 +131,7 @@ void Map::loadTileLayer(const tmx::TileLayer& layer)
             );
         });
     })
+    // 2D view to 1D vector; might be better keep as view with scene management
     | std::views::join
     | std::ranges::to<std::vector>();
 
@@ -169,6 +146,7 @@ void Map::addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int
     tile.addComponent<SpriteComponent>("assets/grassy-river-tiles.png" /*texturePath*/, v, u, zIndex); // why does uv need to be reversed?
 
     if (hasCollision) {
+        // tag currently does not have a clear purposes, TODO: figure out appropriate tag name
         tile.addComponent<ColliderComponent>("hello I am a collider of a tile!");
         tile.addGroup((size_t)Entity::GroupLabel::MAPTILES);
     }

@@ -1,50 +1,44 @@
 #pragma once
 
-#include "tmxlite/Map.hpp"
-#include "tmxlite/TileLayer.hpp"
 #include <functional>
-#include <tmxlite/Property.hpp>
 #include <optional>
-#include <tmxlite/Types.hpp>
-#include <map>
 #include <string>
 #include <vector>
+
+#include <tmxlite/Map.hpp>
+#include <tmxlite/Property.hpp>
+#include <tmxlite/TileLayer.hpp>
+#include <tmxlite/Types.hpp>
 
 class GameInternal;
 class Map
 {
 public:
-	Map(const char* path);
-
-	//[[deprecated("ID based text files are not supported anymore, use .tmx maps instead")]]
-	//static void loadMap(const char* path, int sizeX, int sizeY, GameInternal* game, const std::map<int, std::pair<std::string, bool>>* textureDict /* backreference */);
-	//[[deprecated]]
-	//static void addTile(unsigned long id, int x, int y, GameInternal* game, const std::map<int, std::pair<std::string, bool>>* textureDict);
-
 	/*!
 	 * \brief Loads a .tmx map
+	 * \details Loads a `.tmx` file and extracts all relevant data. Any entities (including tiles) are only spawned once 
 	 * \param path Path to the `.tmx` map file
-	 * 
+	 * \sa Map::generateTiles()
 	 */
-	
-	void generateTiles();
+	Map(const char* path);
+	void generateTiles(); //!< Generates the map based on the loaded definition
 private:
-	// required for initialisation
+	// struct required for initialisation
 	struct MapData {
-    	const std::vector<tmx::Tileset>* tileSets;
-    	const std::vector<tmx::Layer::Ptr>* mapLayers;
-    	const tmx::Vector2u* mapSize;
-    	const tmx::Vector2u* mapTileSize;
-    	const std::vector<std::string>* texturePaths;
+		const std::vector<tmx::Tileset>* tileSets;
+		const std::vector<tmx::Layer::Ptr>* mapLayers;
+		const tmx::Vector2u* mapSize;
+		const tmx::Vector2u* mapTileSize;
+		const std::vector<std::string>* texturePaths;
 	};
 
 	struct TileSetData {
-        const char* texturePath{};
-        tmx::Vector2i textureSize;
-        uint32_t tileCount{};
-        tmx::Vector2u tileCount2D;
-        uint32_t firstGID{};
-    };
+		const char* texturePath{};
+		tmx::Vector2i textureSize;
+		uint32_t tileCount{};
+		tmx::Vector2u tileCount2D;
+		uint32_t firstGID{};
+	};
 
 	tmx::Map map;
 	Map::MapData mapData;
@@ -55,4 +49,28 @@ private:
 
 	template<typename T>
 	static std::optional<T> getLayerProperty(const std::vector<tmx::Property>& properties, std::string propertyName) { return std::nullopt; };
+	template<> std::optional<bool> getLayerProperty(const std::vector<tmx::Property>& properties, std::string propertyName) {
+		auto zIndexIterator = std::ranges::find_if(properties, [propertyName](const tmx::Property& property) {
+			return property.getName().compare(propertyName) == 0;
+		});
+
+		if (zIndexIterator != properties.end() && zIndexIterator->getType() == tmx::Property::Type::Boolean) {
+			return zIndexIterator->getBoolValue();
+		}
+
+		return std::nullopt;
+	}
+
+	template<> std::optional<int> getLayerProperty(const std::vector<tmx::Property>& properties, std::string propertyName) 
+	{
+		auto zIndexIterator = std::ranges::find_if(properties, [propertyName](const tmx::Property& property) {
+			return property.getName().compare(propertyName) == 0;
+		});
+
+		if (zIndexIterator != properties.end() && zIndexIterator->getType() == tmx::Property::Type::Int) {
+			return zIndexIterator->getIntValue();
+		}
+
+		return std::nullopt;
+	}
 };
