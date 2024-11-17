@@ -26,6 +26,32 @@
 #include "TileComponent.h"
 #include "VEGO.h"
 
+
+template<> std::optional<bool> Map::getLayerProperty(const std::vector<tmx::Property>& properties, std::string propertyName) {
+    auto zIndexIterator = std::ranges::find_if(properties, [propertyName](const tmx::Property& property) {
+        return property.getName().compare(propertyName) == 0;
+    });
+
+    if (zIndexIterator != properties.end() && zIndexIterator->getType() == tmx::Property::Type::Boolean) {
+        return zIndexIterator->getBoolValue();
+    }
+
+    return std::nullopt;
+}
+
+template<> std::optional<int> Map::getLayerProperty(const std::vector<tmx::Property>& properties, std::string propertyName) 
+{
+    auto zIndexIterator = std::ranges::find_if(properties, [propertyName](const tmx::Property& property) {
+        return property.getName().compare(propertyName) == 0;
+    });
+
+    if (zIndexIterator != properties.end() && zIndexIterator->getType() == tmx::Property::Type::Int) {
+        return zIndexIterator->getIntValue();
+    }
+
+    return std::nullopt;
+}
+
 Map::Map(const char* path)
 {
     if (!this->map.load(path)) {
@@ -138,12 +164,12 @@ void Map::loadTileLayer(const tmx::TileLayer& layer)
     this->tileConstructors.insert(this->tileConstructors.end(), tileConstructorRange.begin(), tileConstructorRange.end());
 }
 
-void Map::addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int v, int zIndex, const char* texturePath, bool hasCollision)
+void Map::addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int v, int zIndex, std::string texturePath, bool hasCollision)
 {
     auto& tile(VEGO_Game().manager.addEntity());
 
     tile.addComponent<TransformComponent>(x, y, mapTileSize.x, mapTileSize.y, 1);
-    tile.addComponent<SpriteComponent>("assets/grassy-river-tiles.png" /*texturePath*/, v, u, zIndex); // why does uv need to be reversed?
+    tile.addComponent<SpriteComponent>(texturePath.c_str(), v, u, zIndex); // why does uv need to be reversed?
 
     if (hasCollision) {
         // tag currently does not have a clear purposes, TODO: figure out appropriate tag name

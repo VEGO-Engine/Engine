@@ -33,7 +33,7 @@ private:
 	};
 
 	struct TileSetData {
-		const char* texturePath{};
+		std::string texturePath{};
 		tmx::Vector2i textureSize;
 		uint32_t tileCount{};
 		tmx::Vector2u tileCount2D;
@@ -45,32 +45,8 @@ private:
 	std::vector<std::function<void()>> tileConstructors;
 
 	void loadTileLayer(const tmx::TileLayer& layer);
-	static void addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int v, int zIndex, const char* texturePath, bool hasCollision);
+	static void addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int v, int zIndex, std::string texturePath, bool hasCollision);
 
 	template<typename T>
 	static std::optional<T> getLayerProperty(const std::vector<tmx::Property>& properties, std::string propertyName) { return std::nullopt; };
-	template<> std::optional<bool> getLayerProperty(const std::vector<tmx::Property>& properties, std::string propertyName) {
-		auto zIndexIterator = std::ranges::find_if(properties, [propertyName](const tmx::Property& property) {
-			return property.getName().compare(propertyName) == 0;
-		});
-
-		if (zIndexIterator != properties.end() && zIndexIterator->getType() == tmx::Property::Type::Boolean) {
-			return zIndexIterator->getBoolValue();
-		}
-
-		return std::nullopt;
-	}
-
-	template<> std::optional<int> getLayerProperty(const std::vector<tmx::Property>& properties, std::string propertyName) 
-	{
-		auto zIndexIterator = std::ranges::find_if(properties, [propertyName](const tmx::Property& property) {
-			return property.getName().compare(propertyName) == 0;
-		});
-
-		if (zIndexIterator != properties.end() && zIndexIterator->getType() == tmx::Property::Type::Int) {
-			return zIndexIterator->getIntValue();
-		}
-
-		return std::nullopt;
-	}
 };
