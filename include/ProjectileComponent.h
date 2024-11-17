@@ -11,7 +11,8 @@ class ProjectileComponent : public Component
     //can maybe be split in separate .cpp file
 
 public:
-    ProjectileComponent(int range, int speed, Vector2D direction) : range(range), speed(speed), direction(direction) {}
+    ProjectileComponent(int range, int speed, Vector2D direction, Entity* owner)
+    : range(range), speed(speed), direction(direction), owner(owner) {}
     ~ProjectileComponent() {}
 
     void init() override;
@@ -23,6 +24,8 @@ private:
     int range = 0;
     int speed = 0;
     int distance = 0;
+
+    Entity* owner = nullptr;
 
     Vector2D direction;
 };

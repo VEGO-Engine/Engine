@@ -2,7 +2,7 @@
 
 #include "CollisionHandler.h"
 #include "Entity.h"
-#include "Game.h"
+#include "GameInternal.h"
 #include "TransformComponent.h"
 #include <iostream>
 
@@ -31,7 +31,6 @@ void ColliderComponent::init()
 	}
 
 	transform = &entity->getComponent<TransformComponent>();
-	//Game::collisionHandler->add(this);
 	this->update();
 }
 

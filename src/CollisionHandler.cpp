@@ -87,8 +87,7 @@ IntersectionBitSet CollisionHandler::getIntersectionWithBounds(Entity* entity, V
 
 std::vector<ColliderComponent*> CollisionHandler::getColliders(
 	std::initializer_list<Entity::GroupLabel> const& groupLabels,
-	std::initializer_list<Entity::TeamLabel> const& teamLabels,
-	bool negateTeam) 
+	std::initializer_list<Entity*> const& excludedEntities) 
 {
 	std::vector<ColliderComponent*> colliders;
 
@@ -97,16 +96,11 @@ std::vector<ColliderComponent*> CollisionHandler::getColliders(
 		groupBitSet.set((size_t) groupLabel);
 	}
 
-	std::bitset<MAX_TEAMS> teamBitSet;
-	for (auto& teamLabel : teamLabels) {
-		teamBitSet.set((size_t) teamLabel);
-	}
-
 	for (auto& entity : manager.getAll()) {
 		if ((groupBitSet & entity->getGroupBitSet()).none())
 			continue;
-		if (teamBitSet.any() && negateTeam != (teamBitSet.test((size_t) entity->getTeam())))
-			continue;
+		if (std::ranges::find(excludedEntities, entity) != excludedEntities.end())
+    		continue;
 		if (!entity->hasComponent<ColliderComponent>())
 			continue;
 		colliders.emplace_back(&entity->getComponent<ColliderComponent>());
@@ -131,12 +125,11 @@ IntersectionBitSet CollisionHandler::getAnyIntersection<IntersectionBitSet>(
 	Entity* entity,
 	Vector2D posMod,
 	std::initializer_list<Entity::GroupLabel> const& groupLabels,
-	std::initializer_list<Entity::TeamLabel> const& teamLabels,
-	bool negateTeam)
+	std::initializer_list<Entity*> const& excludedEntities)
 {
 	if (!entity->hasComponent<ColliderComponent>()) return std::bitset<DIRECTION_C>();
 	IntersectionBitSet intersections;
-	for (auto& collider : getColliders(groupLabels, teamLabels)) {
+	for (auto& collider : getColliders(groupLabels, excludedEntities)) {
    		intersections |= getIntersection(entity, collider->entity, posMod);
 	}
 	return intersections;
@@ -154,11 +147,10 @@ Entity* CollisionHandler::getAnyIntersection<Entity*>(
 	Entity* entity,
 	Vector2D posMod,
 	std::initializer_list<Entity::GroupLabel> const& groupLabels,
-	std::initializer_list<Entity::TeamLabel> const& teamLabels,
-	bool negateTeam)
+	std::initializer_list<Entity*> const& excludedEntities)
 {
 	if (!entity->hasComponent<ColliderComponent>()) return nullptr;
-	for (auto& collider : getColliders(groupLabels, teamLabels)) {
+	for (auto& collider : getColliders(groupLabels, excludedEntities)) {
 		SDL_Rect rect = entity->getComponent<ColliderComponent>().collider + posMod;
    	    if (SDL_HasIntersection(&rect, &collider->collider)) {
    	    	return collider->entity;
@@ -178,11 +170,10 @@ bool CollisionHandler::getAnyIntersection<bool>(
 	Entity* entity,
 	Vector2D posMod,
 	std::initializer_list<Entity::GroupLabel> const& groupLabels,
-	std::initializer_list<Entity::TeamLabel> const& teamLabels,
-	bool negateTeam)
+	std::initializer_list<Entity*> const& excludedEntities)
 {
 	if (!entity->hasComponent<ColliderComponent>()) return false;
-	for (auto& collider : getColliders(groupLabels, teamLabels)) {
+	for (auto& collider : getColliders(groupLabels, excludedEntities)) {
 		SDL_Rect rect = entity->getComponent<ColliderComponent>().collider + posMod;
    	    if (SDL_HasIntersection(&rect, &collider->collider)) {
    	    	return true;

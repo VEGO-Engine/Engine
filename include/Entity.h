@@ -9,6 +9,12 @@
 #include "ECS.h"
 #include "Constants.h"
 
+// TODO: remove here if possible
+// temporary fix: addComponent function template doesnt know TransformComponent -> error undefined type
+#include "InputComponent.h"
+#include "TransformComponent.h"
+#include "SpriteComponent.h"
+
 class Manager;
 class Component;
 
@@ -48,25 +54,12 @@ public:
 	};
 
 	/*!
-	 * \brief Allows grouping entities by team association for hits, win conditions, etc.
-	 */
-	enum class TeamLabel
-	{
-		NONE, //!< No team, should be skipped in any checks
-		BLUE, //!< Team blue
-		RED //!< Team red
-	};
-
-	/*!
 	 * \todo Document
 	 */
 	explicit Entity(Manager& mManager) :
 		manager(mManager) { };
 
 	void update() const; //!< Call each frame to update all components
-	//! Call after update to render components.
-	//! \sa SpriteComponent::draw()
-	void draw() const;
 
 	bool isActive() const { return this->active; } //!< \sa destroy()
 	//! Mark for destruction for Manager::refresh() and disables collision
@@ -84,9 +77,6 @@ public:
 	//! \returns bitset with true on position GroupLabel if the entity belongs to group
 	//! \sa GroupLabel
 	std::bitset<MAX_GROUPS> getGroupBitSet();
-
-	void setTeam(TeamLabel teamLabel); //!< \sa TeamLabel
-	TeamLabel getTeam(); //!< \sa TeamLabel
 
  	//! \sa Manager
 	Manager& getManager() { return manager; };
@@ -126,5 +116,4 @@ private:
 	ComponentArray componentArray = {};
 	ComponentBitSet componentBitSet;
 	GroupBitSet groupBitSet;
-	TeamLabel teamLabel;
 };
