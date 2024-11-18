@@ -25,11 +25,11 @@ public:
 
 	void init() override;
 	/*! TODO: document usage of collision handler */
-	void update() override;
+	void update(uint_fast16_t diffTime) override;
     void setPositionAfterCollision(Vector2D& positionChange);
 	void modifySpeed(int8_t modifier);
 
 private:
-	int speed = 3;
+	int speed = 180;
 	int speedMod = 0;
 };

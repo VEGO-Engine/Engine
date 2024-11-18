@@ -16,14 +16,14 @@ public:
     ~ProjectileComponent() {}
 
     void init() override;
-    void update() override;
+    void update(uint_fast16_t diffTime) override;
 
 private:
     TransformComponent* transformComponent;
 
     int range = 0;
-    int speed = 0;
-    int distance = 0;
+    float speed = 0;
+    float distance = 0;
 
     Entity* owner = nullptr;
 

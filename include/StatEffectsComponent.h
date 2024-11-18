@@ -16,7 +16,7 @@ public:
 	~StatEffectsComponent() {};
 
 	void init() override;
-	void update() override;
+	void update(uint_fast16_t diffTime) override;
 
 	void modifyStatDur(Stats stat, int duration, int value);
 

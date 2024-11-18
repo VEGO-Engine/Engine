@@ -8,16 +8,16 @@
 void StatEffectsComponent::init()
 {}
 
-void StatEffectsComponent::update()
+void StatEffectsComponent::update(uint_fast16_t diffTime)
 {
 	for (int i = 0; i < MAX_STATS; i++)
 	{
-		if (this->buffs.at(i) == 0) continue;
-		if (this->buffs.at(i) - 1 == 0)
+		if (this->buffs.at(i) <= 0) continue;
+		if (this->buffs.at(i) - diffTime <= 0)
 		{
 			this->resetStatValue((Stats)i);
 		}
-		this->buffs.at(i) -= 1;
+		this->buffs.at(i) -= diffTime;
 	}
 }
 
@@ -32,7 +32,7 @@ void StatEffectsComponent::modifyStatValue(Stats stat, int modifier) //modifier 
 	switch (stat)
 	{
 	case Stats::MOVEMENT_SPEED:
-		this->entity->getComponent<TransformComponent>().modifySpeed(modifier);
+		this->entity->getComponent<TransformComponent>().modifySpeed(modifier * 60);
 		break;
 	case Stats::ATTACK_SPEED:
 		// this->entity->getComponent<KeyboardController>().modifyAtkSpeed(modifier);

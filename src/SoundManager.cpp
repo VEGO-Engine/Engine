@@ -1,6 +1,5 @@
 #include "SoundManager.h"
 
-#include <stdexcept>
 #include <string>
 #include <iostream>
 

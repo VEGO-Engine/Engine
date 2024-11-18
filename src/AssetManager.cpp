@@ -46,7 +46,7 @@ Mix_Music* AssetManager::getMusic(std::string id)
 	return music.at(id);
 }
 
-void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, const char* texturePath, Entity* owner) {
+void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, float speed, const char* texturePath, Entity* owner) {
 
     auto& projectile(man->addEntity());
     projectile.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, scale); //32x32 is standard size for objects

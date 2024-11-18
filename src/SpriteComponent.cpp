@@ -59,14 +59,14 @@ void SpriteComponent::init()
 	this->srcRect.x = this->textureXOffset * this->srcRect.w;
 	this->srcRect.y = this->textureYOffset * this->srcRect.h;;
 
-	this->update();
+	this->update(0);
 }
 
-void SpriteComponent::update()
+void SpriteComponent::update(uint_fast16_t diffTime)
 {
 	// This code is not compatible for animated tiles
 	if (animated) {
-		srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
+		srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames); // TODO: should not call SDL_GetTicks() but use diffTime
 
 		srcRect.y = animationIndex * transform->height;
 	}

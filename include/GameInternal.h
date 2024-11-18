@@ -3,6 +3,7 @@
 #include <SDL3/SDL.h>
 #include <SDL3_image/SDL_image.h>
 #include <SDL3_mixer/SDL_mixer.h>
+#include <cstdint>
 #include <functional>
 #include <vector>
 
@@ -26,10 +27,10 @@ public:
 	GameInternal();
 	~GameInternal();
 
-	void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
+	SDL_AppResult init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
 
 	void handleEvents();
-	void update();
+	void update(Uint64 frameTime);
 	void render();
 	void clean();
 	bool isRunning() const;
@@ -63,4 +64,6 @@ private:
 	int counter = 0;
 	bool running = true;
 	SDL_Window* window;
+
+	Uint64 lastFrameTime = 0;
 };

@@ -22,7 +22,7 @@ public:
 	ColliderComponent(const char* tag, float hitboxScale);
 
 	void init() override;
-	void update() override;
+	void update(uint_fast16_t diffTime) override;
     void removeCollision();
 
 	void handleCollision(Vector2D& characterPos, SDL_Rect& characterCollider, SDL_Rect& componentCollider);

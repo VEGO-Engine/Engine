@@ -13,6 +13,8 @@
 #include "Game.h"
 #include "GameFactory.h"
 
+#include <VEGO.h>
+
 GameInternal::GameInternal() :
 	manager(this),
 	renderManager(),
@@ -25,7 +27,7 @@ GameInternal::GameInternal() :
 
 GameInternal::~GameInternal() = default;
 
-void GameInternal::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
+SDL_AppResult GameInternal::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
 	GameInternal::assets = new AssetManager(&manager);
 	GameInternal::textureManager = new TextureManager(&manager);
@@ -42,12 +44,12 @@ void GameInternal::init(const char* title, int xpos, int ypos, int width, int he
 	{
 		std::cout << "ERROR. Subsystem couldnt be initialized! " << SDL_GetError() << std::endl;
 		SDL_ClearError();
-		return;
+		return SDL_APP_FAILURE;
 	}
 
 	if (Mix_Init(MIX_INIT_MP3) != MIX_INIT_MP3) {
 		std::cout << "ERROR. Subsystem couldnt be initialized!" << std::endl;
-		return;
+		return SDL_APP_FAILURE;
 	}
 
 	window = SDL_CreateWindow(title, width, height, flags);
@@ -55,7 +57,7 @@ void GameInternal::init(const char* title, int xpos, int ypos, int width, int he
 	{
 		std::cout << "ERROR: Window couldnt be created! " << SDL_GetError() << std::endl;
 		SDL_ClearError();
-		return;
+		return SDL_APP_FAILURE;
 	}
 
     // bad
@@ -72,7 +74,7 @@ void GameInternal::init(const char* title, int xpos, int ypos, int width, int he
 	{
 		std::cout << "ERROR: Renderer couldnt be created! " << SDL_GetError() << std::endl;
 		SDL_ClearError();
-		return;
+		return SDL_APP_FAILURE;
 	}
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
@@ -80,7 +82,7 @@ void GameInternal::init(const char* title, int xpos, int ypos, int width, int he
 	{
 		std::cout << "ERROR: Mixer couldnt be initialized! " << SDL_GetError() << std::endl;
 		SDL_ClearError();
-		return;
+		return SDL_APP_FAILURE;
 	}
 
 	Mix_Volume(-1, MIX_MAX_VOLUME);
@@ -95,6 +97,8 @@ void GameInternal::init(const char* title, int xpos, int ypos, int width, int he
 
 	this->gameInstance = GameFactory::instance().create(this);
 	this->gameInstance->init();
+
+	return SDL_APP_CONTINUE;
 }
 
 void GameInternal::handleEvents()
@@ -111,12 +115,16 @@ void GameInternal::handleEvents()
 	}
 }
 
-void GameInternal::update()
+void GameInternal::update(Uint64 frameTime)
 {
 	manager.refresh();
-	manager.update();
 
-	this->gameInstance->update(); // TODO: this might have to be split up into two update functions, before and after manager...
+	uint_fast16_t diffTime = frameTime - this->lastFrameTime;
+	manager.update(diffTime);
+
+	this->gameInstance->update(diffTime); // TODO: this might have to be split up into two update functions, before and after manager...
+
+	this->lastFrameTime = frameTime;
 }
 
 void GameInternal::render()
