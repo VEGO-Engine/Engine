@@ -86,7 +86,7 @@ Vector2D AssetManager::calculateSpawnPosition()
 		conflict = false;
 		for (auto cc : this->man->getGame()->collisionHandler->getColliders({ Entity::GroupLabel::MAPTILES }))
 		{
-			if (SDL_HasIntersection(&spawnRect, &cc->collider) && strcmp(cc->tag, "projectile"))
+			if (SDL_HasRectIntersection(&spawnRect, &cc->collider) && strcmp(cc->tag, "projectile"))
 			{
 				conflict = true;
 				break;

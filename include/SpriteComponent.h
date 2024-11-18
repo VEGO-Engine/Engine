@@ -1,7 +1,7 @@
 #pragma once
 
 #include <map>
-#include <SDL_render.h>
+#include <SDL3/SDL_render.h>
 #include <memory>
 #include <string>
 
@@ -22,7 +22,7 @@ public:
 private:
 	TransformComponent* transform;
 	SDL_Texture* texture;
-	SDL_Rect srcRect, destRect;
+	SDL_FRect srcRect, destRect;
 
 	const char* texturePath;
 

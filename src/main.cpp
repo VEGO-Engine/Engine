@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctime>
+#include <SDL3/SDL_main.h>
 
 #include "VEGO.h"
 #include "Entity.h"

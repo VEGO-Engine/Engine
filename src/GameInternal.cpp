@@ -1,20 +1,15 @@
 #include "GameInternal.h"
 
-#include <SDL_error.h>
-
 #include "CollisionHandler.h"
 #include "AssetManager.h"
 #include "RenderManager.h"
-#include "SDL_mixer.h"
+#include <SDL3_mixer/SDL_mixer.h>
+#include "SDL3/SDL_init.h"
 #include "SoundManager.h"
-#include "TileComponent.h"
-#include "Direction.h"
 #include "Entity.h"
 #include "HealthComponent.h"
 #include "Map.h"
 #include "TextureManager.h"
-#include "StatEffectsComponent.h"
-#include "Constants.h"
 #include "Game.h"
 #include "GameFactory.h"
 
@@ -43,7 +38,7 @@ void GameInternal::init(const char* title, int xpos, int ypos, int width, int he
 		flags = SDL_WINDOW_FULLSCREEN;
 	}
 
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+	if (!SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO))
 	{
 		std::cout << "ERROR. Subsystem couldnt be initialized! " << SDL_GetError() << std::endl;
 		SDL_ClearError();
@@ -55,7 +50,7 @@ void GameInternal::init(const char* title, int xpos, int ypos, int width, int he
 		return;
 	}
 
-	window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
+	window = SDL_CreateWindow(title, width, height, flags);
 	if (!window)
 	{
 		std::cout << "ERROR: Window couldnt be created! " << SDL_GetError() << std::endl;
@@ -72,7 +67,7 @@ void GameInternal::init(const char* title, int xpos, int ypos, int width, int he
 
     SDL_SetWindowIcon(window, icon);
 
-	renderer = SDL_CreateRenderer(window, -1, 0);
+	renderer = SDL_CreateRenderer(window, NULL);
 	if (!renderer)
 	{
 		std::cout << "ERROR: Renderer couldnt be created! " << SDL_GetError() << std::endl;
@@ -81,7 +76,7 @@ void GameInternal::init(const char* title, int xpos, int ypos, int width, int he
 	}
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+	if (!Mix_OpenAudio(0, NULL))
 	{
 		std::cout << "ERROR: Mixer couldnt be initialized! " << SDL_GetError() << std::endl;
 		SDL_ClearError();
@@ -108,7 +103,7 @@ void GameInternal::handleEvents()
 
 	switch (event.type)
 	{
-		case SDL_QUIT: this->setRunning(false);
+		case SDL_EVENT_QUIT: this->setRunning(false);
 			break;
 
 		default:

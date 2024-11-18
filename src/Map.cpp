@@ -9,8 +9,8 @@
 #include <ranges>
 #include <vector>
 
-#include <SDL_error.h>
-#include <SDL_render.h>
+#include <SDL3/SDL_error.h>
+#include <SDL3/SDL_render.h>
 
 #include <tmxlite/Layer.hpp>
 #include <tmxlite/Map.hpp>
@@ -102,16 +102,14 @@ void Map::loadTileLayer(const tmx::TileLayer& layer)
     | std::views::transform([&](uint16_t i) {
         const char* texturePath = this->mapData.texturePaths->at(i).c_str();
 
-        tmx::Vector2i textureSize;
-        SDL_QueryTexture(
+        tmx::Vector2f textureSize;
+        SDL_GetTextureSize(
             VEGO_Game().textureManager->loadTexture(texturePath),
-            nullptr,
-            nullptr,
             &(textureSize.x),
             &(textureSize.y)
         );
 
-        tmx::Vector2u tileCount2D = { textureSize.x / this->mapData.mapTileSize->x, textureSize.y / this->mapData.mapTileSize->y };
+        tmx::Vector2u tileCount2D = { static_cast<unsigned int>(textureSize.x / this->mapData.mapTileSize->x), static_cast<unsigned int>(textureSize.y / this->mapData.mapTileSize->y) };
 
         uint32_t tileCount = this->mapData.tileSets->at(i).getTileCount();
         uint32_t firstGID = this->mapData.tileSets->at(i).getFirstGID();

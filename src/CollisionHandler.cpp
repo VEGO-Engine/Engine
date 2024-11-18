@@ -6,7 +6,7 @@
 #include "Manager.h"
 #include "Vector2D.h"
 
-#include <SDL_rect.h>
+#include <SDL3/SDL_rect.h>
 #include <bitset>
 #include <cstdio>
 #include <memory>
@@ -26,7 +26,7 @@ IntersectionBitSet CollisionHandler::getIntersection(Entity* entityA, Entity* en
 	colliderB.x += posModB.x;
 	colliderB.y += posModB.y;
 
-	if (!SDL_HasIntersection(
+	if (!SDL_HasRectIntersection(
 		&colliderA,
 		&colliderB))
 		return std::bitset<DIRECTION_C>();
@@ -152,7 +152,7 @@ Entity* CollisionHandler::getAnyIntersection<Entity*>(
 	if (!entity->hasComponent<ColliderComponent>()) return nullptr;
 	for (auto& collider : getColliders(groupLabels, excludedEntities)) {
 		SDL_Rect rect = entity->getComponent<ColliderComponent>().collider + posMod;
-   	    if (SDL_HasIntersection(&rect, &collider->collider)) {
+   	    if (SDL_HasRectIntersection(&rect, &collider->collider)) {
    	    	return collider->entity;
    	    }
 	}
@@ -175,7 +175,7 @@ bool CollisionHandler::getAnyIntersection<bool>(
 	if (!entity->hasComponent<ColliderComponent>()) return false;
 	for (auto& collider : getColliders(groupLabels, excludedEntities)) {
 		SDL_Rect rect = entity->getComponent<ColliderComponent>().collider + posMod;
-   	    if (SDL_HasIntersection(&rect, &collider->collider)) {
+   	    if (SDL_HasRectIntersection(&rect, &collider->collider)) {
    	    	return true;
    	    }
 	}

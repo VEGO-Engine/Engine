@@ -1,6 +1,5 @@
 #include "TextureManager.h"
 
-#include <memory>
 #include <stdexcept>
 #include <string>
 
@@ -14,13 +13,14 @@ SDL_Texture* TextureManager::loadTexture(const char* fileName)
 	}
 	auto texture = IMG_LoadTexture(this->manager->getGame()->renderer, fileName);
 	if (texture == NULL) throw std::runtime_error(std::string("Couldn't load texture '") + fileName + "'");
+	SDL_SetTextureScaleMode(texture, this->scaleMode); // linear scaling results in blurry images
 	this->texture_cache.emplace(std::string(fileName), texture);
 	printf("Loaded texture at '%s'\n", fileName);
 	return texture;
 }
 
-void TextureManager::draw(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect src, SDL_Rect dest, bool flipped)
+void TextureManager::draw(SDL_Renderer* renderer, SDL_Texture* texture, SDL_FRect src, SDL_FRect dest, bool flipped)
 {
-	SDL_RendererFlip flip = flipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
-	SDL_RenderCopyEx(renderer, texture, &src, &dest, 0, NULL, flip);
+	SDL_FlipMode flip = flipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
+	SDL_RenderTextureRotated(renderer, texture, &src, &dest, 0, NULL, flip);
 }

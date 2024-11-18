@@ -7,7 +7,7 @@
 #include "ColliderComponent.h"
 #include "Constants.h"
 #include "Entity.h"
-#include "SDL_rect.h"
+#include <SDL3/SDL_rect.h>
 #include "SpriteComponent.h"
 #include "Vector2D.h"
 #include "Manager.h"
