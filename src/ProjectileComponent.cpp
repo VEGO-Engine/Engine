@@ -27,7 +27,7 @@ void ProjectileComponent::update(uint_fast16_t diffTime)
         this->entity->destroy();
     }
 
-    if (distance > range && false) {
+    if (distance > range) {
         this->entity->destroy();
     }
 
