@@ -3,6 +3,7 @@
 #include <SDL_timer.h>
 #include <cstring>
 #include <memory>
+#include <magic_enum/magic_enum.hpp>
 
 #include "AnimationHandler.h"
 #include "Direction.h"
@@ -18,11 +19,13 @@
 SpriteComponent::SpriteComponent(Textures texture, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(0), textureYOffset(0)
 {
 	this->textureEnum = texture;
+	this->path = "";
 }
 
 SpriteComponent::SpriteComponent(Textures texture, int xOffset, int yOffset, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(xOffset), textureYOffset(yOffset)
 {
 	this->textureEnum = texture;
+	this->path = "";
 }
 
 SpriteComponent::SpriteComponent(const char* path, int xOffset, int yOffset, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(xOffset), textureYOffset(yOffset) {
@@ -44,6 +47,8 @@ SpriteComponent::SpriteComponent(
 	playAnimation(defaultAnimation);
 
 	this->textureEnum = texture;
+
+	this->path = "";
 }
 
 SpriteComponent::~SpriteComponent() {}
@@ -55,7 +60,12 @@ void SpriteComponent::setTexture(Textures texture)
 
 void SpriteComponent::init()
 {
-	setTexture(this->textureEnum);
+	if (this->path == "") {
+		setTexture(this->textureEnum);
+	}
+	else {
+		setMapTileTexture(this->path);
+	}
 
 	this->transform = &entity->getComponent<TransformComponent>();
 
@@ -97,4 +107,8 @@ void SpriteComponent::playAnimation(std::string type)
 void SpriteComponent::setDirection(Direction direction)
 {
 	this->flipped = direction == Direction::RIGHT;
+}
+
+void SpriteComponent::setMapTileTexture(const char *path) {
+	this->texture = VEGO_Game().textureManager->loadMapTileTexture(path);
 }

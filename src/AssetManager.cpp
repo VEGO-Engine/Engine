@@ -31,9 +31,6 @@ void AssetManager::addMusic(std::string id, const char* path)
     music.emplace(id, this->man->getGame()->soundManager->loadMusic(path));
 }
 
-SDL_Texture* AssetManager::getTexture(std::string id) {
-    return textures.at(id);
-}
 
 Mix_Chunk* AssetManager::getSound(std::string id) {
     return soundEffects.at(id);

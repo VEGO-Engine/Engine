@@ -51,6 +51,7 @@ public:
 	~SpriteComponent();
 
 	void setTexture(Textures texture);
+	void setMapTileTexture(const char* path);
 
 	void init() override;
 	void update() override;

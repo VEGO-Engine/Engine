@@ -46,9 +46,12 @@ SDL_Texture* TextureManager::loadMapTileTexture(const char *path) {
 
 	//returns tile if it exists already
 	if(mapTile_texture_cache.contains(std::string(path)))
-		return mapTile_texture_cache.at(std::string(path));
+		return mapTile_texture_cache.find(std::string(path))->second;
 
 	auto newTexture = IMG_LoadTexture(VEGO_Game().renderer, path);
+
+	if (newTexture == nullptr)
+		throw std::runtime_error(std::string("Couldn't load texture '") + path + "'");
 
 	this->mapTile_texture_cache.emplace(std::string(path), newTexture);
 

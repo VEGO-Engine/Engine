@@ -16,6 +16,9 @@ class TextureManager
 			for (auto& it : this->texture_cache) {
 				SDL_DestroyTexture(it.second);
 			}
+			for (auto& it : this->mapTile_texture_cache) {
+				SDL_DestroyTexture(it.second);
+			}
 		}
 
 		void addSingleTexture(Textures texture, const char* filePath);
