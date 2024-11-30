@@ -4,7 +4,6 @@
 #include <stdexcept>
 #include <string>
 #include <VEGO.h>
-#include <linux/soundcard.h>
 
 #include "GameInternal.h"
 
