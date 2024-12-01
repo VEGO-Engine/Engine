@@ -15,13 +15,11 @@
 #include "PowerupComponent.h"
 #include <iostream>
 
+#include "Textures.h"
+
 AssetManager::AssetManager(Manager* manager) : man(manager) {}
 
 AssetManager::~AssetManager() {}
-
-void AssetManager::addTexture(std::string id, const char* path) {
-    textures.emplace(id, this->man->getGame()->textureManager->loadTexture(path));
-}
 
 void AssetManager::addSoundEffect(std::string id, const char* path)
 {
@@ -33,9 +31,6 @@ void AssetManager::addMusic(std::string id, const char* path)
     music.emplace(id, this->man->getGame()->soundManager->loadMusic(path));
 }
 
-SDL_Texture* AssetManager::getTexture(std::string id) {
-    return textures.at(id);
-}
 
 Mix_Chunk* AssetManager::getSound(std::string id) {
     return soundEffects.at(id);
@@ -46,23 +41,23 @@ Mix_Music* AssetManager::getMusic(std::string id)
 	return music.at(id);
 }
 
-void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, const char* texturePath, Entity* owner) {
+void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, Textures textureEnum, Entity* owner) {
 
     auto& projectile(man->addEntity());
     projectile.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, scale); //32x32 is standard size for objects
-    projectile.addComponent<SpriteComponent>(texturePath, 4);
+    projectile.addComponent<SpriteComponent>(textureEnum, 4);
     projectile.addComponent<ProjectileComponent>(range, speed, velocity, owner);
     projectile.addComponent<ColliderComponent>("projectile", 0.6f);
     projectile.addGroup((size_t)Entity::GroupLabel::PROJECTILE);
 }
 
-void AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, std::string texturePath) {
+void AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, Textures texture) {
 
     auto& powerups(man->addEntity());
     powerups.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, 1); //32x32 is standard size for objects
 
     try {
-        powerups.addComponent<SpriteComponent>(texturePath.c_str(), 3);
+        powerups.addComponent<SpriteComponent>(texture, 3);
     }
     catch (std::runtime_error e) {
         std::cout << e.what() << std::endl;

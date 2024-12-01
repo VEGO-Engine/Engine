@@ -16,7 +16,7 @@ class Map
 public:
 	/*!
 	 * \brief Loads a .tmx map
-	 * \details Loads a `.tmx` file and extracts all relevant data. Any entities (including tiles) are only spawned once 
+	 * \details Loads a `.tmx` file and extracts all relevant data. Any entities (including tiles) are only spawned once
 	 * \param path Path to the `.tmx` map file
 	 * \sa Map::generateTiles()
 	 */

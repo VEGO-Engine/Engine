@@ -5,6 +5,7 @@
 #include <memory>
 #include <string>
 
+#include "Textures.h"
 #include "AnimationHandler.h"
 #include "Component.h"
 #include "Direction.h"
@@ -24,7 +25,7 @@ private:
 	SDL_Texture* texture;
 	SDL_Rect srcRect, destRect;
 
-	const char* texturePath;
+	Textures textureEnum;
 
 	bool animated = false;
 	uint8_t frames = 0;
@@ -34,18 +35,24 @@ private:
 	int textureXOffset;
 	int textureYOffset;
 
+	//there should be a better solution as this variable is only used for the loading of the tmx map
+	//TODO: improve this in the future and also remove it from the scope of the developer
+	const char* path; //!< empty string if texture has a texture enum value, otherwise the path of the texture
+
 public:
-	SpriteComponent(const char* path, int zIndex);
+	SpriteComponent(Textures texture, int zIndex);
+	SpriteComponent(Textures texture, int xOffset, int yOffset, int zIndex);
 	SpriteComponent(const char* path, int xOffset, int yOffset, int zIndex);
 	SpriteComponent(
-		const char* path,
+		Textures texture,
 		bool isAnimated,
 		std::map<std::string, std::unique_ptr<Animation>>* animationList,
 		std::string defaultAnimation,
 		int zIndex);
 	~SpriteComponent();
 
-	void setTexture(const char* path);
+	void setTexture(Textures texture);
+	void setMapTileTexture(const char* path);
 
 	void init() override;
 	void update() override;

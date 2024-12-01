@@ -15,18 +15,25 @@
 #include "Manager.h"
 #include "VEGO.h"
 
-SpriteComponent::SpriteComponent(const char* path, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(0), textureYOffset(0)
+SpriteComponent::SpriteComponent(Textures texture, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(0), textureYOffset(0)
 {
-	this->texturePath = path;
+	this->textureEnum = texture;
+	this->path = "";
 }
 
-SpriteComponent::SpriteComponent(const char* path, int xOffset, int yOffset, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(xOffset), textureYOffset(yOffset)
+SpriteComponent::SpriteComponent(Textures texture, int xOffset, int yOffset, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(xOffset), textureYOffset(yOffset)
 {
-	this->texturePath = path;
+	this->textureEnum = texture;
+	this->path = "";
+}
+
+SpriteComponent::SpriteComponent(const char* path, int xOffset, int yOffset, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(xOffset), textureYOffset(yOffset) {
+
+	this->path = path;
 }
 
 SpriteComponent::SpriteComponent(
-	const char* path,
+	Textures texture,
 	bool isAnimated,
 	std::map<std::string, std::unique_ptr<Animation>>* animationMap,
 	std::string defaultAnimation,
@@ -38,19 +45,26 @@ SpriteComponent::SpriteComponent(
 
 	playAnimation(defaultAnimation);
 
-	this->texturePath = path;
+	this->textureEnum = texture;
+
+	this->path = "";
 }
 
 SpriteComponent::~SpriteComponent() {}
 
-void SpriteComponent::setTexture(const char* path)
+void SpriteComponent::setTexture(Textures texture)
 {
-	this->texture = VEGO_Game().textureManager->loadTexture(path);
+	this->texture = VEGO_Game().textureManager->loadTexture(texture);
 }
 
 void SpriteComponent::init()
 {
-	setTexture(this->texturePath);
+	if (this->path == "") {
+		setTexture(this->textureEnum);
+	}
+	else {
+		setMapTileTexture(this->path);
+	}
 
 	this->transform = &entity->getComponent<TransformComponent>();
 
@@ -92,4 +106,8 @@ void SpriteComponent::playAnimation(std::string type)
 void SpriteComponent::setDirection(Direction direction)
 {
 	this->flipped = direction == Direction::RIGHT;
+}
+
+void SpriteComponent::setMapTileTexture(const char *path) {
+	this->texture = VEGO_Game().textureManager->loadMapTileTexture(path);
 }
