@@ -75,7 +75,7 @@ class TextureManager
 		 * loads the texture from the file system and stores it in the cache.
 		 *
 		 * If loading fails, an exception is thrown with a descriptive error message.
-		 * /todo should not be usable for the developer and only be accessed by the map class
+		 * \todo should not be usable for the developer and only be accessed by the map class
 		 */
 		SDL_Texture* loadMapTileTexture(const char* path);
 
