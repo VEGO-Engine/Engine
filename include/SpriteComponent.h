@@ -37,7 +37,7 @@ private:
 
 	//there should be a better solution as this variable is only used for the loading of the tmx map
 	//TODO: improve this in the future and also remove it from the scope of the developer
-	const char* path; //empty string if texture has a texture enum value, otherwise the path of the texture
+	const char* path; //!< empty string if texture has a texture enum value, otherwise the path of the texture
 
 public:
 	SpriteComponent(Textures texture, int zIndex);

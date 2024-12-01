@@ -16,7 +16,7 @@
  * and rendering in the engine. It provides functions to add, load, and draw textures
  * from files, as well as manage sprite sheets.
  *
- * \sa Textures "Textures" are used to identify textures within the engine.
+ * \sa Textures are used to identify textures within the engine.
  * It is expected that they are implemented within the games scope.
  */
 
@@ -37,9 +37,10 @@ class TextureManager
 		 * \brief Adds a single texture to the cache.
 		 * \param texture The texture identifier.
 		 * \param filePath The file path to the texture file.
+		 * \throws std::runtime_error Is thrown if the texture could not be loaded correctly
 		 *
 		 * This function loads the texture from the specified file and stores it in
-		 * a cache. If loading the texture fails, an exception is thrown.
+		 * a cache.
 		 */
 		void addSingleTexture(Textures texture, const char* filePath);
 
@@ -70,11 +71,11 @@ class TextureManager
 		 * \brief Loads a map tile texture from the file system and caches it.
 		 * \param path The file path to the texture.
 		 * \return `SDL_Texture*` representing the map tile.
+		 * \throws std::runtime_error Is thrown if the texture could not be loaded correctly
 		 *
 		 * This function checks if the map tile texture is already cached. If not, it
 		 * loads the texture from the file system and stores it in the cache.
 		 *
-		 * If loading fails, an exception is thrown with a descriptive error message.
 		 * \todo should not be usable for the developer and only be accessed by the map class
 		 */
 		SDL_Texture* loadMapTileTexture(const char* path);
