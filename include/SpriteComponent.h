@@ -5,7 +5,7 @@
 #include <memory>
 #include <string>
 
-#include "TextureEnumBase.h"
+#include "Textures.h"
 #include "AnimationHandler.h"
 #include "Component.h"
 #include "Direction.h"
@@ -35,8 +35,9 @@ private:
 	int textureXOffset;
 	int textureYOffset;
 
-	//should be changed in the future as this is only for the tiles
-	const char* path;
+	//might be a better solution as this variable is only used for the loading of the tmx map
+	//TODO: improve this in the future
+	const char* path; //empty string if texture has a texture enum value, otherwise the path of the texture
 
 public:
 	SpriteComponent(Textures texture, int zIndex);

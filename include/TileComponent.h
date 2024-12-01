@@ -6,7 +6,7 @@
 #include <magic_enum/magic_enum.hpp>
 
 #include "Component.h"
-#include "TextureEnumBase.h"
+#include "Textures.h"
 
 class SpriteComponent;
 class TransformComponent;

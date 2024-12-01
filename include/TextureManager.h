@@ -6,7 +6,7 @@
 #include <memory>
 #include <string>
 #include <vector>
-#include "TextureEnumBase.h"
+#include "Textures.h"
 
 /*!
  * \class TextureManager
@@ -16,12 +16,8 @@
  * and rendering in the engine. It provides functions to add, load, and draw textures
  * from files, as well as manage sprite sheets.
  *
- * It uses two caches: one for regular textures (`texture_cache`) and one for
- * map tile textures (`mapTile_texture_cache`). This allows for efficient texture reuse
- * and management across different parts of the game.
- *
- * \note Textures are identified by an enum class `Textures` which is user-defined.
- *       Developers are expected to define the texture types in their own implementation.
+ * \sa \ref Textures "Textures" are used to identify textures within the engine.
+ * It is expected that they are implemented within the games scope.
  */
 
 class TextureManager
@@ -43,7 +39,7 @@ class TextureManager
 		 * \param filePath The file path to the texture file.
 		 *
 		 * This function loads the texture from the specified file and stores it in
-		 * the `texture_cache`. If loading the texture fails, an exception is thrown.
+		 * a cache. If loading the texture fails, an exception is thrown.
 		 */
 		void addSingleTexture(Textures texture, const char* filePath);
 
@@ -52,8 +48,8 @@ class TextureManager
 		 * \param textures A map of texture identifiers and corresponding file paths.
 		 *
 		 * This function iterates over the provided map of textures and loads each
-		 * texture using `addSingleTexture`. It allows developers to add several
-		 * textures at once.
+		 * texture using `addSingleTexture`. It allows for several
+		 * textures to be added at once.
 		 */
 		void addTextures(const std::map<Textures, const char*>& textures);
 
@@ -62,7 +58,7 @@ class TextureManager
 		 * \param texture The texture identifier.
 		 * \return A pointer to the `SDL_Texture` if found, or `nullptr` if not found.
 		 *
-		 * This function looks up a texture in the `texture_cache` and returns the
+		 * This function looks up a texture within the cache and returns the
 		 * corresponding `SDL_Texture*`. If the texture is not found, it logs an error
 		 * message and returns `nullptr`.
 		 */
@@ -73,7 +69,7 @@ class TextureManager
 		/*!
 		 * \brief Loads a map tile texture from the file system and caches it.
 		 * \param path The file path to the texture.
-		 * \return A pointer to the `SDL_Texture` representing the map tile.
+		 * \return `SDL_Texture*` representing the map tile.
 		 *
 		 * This function checks if the map tile texture is already cached. If not, it
 		 * loads the texture from the file system and stores it in the cache.

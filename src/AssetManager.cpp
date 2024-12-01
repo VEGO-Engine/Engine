@@ -15,7 +15,7 @@
 #include "PowerupComponent.h"
 #include <iostream>
 
-#include "TextureEnumBase.h"
+#include "Textures.h"
 
 AssetManager::AssetManager(Manager* manager) : man(manager) {}
 

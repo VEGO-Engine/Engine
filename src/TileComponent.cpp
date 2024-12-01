@@ -5,9 +5,7 @@
 #include "Entity.h"
 #include "TransformComponent.h"
 #include "SpriteComponent.h"
-#include "TileComponent.h"
 
-#include "TextureEnumBase.h"
 
 TileComponent::TileComponent(int x, int y, int w, int h, int id, const std::map<int, std::pair<Textures, bool>>* textureDict)
 {
