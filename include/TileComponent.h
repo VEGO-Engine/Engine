@@ -3,7 +3,6 @@
 #include <SDL.h>
 #include <string>
 #include <map>
-#include <magic_enum/magic_enum.hpp>
 
 #include "Component.h"
 #include "Textures.h"
@@ -29,14 +28,6 @@ public:
 
 	bool hasCollision() {
 		return this->collision;
-	}
-
-	std::string getName() {
-#ifdef TEXTURE_ENUM_DEFINED
-		return std::string(magic_enum::enum_name(this->texture));
-#else
-		return "Undefined Enum";
-#endif
 	}
 
 

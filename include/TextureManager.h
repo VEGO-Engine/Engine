@@ -16,7 +16,7 @@
  * and rendering in the engine. It provides functions to add, load, and draw textures
  * from files, as well as manage sprite sheets.
  *
- * \sa \ref Textures "Textures" are used to identify textures within the engine.
+ * \sa Textures "Textures" are used to identify textures within the engine.
  * It is expected that they are implemented within the games scope.
  */
 

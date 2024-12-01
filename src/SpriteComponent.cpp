@@ -3,7 +3,6 @@
 #include <SDL_timer.h>
 #include <cstring>
 #include <memory>
-#include <magic_enum/magic_enum.hpp>
 
 #include "AnimationHandler.h"
 #include "Direction.h"
