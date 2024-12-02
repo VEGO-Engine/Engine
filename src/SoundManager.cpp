@@ -66,12 +66,12 @@ void SoundManager::playSound(GameInternal* game, std::string sound, bool canOver
 
 	if(Mix_VolumeChunk(game->assets->getSound(sound), volume) == -1)
 	{
-		std::cerr << "Error adjusting volume: " /*<< Mix_GetError()*/ << std::endl;
+		std::cerr << "Error adjusting volume: " << SDL_GetError() << std::endl;
 	}
 
 	if (Mix_PlayChannel(channel, game->assets->getSound(sound), loops) == -1) 
 	{
-		std::cerr << "Error playing sound '" << sound << "': " /*<< Mix_GetError()*/ << std::endl;
+		std::cerr << "Error playing sound '" << sound << "': " << SDL_GetError() << std::endl;
 	}
 }
 
@@ -88,12 +88,12 @@ void SoundManager::playMusic(GameInternal* game, std::string music, int loops, i
 
 	if(Mix_VolumeMusic(volume) == -1)
 	{
-		std::cerr << "Error adjusting volume: " /*<< Mix_GetError()*/ << std::endl;
+		std::cerr << "Error adjusting volume: " << SDL_GetError() << std::endl;
 	}
 
 	if (Mix_PlayMusic(game->assets->getMusic(music), loops) == -1) 
 	{
-		std::cerr << "Error playing music '" << music << "': " /*<< Mix_GetError()*/ << std::endl;
+		std::cerr << "Error playing music '" << music << "': " << SDL_GetError() << std::endl;
 	}
 }
 
