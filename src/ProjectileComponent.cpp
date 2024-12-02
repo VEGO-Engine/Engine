@@ -17,9 +17,9 @@ void ProjectileComponent::init()
     SoundManager::playSound(this->entity->getManager().getGame(), "throw_egg", true, PLAY_ONCE, MAX_VOLUME, -1);
 }
 
-void ProjectileComponent::update() 
+void ProjectileComponent::update(uint_fast16_t diffTime) 
 {
-    distance += speed;
+    distance += speed * diffTime * (1.f/1000);
 
     IntersectionBitSet boundsIntersection = this->entity->getManager().getGame()->collisionHandler->getIntersectionWithBounds(entity);
 

@@ -2,12 +2,12 @@
     "folders":
     [
         {
-            "path": "."
+            "path": ".",
         }
-    ],
+	],
     "settings":
     {
-        "tab_size": 4
+        "tab_size": 4,
     },
 	"build_systems": [
 		{
@@ -23,7 +23,7 @@
 					"name": "Release",
 					"shell_cmd": "cmake -DCMAKE_BUILD_TYPE=Release build && cmake --build build",
 				},
-			]
+			],
 		},
 		{
 			"name": "Generate CMake",
@@ -43,7 +43,10 @@
 					"name": "Generate documentation",
 					"shell_cmd": "docker run --rm -v \"$project_path:/source\" -v \"$project_path/docs:/output\" -v \"$project_path/docs/Doxyfile:/Doxyfile\" vego_engine-docker",
 				},
-			]
+			],
 		}
-	]
+	],
+	"debugger_configurations":
+	[
+	],
 }

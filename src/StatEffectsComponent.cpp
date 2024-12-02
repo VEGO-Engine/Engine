@@ -8,16 +8,14 @@
 void StatEffectsComponent::init()
 {}
 
-void StatEffectsComponent::update()
+void StatEffectsComponent::update(uint_fast16_t diffTime)
 {
 	for (int i = 0; i < MAX_STATS; i++)
 	{
-		if (this->buffs.at(i) == 0) continue;
-		if (this->buffs.at(i) - 1 == 0)
-		{
+        this->buffs.at(i) -= diffTime;
+		if (this->buffs.at(i) <= 0) {
 			this->resetStatValue((Stats)i);
 		}
-		this->buffs.at(i) -= 1;
 	}
 }
 

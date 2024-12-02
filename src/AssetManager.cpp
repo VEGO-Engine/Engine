@@ -41,7 +41,7 @@ Mix_Music* AssetManager::getMusic(std::string id)
 	return music.at(id);
 }
 
-void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, Textures textureEnum, Entity* owner) {
+void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, float speed, Textures textureEnum, Entity* owner) {
 
     auto& projectile(man->addEntity());
     projectile.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, scale); //32x32 is standard size for objects
@@ -81,7 +81,7 @@ Vector2D AssetManager::calculateSpawnPosition()
 		conflict = false;
 		for (auto cc : this->man->getGame()->collisionHandler->getColliders({ Entity::GroupLabel::MAPTILES }))
 		{
-			if (SDL_HasIntersection(&spawnRect, &cc->collider) && strcmp(cc->tag, "projectile"))
+			if (SDL_HasRectIntersection(&spawnRect, &cc->collider) && strcmp(cc->tag, "projectile"))
 			{
 				conflict = true;
 				break;

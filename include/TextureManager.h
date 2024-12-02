@@ -1,7 +1,8 @@
 #pragma once
 
 #include "ECS.h"
-#include <SDL_render.h>
+#include "SDL3/SDL_surface.h"
+#include <SDL3/SDL_render.h>
 #include <map>
 #include <memory>
 #include <string>
@@ -65,7 +66,9 @@ class TextureManager
 		 */
 		SDL_Texture* loadTexture(Textures texture);
         static std::vector<SDL_Rect> splitSpriteSheet(SDL_Texture* spriteSheet, int width, int height, int spritesOnSheet);
-		static void draw(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect src, SDL_Rect dest, bool flipped = false);
+		static void draw(SDL_Renderer* renderer, SDL_Texture* texture, SDL_FRect src, SDL_FRect dest, bool flipped = false);
+
+		void setScaleMode(SDL_ScaleMode scaleMode) { this->scaleMode = scaleMode; }
 
 		/*!
 		 * \brief Loads a map tile texture from the file system and caches it.
@@ -81,6 +84,7 @@ class TextureManager
 		SDL_Texture* loadMapTileTexture(const char* path);
 
 	private:
+		SDL_ScaleMode scaleMode = SDL_SCALEMODE_NEAREST;
 		Manager* manager;
 		std::map<Textures, SDL_Texture*> texture_cache;
 		std::map<std::string, SDL_Texture*> mapTile_texture_cache;

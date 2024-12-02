@@ -8,7 +8,7 @@ public:
     virtual ~Game() {}
 
     virtual void init() = 0;
-    virtual void update() = 0;
+    virtual void update(uint_fast16_t diffTime) = 0;
 
     GameInternal* gameInternal; //!< \deprecated  
 };

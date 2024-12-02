@@ -59,7 +59,7 @@ public:
 	explicit Entity(Manager& mManager) :
 		manager(mManager) { };
 
-	void update() const; //!< Call each frame to update all components
+	void update(uint_fast16_t diffTime) const; //!< Call each frame to update all components
 
 	bool isActive() const { return this->active; } //!< \sa destroy()
 	//! Mark for destruction for Manager::refresh() and disables collision

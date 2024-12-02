@@ -34,7 +34,7 @@ private:
 
 	struct TileSetData {
 		std::string texturePath{};
-		tmx::Vector2i textureSize;
+		tmx::Vector2f textureSize;
 		uint32_t tileCount{};
 		tmx::Vector2u tileCount2D;
 		uint32_t firstGID{};

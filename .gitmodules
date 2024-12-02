@@ -1,19 +1,15 @@
 [submodule "SDL"]
 	path = extern/SDL
 	url = https://github.com/libsdl-org/SDL.git
-	branch = release-2.28.x
 [submodule "SDL_image"]
 	path = extern/SDL_image
 	url = https://github.com/libsdl-org/SDL_image.git
-	branch = release-2.8.x
 [submodule "extern/SDL_mixer"]
 	path = extern/SDL_mixer
 	url = https://github.com/libsdl-org/SDL_mixer.git
-	branch = release-2.8.x
 [submodule "extern/SDL_ttf"]
 	path = extern/SDL_ttf
 	url = https://github.com/libsdl-org/SDL_ttf.git
-	branch = release-2.22.x
 [submodule "extern/tmxlite"]
 	path = extern/tmxlite
 	url = https://github.com/fallahn/tmxlite.git

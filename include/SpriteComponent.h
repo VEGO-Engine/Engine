@@ -1,7 +1,7 @@
 #pragma once
 
 #include <map>
-#include <SDL_render.h>
+#include <SDL3/SDL_render.h>
 #include <memory>
 #include <string>
 
@@ -23,7 +23,7 @@ public:
 private:
 	TransformComponent* transform;
 	SDL_Texture* texture;
-	SDL_Rect srcRect, destRect;
+	SDL_FRect srcRect, destRect;
 
 	Textures textureEnum;
 
@@ -55,7 +55,7 @@ public:
 	void setMapTileTexture(const char* path);
 
 	void init() override;
-	void update() override;
+	void update(uint_fast16_t diffTime) override;
 	void draw() override;
 	void playAnimation(std::string type);
 	void setDirection(Direction direction);

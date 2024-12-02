@@ -9,7 +9,7 @@ public:
 	PowerupComponent(std::function<void (Entity*)> func);
 	~PowerupComponent() {};
 
-	void update() override;
+	void update(uint_fast16_t diffTime) override;
 
 private:
 	std::function<void (Entity*)> pickupFunc;

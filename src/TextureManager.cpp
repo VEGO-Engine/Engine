@@ -1,6 +1,5 @@
 #include "TextureManager.h"
 
-#include <memory>
 #include <stdexcept>
 #include <string>
 #include <VEGO.h>
@@ -14,6 +13,7 @@ void TextureManager::addSingleTexture(Textures texture, const char* filePath) {
 	if (sdlTexture == nullptr)
 		throw std::runtime_error(std::string("Couldn't load texture '") + filePath + "'");
 
+    SDL_SetTextureScaleMode(sdlTexture, this->scaleMode); // linear scaling results in blurry images
 	this->texture_cache.emplace(texture, sdlTexture);
 	std::cout << "Loaded texture at " << filePath << std::endl;
 }
@@ -35,10 +35,10 @@ SDL_Texture* TextureManager::loadTexture(Textures texture) {
 	return nullptr;
 }
 
-void TextureManager::draw(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect src, SDL_Rect dest, bool flipped)
+void TextureManager::draw(SDL_Renderer* renderer, SDL_Texture* texture, SDL_FRect src, SDL_FRect dest, bool flipped)
 {
-	SDL_RendererFlip flip = flipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
-	SDL_RenderCopyEx(renderer, texture, &src, &dest, 0, NULL, flip);
+	SDL_FlipMode flip = flipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
+	SDL_RenderTextureRotated(renderer, texture, &src, &dest, 0, NULL, flip);
 }
 
 SDL_Texture* TextureManager::loadMapTileTexture(const char *path) {
@@ -51,7 +51,8 @@ SDL_Texture* TextureManager::loadMapTileTexture(const char *path) {
 
 	if (newTexture == nullptr)
 		throw std::runtime_error(std::string("Couldn't load texture '") + path + "'");
-
+        
+	SDL_SetTextureScaleMode(newTexture, this->scaleMode); // linear scaling results in blurry images
 	this->mapTile_texture_cache.emplace(std::string(path), newTexture);
 
 	return newTexture;
