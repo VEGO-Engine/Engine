@@ -15,6 +15,8 @@
 
 #include <VEGO.h>
 
+#include "ConfigLoader.h"
+
 GameInternal::GameInternal() :
 	manager(this),
 	renderManager(),
@@ -29,13 +31,19 @@ GameInternal::~GameInternal() = default;
 
 SDL_AppResult GameInternal::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
+	this->gameInstance = GameFactory::instance().create(this);
+	ConfigLoader().setCustomConfig(this->gameInstance->getConfigFilePath());
+	ConfigLoader().init();
+
+	json config = ConfigLoader().getFinalConfig();
+
 	GameInternal::assets = new AssetManager(&manager);
 	GameInternal::textureManager = new TextureManager(&manager);
 	GameInternal::soundManager = new SoundManager();
 	GameInternal::collisionHandler = new CollisionHandler(manager); // why does this use a referrence, but AssetManager a pointer?
 	
 	int flags = 0;
-	if (fullscreen)
+	if (config.at("fullscreen"))
 	{
 		flags = SDL_WINDOW_FULLSCREEN;
 	}
@@ -95,7 +103,6 @@ SDL_AppResult GameInternal::init(const char* title, int xpos, int ypos, int widt
 	// loading music
 	// assets->addMusic("background_music", "assets/sound/background_music.mp3");
 
-	this->gameInstance = GameFactory::instance().create(this);
 	this->gameInstance->init();
 
 	return SDL_APP_CONTINUE;

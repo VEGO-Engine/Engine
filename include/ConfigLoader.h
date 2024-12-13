@@ -12,7 +12,9 @@ public:
 
     void init();
 
-    void setCustomConfig(std::string path);
+    void setCustomConfig(const std::optional<std::string>& path);
+
+    json getFinalConfig();
 
 private:
     json baseConfig;

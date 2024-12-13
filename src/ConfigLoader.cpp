@@ -6,6 +6,8 @@ ConfigLoader::ConfigLoader() {
     baseConfig = loadConfigFromJSON("config.json");
 }
 
+ConfigLoader::~ConfigLoader() {}
+
 void ConfigLoader::init() {
     if (!customConfig.has_value()) {
         finalConfig = baseConfig;
@@ -27,8 +29,8 @@ json ConfigLoader::loadConfigFromJSON(const std::string& path) {
 }
 
 
-void ConfigLoader::setCustomConfig(std::string path) {
-    customConfig.emplace(loadConfigFromJSON(path));
+void ConfigLoader::setCustomConfig(const std::optional<std::string>& path) {
+    customConfig = path;
 }
 
 json ConfigLoader::mergeConfigs(json baseConfig, json customConfig) {
@@ -37,5 +39,10 @@ json ConfigLoader::mergeConfigs(json baseConfig, json customConfig) {
     }
     return baseConfig;
 }
+
+json ConfigLoader::getFinalConfig() {
+    return finalConfig;
+}
+
 
 
