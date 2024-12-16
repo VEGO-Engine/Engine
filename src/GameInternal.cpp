@@ -31,11 +31,13 @@ GameInternal::~GameInternal() = default;
 
 SDL_AppResult GameInternal::init()
 {
-	this->gameInstance = GameFactory::instance().create(this);
-	ConfigLoader().setCustomConfig(this->gameInstance->getConfigFilePath());
-	ConfigLoader().init();
+	ConfigLoader* loader = new ConfigLoader();
 
-	json config = ConfigLoader().getFinalConfig();
+	this->gameInstance = GameFactory::instance().create(this);
+	loader->setCustomConfig(this->gameInstance->getConfigFilePath());
+	loader->init();
+
+	json config = loader->getFinalConfig();
 
 	GameInternal::assets = new AssetManager(&manager);
 	GameInternal::textureManager = new TextureManager(&manager);
