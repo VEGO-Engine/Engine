@@ -31,13 +31,13 @@ GameInternal::~GameInternal() = default;
 
 SDL_AppResult GameInternal::init()
 {
-	ConfigLoader* loader = new ConfigLoader();
+	config = new ConfigLoader;
 
 	this->gameInstance = GameFactory::instance().create(this);
-	loader->setCustomConfig(this->gameInstance->getConfigFilePath());
-	loader->init();
+	config->setCustomConfig(this->gameInstance->getConfigFilePath());
+	config->init();
 
-	json config = loader->getFinalConfig();
+	json finalConfig = config->getFinalConfig();
 
 	GameInternal::assets = new AssetManager(&manager);
 	GameInternal::textureManager = new TextureManager(&manager);
@@ -45,7 +45,7 @@ SDL_AppResult GameInternal::init()
 	GameInternal::collisionHandler = new CollisionHandler(manager); // why does this use a referrence, but AssetManager a pointer?
 	
 	int flags = 0;
-	if (config.at("fullscreen"))
+	if (finalConfig.at("fullscreen"))
 	{
 		flags = SDL_WINDOW_FULLSCREEN;
 	}
@@ -62,7 +62,7 @@ SDL_AppResult GameInternal::init()
 		return SDL_APP_FAILURE;
 	}
 
-	window = SDL_CreateWindow(config.at("title").get<std::string>().c_str(), config.at("width"), config.at("height"), flags);
+	window = SDL_CreateWindow(finalConfig.at("title").get<std::string>().c_str(), finalConfig.at("width"), finalConfig.at("height"), flags);
 	if (!window)
 	{
 		std::cout << "ERROR: Window couldnt be created! " << SDL_GetError() << std::endl;
@@ -72,7 +72,7 @@ SDL_AppResult GameInternal::init()
 
     // bad
     SDL_Surface* icon;
-    if((icon = SDL_LoadBMP(config.at("icon").get<std::string>().c_str())))
+    if((icon = SDL_LoadBMP(finalConfig.at("icon").get<std::string>().c_str())))
     {
     	SDL_SetWindowIcon(window, icon);
     }

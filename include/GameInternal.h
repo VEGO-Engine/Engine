@@ -11,6 +11,7 @@
 #include "Vector2D.h"
 #include "Entity.h"
 #include "RenderManager.h"
+#include "ConfigLoader.h"
 
 typedef std::function<void()> gamefunction;
 
@@ -47,6 +48,8 @@ public:
     Manager manager;
     RenderManager renderManager;
     Map* map; // game specific, might not be needed for all types of games
+
+	ConfigLoader* config;
 
 	std::vector<Entity*>& tiles;
 	std::vector<Entity*>& players;
