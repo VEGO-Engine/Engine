@@ -3,7 +3,9 @@
 #include <fstream>
 
 ConfigLoader::ConfigLoader() {
-    baseConfig = loadConfigFromJSON("config.json");
+    //TODO: look into adaptive paths for better handling as this requires the implemented game
+    // to have ./engine in the root folder
+    baseConfig = loadConfigFromJSON("./engine/config.json");
 }
 
 ConfigLoader::~ConfigLoader() {}
@@ -30,7 +32,9 @@ json ConfigLoader::loadConfigFromJSON(const std::string& path) {
 
 
 void ConfigLoader::setCustomConfig(const std::optional<std::string>& path) {
-    customConfig = path;
+    if (path.has_value()) {
+        customConfig = loadConfigFromJSON(path.value());
+    }
 }
 
 json ConfigLoader::mergeConfigs(json baseConfig, json customConfig) {
