@@ -19,7 +19,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv) {
 
     *appstate = vego::game = new GameInternal();
 
-    return vego::game->init("No_Name_Chicken_Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_SIZE_WIDTH, SCREEN_SIZE_HEIGHT, false);
+    return vego::game->init();
 }
 
 SDL_AppResult SDL_AppIterate(void *appstate) {

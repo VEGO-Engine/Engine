@@ -11,9 +11,6 @@ constexpr std::size_t MAX_GROUPS = 32;
 constexpr std::size_t MAX_STATS = 8;
 constexpr std::size_t MAX_TEAMS = 8;
 
-constexpr int SCREEN_SIZE_HEIGHT = 640;
-constexpr int SCREEN_SIZE_WIDTH = 800;
-
 constexpr int FPS = 60;
 
 constexpr int TILE_SIZE = 32;
