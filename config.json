@@ -1,3 +1,7 @@
 {
-  "fullscreen": false
+  "fullscreen": false,
+  "title": "VGG (Very Good Game)",
+  "height": 100,
+  "width": 100,
+  "icon": "./engine/internalAssets/iconImage.bmp"
 }

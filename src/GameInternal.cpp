@@ -29,7 +29,7 @@ GameInternal::GameInternal() :
 
 GameInternal::~GameInternal() = default;
 
-SDL_AppResult GameInternal::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
+SDL_AppResult GameInternal::init()
 {
 	this->gameInstance = GameFactory::instance().create(this);
 	ConfigLoader().setCustomConfig(this->gameInstance->getConfigFilePath());
@@ -60,7 +60,7 @@ SDL_AppResult GameInternal::init(const char* title, int xpos, int ypos, int widt
 		return SDL_APP_FAILURE;
 	}
 
-	window = SDL_CreateWindow(title, width, height, flags);
+	window = SDL_CreateWindow(config.at("title").get<std::string>().c_str(), config.at("width"), config.at("height"), flags);
 	if (!window)
 	{
 		std::cout << "ERROR: Window couldnt be created! " << SDL_GetError() << std::endl;
@@ -70,7 +70,7 @@ SDL_AppResult GameInternal::init(const char* title, int xpos, int ypos, int widt
 
     // bad
     SDL_Surface* icon;
-    if((icon = SDL_LoadBMP("assets/iconImage.bmp")))
+    if((icon = SDL_LoadBMP(config.at("icon").get<std::string>().c_str())))
     {
     	SDL_SetWindowIcon(window, icon);
     }

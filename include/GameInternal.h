@@ -27,7 +27,7 @@ public:
 	GameInternal();
 	~GameInternal();
 
-	SDL_AppResult init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
+	SDL_AppResult init();
 
 	void handleEvents();
 	void update(Uint64 frameTime);
