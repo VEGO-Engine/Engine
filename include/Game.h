@@ -9,6 +9,7 @@ public:
 
     virtual void init() = 0;
     virtual void update(uint_fast16_t diffTime) = 0;
+    virtual std::optional<std::string> setConfigFilePath() {return std::nullopt;}
 
     GameInternal* gameInternal; //!< \deprecated  
 };
