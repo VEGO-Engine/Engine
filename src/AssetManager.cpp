@@ -74,6 +74,7 @@ void AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pic
     powerups.addGroup((size_t)Entity::GroupLabel::POWERUPS);
 }
 
+
 Vector2D AssetManager::calculateSpawnPosition(Vector2D size, Vector2D spawnArea)
 {
     Vector2D spawnPos = Vector2D(-1, -1);
