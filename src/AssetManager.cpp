@@ -77,8 +77,8 @@ Vector2D AssetManager::calculateSpawnPosition()
 	{
 		SDL_Rect spawnRect;
 		spawnRect.h = spawnRect.w = 32;
-		spawnRect.x = rand() % (VEGO_Game().config->getFinalConfig().at("width").get<int>() - spawnRect.w);
-		spawnRect.y = rand() % (VEGO_Game().config->getFinalConfig().at("height").get<int>() - spawnRect.h);
+		spawnRect.x = rand() % (VEGO_Game().config->getFinalConfig().at("screen_width").get<int>() - spawnRect.w);
+		spawnRect.y = rand() % (VEGO_Game().config->getFinalConfig().at("screen_height").get<int>() - spawnRect.h);
 		conflict = false;
 		for (auto cc : this->man->getGame()->collisionHandler->getColliders({ Entity::GroupLabel::MAPTILES }))
 		{

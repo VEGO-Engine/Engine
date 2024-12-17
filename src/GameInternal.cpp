@@ -31,10 +31,10 @@ GameInternal::~GameInternal() = default;
 
 SDL_AppResult GameInternal::init()
 {
-	config = new ConfigLoader;
+	config = new ConfigLoader();
 
 	this->gameInstance = GameFactory::instance().create(this);
-	config->setCustomConfig(this->gameInstance->getConfigFilePath());
+	config->setCustomConfig(this->gameInstance->setConfigFilePath());
 	config->init();
 
 	json finalConfig = config->getFinalConfig();
@@ -62,7 +62,9 @@ SDL_AppResult GameInternal::init()
 		return SDL_APP_FAILURE;
 	}
 
-	window = SDL_CreateWindow(finalConfig.at("title").get<std::string>().c_str(), finalConfig.at("width"), finalConfig.at("height"), flags);
+	window = SDL_CreateWindow(finalConfig.at("title").get<std::string>().c_str(),
+		finalConfig.at("screen_width"), finalConfig.at("screen_height"), flags);
+
 	if (!window)
 	{
 		std::cout << "ERROR: Window couldnt be created! " << SDL_GetError() << std::endl;

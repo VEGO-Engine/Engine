@@ -17,8 +17,8 @@ public:
     json getFinalConfig();
 
 private:
-    json baseConfig;
-    std::optional<json> customConfig;
+
+    std::optional<std::string> customConfigPath;
     json finalConfig;
 
     json loadConfigFromJSON(const std::string& path);

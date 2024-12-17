@@ -67,20 +67,20 @@ IntersectionBitSet CollisionHandler::getIntersectionWithBounds(Entity* entity, V
 
 	// all 4 directions and both sides to allow checking for fully out of bounds
 	if (collider->x + posMod.x < 0 ||
-		collider->x + posMod.x > VEGO_Game().config->getFinalConfig().at("width")) {
+		collider->x + posMod.x > VEGO_Game().config->getFinalConfig().at("screen_width")) {
 		intersections.set((size_t) Direction::LEFT);
 	}
 
 	if (collider->x + collider->w + posMod.x < 0 ||
-		collider->x + collider->w + posMod.x > VEGO_Game().config->getFinalConfig().at("width"))
+		collider->x + collider->w + posMod.x > VEGO_Game().config->getFinalConfig().at("screen_width"))
 		intersections.set((size_t) Direction::RIGHT);
 
 	if (collider->y + posMod.y < 0 ||
-		collider->y + posMod.y > VEGO_Game().config->getFinalConfig().at("height"))
+		collider->y + posMod.y > VEGO_Game().config->getFinalConfig().at("screen_height"))
 		intersections.set((size_t) Direction::UP);
 
 	if (collider->y + collider->h + posMod.y < 0 ||
-		collider->y + collider->h + posMod.y > VEGO_Game().config->getFinalConfig().at("height"))
+		collider->y + collider->h + posMod.y > VEGO_Game().config->getFinalConfig().at("screen_height"))
 		intersections.set((size_t) Direction::DOWN);
 
 	return intersections;
