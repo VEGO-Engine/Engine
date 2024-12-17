@@ -74,17 +74,18 @@ void AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pic
     powerups.addGroup((size_t)Entity::GroupLabel::POWERUPS);
 }
 
-Vector2D AssetManager::calculateSpawnPosition(int width, int height)
+Vector2D AssetManager::calculateSpawnPosition(Vector2D size, Vector2D spawnArea)
 {
     Vector2D spawnPos = Vector2D(-1, -1);
 
     for(int i = 0; i <= SPAWN_ATTEMPTS; i++)
     {
+
         SDL_Rect spawnRect = {
-                rand() % (SCREEN_SIZE_WIDTH - width),
-                rand() % (SCREEN_SIZE_HEIGHT - height),
-                width,
-                height
+                rand() % (int)(spawnArea.x - size.x),
+                rand() % (int)(spawnArea.y - size.y),
+                size.x,
+                size.y
         };
 
         std::vector<ColliderComponent*> colliders = this->man->getGame()->collisionHandler->getColliders({Entity::GroupLabel::MAPTILES});
@@ -103,7 +104,7 @@ Vector2D AssetManager::calculateSpawnPosition(int width, int height)
 }
 
 template <typename T>
-T AssetManager::calculateType(int amount)
+T AssetManager::calculateRandomType(int amount)
 {
     T type = T(rand() % amount);
     return type;

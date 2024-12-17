@@ -27,8 +27,8 @@ public:
     void createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, const char* texturePath, Entity* owner);
     void createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, std::string texturePath);
 
-    Vector2D calculateSpawnPosition(int width, int height);
-    template <typename T> T calculateType(int amount);
+    Vector2D calculateSpawnPosition(Vector2D size, Vector2D spawnArea);
+    template <typename T> [[deprecated]] T calculateRandomType(int amount);
 
     //texture management
     void addTexture(std::string id, const char* path);
