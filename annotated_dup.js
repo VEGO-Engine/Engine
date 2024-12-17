@@ -4,7 +4,7 @@ var annotated_dup =
       [ "GameRegistryHelper", "classvego_1_1GameRegistryHelper.html", null ]
     ] ],
     [ "Animation", "structAnimation.html", null ],
-    [ "AssetManager", "classAssetManager.html", null ],
+    [ "AssetManager", "classAssetManager.html", "classAssetManager" ],
     [ "ColliderComponent", "classColliderComponent.html", null ],
     [ "CollisionHandler", "classCollisionHandler.html", "classCollisionHandler" ],
     [ "Component", "classComponent.html", null ],

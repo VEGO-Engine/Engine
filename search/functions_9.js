@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['refresh_0',['refresh',['../classManager.html#adc5c66704fd1b0a9b9d38de8fdcb3748',1,'Manager']]],
-  ['renderall_1',['renderAll',['../classRenderManager.html#ac26def932c9624d73f03af4bd84b20ef',1,'RenderManager']]],
-  ['restartmusic_2',['restartMusic',['../classSoundManager.html#aaca970232ead83c6c107331f3d9ee0db',1,'SoundManager']]],
-  ['restartsound_3',['restartSound',['../classSoundManager.html#ac24dc06983603020f6556273d3c78df3',1,'SoundManager']]]
+  ['pausemusic_0',['pauseMusic',['../classSoundManager.html#a5071bf5e87394afdb1e4148227ffc3ea',1,'SoundManager']]],
+  ['pausesound_1',['pauseSound',['../classSoundManager.html#a8031476c2ccd2dd1c40a39a102bc5844',1,'SoundManager']]],
+  ['playmusic_2',['playMusic',['../classSoundManager.html#ad6e691964b526b134495b7bcc60e3745',1,'SoundManager']]],
+  ['playsound_3',['playSound',['../classSoundManager.html#a868041e81dbc012629f78063201acc02',1,'SoundManager']]]
 ];

@@ -137,12 +137,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>createProjectile</b> 
 <tr class="memitem:a1703d41e553c2d1b9084dbc30f470132" id="r_a1703d41e553c2d1b9084dbc30f470132"><td class="memItemLeft" align="right" valign="top"><a id="a1703d41e553c2d1b9084dbc30f470132" name="a1703d41e553c2d1b9084dbc30f470132"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>createPowerup</b> (<a class="el" href="classVector2D.html">Vector2D</a> pos, std::function&lt; void(<a class="el" href="classEntity.html">Entity</a> *)&gt; pickupFunc, std::string texturePath)</td></tr>
 <tr class="separator:a1703d41e553c2d1b9084dbc30f470132"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adcceaa7824c20f227f1d9774d0986625" id="r_adcceaa7824c20f227f1d9774d0986625"><td class="memItemLeft" align="right" valign="top"><a id="adcceaa7824c20f227f1d9774d0986625" name="adcceaa7824c20f227f1d9774d0986625"></a>
-<a class="el" href="classVector2D.html">Vector2D</a>&#160;</td><td class="memItemRight" valign="bottom"><b>calculateSpawnPosition</b> ()</td></tr>
-<tr class="separator:adcceaa7824c20f227f1d9774d0986625"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67b67fe0e0bb52023490e229d73301c5" id="r_a67b67fe0e0bb52023490e229d73301c5"><td class="memItemLeft" align="right" valign="top"><a id="a67b67fe0e0bb52023490e229d73301c5" name="a67b67fe0e0bb52023490e229d73301c5"></a>
-PowerupType&#160;</td><td class="memItemRight" valign="bottom"><b>calculateType</b> ()</td></tr>
-<tr class="separator:a67b67fe0e0bb52023490e229d73301c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d3e4eb90ca0392825d0e6b4b26fa570" id="r_a0d3e4eb90ca0392825d0e6b4b26fa570"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVector2D.html">Vector2D</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d3e4eb90ca0392825d0e6b4b26fa570">calculateSpawnPosition</a> (<a class="el" href="classVector2D.html">Vector2D</a> size, <a class="el" href="classVector2D.html">Vector2D</a> spawnArea)</td></tr>
+<tr class="memdesc:a0d3e4eb90ca0392825d0e6b4b26fa570"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates a random spawn position for an object within a given area.  <br /></td></tr>
+<tr class="separator:a0d3e4eb90ca0392825d0e6b4b26fa570"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27ff29725708c2bb6cea9945010730a4" id="r_a27ff29725708c2bb6cea9945010730a4"><td class="memTemplParams" colspan="2"><a id="a27ff29725708c2bb6cea9945010730a4" name="a27ff29725708c2bb6cea9945010730a4"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a27ff29725708c2bb6cea9945010730a4"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><b>calculateRandomType</b> (int amount)</td></tr>
+<tr class="separator:a27ff29725708c2bb6cea9945010730a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd15fb688a842a2c63d215ed720d346d" id="r_acd15fb688a842a2c63d215ed720d346d"><td class="memItemLeft" align="right" valign="top"><a id="acd15fb688a842a2c63d215ed720d346d" name="acd15fb688a842a2c63d215ed720d346d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>addTexture</b> (std::string id, const char *path)</td></tr>
 <tr class="separator:acd15fb688a842a2c63d215ed720d346d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -162,6 +163,38 @@ Mix_Chunk *&#160;</td><td class="memItemRight" valign="bottom"><b>getSound</b> (
 Mix_Music *&#160;</td><td class="memItemRight" valign="bottom"><b>getMusic</b> (std::string id)</td></tr>
 <tr class="separator:a802765ad036e690ed62410695615cbf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0d3e4eb90ca0392825d0e6b4b26fa570" name="a0d3e4eb90ca0392825d0e6b4b26fa570"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d3e4eb90ca0392825d0e6b4b26fa570">&#9670;&#160;</a></span>calculateSpawnPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classVector2D.html">Vector2D</a> AssetManager::calculateSpawnPosition </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classVector2D.html">Vector2D</a></td>          <td class="paramname"><span class="paramname"><em>size</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classVector2D.html">Vector2D</a></td>          <td class="paramname"><span class="paramname"><em>spawnArea</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates a random spawn position for an object within a given area. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>The size (collision box) of the object </td></tr>
+    <tr><td class="paramname">spawnArea</td><td>The area within which a spawn position will be calculated </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Spawn Coordinates for the object </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>include/<a class="el" href="AssetManager_8h_source.html">AssetManager.h</a></li>
 <li>src/<b>AssetManager.cpp</b></li>

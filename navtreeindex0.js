@@ -36,6 +36,7 @@ var NAVTREEINDEX0 =
 "Vector2D_8h_source.html":[3,0,0,29],
 "annotated.html":[2,0],
 "classAssetManager.html":[2,0,2],
+"classAssetManager.html#a0d3e4eb90ca0392825d0e6b4b26fa570":[2,0,2,0],
 "classColliderComponent.html":[2,0,3],
 "classCollisionHandler.html":[2,0,4],
 "classCollisionHandler.html#a247c551454374148029c2e88a5c325d9":[2,0,4,0],
