@@ -14,6 +14,7 @@
 #include "Vector2D.h"
 #include "PowerupComponent.h"
 #include <iostream>
+#include <algorithm>
 
 AssetManager::AssetManager(Manager* manager) : man(manager) {}
 
@@ -73,33 +74,39 @@ void AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pic
     powerups.addGroup((size_t)Entity::GroupLabel::POWERUPS);
 }
 
-Vector2D AssetManager::calculateSpawnPosition()
+
+Vector2D AssetManager::calculateSpawnPosition(Vector2D size, Vector2D spawnArea)
 {
-	Vector2D spawnPos = Vector2D(-1, -1);
-	bool conflict = false;
-	for (int i = 0; i <= SPAWN_ATTEMPTS; i++)
-	{
-		SDL_Rect spawnRect;
-		spawnRect.h = spawnRect.w = 32;
-		spawnRect.x = rand() % (SCREEN_SIZE_WIDTH - spawnRect.w);
-		spawnRect.y = rand() % (SCREEN_SIZE_HEIGHT - spawnRect.h);
-		conflict = false;
-		for (auto cc : this->man->getGame()->collisionHandler->getColliders({ Entity::GroupLabel::MAPTILES }))
-		{
-			if (SDL_HasIntersection(&spawnRect, &cc->collider) && strcmp(cc->tag, "projectile"))
-			{
-				conflict = true;
-				break;
-			}
-		}
-		if (conflict) continue;
-		spawnPos = Vector2D(spawnRect.x, spawnRect.y);
-	}
-	return spawnPos;
+    Vector2D spawnPos = Vector2D(-1, -1);
+
+    for(int i = 0; i <= SPAWN_ATTEMPTS; i++)
+    {
+
+        SDL_Rect spawnRect = {
+                rand() % (int)(spawnArea.x - size.x),
+                rand() % (int)(spawnArea.y - size.y),
+                size.x,
+                size.y
+        };
+
+        std::vector<ColliderComponent*> colliders = this->man->getGame()->collisionHandler->getColliders({Entity::GroupLabel::MAPTILES});
+        bool conflict = std::any_of(colliders.begin(), colliders.end(),
+                                    [&](const auto& cc) {
+                                        return SDL_HasIntersection(&spawnRect, &cc->collider);} );
+
+        if(!conflict)
+        {
+            spawnPos = Vector2D(spawnRect.x, spawnRect.y);
+            break;
+        }
+    }
+
+    return spawnPos;
 }
 
-PowerupType AssetManager::calculateType()
+template <typename T>
+T AssetManager::calculateRandomType(int amount)
 {
-	PowerupType type = PowerupType(rand() % 3);
-	return type;
+    T type = T(rand() % amount);
+    return type;
 }

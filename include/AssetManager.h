@@ -27,8 +27,14 @@ public:
     void createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, const char* texturePath, Entity* owner);
     void createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, std::string texturePath);
 
-    Vector2D calculateSpawnPosition();
-    PowerupType calculateType();
+    /*!
+	 * \brief Calculates a random spawn position for an object within a given area
+     * \param size The size (collision box) of the object
+     * \param spawnArea The area within which a spawn position will be calculated
+	 * \returns Spawn Coordinates for the object
+     */
+    Vector2D calculateSpawnPosition(Vector2D size, Vector2D spawnArea);
+    template <typename T> [[deprecated]] T calculateRandomType(int amount);
 
     //texture management
     void addTexture(std::string id, const char* path);
