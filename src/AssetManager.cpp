@@ -41,7 +41,7 @@ Mix_Music* AssetManager::getMusic(std::string id)
 	return music.at(id);
 }
 
-void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, float speed, Textures textureEnum, Entity* owner) {
+Entity* AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, float speed, Textures textureEnum, Entity* owner) {
 
     auto& projectile(man->addEntity());
     projectile.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, scale); //32x32 is standard size for objects
@@ -49,9 +49,11 @@ void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, 
     projectile.addComponent<ProjectileComponent>(range, speed, velocity, owner);
     projectile.addComponent<ColliderComponent>("projectile", 0.6f);
     projectile.addGroup((size_t)Entity::GroupLabel::PROJECTILE);
+
+    return &projectile;
 }
 
-void AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, Textures texture) {
+Entity* AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, Textures texture) {
 
     auto& powerups(man->addEntity());
     powerups.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, 1); //32x32 is standard size for objects
@@ -66,6 +68,8 @@ void AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pic
     powerups.addComponent<ColliderComponent>("powerup", 0.6f);
     powerups.addComponent<PowerupComponent>(pickupFunc);
     powerups.addGroup((size_t)Entity::GroupLabel::POWERUPS);
+
+    return &powerups;
 }
 
 Vector2D AssetManager::calculateSpawnPosition()

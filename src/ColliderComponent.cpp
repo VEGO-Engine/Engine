@@ -49,6 +49,11 @@ void ColliderComponent::removeCollision()
 	this->hasCollision = false;
 }
 
+void ColliderComponent::addCollision()
+{
+    this->hasCollision = true;
+}
+
 void ColliderComponent::handleCollision(Vector2D& entityPos, SDL_Rect& entityCollider, SDL_Rect& componentCollider)
 {
 	// collision to right of character

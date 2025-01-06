@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Entity.h"
 #include <functional>
 #include <optional>
 #include <string>
@@ -22,6 +23,7 @@ public:
 	 */
 	Map(const char* path);
 	void generateTiles(); //!< Generates the map based on the loaded definition
+    void removeTiles(); //!< Removes all tiles previously generated
 private:
 	// struct required for initialisation
 	struct MapData {
@@ -42,10 +44,13 @@ private:
 
 	tmx::Map map;
 	Map::MapData mapData;
-	std::vector<std::function<void()>> tileConstructors;
+	std::vector<std::function<Entity*()>> tileConstructors;
+
+    std::vector<Entity*> tiles;
 
 	void loadTileLayer(const tmx::TileLayer& layer);
-	static void addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int v, int zIndex, std::string texturePath, bool hasCollision);
+    // created tile is returned so it can be removed later
+	static Entity* addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int v, int zIndex, std::string texturePath, bool hasCollision);
 
 	template<typename T>
 	static std::optional<T> getLayerProperty(const std::vector<tmx::Property>& properties, std::string propertyName) { return std::nullopt; };

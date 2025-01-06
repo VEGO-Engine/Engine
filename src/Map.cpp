@@ -20,6 +20,7 @@
 #include <tmxlite/Types.hpp>
 
 #include "ColliderComponent.h"
+#include "Entity.h"
 #include "GameInternal.h"
 #include "SpriteComponent.h"
 #include "TextureManager.h"
@@ -148,9 +149,9 @@ void Map::loadTileLayer(const tmx::TileLayer& layer)
             const float tilePosY = (static_cast<float>(y) * this->mapData.mapTileSize->y);
 
             // return tile data as a function to spawn said tile
-            return std::function<void()>(
+            return std::function<Entity*()>(
                 [tilePosX, tilePosY, capture0 = *this->mapData.mapTileSize, u, v, zIndex, capture1 = data.texturePath, collision] {
-                    Map::addTile(tilePosX, tilePosY, capture0, u, v, zIndex, capture1, collision);
+                    return Map::addTile(tilePosX, tilePosY, capture0, u, v, zIndex, capture1, collision);
                 }
             );
         });
@@ -162,7 +163,7 @@ void Map::loadTileLayer(const tmx::TileLayer& layer)
     this->tileConstructors.insert(this->tileConstructors.end(), tileConstructorRange.begin(), tileConstructorRange.end());
 }
 
-void Map::addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int v, int zIndex, std::string texturePath, bool hasCollision)
+Entity* Map::addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int v, int zIndex, std::string texturePath, bool hasCollision)
 {
     auto& tile(VEGO_Game().manager.addEntity());
 
@@ -175,11 +176,20 @@ void Map::addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int
         tile.addComponent<ColliderComponent>("hello I am a collider of a tile!");
         tile.addGroup((size_t)Entity::GroupLabel::MAPTILES);
     }
+
+    return &tile;
 }
 
 void Map::generateTiles()
 {
-    std::ranges::for_each(this->tileConstructors, [](auto& function) {
-        function();
+    this->tiles = std::views::transform(this->tileConstructors, [](auto& function) {
+        return function();
+    }) | std::ranges::to<std::vector<Entity*>>();
+}
+
+void Map::removeTiles()
+{
+    std::ranges::for_each(this->tiles, [](const auto& tile) {
+        tile->destroy();
     });
 }

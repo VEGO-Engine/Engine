@@ -24,8 +24,8 @@ public:
     AssetManager(Manager* manager);
     ~AssetManager();
 
-    void createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, float speed, Textures textureEnum, Entity* owner);
-    void createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, Textures texture);
+    Entity* createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, float speed, Textures textureEnum, Entity* owner);
+    Entity* createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, Textures texture);
 
     Vector2D calculateSpawnPosition();
     PowerupType calculateType();
