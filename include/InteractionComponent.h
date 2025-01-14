@@ -4,6 +4,7 @@
 #include "Entity.h"
 
 #include <vector>
+#include <functional>
 
 class InteractionComponent : public Component
 {
@@ -12,7 +13,7 @@ public:
     ~InteractionComponent();
 
     void init() override;
-    void update() override;
+    void update();
 
     bool interact(Entity* interactor, Entity* interactee);
 

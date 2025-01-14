@@ -44,18 +44,18 @@ Entity* InteractionComponent::findClosestEntity(std::vector<Entity*>& entities, 
     auto isInDirection = getDirectionalCheck(direction, interactorT);
 
     entities.erase(std::remove_if(entities.begin(), entities.end(), [&](Entity* e){
-        auto& entityT = entity->getComponent<TransformComponent>();
+        auto& entityT = e->getComponent<TransformComponent>();
         return !isInDirection(entityT) || !isEntityCloseEnough(interactorT, entityT, direction);
     }), entities.end());
 
     for(auto e : entities)
     {
-        auto& entityT = entity->getComponent<TransformComponent>();
+        auto& entityT = e->getComponent<TransformComponent>();
         float distance = calculateDistance(interactorT.position, entityT.position);
 
         if (distance < closestDistance) {
             closestDistance = distance;
-            closestEntity = entity;
+            closestEntity = e;
         }
     }
 
