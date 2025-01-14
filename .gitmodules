@@ -17,3 +17,6 @@
 	path = docs/doxygen-awesome-css
 	url = https://github.com/jothepro/doxygen-awesome-css.git
 
+[submodule "external/tmxlite"]
+	path = external/tmxlite
+	url = https://github.com/fallahn/tmxlite.git
