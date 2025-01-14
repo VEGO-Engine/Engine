@@ -8,13 +8,9 @@ InputComponent::InputComponent()
 
 InputComponent::~InputComponent() = default;
 
-void InputComponent::init()
-{
-    // m_keyStates = SDL_GetKeyboardState(NULL);
-    // InitKeyMappings();
-}
+void InputComponent::init(){}
 
-void InputComponent::update()
+void InputComponent::update(uint_fast16_t diffTime)
 {
     SDL_PumpEvents();
 }

@@ -1,6 +1,6 @@
 #pragma once
-#include <SDL_render.h>
-#include <SDL_mixer.h>
+#include <SDL3/SDL_render.h>
+#include <SDL3_mixer/SDL_mixer.h>
 #include <map>
 #include <string>
 #include <functional>
@@ -24,24 +24,24 @@ public:
     AssetManager(Manager* manager);
     ~AssetManager();
 
-    void createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, const char* texturePath, Entity::TeamLabel teamLabel);
-    void createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, std::string texturePath);
+    void createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, float speed, Textures textureEnum, Entity* owner);
+    void createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, Textures texture);
 
     Vector2D calculateSpawnPosition();
     PowerupType calculateType();
 
-    //texture management
-    void addTexture(std::string id, const char* path);
 
     // sound management
     void addSoundEffect(std::string id, const char* path);
 
-    SDL_Texture* getTexture(std::string id);
+    void addMusic(std::string id, const char* path);
+
     Mix_Chunk* getSound(std::string id);
+    Mix_Music* getMusic(std::string id);
 
 private:
 
     Manager* man;
-    std::map<std::string, SDL_Texture*> textures;
     std::map<std::string, Mix_Chunk*> soundEffects;
+    std::map<std::string, Mix_Music*> music;
 };

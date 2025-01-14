@@ -14,12 +14,12 @@ void ProjectileComponent::init()
 {
 	transformComponent = &entity->getComponent<TransformComponent>();
     transformComponent->direction = direction;
-    SoundManager::playSound(this->entity->getManager().getGame(), THROW_EGG);
+    SoundManager::playSound(this->entity->getManager().getGame(), "throw_egg", true, PLAY_ONCE, MAX_VOLUME, -1);
 }
 
-void ProjectileComponent::update() 
+void ProjectileComponent::update(uint_fast16_t diffTime) 
 {
-    distance += speed;
+    distance += speed * diffTime * (1.f/1000);
 
     IntersectionBitSet boundsIntersection = this->entity->getManager().getGame()->collisionHandler->getIntersectionWithBounds(entity);
 
@@ -36,8 +36,7 @@ void ProjectileComponent::update()
         entity,
         Vector2D(0,0),
         {Entity::GroupLabel::PLAYERS},
-        {entity->getTeam()},
-        true)) != nullptr) {
+        {this->owner})) != nullptr) {
         player->getComponent<HealthComponent>().modifyHealth();
         this->entity->destroy();
     }

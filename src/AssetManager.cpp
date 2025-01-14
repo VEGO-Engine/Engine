@@ -15,45 +15,49 @@
 #include "PowerupComponent.h"
 #include <iostream>
 
+#include "Textures.h"
+
 AssetManager::AssetManager(Manager* manager) : man(manager) {}
 
 AssetManager::~AssetManager() {}
-
-void AssetManager::addTexture(std::string id, const char* path) {
-    textures.emplace(id, this->man->getGame()->textureManager->loadTexture(path));
-}
 
 void AssetManager::addSoundEffect(std::string id, const char* path)
 {
     soundEffects.emplace(id, this->man->getGame()->soundManager->loadSound(path));
 }
 
-SDL_Texture* AssetManager::getTexture(std::string id) {
-    return textures.at(id);
+void AssetManager::addMusic(std::string id, const char* path)
+{
+    music.emplace(id, this->man->getGame()->soundManager->loadMusic(path));
 }
+
 
 Mix_Chunk* AssetManager::getSound(std::string id) {
     return soundEffects.at(id);
 }
 
-void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, int speed, const char* texturePath, Entity::TeamLabel teamLabel) {
+Mix_Music* AssetManager::getMusic(std::string id)
+{
+	return music.at(id);
+}
+
+void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, float speed, Textures textureEnum, Entity* owner) {
 
     auto& projectile(man->addEntity());
     projectile.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, scale); //32x32 is standard size for objects
-    projectile.addComponent<SpriteComponent>(texturePath);
-    projectile.addComponent<ProjectileComponent>(range, speed, velocity);
+    projectile.addComponent<SpriteComponent>(textureEnum, 4);
+    projectile.addComponent<ProjectileComponent>(range, speed, velocity, owner);
     projectile.addComponent<ColliderComponent>("projectile", 0.6f);
     projectile.addGroup((size_t)Entity::GroupLabel::PROJECTILE);
-    projectile.setTeam(teamLabel);
 }
 
-void AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, std::string texturePath) {
+void AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, Textures texture) {
 
     auto& powerups(man->addEntity());
     powerups.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, 1); //32x32 is standard size for objects
 
     try {
-        powerups.addComponent<SpriteComponent>(texturePath.c_str());
+        powerups.addComponent<SpriteComponent>(texture, 3);
     }
     catch (std::runtime_error e) {
         std::cout << e.what() << std::endl;
@@ -77,7 +81,7 @@ Vector2D AssetManager::calculateSpawnPosition()
 		conflict = false;
 		for (auto cc : this->man->getGame()->collisionHandler->getColliders({ Entity::GroupLabel::MAPTILES }))
 		{
-			if (SDL_HasIntersection(&spawnRect, &cc->collider) && strcmp(cc->tag, "projectile"))
+			if (SDL_HasRectIntersection(&spawnRect, &cc->collider) && strcmp(cc->tag, "projectile"))
 			{
 				conflict = true;
 				break;

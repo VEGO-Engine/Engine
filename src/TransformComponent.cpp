@@ -50,14 +50,12 @@ void TransformComponent::init()
 	direction.zero();
 }
 
-void TransformComponent::update()
+void TransformComponent::update(uint_fast16_t diffTime)
 {
-	// if(velocity.x != 0 && velocity.y != 0)
-
 	float multiplier = direction.x != 0 && direction.y != 0 ? 0.707 : 1; // normalizes vector; only works if directions are in increments of 45°
 	Vector2D positionChange(
-		direction.x * this->getSpeed() * multiplier,
-		direction.y * this->getSpeed() * multiplier
+		direction.x * this->getSpeed() * multiplier * diffTime * (1.f/1000),
+		direction.y * this->getSpeed() * multiplier * diffTime * (1.f/1000)
 	);
 
 	if (this->entity->hasGroup((size_t)Entity::GroupLabel::PLAYERS)){
@@ -74,7 +72,8 @@ void TransformComponent::modifySpeed(int8_t modifier)
 
 void TransformComponent::setPositionAfterCollision(Vector2D& positionChange)
 {
-	std::initializer_list colliders = { Entity::GroupLabel::MAPTILES, Entity::GroupLabel::COLLIDERS };
+	std::initializer_list<Entity::GroupLabel> colliders = { Entity::GroupLabel::MAPTILES, Entity::GroupLabel::COLLIDERS };
+	// [getAnyIntersection example code]
 	IntersectionBitSet intersections =
 		(CollisionHandler::getIntersectionWithBounds(entity, Vector2D(positionChange.x, 0)) |
 			(this->entity->getManager()
@@ -90,4 +89,5 @@ void TransformComponent::setPositionAfterCollision(Vector2D& positionChange)
 
 	if (intersections.test((size_t)Direction::UP) || intersections.test((size_t)Direction::DOWN))
 		positionChange.y = 0;
+	// [getAnyIntersection example code]
 }

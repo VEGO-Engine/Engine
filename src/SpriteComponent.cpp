@@ -1,27 +1,43 @@
 #include "SpriteComponent.h"
 
-#include <SDL_timer.h>
+#include <SDL3/SDL_timer.h>
 #include <cstring>
 #include <memory>
 
 #include "AnimationHandler.h"
 #include "Direction.h"
+#include "ProjectileComponent.h"
+#include "RenderObject.h"
 #include "TextureManager.h"
 #include "Entity.h"
 #include "TransformComponent.h"
 #include "GameInternal.h"
 #include "Manager.h"
+#include "VEGO.h"
 
-SpriteComponent::SpriteComponent(const char* path)
+SpriteComponent::SpriteComponent(Textures texture, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(0), textureYOffset(0)
 {
-	this->texturePath = path;
+	this->textureEnum = texture;
+	this->path = "";
+}
+
+SpriteComponent::SpriteComponent(Textures texture, int xOffset, int yOffset, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(xOffset), textureYOffset(yOffset)
+{
+	this->textureEnum = texture;
+	this->path = "";
+}
+
+SpriteComponent::SpriteComponent(const char* path, int xOffset, int yOffset, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(xOffset), textureYOffset(yOffset) {
+
+	this->path = path;
 }
 
 SpriteComponent::SpriteComponent(
-	const char* path,
+	Textures texture,
 	bool isAnimated,
 	std::map<std::string, std::unique_ptr<Animation>>* animationMap,
-	std::string defaultAnimation)
+	std::string defaultAnimation,
+	int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(0), textureYOffset(0)
 {
 	animated = isAnimated;
 
@@ -29,39 +45,45 @@ SpriteComponent::SpriteComponent(
 
 	playAnimation(defaultAnimation);
 
-	this->texturePath = path;
+	this->textureEnum = texture;
+
+	this->path = "";
 }
 
-SpriteComponent::~SpriteComponent()
-{
-	// SDL_DestroyTexture(this->texture);
-}
+SpriteComponent::~SpriteComponent() {}
 
-void SpriteComponent::setTexture(const char* path)
+void SpriteComponent::setTexture(Textures texture)
 {
-	this->texture = this->entity->getManager().getGame()->textureManager->loadTexture(path);
+	this->texture = VEGO_Game().textureManager->loadTexture(texture);
 }
 
 void SpriteComponent::init()
 {
-	setTexture(this->texturePath);
+	if (this->path == "") {
+		setTexture(this->textureEnum);
+	}
+	else {
+		setMapTileTexture(this->path);
+	}
 
 	this->transform = &entity->getComponent<TransformComponent>();
 
-	this->srcRect.x = this->srcRect.y = 0;
 	this->srcRect.w = transform->width;
 	this->srcRect.h = transform->height;
+	this->srcRect.x = this->textureXOffset * this->srcRect.w;
+	this->srcRect.y = this->textureYOffset * this->srcRect.h;;
 
-	this->update();
+	this->update(0);
 }
 
-void SpriteComponent::update()
+void SpriteComponent::update(uint_fast16_t diffTime)
 {
+	// This code is not compatible for animated tiles
 	if (animated) {
-		srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames);
-	}
+		srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks() / speed) % frames); // TODO: should not call SDL_GetTicks() but use diffTime
 
-	srcRect.y = animationIndex * transform->height;
+		srcRect.y = animationIndex * transform->height;
+	}
 
 	this->destRect.x = this->transform->position.x;
 	this->destRect.y = this->transform->position.y;
@@ -71,7 +93,7 @@ void SpriteComponent::update()
 
 void SpriteComponent::draw()
 {
-	this->entity->getManager().getGame()->textureManager->draw(this->entity->getManager().getGame()->renderer, this->texture, this->srcRect, this->destRect, this->animated && this->flipped);
+	this->entity->getManager().getGame()->textureManager->draw(VEGO_Game().renderer, this->texture, this->srcRect, this->destRect, this->animated && this->flipped);
 }
 
 void SpriteComponent::playAnimation(std::string type)
@@ -84,4 +106,8 @@ void SpriteComponent::playAnimation(std::string type)
 void SpriteComponent::setDirection(Direction direction)
 {
 	this->flipped = direction == Direction::RIGHT;
+}
+
+void SpriteComponent::setMapTileTexture(const char *path) {
+	this->texture = VEGO_Game().textureManager->loadMapTileTexture(path);
 }

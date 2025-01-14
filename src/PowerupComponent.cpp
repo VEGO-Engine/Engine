@@ -12,15 +12,13 @@ PowerupComponent::PowerupComponent(std::function<void (Entity*)> func)
     this->pickupFunc = func;
 }
 
-void  PowerupComponent::update()
+void  PowerupComponent::update(uint_fast16_t diffTime)
 {
     Entity* player;
     if ((player = this->entity->getManager().getGame()->collisionHandler->getAnyIntersection<Entity*>(
         entity,
         Vector2D(0, 0),
-        { Entity::GroupLabel::PLAYERS },
-        {},
-        true)) != nullptr)
+        { Entity::GroupLabel::PLAYERS })) != nullptr)
     {
         (this->pickupFunc)(player);
         this->entity->destroy();

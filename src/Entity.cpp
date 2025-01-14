@@ -4,14 +4,9 @@
 #include "Component.h"
 #include <cstddef>
 
-void Entity::update() const
+void Entity::update(uint_fast16_t diffTime) const
 {
-	for (auto const& c : components) c->update();
-}
-
-void Entity::draw() const
-{
-	for (auto const& c : components) c->draw();
+	for (auto const& c : components) c->update(diffTime);
 }
 
 bool Entity::hasGroup(Group mGroup)
@@ -33,15 +28,4 @@ void Entity::delGroup(Group mGroup)
 std::bitset<MAX_GROUPS> Entity::getGroupBitSet()
 {
 	return groupBitSet;
-}
-
-void Entity::setTeam(Entity::TeamLabel teamLabel)
-{
-	this->teamLabel = teamLabel;
-	manager.addToTeam(this, (size_t) teamLabel);
-}
-
-Entity::TeamLabel Entity::getTeam()
-{
-	return teamLabel;
 }

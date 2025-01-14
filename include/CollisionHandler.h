@@ -1,9 +1,13 @@
 #pragma once
 
+//! \file CollisionHandler.h
+//! \file CollisionHandler.cpp
+//! \file TransformComponent.cpp
+
 #include "ColliderComponent.h"
 #include "Constants.h"
 #include "Entity.h"
-#include "SDL_rect.h"
+#include <SDL3/SDL_rect.h>
 #include "SpriteComponent.h"
 #include "Vector2D.h"
 #include "Manager.h"
@@ -17,9 +21,11 @@
 class ColliderComponent;
 class Entity;
 
+// [IntersectionBitSet]
 constexpr uint8_t DIRECTION_C = 4;
 
 using IntersectionBitSet = std::bitset<DIRECTION_C>;
+// [IntersectionBitSet]
 
 class CollisionHandler
 {
@@ -44,16 +50,28 @@ public:
 	// temporary function, remove once game.cpp cleaned up
 	std::vector<ColliderComponent*> getColliders(
 		std::initializer_list<Entity::GroupLabel> const& groupLabels,
-		std::initializer_list<Entity::TeamLabel> const& teamLabels = {},
-		bool negateTeam = false);
+		std::initializer_list<Entity*> const& excludedEntities = {});
 
+	/*!
+	 * 
+	 * \brief Tests entity against all entities with the specified labels for a collision
+	 * \details Tests the given entity against every other entity with the specified labels for intersections between their collison boxes.
+	 * If the primary entity has no ColliderComponent, the equivalent of no collision is returned immediately, other entities are skipped
+	 * if they don't have a ColliderComponent
+	 * \param entity The primary entity to check against. Return values will be relative to this entity
+	 * \param posMod Modifier to apply toposition before checking collisions.
+	 * \param groupLabels Entities need to have at least one listed GroupLabels to get checked against
+	 * \param teamLabels Entities need to have one of the specified TeamLabels to get checked against
+	 * \param negateTeam If set to true, entities will only be checked against if they **don't** have one of the specified TeamLabels
+	 * \see ColliderComponent
+	 * 
+	 */
 	template<typename T>
 	T getAnyIntersection(
 		Entity* entity,
 		Vector2D posMod = {},
 		std::initializer_list<Entity::GroupLabel> const& groupLabels = {},
-		std::initializer_list<Entity::TeamLabel> const& teamLabels = {},
-		bool negateTeam = false);
+		std::initializer_list<Entity*> const& excludedEntities = {});
 
 	void update();
 };

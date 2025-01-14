@@ -1,0 +1,52 @@
+{
+    "folders":
+    [
+        {
+            "path": ".",
+        }
+	],
+    "settings":
+    {
+        "tab_size": 4,
+    },
+	"build_systems": [
+		{
+			"name": "Build engine",
+			"shell_cmd": "cmake --build build",
+			"working_dir": "$project_path",
+			"variants": [
+				{
+					"name": "Debug",
+					"shell_cmd": "cmake -DCMAKE_BUILD_TYPE=Debug build && cmake --build build",
+				},
+				{
+					"name": "Release",
+					"shell_cmd": "cmake -DCMAKE_BUILD_TYPE=Release build && cmake --build build",
+				},
+			],
+		},
+		{
+			"name": "Generate CMake",
+			"shell_cmd": "cmake -S . -B build",
+			"working_dir": "$project_path",
+		},
+		{
+			"name": "Doxygen",
+			"shell_cmd": "xdg-open $project_path/docs/html/index.html",
+			"working_dir": "$project_path",
+			"variants": [
+				{
+					"name": "Build image",
+					"shell_cmd": "docker build -t vego_engine-docker $project_path/docs/docker",
+				},
+				{
+					"name": "Generate documentation",
+					"shell_cmd": "docker run --rm -v \"$project_path:/source\" -v \"$project_path/docs:/output\" -v \"$project_path/docs/Doxyfile:/Doxyfile\" vego_engine-docker",
+				},
+			],
+		}
+	],
+	"debugger_configurations":
+	[
+	],
+}

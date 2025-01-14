@@ -1,14 +1,16 @@
 #pragma once
 
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_mixer.h>
+#include <SDL3/SDL.h>
+#include <SDL3_image/SDL_image.h>
+#include <SDL3_mixer/SDL_mixer.h>
+#include <cstdint>
 #include <functional>
 #include <vector>
 
 #include "Manager.h"
 #include "Vector2D.h"
 #include "Entity.h"
+#include "RenderManager.h"
 
 typedef std::function<void()> gamefunction;
 
@@ -25,15 +27,15 @@ public:
 	GameInternal();
 	~GameInternal();
 
-	void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
-	void selectCharacters(const char* &playerSprite, const char* &enemySprite);
+	SDL_AppResult init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
 
 	void handleEvents();
-	void update();
+	void update(Uint64 frameTime);
 	void render();
 	void clean();
 	bool isRunning() const;
-	void setRunning(bool running);
+	void setRunning(bool running); // TODO: should be private/not accesible for game dev
+	void stopGame();
 
 	/* static */ SDL_Renderer* renderer = nullptr;
 	/* static */ SDL_Event event;
@@ -42,8 +44,8 @@ public:
     /* static */ TextureManager* textureManager;
     /* static */ SoundManager* soundManager;
 
-    // moved globals
     Manager manager;
+    RenderManager renderManager;
     Map* map; // game specific, might not be needed for all types of games
 
 	std::vector<Entity*>& tiles;
@@ -54,15 +56,14 @@ public:
 	// end moved globals
 
     void refreshPlayers();
-    Entity::TeamLabel getWinner() const;
-    void setWinner(Entity::TeamLabel winningTeam);
 
 private:
 
 	Game* gameInstance;
 
 	int counter = 0;
-	bool running = false;
+	bool running = true;
 	SDL_Window* window;
-    Entity::TeamLabel winner;
+
+	Uint64 lastFrameTime = 0;
 };
