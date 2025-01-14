@@ -8,7 +8,7 @@ ConfigLoader::~ConfigLoader() {}
 
 void ConfigLoader::init() {
     //TODO: look into adaptive paths for better handling as this requires the implemented game
-    // to have ./engine in the root folder
+    // to have ./engine in the root folder (very low prio)
     const json baseConfig = loadConfigFromJSON("./engine/config.json");
 
     if (!customConfigPath.has_value()) {
