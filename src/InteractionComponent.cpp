@@ -14,6 +14,9 @@ void InteractionComponent::update() {}
 
 bool InteractionComponent::interact(Entity* interactor, Entity* interactee)
 {
+    if(interactee == nullptr)
+        return false;
+
     if(!interactor->hasComponent<InteractionComponent>() || !interactor->getComponent<InteractionComponent>().canInteract)
         throw std::logic_error("Interactor entity cannot interact");
 
