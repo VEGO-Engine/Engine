@@ -44,7 +44,7 @@ public:
     /* static */ AssetManager* assets;
     /* static */ TextureManager* textureManager;
     /* static */ SoundManager* soundManager;
-    /* static */ InputManager* inputs;
+    /* static */ InputManager* inputManager;
 
     Manager manager;
     RenderManager renderManager;

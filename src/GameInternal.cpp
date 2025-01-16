@@ -33,7 +33,7 @@ SDL_AppResult GameInternal::init(const char* title, int xpos, int ypos, int widt
 	GameInternal::textureManager = new TextureManager(&manager);
 	GameInternal::soundManager = new SoundManager();
 	GameInternal::collisionHandler = new CollisionHandler(manager); // why does this use a referrence, but AssetManager a pointer?
-	GameInternal::inputs = new InputManager();
+	GameInternal::inputManager = new InputManager();
 
 	int flags = 0;
 	if (fullscreen)
@@ -122,6 +122,8 @@ void GameInternal::update(Uint64 frameTime)
 
 	uint_fast16_t diffTime = frameTime - this->lastFrameTime;
 	manager.update(diffTime);
+
+	inputManager->processEvents(); // TODO: find out if location is correct
 
 	this->gameInstance->update(diffTime); // TODO: this might have to be split up into two update functions, before and after manager...
 
