@@ -105,6 +105,47 @@ void InputManager::registerAction(const std::string& actionName, const std::vect
     std::cout << "Registered action: " << actionName << " in context: " << context << std::endl;
 }
 
+void InputManager::rebindAction(const std::string& actionName, const std::vector<Key>& newBindings, const std::string& context) {
+    auto it = actionsByContext.find(context);
+    if (it != actionsByContext.end()) {
+        for (auto& action : it->second) {
+            if (action.name == actionName) {
+                action.bindings = newBindings;
+                std::cout << "Rebound action: " << actionName << " in context: " << context << " to new bindings.\n";
+                return;
+            }
+        }
+    }
+    std::cout << "Action not found: " << actionName << " in context: " << context << std::endl;
+}
+
+void InputManager::removeBindings(const std::string& actionName, const std::string& context) {
+    auto it = actionsByContext.find(context);
+    if (it != actionsByContext.end()) {
+        for (auto& action : it->second) {
+            if (action.name == actionName) {
+                action.bindings.clear();
+                std::cout << "Removed bindings for action: " << actionName << " in context: " << context << std::endl;
+                return;
+            }
+        }
+    }
+    std::cout << "Action not found: " << actionName << " in context: " << context << std::endl;
+}
+
+std::vector<InputManager::Key> InputManager::getBindings(const std::string& actionName, const std::string& context) const {
+    auto it = actionsByContext.find(context);
+    if (it != actionsByContext.end()) {
+        for (const auto& action : it->second) {
+            if (action.name == actionName) {
+                return action.bindings;
+            }
+        }
+    }
+    std::cout << "Action not found: " << actionName << " in context: " << context << "\n";
+    return {};
+}
+
 void InputManager::setActiveContext(const std::string& context) {
     activeContext = context;
     std::cout << "Active context set to: " << activeContext << std::endl;

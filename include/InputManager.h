@@ -112,6 +112,10 @@ public:
     void setActiveContext(const std::string& context);
     std::string getActiveContext() const;
 
+    void rebindAction(const std::string& actionName, const std::vector<Key>& newBindings, const std::string& context);
+    void removeBindings(const std::string& actionName, const std::string& context);
+    std::vector<Key> getBindings(const std::string& actionName, const std::string& context) const;
+
 private:
     std::map<std::string, std::vector<InputAction>> actionsByContext;
     std::map<Key, SDL_Scancode> keyMap;
