@@ -101,7 +101,8 @@ void InputManager::initKeyMap() {
 }
 
 void InputManager::registerAction(const std::string& actionName, const std::vector<Key>& keys, std::function<void()> callback, const std::string& context) {
-    actions.push_back({actionName, keys, callback, context});
+    actionsByContext[context].push_back({actionName, keys, callback});
+    std::cout << "Registered action: " << actionName << " in context: " << context << std::endl;
 }
 
 void InputManager::setActiveContext(const std::string& context) {
@@ -124,19 +125,12 @@ void InputManager::processEvents() {
 void InputManager::handleEvent(const SDL_Event& event) {
     if (event.type != SDL_EVENT_KEY_DOWN) return; // TODO: add other events if necessary
 
-    for (const auto& action : actions) {
-        std::cout << "Processing action " << action.name
-                    << " with context " << action.context
-                    << " (Active context: " << activeContext << ")" << std::endl;
+    auto& contextActions = actionsByContext[activeContext];
 
-        if (action.context != activeContext) {
-            std::cout << "Skipping action: " << action.name << std::endl;
-            continue;
-        }
-
+    for (const auto& action : contextActions) {
         for (const auto& binding : action.bindings) {
-            if (event.key.scancode == keyMap[binding] && action.context == activeContext) {
-                std::cout << "Action triggered: " << action.name << " in context: " << action.context << std::endl;
+            if (event.key.scancode == keyMap[binding]) {
+                std::cout << "Action triggered: " << action.name << " in context: " << activeContext << std::endl;
                 action.callback();
                 return;
             }

@@ -114,7 +114,7 @@ public:
     std::string getActiveContext() const;
 
 private:
-    std::vector<InputAction> actions;
+    std::map<std::string, std::vector<InputAction>> actionsByContext;
     std::map<Key, SDL_Scancode> keyMap;
     std::string activeContext;
 
