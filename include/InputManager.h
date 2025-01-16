@@ -96,27 +96,23 @@ public:
         GRAVE
     };
 
+    struct InputAction {
+        std::string name;
+        std::vector<Key> bindings;
+        std::function<void()> callback;
+    };
+
     InputManager();
     ~InputManager();
 
     void init(); // see if necessary
     void processEvents();
-    void registerAction(const std::string& actionName, EventType eventType, Key key, std::function<void()> callback);
-    bool isKeyPressed(Key key);
+    void registerAction(const std::string& actionName, const std::vector<Key>& keys, std::function<void()> callback);
 
 private:
+    std::vector<InputAction> actions;
     std::map<Key, SDL_Scancode> keyMap;
-    std::map<EventType, SDL_EventType> eventMap;
-
-    struct ActionBinding {
-        std::string actionName; // not strictly necessary, but good for debugging purposes
-        EventType eventType;
-        Key key;
-        std::function<void()> callback;
-    };
-    std::vector<ActionBinding> actionBindings;
 
     void initKeyMap();
-    void initEventMap();
     void handleEvent(const SDL_Event& event);
 };

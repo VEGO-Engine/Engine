@@ -3,7 +3,6 @@
 
 InputManager::InputManager() {
     initKeyMap();
-    initEventMap();
 }
 
 InputManager::~InputManager() {
@@ -101,34 +100,27 @@ void InputManager::initKeyMap() {
     };
 }
 
-void InputManager::initEventMap() {
-    eventMap = {
-        {EventType::KeyDown, SDL_EVENT_KEY_DOWN},
-        {EventType::KeyUp, SDL_EVENT_KEY_UP},
-    };
-}
-
-void InputManager::registerAction(const std::string& actionName, EventType eventType, Key key, std::function<void()> callback) {
-    actionBindings.push_back({actionName, eventType, key, callback});
-}
-
-bool InputManager::isKeyPressed(Key key) {
-    const bool* state = SDL_GetKeyboardState(nullptr);
-    auto sdlKey = keyMap[key];
-    return state[sdlKey];
+void InputManager::registerAction(const std::string& actionName, const std::vector<Key>& keys, std::function<void()> callback) {
+    actions.push_back({actionName, keys, callback});
 }
 
 void InputManager::processEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
+        std::cout << "Event detected: " << event.type << std::endl;
         handleEvent(event);
     }
 }
 
 void InputManager::handleEvent(const SDL_Event& event) {
-    for (const auto& binding : actionBindings) {
-        if (event.type == eventMap[binding.eventType] && event.key.scancode == keyMap[binding.key]) {
-            binding.callback();
+    if (event.type != SDL_EVENT_KEY_DOWN) return; // TODO: add other events if necessary
+
+    for (const auto& action : actions) {
+        for (const auto& binding : action.bindings) {
+            if (event.key.scancode == keyMap[binding]) {
+                std::cout << "Action triggered: " << action.name << std::endl;
+                action.callback();
+            }
         }
     }
 }

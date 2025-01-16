@@ -27,7 +27,7 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
         return SDL_APP_SUCCESS;
     }
 
-    vego::game->handleEvents(); // bad
+    //vego::game->handleEvents(); // bad
 
     Uint64 frameStart = SDL_GetTicks();
 
