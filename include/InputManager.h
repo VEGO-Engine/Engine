@@ -100,7 +100,6 @@ public:
         std::string name;
         std::vector<Key> bindings;
         std::function<void()> callback;
-        std::string context;
     };
 
     InputManager();
