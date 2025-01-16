@@ -10,6 +10,7 @@
 #include "Manager.h"
 #include "Vector2D.h"
 #include "Entity.h"
+#include "InputManager.h"
 #include "RenderManager.h"
 
 typedef std::function<void()> gamefunction;
@@ -43,6 +44,7 @@ public:
     /* static */ AssetManager* assets;
     /* static */ TextureManager* textureManager;
     /* static */ SoundManager* soundManager;
+    /* static */ InputManager* inputs;
 
     Manager manager;
     RenderManager renderManager;

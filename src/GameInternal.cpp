@@ -33,7 +33,8 @@ SDL_AppResult GameInternal::init(const char* title, int xpos, int ypos, int widt
 	GameInternal::textureManager = new TextureManager(&manager);
 	GameInternal::soundManager = new SoundManager();
 	GameInternal::collisionHandler = new CollisionHandler(manager); // why does this use a referrence, but AssetManager a pointer?
-	
+	GameInternal::inputs = new InputManager();
+
 	int flags = 0;
 	if (fullscreen)
 	{
