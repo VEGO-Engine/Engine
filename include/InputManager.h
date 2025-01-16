@@ -100,6 +100,7 @@ public:
         std::string name;
         std::vector<Key> bindings;
         std::function<void()> callback;
+        std::string context;
     };
 
     InputManager();
@@ -107,11 +108,15 @@ public:
 
     void init(); // see if necessary
     void processEvents();
-    void registerAction(const std::string& actionName, const std::vector<Key>& keys, std::function<void()> callback);
+    void registerAction(const std::string& actionName, const std::vector<Key>& keys, std::function<void()> callback, const std::string& context);
+
+    void setActiveContext(const std::string& context);
+    std::string getActiveContext() const;
 
 private:
     std::vector<InputAction> actions;
     std::map<Key, SDL_Scancode> keyMap;
+    std::string activeContext;
 
     void initKeyMap();
     void handleEvent(const SDL_Event& event);
