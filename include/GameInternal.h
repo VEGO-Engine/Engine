@@ -18,6 +18,7 @@ class AssetManager;
 class CollisionHandler;
 class TextureManager;
 class SoundManager;
+class TextManager;
 class Map;
 class Game;
 
@@ -43,6 +44,7 @@ public:
     /* static */ AssetManager* assets;
     /* static */ TextureManager* textureManager;
     /* static */ SoundManager* soundManager;
+    /* static */ TextManager* textManager;
 
     Manager manager;
     RenderManager renderManager;

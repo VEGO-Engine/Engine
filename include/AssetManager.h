@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL3/SDL_render.h>
 #include <SDL3_mixer/SDL_mixer.h>
+#include <SDL3_ttf/SDL_ttf.h>
 #include <map>
 #include <string>
 #include <functional>
@@ -33,15 +34,19 @@ public:
 
     // sound management
     void addSoundEffect(std::string id, const char* path);
-
     void addMusic(std::string id, const char* path);
 
-    Mix_Chunk* getSound(std::string id);
+    void addFont(std::string id, const char* path);
+
+    Mix_Chunk* getSound(std::string id); // ??? do we not have a getsound implemented????? too busy to look now, where do we get the soundeffects???
     Mix_Music* getMusic(std::string id);
+
+    TTF_Font* getFont(std::string id);
 
 private:
 
     Manager* man;
     std::map<std::string, Mix_Chunk*> soundEffects;
     std::map<std::string, Mix_Music*> music;
+    std::map<std::string, TTF_Font*> fonts;
 };

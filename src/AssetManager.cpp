@@ -2,6 +2,7 @@
 
 #include "TextureManager.h"
 #include "SoundManager.h"
+#include "TextManager.h"
 #include "ProjectileComponent.h"
 #include "GameInternal.h"
 
@@ -31,14 +32,24 @@ void AssetManager::addMusic(std::string id, const char* path)
     music.emplace(id, this->man->getGame()->soundManager->loadMusic(path));
 }
 
-
-Mix_Chunk* AssetManager::getSound(std::string id) {
-    return soundEffects.at(id);
+void AssetManager::addFont(std::string id, const char *path)
+{
+    fonts.emplace(id, this->man->getGame()->textManager->loadFont(path));
 }
 
 Mix_Music* AssetManager::getMusic(std::string id)
 {
 	return music.at(id);
+}
+
+Mix_Chunk* AssetManager::getSound(std::string id)
+{
+    return soundEffects.at(id);
+}
+
+TTF_Font* AssetManager::getFont(std::string id)
+{
+    return fonts.at(id);
 }
 
 void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, float speed, Textures textureEnum, Entity* owner) {
