@@ -4,6 +4,7 @@
 #include <SDL3_ttf/SDL_ttf.h>
 #include <SDL3/SDL_surface.h>
 #include <map>
+#include <string>
 
 enum DisplayOptions
 {
@@ -49,14 +50,18 @@ public:
      * */
     // TODO: change the sdl surface, i just dont know what i gotta change it to lol
     SDL_Surface* RenderText(GameInternal* game, std::string font, std::string text, DisplayOptions displayOptions, Color fg, Color bg, int wrapWidth);
+    /*
+     * takes everything + a filepath to a dialogfile and the id for the dialog
+     * */
+    SDL_Surface* RenderTextFromFile(GameInternal* game, std::string font, std::string filepath, int id, DisplayOptions displayOptions, Color fg, Color bg, int wrapWidth);
 
     std::map<const char*, TTF_Font*> font_cache;
 
 private:
-    SDL_Surface* RenderSolid(TTF_Font* font, std::string text, Color fg, int wrapWidth);
-    SDL_Surface* RenderShaded(TTF_Font* font, std::string text, Color fg, Color bg, int wrapWidth);
-    SDL_Surface* RenderBlended(TTF_Font* font, std::string text, Color fg, int wrapWidth);
-    SDL_Surface* RenderLCD(TTF_Font* font, std::string text, Color fg, Color bg, int wrapWidth);
+    SDL_Surface* RenderSolid(TTF_Font* font, std::string text, SDL_Color fg, int wrapWidth);
+    SDL_Surface* RenderShaded(TTF_Font* font, std::string text, SDL_Color fg, SDL_Color bg, int wrapWidth);
+    SDL_Surface* RenderBlended(TTF_Font* font, std::string text, SDL_Color fg, int wrapWidth);
+    SDL_Surface* RenderLCD(TTF_Font* font, std::string text, SDL_Color fg, SDL_Color bg, int wrapWidth);
 };
 
 #endif //CHICKENGAME_TEXTMANAGER_H

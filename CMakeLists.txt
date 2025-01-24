@@ -25,11 +25,13 @@ add_subdirectory(extern/SDL_mixer EXCLUDE_FROM_ALL)
 add_subdirectory(extern/SDL_ttf EXCLUDE_FROM_ALL)
 add_subdirectory(extern/tmxlite/tmxlite EXCLUDE_FROM_ALL)
 
-
 file(GLOB_RECURSE SOURCES ${ENGINE_SOURCE_DIR}/src/*.cpp)
 add_library(${PROJECT_NAME} ${SOURCES})
 
-target_include_directories(${PROJECT_NAME} PUBLIC ${ENGINE_INCLUDE_DIR})
+target_include_directories(${PROJECT_NAME} PUBLIC
+        ${ENGINE_INCLUDE_DIR}
+        ${ENGINE_SOURCE_DIR}/extern/json/include
+)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC # should be private when all SDL functionality has a wrapper
     SDL3::SDL3-static
