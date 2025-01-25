@@ -41,18 +41,8 @@ public:
 
     TTF_Font* loadFont(const char* filepath);
 
-    /*
-     * font - to search for font
-     * text - text to display
-     * displayoptions - theres like 4 goddamn funcs, ill wrap them all in one
-     * fg + bg - solid only takes fg, rest also bg colors
-     * wraplength - manually set wraplength, set to 0 to wrap on newline chars, -1 to disable (again. 4 more funcs)
-     * */
-    // TODO: change the sdl surface, i just dont know what i gotta change it to lol
+    // TODO: probably gotta change sdl surface since this is a wrapper func for the dev
     SDL_Surface* RenderText(GameInternal* game, std::string font, std::string text, DisplayOptions displayOptions, Color fg, Color bg, int wrapWidth);
-    /*
-     * takes everything + a filepath to a dialogfile and the id for the dialog
-     * */
     SDL_Surface* RenderTextFromFile(GameInternal* game, std::string font, std::string filepath, int id, DisplayOptions displayOptions, Color fg, Color bg, int wrapWidth);
 
     std::map<const char*, TTF_Font*> font_cache;

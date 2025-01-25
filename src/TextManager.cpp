@@ -68,11 +68,21 @@ SDL_Surface* TextManager::RenderText(GameInternal* game, std::string font, std::
 SDL_Surface* TextManager::RenderTextFromFile(GameInternal* game, std::string font, std::string filepath, int id, DisplayOptions displayOptions, Color fg, Color bg, int wrapWidth)
 {
     std::ifstream f(filepath);
-    json data = json::parse(f);
+    json data = json::parse(f);;
 
-    // logic to parse dialogline
+    if(!json::accept(data))
+    {
+        std::cerr << "JSON is invalid!" << std::endl;
+    }
 
-    std::string text = "placeholder so i dont get compile errors :3";
+    auto it = std::find_if(data.begin(), data.end(), [id](const nlohmann::json& obj){
+        return obj.contains("id") && obj["id"]  == id;
+    });
+
+    if(it == data.end() || !it->contains("line"))
+        sdt::cerr << "Object with id " << id << " not found or 'line' not present!" << std::endl;
+
+    std::string text = (*it)["line"];
 
     return RenderText(game, font, text, displayOptions, fg, bg, wrapWidth);
 }
