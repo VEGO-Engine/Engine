@@ -14,6 +14,7 @@
 #include "Vector2D.h"
 #include "PowerupComponent.h"
 #include <iostream>
+#include <VEGO.h>
 
 #include "Textures.h"
 
@@ -76,8 +77,8 @@ Vector2D AssetManager::calculateSpawnPosition()
 	{
 		SDL_Rect spawnRect;
 		spawnRect.h = spawnRect.w = 32;
-		spawnRect.x = rand() % (SCREEN_SIZE_WIDTH - spawnRect.w);
-		spawnRect.y = rand() % (SCREEN_SIZE_HEIGHT - spawnRect.h);
+		spawnRect.x = rand() % (VEGO_Game().config->getFinalConfig().at("screen_width").get<int>() - spawnRect.w);
+		spawnRect.y = rand() % (VEGO_Game().config->getFinalConfig().at("screen_height").get<int>() - spawnRect.h);
 		conflict = false;
 		for (auto cc : this->man->getGame()->collisionHandler->getColliders({ Entity::GroupLabel::MAPTILES }))
 		{

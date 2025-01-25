@@ -15,6 +15,8 @@
 
 #include <VEGO.h>
 
+#include "ConfigLoader.h"
+
 GameInternal::GameInternal() :
 	manager(this),
 	renderManager(),
@@ -27,15 +29,23 @@ GameInternal::GameInternal() :
 
 GameInternal::~GameInternal() = default;
 
-SDL_AppResult GameInternal::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
+SDL_AppResult GameInternal::init()
 {
+	config = new ConfigLoader();
+
+	this->gameInstance = GameFactory::instance().create(this);
+	config->setCustomConfig(this->gameInstance->setConfigFilePath());
+	config->init();
+
+	json finalConfig = config->getFinalConfig();
+
 	GameInternal::assets = new AssetManager(&manager);
 	GameInternal::textureManager = new TextureManager(&manager);
 	GameInternal::soundManager = new SoundManager();
 	GameInternal::collisionHandler = new CollisionHandler(manager); // why does this use a referrence, but AssetManager a pointer?
 	
 	int flags = 0;
-	if (fullscreen)
+	if (finalConfig.at("fullscreen"))
 	{
 		flags = SDL_WINDOW_FULLSCREEN;
 	}
@@ -52,7 +62,9 @@ SDL_AppResult GameInternal::init(const char* title, int xpos, int ypos, int widt
 		return SDL_APP_FAILURE;
 	}
 
-	window = SDL_CreateWindow(title, width, height, flags);
+	window = SDL_CreateWindow(finalConfig.at("title").get<std::string>().c_str(),
+		finalConfig.at("screen_width"), finalConfig.at("screen_height"), flags);
+
 	if (!window)
 	{
 		std::cout << "ERROR: Window couldnt be created! " << SDL_GetError() << std::endl;
@@ -62,7 +74,7 @@ SDL_AppResult GameInternal::init(const char* title, int xpos, int ypos, int widt
 
     // bad
     SDL_Surface* icon;
-    if((icon = SDL_LoadBMP("assets/iconImage.bmp")))
+    if((icon = SDL_LoadBMP(finalConfig.at("icon").get<std::string>().c_str())))
     {
     	SDL_SetWindowIcon(window, icon);
     }
@@ -95,7 +107,6 @@ SDL_AppResult GameInternal::init(const char* title, int xpos, int ypos, int widt
 	// loading music
 	// assets->addMusic("background_music", "assets/sound/background_music.mp3");
 
-	this->gameInstance = GameFactory::instance().create(this);
 	this->gameInstance->init();
 
 	return SDL_APP_CONTINUE;

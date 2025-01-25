@@ -24,6 +24,7 @@ add_subdirectory(extern/SDL_image EXCLUDE_FROM_ALL)
 add_subdirectory(extern/SDL_mixer EXCLUDE_FROM_ALL)
 add_subdirectory(extern/SDL_ttf EXCLUDE_FROM_ALL)
 add_subdirectory(extern/tmxlite/tmxlite EXCLUDE_FROM_ALL)
+add_subdirectory(extern/nlohmann_json EXCLUDE_FROM_ALL)
 
 
 file(GLOB_RECURSE SOURCES ${ENGINE_SOURCE_DIR}/src/*.cpp)
@@ -36,6 +37,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC # should be private when all SDL fu
     SDL3_image::SDL3_image-static
     SDL3_mixer::SDL3_mixer-static
     SDL3_ttf::SDL3_ttf-static
+    nlohmann_json::nlohmann_json
     tmxlite
 )
 
