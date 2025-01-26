@@ -6,6 +6,8 @@
 #include <map>
 #include <string>
 
+#include <VEGO.h>
+
 enum DisplayOptions
 {
     SOLID,
@@ -20,6 +22,14 @@ struct Color
     int g;
     int b;
     int a;
+};
+
+struct Rect
+{
+    float x;
+    float y;
+    float w;
+    float h;
 };
 
 class GameInternal;
@@ -42,12 +52,13 @@ public:
     TTF_Font* loadFont(const char* filepath);
 
     // TODO: probably gotta change sdl surface since this is a wrapper func for the dev
-    SDL_Surface* RenderText(GameInternal* game, std::string font, std::string text, DisplayOptions displayOptions, Color fg, Color bg, int wrapWidth);
-    SDL_Surface* RenderTextFromFile(GameInternal* game, std::string font, std::string filepath, int id, DisplayOptions displayOptions, Color fg, Color bg, int wrapWidth);
+    void RenderText(GameInternal* game, std::string font, std::string text, DisplayOptions displayOptions, Color fg, Color bg, int wrapWidth, Rect src, Rect dst);
+    void RenderTextFromFile(GameInternal* game, std::string font, std::string filepath, int id, DisplayOptions displayOptions, Color fg, Color bg, int wrapWidth, Rect src, Rect dst);
 
     std::map<const char*, TTF_Font*> font_cache;
 
 private:
+    SDL_Texture* CreateRenderedTexture(TTF_Font* font, std::string text, DisplayOptions displayOptions, SDL_Color fg, SDL_Color bg, int wrapWidth);
     SDL_Surface* RenderSolid(TTF_Font* font, std::string text, SDL_Color fg, int wrapWidth);
     SDL_Surface* RenderShaded(TTF_Font* font, std::string text, SDL_Color fg, SDL_Color bg, int wrapWidth);
     SDL_Surface* RenderBlended(TTF_Font* font, std::string text, SDL_Color fg, int wrapWidth);

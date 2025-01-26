@@ -32,27 +32,59 @@ TTF_Font* TextManager::loadFont(const char *filepath)
     return font;
 }
 
-SDL_Surface* TextManager::RenderText(GameInternal* game, std::string font, std::string text, DisplayOptions displayOptions, Color fg, Color bg, int wrapWidth)
+void TextManager::RenderText(GameInternal* game, std::string font, std::string text, DisplayOptions displayOptions, Color fg, Color bg, int wrapWidth, Rect src, Rect dst)
 {
     TTF_Font* ttfFont = game->assets->getFont(font);
-    SDL_Surface* surface = nullptr;
-
     SDL_Color sdlFg = {fg.r, fg.g, fg.b, fg.a};
     SDL_Color sdlBg = {bg.r, bg.g, bg.b, bg.a};
+
+    SDL_FRect sdlSrcRect = { src.x, src.y, src.w, src.h };
+    SDL_FRect sdlDstRect = { dst.x, dst.y, dst.w, dst.h };
+
+    SDL_RenderTexture(VEGO_Game().renderer, CreateRenderedTexture(ttfFont, text, displayOptions, sdlFg, sdlBg, wrapWidth), &sdlSrcRect, &sdlDstRect);
+}
+
+void TextManager::RenderTextFromFile(GameInternal* game, std::string font, std::string filepath, int id, DisplayOptions displayOptions, Color fg, Color bg, int wrapWidth, Rect src, Rect dst)
+{
+    TTF_Font* ttfFont = game->assets->getFont(font);
+    SDL_Color sdlFg = {fg.r, fg.g, fg.b, fg.a};
+    SDL_Color sdlBg = {bg.r, bg.g, bg.b, bg.a};
+
+    SDL_FRect sdlSrcRect = { src.x, src.y, src.w, src.h };
+    SDL_FRect sdlDstRect = { dst.x, dst.y, dst.w, dst.h };
+
+    std::ifstream f(filepath);
+    json data = json::parse(f);;
+
+    auto it = std::find_if(data.begin(), data.end(), [id](const nlohmann::json& obj){
+        return obj.contains("id") && obj["id"]  == id;
+    });
+
+    if(it == data.end() || !it->contains("line"))
+        std::cerr << "Object with id " << id << " not found or 'line' not present!" << std::endl;
+
+    std::string text = (*it)["line"];
+
+    SDL_RenderTexture(VEGO_Game().renderer, CreateRenderedTexture(ttfFont, text, displayOptions, sdlFg, sdlBg, wrapWidth), &sdlSrcRect, &sdlDstRect);
+}
+
+SDL_Texture* TextManager::CreateRenderedTexture(TTF_Font* font, std::string text, DisplayOptions displayOptions, SDL_Color fg, SDL_Color bg, int wrapWidth)
+{
+    SDL_Surface* surface = nullptr;
 
     switch(displayOptions)
     {
         case SOLID:
-            surface = RenderSolid(ttfFont, text, sdlFg, wrapWidth);
+            surface = RenderSolid(font, text, fg, wrapWidth);
             break;
         case SHADED:
-            surface = RenderShaded(ttfFont, text, sdlFg, sdlBg, wrapWidth);
+            surface = RenderShaded(font, text, fg, bg, wrapWidth);
             break;
         case BLENDED:
-            surface = RenderBlended(ttfFont, text, sdlFg, wrapWidth);
+            surface = RenderBlended(font, text, fg, wrapWidth);
             break;
         case LCD:
-            surface = RenderLCD(ttfFont, text, sdlFg, sdlBg, wrapWidth);
+            surface = RenderLCD(font, text, fg, bg, wrapWidth);
             break;
         default:
             std::cerr << "Invalid display option!" << std::endl;
@@ -62,29 +94,7 @@ SDL_Surface* TextManager::RenderText(GameInternal* game, std::string font, std::
     if(!surface)
         std::cerr << "Error when rendering text!" << std::endl;
 
-    return surface;
-}
-
-SDL_Surface* TextManager::RenderTextFromFile(GameInternal* game, std::string font, std::string filepath, int id, DisplayOptions displayOptions, Color fg, Color bg, int wrapWidth)
-{
-    std::ifstream f(filepath);
-    json data = json::parse(f);;
-
-    if(!json::accept(data))
-    {
-        std::cerr << "JSON is invalid!" << std::endl;
-    }
-
-    auto it = std::find_if(data.begin(), data.end(), [id](const nlohmann::json& obj){
-        return obj.contains("id") && obj["id"]  == id;
-    });
-
-    if(it == data.end() || !it->contains("line"))
-        sdt::cerr << "Object with id " << id << " not found or 'line' not present!" << std::endl;
-
-    std::string text = (*it)["line"];
-
-    return RenderText(game, font, text, displayOptions, fg, bg, wrapWidth);
+    return SDL_CreateTextureFromSurface(VEGO_Game().renderer, surface);
 }
 
 SDL_Surface* TextManager::RenderSolid(TTF_Font* font, std::string text, SDL_Color fg, int wrapWidth)
