@@ -3,6 +3,7 @@
 #include "Component.h"
 #include "Vector2D.h"
 #include "Constants.h"
+#include "DataComponent.h"
 
 class TransformComponent : public Component
 {
@@ -14,21 +15,14 @@ public:
 	int width = 32;
 	int scale = 1;
 
-	int getSpeed() { return speed + speedMod; };
-	void resetSpeedMod() { speedMod = 0; };
-
-	TransformComponent();
-	explicit TransformComponent(int scale);
-	TransformComponent(float x, float y);
-	TransformComponent(float x, float y, int scale);
-	TransformComponent(float x, float y, int w, int h, int scale);
+	explicit TransformComponent(int scale = 1);
+	TransformComponent(float x, float y, int scale = 1);
+	TransformComponent(float x, float y, int w, int h, int scale = 1);
 
 	void init() override;
 	void update() override;
-    void setPositionAfterCollision(Vector2D& positionChange);
-	void modifySpeed(int8_t modifier);
+	
+	int getSpeed();
 
-private:
-	int speed = 3;
-	int speedMod = 0;
+    void setPositionAfterCollision(Vector2D& positionChange);
 };

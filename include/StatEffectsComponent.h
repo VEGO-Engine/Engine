@@ -3,11 +3,13 @@
 #include "Constants.h"
 #include <cstdint>
 #include <array>
+#include <functional>
 
-enum class Stats
-{
-	MOVEMENT_SPEED,
-	ATTACK_SPEED
+// This acts as a manager for the lifetime of a stateffect
+struct StatEffect {
+    uint32_t duration;
+    std::function<void()> resetFunction;
+    uint32_t startTime;
 };
 
 class StatEffectsComponent : public Component{
@@ -17,12 +19,8 @@ public:
 
 	void init() override;
 	void update() override;
-
-	void modifyStatDur(Stats stat, int duration, int value);
-
-	void modifyStatValue(Stats stat, int modifier);
-	void resetStatValue(Stats stat);
+	void addEffect(uint32_t duration, std::function<void()> resetFunction);
 
 private:
-	std::array<int, MAX_STATS> buffs = { 0 };
+	std::vector<StatEffect> effects = {};
 };

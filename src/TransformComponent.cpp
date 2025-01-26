@@ -9,24 +9,14 @@
 #include <cstdio>
 #include <initializer_list>
 #include <iostream>
+#include <optional>
 
 #include "SoundManager.h"
-
-TransformComponent::TransformComponent()
-{
-	position.zero();
-}
 
 TransformComponent::TransformComponent(int scale)
 {
 	position.zero();
 	this->scale = scale;
-}
-
-TransformComponent::TransformComponent(float x, float y)
-{
-	this->position.x = x;
-	this->position.y = y;
 }
 
 TransformComponent::TransformComponent(float x, float y, int scale)
@@ -65,9 +55,11 @@ void TransformComponent::update()
 	position += positionChange;
 }
 
-void TransformComponent::modifySpeed(int8_t modifier)
-{
-	this->speedMod += modifier;
+int TransformComponent::getSpeed()
+{ 
+	return (this->entity->hasComponent<DataComponent>()
+			? this->entity->getComponent<DataComponent>().getEntry<int>("speed").value_or(0)
+			: 0);
 }
 
 void TransformComponent::setPositionAfterCollision(Vector2D& positionChange)
