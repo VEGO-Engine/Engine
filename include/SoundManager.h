@@ -81,6 +81,10 @@ class SoundManager
 		static void addSingleBackgroundMusic(BackgroundMusic backgroundMusic, const char* path);
 		static void addBackgroundMusic(const std::map<BackgroundMusic, const char*> &backgroundMusic);
 
+		static SoundManager* getInstance() {
+			return this_instance;
+		}
+
 
 	private:
 
