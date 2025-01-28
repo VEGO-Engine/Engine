@@ -4,6 +4,7 @@
 #include "AssetManager.h"
 #include "RenderManager.h"
 #include <SDL3_mixer/SDL_mixer.h>
+#include <SDL3_ttf/SDL_ttf.h>
 #include "SDL3/SDL_init.h"
 #include "SoundManager.h"
 #include "Entity.h"
@@ -87,6 +88,13 @@ SDL_AppResult GameInternal::init(const char* title, int xpos, int ypos, int widt
 
 	Mix_Volume(-1, MIX_MAX_VOLUME);
 	Mix_AllocateChannels(16);
+
+    if(!TTF_Init())
+    {
+        std::cout << "ERROR: SDL_TTF couldnt be initialized! " << SDL_GetError() << std::endl;
+        SDL_ClearError();
+        return SDL_APP_FAILURE;
+    }
 
 	// loading sounds
 	// assets->addSoundEffect("throw_egg", "assets/sound/throw_egg.wav");

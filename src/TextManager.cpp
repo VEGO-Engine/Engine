@@ -3,6 +3,7 @@
 #include <iostream>
 #include <nlohmann/json.hpp>
 #include <fstream>
+#include <string>
 
 #include "GameInternal.h"
 #include "AssetManager.h"
@@ -11,21 +12,18 @@ using json = nlohmann::json;
 
 TTF_Font* TextManager::loadFont(const char *filepath)
 {
-    if(!TTF_Init())
-        std::cerr << "Failed to initialize SDL_TTF'" << std::endl;
-
-    auto it = this->font_cache.find(filepath);
-
-    if (it != this->font_cache.end()) {
-        return it->second;
-    }
+//    auto it = this->font_cache.find(filepath);
+//
+//    if (it != this->font_cache.end()) {
+//        return it->second;
+//    }
 
     auto font = TTF_OpenFont(filepath, 12); // setting fontsize to 12 for now
 
     if (font == NULL)
         std::cerr << "Couldn't load font '" << filepath << "'" << std::endl;
 
-    this->font_cache.emplace(filepath, font);
+//    this->font_cache.emplace(filepath, font);
 
     std::cout << "Loaded font at " << filepath << std::endl;
 
@@ -41,7 +39,8 @@ void TextManager::RenderText(GameInternal* game, std::string font, std::string t
     SDL_FRect sdlSrcRect = { src.x, src.y, src.w, src.h };
     SDL_FRect sdlDstRect = { dst.x, dst.y, dst.w, dst.h };
 
-    SDL_RenderTexture(VEGO_Game().renderer, CreateRenderedTexture(ttfFont, text, displayOptions, sdlFg, sdlBg, wrapWidth), &sdlSrcRect, &sdlDstRect);
+    SDL_RenderTexture(game->renderer, CreateRenderedTexture(game, ttfFont, text, displayOptions, sdlFg, sdlBg, wrapWidth), &sdlSrcRect, &sdlDstRect);
+    SDL_RenderPresent(game->renderer);
 }
 
 void TextManager::RenderTextFromFile(GameInternal* game, std::string font, std::string filepath, int id, DisplayOptions displayOptions, Color fg, Color bg, int wrapWidth, Rect src, Rect dst)
@@ -54,21 +53,41 @@ void TextManager::RenderTextFromFile(GameInternal* game, std::string font, std::
     SDL_FRect sdlDstRect = { dst.x, dst.y, dst.w, dst.h };
 
     std::ifstream f(filepath);
-    json data = json::parse(f);;
+    if (!f.is_open()) {
+        std::cerr << "Failed to open file: " << filepath << std::endl;
+        return;
+    }
 
-    auto it = std::find_if(data.begin(), data.end(), [id](const nlohmann::json& obj){
-        return obj.contains("id") && obj["id"]  == id;
-    });
+    json data;
+    try {
+        data = json::parse(f);
+    } catch (const json::parse_error& e) {
+        std::cerr << "JSON parse error: " << e.what() << std::endl;
+        return;
+    }
 
-    if(it == data.end() || !it->contains("line"))
-        std::cerr << "Object with id " << id << " not found or 'line' not present!" << std::endl;
+    std::string text;
+    bool found = false;
+    for (auto it = data.begin(); it != data.end(); ++it) {
+        std::cout << "Key: " << it.key() << ", Value: " << it.value() << std::endl;
+        if (it.key() == std::to_string(id)) {
+            text = it.value();
+            found = true;
+            break;
+        }
+    }
 
-    std::string text = (*it)["line"];
+    if(!found)
+    {
+        std::cerr << "Object with id " << id << " not found!" << std::endl;
+        return;
+    }
 
-    SDL_RenderTexture(VEGO_Game().renderer, CreateRenderedTexture(ttfFont, text, displayOptions, sdlFg, sdlBg, wrapWidth), &sdlSrcRect, &sdlDstRect);
+    SDL_RenderTexture(game->renderer, CreateRenderedTexture(game, ttfFont, text, displayOptions, sdlFg, sdlBg, wrapWidth), &sdlSrcRect, &sdlDstRect);
+    SDL_RenderPresent(game->renderer);
 }
 
-SDL_Texture* TextManager::CreateRenderedTexture(TTF_Font* font, std::string text, DisplayOptions displayOptions, SDL_Color fg, SDL_Color bg, int wrapWidth)
+SDL_Texture* TextManager::CreateRenderedTexture(GameInternal* game, TTF_Font* font, std::string text, DisplayOptions displayOptions, SDL_Color fg, SDL_Color bg, int wrapWidth)
 {
     SDL_Surface* surface = nullptr;
 
@@ -94,7 +113,7 @@ SDL_Texture* TextManager::CreateRenderedTexture(TTF_Font* font, std::string text
     if(!surface)
         std::cerr << "Error when rendering text!" << std::endl;
 
-    return SDL_CreateTextureFromSurface(VEGO_Game().renderer, surface);
+    return SDL_CreateTextureFromSurface(game->renderer, surface);
 }
 
 SDL_Surface* TextManager::RenderSolid(TTF_Font* font, std::string text, SDL_Color fg, int wrapWidth)
