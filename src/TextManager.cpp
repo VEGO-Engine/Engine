@@ -69,7 +69,6 @@ void TextManager::RenderTextFromFile(GameInternal* game, std::string font, std::
     std::string text;
     bool found = false;
     for (auto it = data.begin(); it != data.end(); ++it) {
-        std::cout << "Key: " << it.key() << ", Value: " << it.value() << std::endl;
         if (it.key() == std::to_string(id)) {
             text = it.value();
             found = true;
@@ -89,6 +88,12 @@ void TextManager::RenderTextFromFile(GameInternal* game, std::string font, std::
 
 SDL_Texture* TextManager::CreateRenderedTexture(GameInternal* game, TTF_Font* font, std::string text, DisplayOptions displayOptions, SDL_Color fg, SDL_Color bg, int wrapWidth)
 {
+//    auto it = this->text_cache.find(text);
+//
+//    if (it != this->text_cache.end()) {
+//        return it->second;
+//    }
+
     SDL_Surface* surface = nullptr;
 
     switch(displayOptions)
@@ -113,7 +118,11 @@ SDL_Texture* TextManager::CreateRenderedTexture(GameInternal* game, TTF_Font* fo
     if(!surface)
         std::cerr << "Error when rendering text!" << std::endl;
 
-    return SDL_CreateTextureFromSurface(game->renderer, surface);
+    auto texture = SDL_CreateTextureFromSurface(game->renderer, surface);
+
+//    text_cache[text] = texture;
+
+    return texture;
 }
 
 SDL_Surface* TextManager::RenderSolid(TTF_Font* font, std::string text, SDL_Color fg, int wrapWidth)

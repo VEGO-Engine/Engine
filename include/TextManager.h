@@ -48,15 +48,15 @@ public:
     TextManager(TextManager const&) = delete;
     void operator=(TextManager const&) = delete;
 
+    std::map<const char*, TTF_Font*> font_cache;
+    std::map<std::string, SDL_Texture*> text_cache;
+
     bool isTextRendered = false;
 
     TTF_Font* loadFont(const char* filepath);
 
-    // TODO: probably gotta change sdl surface since this is a wrapper func for the dev
     void RenderText(GameInternal* game, std::string font, std::string text, DisplayOptions displayOptions, Color fg, Color bg, int wrapWidth, Rect src, Rect dst);
     void RenderTextFromFile(GameInternal* game, std::string font, std::string filepath, int id, DisplayOptions displayOptions, Color fg, Color bg, int wrapWidth, Rect src, Rect dst);
-
-    std::map<const char*, TTF_Font*> font_cache;
 
 private:
     SDL_Texture* CreateRenderedTexture(GameInternal* game, TTF_Font* font, std::string text, DisplayOptions displayOptions, SDL_Color fg, SDL_Color bg, int wrapWidth);
