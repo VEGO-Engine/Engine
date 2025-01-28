@@ -102,7 +102,7 @@ public:
 		return *c;
 	};
 	
-	template <typename T> T& getComponent() const //! \returns Component of type T
+	template <typename T> T& getComponent() const //!< \todo: rewrite to use optionals
 	{
 		auto ptr(componentArray[getComponentTypeID<T>()]);
 		return *static_cast<T*>(ptr);

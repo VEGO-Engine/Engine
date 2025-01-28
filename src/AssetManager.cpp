@@ -42,16 +42,6 @@ Mix_Music* AssetManager::getMusic(std::string id)
 	return music.at(id);
 }
 
-void AssetManager::createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, float speed, Textures textureEnum, Entity* owner) {
-
-    auto& projectile(man->addEntity());
-    projectile.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, scale); //32x32 is standard size for objects
-    projectile.addComponent<SpriteComponent>(textureEnum, 4);
-    projectile.addComponent<ProjectileComponent>(range, speed, velocity, owner);
-    projectile.addComponent<ColliderComponent>("projectile", 0.6f);
-    projectile.addGroup((size_t)Entity::GroupLabel::PROJECTILE);
-}
-
 void AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, Textures texture) {
 
     auto& powerups(man->addEntity());
