@@ -39,7 +39,9 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
     return SDL_APP_CONTINUE;
 }
 
+// triggers upon every event
 SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event) {
+    // TODO: call handleEvents() from gameinternal
     return SDL_APP_CONTINUE;
 }
 

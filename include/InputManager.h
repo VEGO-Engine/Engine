@@ -5,6 +5,7 @@
 #include <string>
 #include <functional>
 #include <vector>
+#include <iostream>
 
 class InputManager {
 public:
@@ -115,12 +116,23 @@ public:
     void rebindAction(const std::string& actionName, const std::vector<Key>& newBindings, const std::string& context);
     void removeBindings(const std::string& actionName, const std::string& context);
     std::vector<Key> getBindings(const std::string& actionName, const std::string& context) const;
+    std::vector<InputAction*> getActionsByKey(const Key key) const;
 
 private:
+    // TODO: flesh this out to avoid loops in process actions
+    // additionally to actionsByContext, not instead
     std::map<std::string, std::vector<InputAction>> actionsByContext;
+    std::map<Key, std::vector<InputAction*>> actionsByKey;
+
     std::map<Key, SDL_Scancode> keyMap;
     std::string activeContext;
 
     void initKeyMap();
     void handleEvent(const SDL_Event& event);
 };
+
+std::ostream& operator<<(std::ostream& os, InputManager::Key key);
+std::ostream& operator<<(std::ostream& os, const InputManager::InputAction& action);
+std::ostream& operator<<(std::ostream& os, const InputManager::InputAction* action);
+std::ostream& operator<<(std::ostream& os, const std::vector<InputManager::InputAction>& actions);
+std::ostream& operator<<(std::ostream& os, const std::vector<InputManager::InputAction*>& actions);

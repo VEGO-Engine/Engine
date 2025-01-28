@@ -102,18 +102,10 @@ SDL_AppResult GameInternal::init(const char* title, int xpos, int ypos, int widt
 	return SDL_APP_CONTINUE;
 }
 
+// TODO: rework with InputManager
 void GameInternal::handleEvents()
 {
-	SDL_PollEvent(&event);
-
-	switch (event.type)
-	{
-		case SDL_EVENT_QUIT: this->setRunning(false);
-			break;
-
-		default:
-			break;
-	}
+	inputManager->processEvents();
 }
 
 void GameInternal::update(Uint64 frameTime)
