@@ -83,7 +83,7 @@ void SoundManager::playSound(SoundEffects sound, bool canOverlap, int loops, int
 	}
 }
 
-void SoundManager::playMusic(BackgroundMusic music, int loops, int volume, int ms)
+void SoundManager::playMusic(BackgroundMusic music, int loops, int volume, int milliseconds)
 {
 	if (!this_instance->music_cache.contains(music)) {
 		std::cerr << "Error playing music: music not found" << std::endl;
@@ -93,9 +93,9 @@ void SoundManager::playMusic(BackgroundMusic music, int loops, int volume, int m
 	if (Mix_PlayingMusic() != 0 || Mix_Fading() == Mix_Fading::MIX_FADING_IN)
 		return;
 
-	if(ms > 0)
+	if(milliseconds > 0)
 	{
-		Mix_FadeInMusic(this_instance->music_cache.at(music), loops, ms);
+		Mix_FadeInMusic(this_instance->music_cache.at(music), loops, milliseconds);
 		return;
 	}
 

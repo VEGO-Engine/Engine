@@ -68,7 +68,7 @@ class SoundManager
 		 *
 		 * Handles how often track can loop, as well as the volume at which the specified track should play and if it fades in.
 		 */
-		static void playMusic(BackgroundMusic sound, int loops, int volume, int ms);
+		static void playMusic(BackgroundMusic sound, int loops, int volume, int milliseconds);
 
 		static void setSoundVolume(int volume, int channel); //!< Volume handling for sound effects (either all or on a specific channel)
 		static void setMusicVolume(int volume); //!< Volume handling for music track
@@ -81,9 +81,16 @@ class SoundManager
 
 		static void fadeOutMusic(int ms); //!< Handles fading out a music track
 
-		static void addSingleSoundEffect(SoundEffects soundEffect, const char* path);
+		/*!
+		* \brief Initializes sound-effects and adds them to a cache
+		*
+		*/
 		static void addSoundEffects(const std::map<SoundEffects, const char*> &effects);
-		static void addSingleBackgroundMusic(BackgroundMusic backgroundMusic, const char* path);
+
+		/*!
+		 * \brief Initializes background-music and adds them to a cache
+		 *
+		 */
 		static void addBackgroundMusic(const std::map<BackgroundMusic, const char*> &backgroundMusic);
 
 		static SoundManager* getInstance() {
@@ -96,4 +103,7 @@ class SoundManager
 		std::map<BackgroundMusic, Mix_Music*> music_cache;
 		std::map<SoundEffects, Mix_Chunk*> sound_cache;
 		static SoundManager* this_instance;
+
+		static void addSingleBackgroundMusic(BackgroundMusic backgroundMusic, const char* path);
+		static void addSingleSoundEffect(SoundEffects soundEffect, const char* path);
 };
