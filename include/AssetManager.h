@@ -6,6 +6,7 @@
 #include <functional>
 
 #include "Entity.h"
+#include "SoundEffects.h"
 
 class Vector2D;
 class Manager;
@@ -24,24 +25,14 @@ public:
     AssetManager(Manager* manager);
     ~AssetManager();
 
-    void createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, float speed, Textures textureEnum, Entity* owner);
+    void createProjectile(Vector2D pos, Vector2D velocity, int scale, int range, float speed, Textures textureEnum, Entity* owner, SoundEffects soundEffect);
     void createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, Textures texture);
 
     Vector2D calculateSpawnPosition();
     PowerupType calculateType();
 
 
-    // sound management
-    void addSoundEffect(std::string id, const char* path);
-
-    void addMusic(std::string id, const char* path);
-
-    Mix_Chunk* getSound(std::string id);
-    Mix_Music* getMusic(std::string id);
-
 private:
 
     Manager* man;
-    std::map<std::string, Mix_Chunk*> soundEffects;
-    std::map<std::string, Mix_Music*> music;
 };

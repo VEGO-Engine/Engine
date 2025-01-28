@@ -3,6 +3,7 @@
 #include "Component.h"
 #include "Vector2D.h"
 #include "Constants.h"
+#include "SoundEffects.h"
 
 class TransformComponent;
 
@@ -11,8 +12,8 @@ class ProjectileComponent : public Component
     //can maybe be split in separate .cpp file
 
 public:
-    ProjectileComponent(int range, int speed, Vector2D direction, Entity* owner)
-    : range(range), speed(speed), direction(direction), owner(owner) {}
+    ProjectileComponent(int range, int speed, Vector2D direction, Entity* owner, SoundEffects soundEffect)
+    : range(range), speed(speed), direction(direction), owner(owner), soundEffect(soundEffect) {}
     ~ProjectileComponent() {}
 
     void init() override;
@@ -28,4 +29,6 @@ private:
     Entity* owner = nullptr;
 
     Vector2D direction;
+
+    SoundEffects soundEffect;
 };
