@@ -185,6 +185,8 @@ void SoundManager::addBackgroundMusic(const std::map<BackgroundMusic, const char
 		addSingleBackgroundMusic(track.first, track.second);
 }
 
+SoundManager* SoundManager::this_instance = nullptr;
+
 
 
 

@@ -23,7 +23,12 @@ class SoundManager
 	public:
 
 		SoundManager() {
-			this_instance = this;
+			if (this_instance == nullptr) {
+				this_instance = this;
+			}
+			else {
+				throw std::runtime_error("SoundManager instance already exists!");
+			}
 		}
 		~SoundManager() {
 			for (auto& it : this->sound_cache) {
