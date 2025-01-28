@@ -6,6 +6,7 @@
 #include <functional>
 
 #include "Entity.h"
+#include "SoundEffects.h"
 
 class Vector2D;
 class Manager;
@@ -30,17 +31,7 @@ public:
     PowerupType calculateType();
 
 
-    // sound management
-    void addSoundEffect(std::string id, const char* path);
-
-    void addMusic(std::string id, const char* path);
-
-    Mix_Chunk* getSound(std::string id);
-    Mix_Music* getMusic(std::string id);
-
 private:
 
     Manager* man;
-    std::map<std::string, Mix_Chunk*> soundEffects;
-    std::map<std::string, Mix_Music*> music;
 };

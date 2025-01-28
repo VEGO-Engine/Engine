@@ -22,26 +22,6 @@ AssetManager::AssetManager(Manager* manager) : man(manager) {}
 
 AssetManager::~AssetManager() {}
 
-void AssetManager::addSoundEffect(std::string id, const char* path)
-{
-    soundEffects.emplace(id, this->man->getGame()->soundManager->loadSound(path));
-}
-
-void AssetManager::addMusic(std::string id, const char* path)
-{
-    music.emplace(id, this->man->getGame()->soundManager->loadMusic(path));
-}
-
-
-Mix_Chunk* AssetManager::getSound(std::string id) {
-    return soundEffects.at(id);
-}
-
-Mix_Music* AssetManager::getMusic(std::string id)
-{
-	return music.at(id);
-}
-
 void AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, Textures texture) {
 
     auto& powerups(man->addEntity());
