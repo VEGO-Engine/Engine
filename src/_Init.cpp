@@ -40,7 +40,7 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
 }
 
 SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event) {
-    return SDL_APP_CONTINUE;
+    return vego::game->handleEvent(event);
 }
 
 void SDL_AppQuit(void *appstate, SDL_AppResult result) {

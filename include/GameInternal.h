@@ -7,7 +7,10 @@
 #include <functional>
 #include <vector>
 
+#include "EventManager.h"
 #include "Manager.h"
+#include "SDL3/SDL_events.h"
+#include "SDL3/SDL_init.h"
 #include "Vector2D.h"
 #include "Entity.h"
 #include "RenderManager.h"
@@ -31,6 +34,7 @@ public:
 	SDL_AppResult init();
 
 	void handleEvents();
+    SDL_AppResult handleEvent(SDL_Event* event);
 	void update(Uint64 frameTime);
 	void render();
 	void clean();
@@ -47,6 +51,7 @@ public:
 
     Manager manager;
     RenderManager renderManager;
+    EventManager eventManager;
     Map* map; // game specific, might not be needed for all types of games
 
 	ConfigLoader* config;
