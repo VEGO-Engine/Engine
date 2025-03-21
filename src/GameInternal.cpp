@@ -6,6 +6,7 @@
 #include <SDL3_mixer/SDL_mixer.h>
 #include "SDL3/SDL_events.h"
 #include "SDL3/SDL_init.h"
+#include "SDL3/SDL_oldnames.h"
 #include "SoundManager.h"
 #include "Entity.h"
 #include "HealthComponent.h"
@@ -20,161 +21,157 @@
 #include "ConfigLoader.h"
 
 GameInternal::GameInternal() :
-	manager(this),
-	renderManager(),
-	tiles(manager.getGroup((size_t)Entity::GroupLabel::MAPTILES)),
-	players(manager.getGroup((size_t)Entity::GroupLabel::PLAYERS)),
-	projectiles(manager.getGroup((size_t)Entity::GroupLabel::PROJECTILE)),
-	hearts(manager.getGroup((size_t)Entity::GroupLabel::HEARTS)),
-	powerups(manager.getGroup((size_t)Entity::GroupLabel::POWERUPS))
+    manager(this),
+    renderManager(),
+    tiles(manager.getGroup((size_t)Entity::GroupLabel::MAPTILES)),
+    players(manager.getGroup((size_t)Entity::GroupLabel::PLAYERS)),
+    projectiles(manager.getGroup((size_t)Entity::GroupLabel::PROJECTILE)),
+    hearts(manager.getGroup((size_t)Entity::GroupLabel::HEARTS)),
+    powerups(manager.getGroup((size_t)Entity::GroupLabel::POWERUPS))
 {};
 
 GameInternal::~GameInternal() = default;
 
 SDL_AppResult GameInternal::init()
 {
-	config = new ConfigLoader();
+    config = new ConfigLoader();
 
-	this->gameInstance = GameFactory::instance().create(this);
-	config->setCustomConfig(this->gameInstance->setConfigFilePath());
-	config->init();
+    this->gameInstance = GameFactory::instance().create(this);
+    config->setCustomConfig(this->gameInstance->setConfigFilePath());
+    config->init();
 
-	json finalConfig = config->getFinalConfig();
+    json finalConfig = config->getFinalConfig();
 
-	GameInternal::assets = new AssetManager(&manager);
-	GameInternal::textureManager = new TextureManager(&manager);
-	GameInternal::soundManager = new SoundManager();
-	GameInternal::collisionHandler = new CollisionHandler(manager); // why does this use a referrence, but AssetManager a pointer?
-	
+    GameInternal::assets = new AssetManager(&manager);
+    GameInternal::textureManager = new TextureManager(&manager);
+    GameInternal::soundManager = new SoundManager();
+    GameInternal::collisionHandler = new CollisionHandler(manager); // why does this use a referrence, but AssetManager a pointer?
+    GameInternal::inputManager = new InputManager();
+
+    this->eventManager.registerListener(inputManager, { SDL_EVENT_KEY_DOWN, SDL_EVENT_KEY_UP });
+
     /// \TODO: from c++26 you (should be able to) can loop through all values of an enum
     SDL_RegisterEvents(VEGO_Event_Interaction);
 
-	int flags = 0;
-	if (finalConfig.at("fullscreen"))
-	{
-		flags = SDL_WINDOW_FULLSCREEN;
-	}
+    int flags = 0;
+    if (finalConfig.at("fullscreen"))
+    {
+        flags = SDL_WINDOW_FULLSCREEN;
+    }
 
-	if (!SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO))
-	{
-		std::cout << "ERROR. Subsystem couldnt be initialized! " << SDL_GetError() << std::endl;
-		SDL_ClearError();
-		return SDL_APP_FAILURE;
-	}
+    if (!SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO))
+    {
+        std::cout << "ERROR. Subsystem couldnt be initialized! " << SDL_GetError() << std::endl;
+        SDL_ClearError();
+        return SDL_APP_FAILURE;
+    }
 
-	if (Mix_Init(MIX_INIT_MP3) != MIX_INIT_MP3) {
-		std::cout << "ERROR. Subsystem couldnt be initialized!" << std::endl;
-		return SDL_APP_FAILURE;
-	}
+    if (Mix_Init(MIX_INIT_MP3) != MIX_INIT_MP3) {
+        std::cout << "ERROR. Subsystem couldnt be initialized!" << std::endl;
+        return SDL_APP_FAILURE;
+    }
 
-	window = SDL_CreateWindow(finalConfig.at("title").get<std::string>().c_str(),
-		finalConfig.at("screen_width"), finalConfig.at("screen_height"), flags);
+    window = SDL_CreateWindow(finalConfig.at("title").get<std::string>().c_str(),
+        finalConfig.at("screen_width"), finalConfig.at("screen_height"), flags);
 
-	if (!window)
-	{
-		std::cout << "ERROR: Window couldnt be created! " << SDL_GetError() << std::endl;
-		SDL_ClearError();
-		return SDL_APP_FAILURE;
-	}
+    if (!window)
+    {
+        std::cout << "ERROR: Window couldnt be created! " << SDL_GetError() << std::endl;
+        SDL_ClearError();
+        return SDL_APP_FAILURE;
+    }
 
     // bad
     SDL_Surface* icon;
     if((icon = SDL_LoadBMP(finalConfig.at("icon").get<std::string>().c_str())))
     {
-    	SDL_SetWindowIcon(window, icon);
+        SDL_SetWindowIcon(window, icon);
     }
 
     SDL_SetWindowIcon(window, icon);
 
-	renderer = SDL_CreateRenderer(window, NULL);
-	if (!renderer)
-	{
-		std::cout << "ERROR: Renderer couldnt be created! " << SDL_GetError() << std::endl;
-		SDL_ClearError();
-		return SDL_APP_FAILURE;
-	}
-	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    renderer = SDL_CreateRenderer(window, NULL);
+    if (!renderer)
+    {
+        std::cout << "ERROR: Renderer couldnt be created! " << SDL_GetError() << std::endl;
+        SDL_ClearError();
+        return SDL_APP_FAILURE;
+    }
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-	if (!Mix_OpenAudio(0, NULL))
-	{
-		std::cout << "ERROR: Mixer couldnt be initialized! " << SDL_GetError() << std::endl;
-		SDL_ClearError();
-		return SDL_APP_FAILURE;
-	}
+    if (!Mix_OpenAudio(0, NULL))
+    {
+        std::cout << "ERROR: Mixer couldnt be initialized! " << SDL_GetError() << std::endl;
+        SDL_ClearError();
+        return SDL_APP_FAILURE;
+    }
 
-	Mix_Volume(-1, MIX_MAX_VOLUME);
-	Mix_AllocateChannels(16);
+    Mix_Volume(-1, MIX_MAX_VOLUME);
+    Mix_AllocateChannels(16);
 
-	// loading sounds
-	// assets->addSoundEffect("throw_egg", "assets/sound/throw_egg.wav");
-	// assets->addSoundEffect("steps", "assets/sound/steps.wav");
+    // loading sounds
+    // assets->addSoundEffect("throw_egg", "assets/sound/throw_egg.wav");
+    // assets->addSoundEffect("steps", "assets/sound/steps.wav");
 
-	// loading music
-	// assets->addMusic("background_music", "assets/sound/background_music.mp3");
+    // loading music
+    // assets->addMusic("background_music", "assets/sound/background_music.mp3");
 
-	this->gameInstance->init();
+    this->gameInstance->init();
 
-	return SDL_APP_CONTINUE;
-}
-
-void GameInternal::handleEvents()
-{
-	SDL_PollEvent(&event);
-
-	switch (event.type)
-	{
-		case SDL_EVENT_QUIT: this->setRunning(false);
-			break;
-
-		default:
-			break;
-	}
+    return SDL_APP_CONTINUE;
 }
 
 SDL_AppResult GameInternal::handleEvent(SDL_Event* event) {
-    return this->eventManager.handleEvent(event);
+    SDL_AppResult result = this->eventManager.handleEvent(event);
+
+    if (event->type == SDL_EVENT_QUIT) {
+        this->clean();
+        return result == SDL_APP_FAILURE ? SDL_APP_FAILURE : SDL_APP_SUCCESS;
+    }
+
+    return result;
 }
 
 void GameInternal::update(Uint64 frameTime)
 {
-	manager.refresh();
+    manager.refresh();
 
-	uint_fast16_t diffTime = frameTime - this->lastFrameTime;
-	manager.update(diffTime);
+    uint_fast16_t diffTime = frameTime - this->lastFrameTime;
+    manager.update(diffTime);
 
-	this->gameInstance->update(diffTime); // TODO: this might have to be split up into two update functions, before and after manager...
+    this->gameInstance->update(diffTime); // TODO: this might have to be split up into two update functions, before and after manager...
 
-	this->lastFrameTime = frameTime;
+    this->lastFrameTime = frameTime;
 }
 
 void GameInternal::render()
 {
-	SDL_RenderClear(renderer);
-	this->renderManager.renderAll();
-	SDL_RenderPresent(renderer);
+    SDL_RenderClear(renderer);
+    this->renderManager.renderAll();
+    SDL_RenderPresent(renderer);
 }
 
 void GameInternal::clean()
 {
-	delete(textureManager);
-	SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(window);
-	SDL_Quit();
-	std::cout << "Game Cleaned!" << std::endl;
+    delete(textureManager);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+    std::cout << "Game Cleaned!" << std::endl;
 }
 
 bool GameInternal::isRunning() const
 {
-	return running;
+    return running;
 }
 
 void GameInternal::setRunning(bool running) //TODO: might be depracted
 {
-	this->running = running;
+    this->running = running;
 }
 
 void GameInternal::stopGame()
 {
-	this->running = false;
+    this->running = false;
 }
 

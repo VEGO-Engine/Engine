@@ -12,7 +12,7 @@
 class EventManager {
 public:
     void registerListener(EventListener* listener, std::initializer_list<SDL_EventType> eventTypes);
-    SDL_AppResult handleEvent(SDL_Event* event);
+    SDL_AppResult handleEvent(SDL_Event* const event);
 private:
     std::map<SDL_EventType, std::vector<EventListener*>> eventListeners = std::map<SDL_EventType, std::vector<EventListener*>>();
 };

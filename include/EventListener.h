@@ -5,7 +5,7 @@
 
 class EventListener {
 public:
-    virtual SDL_AppResult handleEvent(SDL_EventType type, SDL_Event* event) = 0;
+    virtual SDL_AppResult handleEvent(SDL_EventType type, SDL_Event* const event) = 0;
     EventListener() {};
     virtual ~EventListener() {};
 };
