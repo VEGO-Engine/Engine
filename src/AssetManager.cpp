@@ -37,6 +37,8 @@ void AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pic
     powerups.addComponent<ColliderComponent>("powerup", 0.6f);
     powerups.addComponent<PowerupComponent>(pickupFunc);
     powerups.addGroup((size_t)Entity::GroupLabel::POWERUPS);
+
+    VEGO_Game().interactionManager->registerListener(powerups.getComponentAsPointer<PowerupComponent>());
 }
 
 Vector2D AssetManager::calculateSpawnPosition()

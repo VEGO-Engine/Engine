@@ -1,7 +1,11 @@
 #include "InputManager.h"
+#include "InteractionEventdataStruct.h"
 #include "SDL3/SDL_events.h"
 #include "SDL3/SDL_init.h"
 #include <iostream>
+#include "SDL3/SDL_stdinc.h"
+#include "VEGO.h"
+#include "VEGO_Event.h"
 
 std::ostream& operator<<(std::ostream& os, InputManager::Key key) {
     static const std::unordered_map<InputManager::Key, std::string> keyToString {
@@ -342,14 +346,11 @@ std::string InputManager::getActiveContext() const {
 }
 
 SDL_AppResult InputManager::handleEvent(SDL_EventType type, SDL_Event* const event) {
-    std::cout << "in handleEvent" << std::endl;
     if (type != SDL_EVENT_KEY_DOWN) {
-        std::cout << "ignore key up" << std::endl;
         return SDL_APP_CONTINUE;
     }
 
     if (event->key.repeat) {
-        std::cout << "ignore key repeat" << std::endl;
         return SDL_APP_CONTINUE;
     }
 

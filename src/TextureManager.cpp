@@ -15,6 +15,9 @@ void TextureManager::addSingleTexture(Textures texture, const char* filePath) {
 
     SDL_SetTextureScaleMode(sdlTexture, this->scaleMode); // linear scaling results in blurry images
 	this->texture_cache.emplace(texture, sdlTexture);
+    if (filePath != nullptr) {
+        this->texture_references.emplace(texture, std::string(filePath));
+    }
 	std::cout << "Loaded texture at " << filePath << std::endl;
 }
 

@@ -18,7 +18,7 @@
 SpriteComponent::SpriteComponent(Textures texture, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(0), textureYOffset(0)
 {
 	this->textureEnum = texture;
-	this->path = "";
+    this->path = "";
 }
 
 SpriteComponent::SpriteComponent(Textures texture, int xOffset, int yOffset, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(xOffset), textureYOffset(yOffset)

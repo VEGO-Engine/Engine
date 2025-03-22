@@ -1,8 +1,7 @@
 #pragma once
 
-#include "EventListener.h"
-#include "SDL3/SDL_events.h"
-#include "SDL3/SDL_init.h"
+#include <SDL3/SDL_events.h>
+#include <SDL3/SDL_init.h>
 #include <SDL3/SDL.h>
 #include <map>
 #include <string>
@@ -10,7 +9,7 @@
 #include <vector>
 #include <iostream>
 
-class InputManager : public EventListener {
+class InputManager {
 public:
     enum class EventType {
         KeyDown,
@@ -121,6 +120,8 @@ public:
     std::vector<Key> getBindings(const std::string& actionName, const std::string& context) const;
     std::vector<InputAction*> getActionsByKey(const Key key) const;
 
+    SDL_AppResult handleEvent(SDL_EventType type, SDL_Event* const event);
+
 private:
     // TODO: flesh this out to avoid loops in process actions
     // additionally to actionsByContext, not instead
@@ -131,7 +132,6 @@ private:
     std::string activeContext;
 
     void initKeyMap();
-    SDL_AppResult handleEvent(SDL_EventType type, SDL_Event* const event) override;
 };
 
 std::ostream& operator<<(std::ostream& os, InputManager::Key key);

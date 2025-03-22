@@ -2,6 +2,9 @@
 
 #include "CollisionHandler.h"
 #include "AssetManager.h"
+#include "EventManager.h"
+#include "InputManager.h"
+#include "InteractionManager.h"
 #include "RenderManager.h"
 #include <SDL3_mixer/SDL_mixer.h>
 #include "SDL3/SDL_events.h"
@@ -17,12 +20,12 @@
 
 #include <VEGO.h>
 #include <VEGO_Event.h>
+#include <functional>
 
 #include "ConfigLoader.h"
 
 GameInternal::GameInternal() :
     manager(this),
-    renderManager(),
     tiles(manager.getGroup((size_t)Entity::GroupLabel::MAPTILES)),
     players(manager.getGroup((size_t)Entity::GroupLabel::PLAYERS)),
     projectiles(manager.getGroup((size_t)Entity::GroupLabel::PROJECTILE)),
@@ -48,10 +51,12 @@ SDL_AppResult GameInternal::init()
     GameInternal::collisionHandler = new CollisionHandler(manager); // why does this use a referrence, but AssetManager a pointer?
     GameInternal::inputManager = new InputManager();
 
-    this->eventManager.registerListener(inputManager, { SDL_EVENT_KEY_DOWN, SDL_EVENT_KEY_UP });
+    GameInternal::renderManager = new RenderManager();
+    GameInternal::eventManager = new EventManager();
+    GameInternal::interactionManager = new InteractionManager();
 
-    /// \TODO: from c++26 you (should be able to) can loop through all values of an enum
-    SDL_RegisterEvents(VEGO_Event_Interaction);
+    this->eventManager->registerListener(std::bind_front(&InputManager::handleEvent, this->inputManager), { SDL_EVENT_KEY_DOWN, SDL_EVENT_KEY_UP });
+    this->eventManager->registerListener(std::bind_front(&InteractionManager::handleInteract, VEGO_Game().interactionManager), { vego::VEGO_Event_Interaction });
 
     int flags = 0;
     if (finalConfig.at("fullscreen"))
@@ -122,7 +127,7 @@ SDL_AppResult GameInternal::init()
 }
 
 SDL_AppResult GameInternal::handleEvent(SDL_Event* event) {
-    SDL_AppResult result = this->eventManager.handleEvent(event);
+    SDL_AppResult result = this->eventManager->handleEvent(event);
 
     if (event->type == SDL_EVENT_QUIT) {
         this->clean();
@@ -147,7 +152,7 @@ void GameInternal::update(Uint64 frameTime)
 void GameInternal::render()
 {
     SDL_RenderClear(renderer);
-    this->renderManager.renderAll();
+    this->renderManager->renderAll();
     SDL_RenderPresent(renderer);
 }
 

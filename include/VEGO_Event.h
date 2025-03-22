@@ -1,5 +1,7 @@
 #pragma once
 
-enum VEGO_Event {
-    VEGO_Event_Interaction = SDL_EVENT_USER
-};
+#include <SDL3/SDL_stdinc.h>
+
+namespace vego {
+    extern Uint32 VEGO_Event_Interaction;
+}

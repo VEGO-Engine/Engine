@@ -83,9 +83,15 @@ class TextureManager
 		 */
 		SDL_Texture* loadMapTileTexture(const char* path);
 
+        std::string getTexturePath(Textures texture) {
+            return this->texture_references.at(texture);
+        }
+
 	private:
 		SDL_ScaleMode scaleMode = SDL_SCALEMODE_NEAREST;
 		Manager* manager;
 		std::map<Textures, SDL_Texture*> texture_cache;
 		std::map<std::string, SDL_Texture*> mapTile_texture_cache;
+
+        std::map<Textures, std::string> texture_references;
 };
