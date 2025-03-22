@@ -1,7 +1,6 @@
 #include "GameInternal.h"
 
 #include "CollisionHandler.h"
-#include "AssetManager.h"
 #include "RenderManager.h"
 #include <SDL3_mixer/SDL_mixer.h>
 #include "SDL3/SDL_init.h"
@@ -39,10 +38,10 @@ SDL_AppResult GameInternal::init()
 
 	json finalConfig = config->getFinalConfig();
 
-	GameInternal::assets = new AssetManager(&manager);
+	GameInternal::pickupManager = new PickupManager(&manager);
 	GameInternal::textureManager = new TextureManager(&manager);
 	GameInternal::soundManager = new SoundManager();
-	GameInternal::collisionHandler = new CollisionHandler(manager); // why does this use a referrence, but AssetManager a pointer?
+	GameInternal::collisionHandler = new CollisionHandler(manager); //why no pointer?
 	
 	int flags = 0;
 	if (finalConfig.at("fullscreen"))

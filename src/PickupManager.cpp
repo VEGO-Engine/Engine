@@ -1,4 +1,4 @@
-#include "AssetManager.h"
+#include "PickupManager.h"
 
 #include "TextureManager.h"
 #include "SoundManager.h"
@@ -12,17 +12,17 @@
 #include "Constants.h"
 #include "Entity.h"
 #include "Vector2D.h"
-#include "PowerupComponent.h"
+#include "PickupComponent.h"
 #include <iostream>
 #include <VEGO.h>
 
 #include "Textures.h"
 
-AssetManager::AssetManager(Manager* manager) : man(manager) {}
+PickupManager::PickupManager(Manager* manager) : man(manager) {}
 
-AssetManager::~AssetManager() {}
+PickupManager::~PickupManager() {}
 
-void AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, Textures texture) {
+void PickupManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, Textures texture) {
 
     auto& powerups(man->addEntity());
     powerups.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, 1); //32x32 is standard size for objects
@@ -35,11 +35,11 @@ void AssetManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pic
     }
 
     powerups.addComponent<ColliderComponent>("powerup", 0.6f);
-    powerups.addComponent<PowerupComponent>(pickupFunc);
+    powerups.addComponent<PickupComponent>(pickupFunc);
     powerups.addGroup((size_t)Entity::GroupLabel::POWERUPS);
 }
 
-Vector2D AssetManager::calculateSpawnPosition()
+Vector2D PickupManager::calculateSpawnPosition()
 {
 	Vector2D spawnPos = Vector2D(-1, -1);
 	bool conflict = false;
@@ -62,10 +62,4 @@ Vector2D AssetManager::calculateSpawnPosition()
 		spawnPos = Vector2D(spawnRect.x, spawnRect.y);
 	}
 	return spawnPos;
-}
-
-PowerupType AssetManager::calculateType()
-{
-	PowerupType type = PowerupType(rand() % 3);
-	return type;
 }

@@ -11,25 +11,16 @@
 class Vector2D;
 class Manager;
 
-enum class PowerupType
-{
-    HEART,
-    WALKINGSPEED,
-    SHOOTINGSPEED
-};
-
-class AssetManager
+class PickupManager
 {
 public:
 
-    AssetManager(Manager* manager);
-    ~AssetManager();
+    PickupManager(Manager* manager);
+    ~PickupManager();
 
     void createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, Textures texture);
 
     Vector2D calculateSpawnPosition();
-    PowerupType calculateType();
-
 
 private:
 

@@ -12,10 +12,10 @@
 #include "Entity.h"
 #include "RenderManager.h"
 #include "ConfigLoader.h"
+#include "PickupManager.h"
 
 typedef std::function<void()> gamefunction;
 
-class AssetManager;
 class CollisionHandler;
 class TextureManager;
 class SoundManager;
@@ -41,7 +41,7 @@ public:
 	/* static */ SDL_Renderer* renderer = nullptr;
 	/* static */ SDL_Event event;
 	/* static */ CollisionHandler* collisionHandler;
-    /* static */ AssetManager* assets;
+	/* static */ PickupManager* pickupManager;
     /* static */ TextureManager* textureManager;
     /* static */ SoundManager* soundManager;
 
