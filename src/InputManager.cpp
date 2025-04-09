@@ -101,12 +101,8 @@ std::ostream& operator<<(std::ostream& os, InputManager::Key key) {
 
 std::ostream& operator<<(std::ostream& os, const InputManager::InputAction& action) {
     os << action.name << " with binding(s): ";
-    for (size_t i = 0; i < action.bindings.size(); ++i) {
-        os << action.bindings[i];
-
-        if (i < action.bindings.size() - 1) {
-            os << ", ";
-        }
+    for (auto& binding : action.bindings) {
+        os << binding << ", ";
     }
     return os;
 }
@@ -167,13 +163,6 @@ std::ostream& operator<<(std::ostream& os, const std::vector<InputManager::Input
 InputManager::InputManager() : activeContext("Default") {}
 
 InputManager::~InputManager() {}
-
-void InputManager::init() {
-    if (SDL_Init(SDL_INIT_EVENTS) != 0) {
-        std::cerr << "Failed to initialize SDL: " << SDL_GetError() << std::endl;
-        return;
-    }
-}
 
 void InputManager::initKeyMap() {
     keyMap = {
@@ -259,81 +248,25 @@ void InputManager::initKeyMap() {
     };
 }
 
-void InputManager::registerAction(const std::string& actionName, const std::vector<Key>& keys, std::function<void()> callback, const std::string& context) {
-    actionsByContext[context].emplace_back(actionName, keys, callback);
-    InputAction& storedAction = actionsByContext[context].back();
+void InputManager::registerAction(const std::string& actionName, const std::vector<Key>& keys, std::function<void(bool)> callback, const std::string& context) {
+    InputAction* storedAction = new InputAction{actionName, keys, callback};
     for (const auto& key : keys) {
-        actionsByKey[key].push_back(&storedAction);
+        actionsByContextAndKey[context][key].emplace_back(storedAction);
     }
     std::cout << "Registered action: " << storedAction << " in context: " << context << std::endl;
 }
 
-void InputManager::rebindAction(const std::string& actionName, const std::vector<Key>& newBindings, const std::string& context) {
-    auto it = actionsByContext.find(context);
-    if (it != actionsByContext.end()) {
-        for (auto& action : it->second) {
-            if (action.name == actionName) {
-                for (const auto& key : action.bindings) {
-                    auto& keyActions = actionsByKey[key];
-                    keyActions.erase(std::remove(keyActions.begin(), keyActions.end(), &action), keyActions.end());
-                    if (keyActions.empty()) {
-                        actionsByKey.erase(key);
-                    }
-                }
-
-                action.bindings = newBindings;
-
-                for (const auto& key : newBindings) {
-                    actionsByKey[key].push_back(&action);
-                }
-
-                std::cout << "Rebound action: " << actionName << " in context: " << context << " to new bindings: ";
-                for (const auto& key : newBindings) {
-                    std::cout << key << " ";
-                }
-                std::cout << std::endl;
-                return;
-            }
-        }
-    }
-    std::cout << "Action not found: " << actionName << " in context: " << context << std::endl;
-}
-
-void InputManager::removeBindings(const std::string& actionName, const std::string& context) {
-    auto it = actionsByContext.find(context);
-    if (it != actionsByContext.end()) {
-        for (auto& action : it->second) {
-            if (action.name == actionName) {
-                action.bindings.clear();
-                std::cout << "Removed bindings for action: " << actionName << " in context: " << context << std::endl;
-                return;
-            }
-        }
-    }
-    std::cout << "Action not found: " << actionName << " in context: " << context << std::endl;
-}
-
-std::vector<InputManager::Key> InputManager::getBindings(const std::string& actionName, const std::string& context) const {
-    auto it = actionsByContext.find(context);
-    if (it != actionsByContext.end()) {
-        for (const auto& action : it->second) {
-            if (action.name == actionName) {
-                return action.bindings;
-            }
-        }
-    }
-    std::cout << "Action not found: " << actionName << " in context: " << context << "\n";
-    return {};
-}
-
 std::vector<InputManager::InputAction*> InputManager::getActionsByKey(const Key key) const {
-    auto it = actionsByKey.find(key);
-    if (it != actionsByKey.end()) {
-        std::cout << "DEBUG: Found " << it->second.size() << " actions for key " << key << std::endl;
-        return it->second;
+    std::vector<InputAction*> result;
+
+    for (const auto& [context, keyMap] : actionsByContextAndKey) {
+        auto it = keyMap.find(key);
+        if (it != keyMap.end()) {
+            result.insert(result.end(), it->second.begin(), it->second.end());
+        }
     }
-    std::cout << "DEBUG: No actions found for key " << key << std::endl;
-    return {};
+
+    return result;
 }
 
 void InputManager::setActiveContext(const std::string& context) {
@@ -346,37 +279,22 @@ std::string InputManager::getActiveContext() const {
 }
 
 SDL_AppResult InputManager::handleEvent(SDL_EventType type, SDL_Event* const event) {
-    if (type != SDL_EVENT_KEY_DOWN) {
-        return SDL_APP_CONTINUE;
-    }
-
     if (event->key.repeat) {
         return SDL_APP_CONTINUE;
     }
-
-    auto keyIt = std::ranges::find_if(keyMap,
-    [&](const auto& pair) { return pair.second == event->key.scancode; });
+    auto keyIt = std::ranges::find_if(keyMap, [&](const auto& pair)
+    { return pair.second == event->key.scancode; });
 
     if (keyIt != keyMap.end()) {
         std::cout << "in != keymap.end" << std::endl;
 
         Key pressedKey = keyIt->first;
-        auto actionIt = actionsByKey.find(pressedKey);
-        if (actionIt != actionsByKey.end()) {
-            std::cout << "in != actionsByKey.end" << std::endl;
-
-            for (auto* action : actionIt->second) {
-                std::cout << "before if(action)" << std::endl;
-                if (action) {
-                    std::cout << "after if(action)" << std::endl;
-
-                    auto& activeActions = actionsByContext[activeContext];
-                    if (std::ranges::find_if(activeActions,
-                    [&](const InputAction& act) { return &act == action; }) != activeActions.end()) {
-                        std::cout << "Action triggered: " << action->name << " in context: " << activeContext << std::endl;
-                        action->callback();
-                    }
-                }
+        auto keyActions = actionsByContextAndKey[activeContext];
+        auto it = keyActions.find(pressedKey);
+        if (it != keyActions.end()) {
+            for (auto& action : it->second) {
+                std::cout << "Action triggered: " << action->name << " in context: " << activeContext << std::endl;
+                action->callback(type == SDL_EVENT_KEY_UP);
             }
         }
     }

@@ -42,6 +42,9 @@ void TransformComponent::init()
 
 void TransformComponent::update(uint_fast16_t diffTime)
 {
+	direction.x = direction.x > 0 ? 1 : direction.x < 0 ? -1 : 0;
+	direction.y = direction.y > 0 ? 1 : direction.y < 0 ? -1 : 0;
+	
 	float multiplier = direction.x != 0 && direction.y != 0 ? 0.707 : 1; // normalizes vector; only works if directions are in increments of 45°
 	Vector2D positionChange(
 		direction.x * this->getSpeed() * multiplier * diffTime * (1.f/1000),

@@ -12,10 +12,10 @@ Uint32 vego::VEGO_Event_Interaction;
 
 EventManager::EventManager()
 {
-
     /// \TODO: from c++26 you (should be able to) can get the amount of name values in an enum
     vego::VEGO_Event_Interaction = SDL_RegisterEvents(1); // TODO: error handling
 }
+
 
 void EventManager::registerListener(EventListener listener, std::initializer_list<Uint32> eventTypes)
 {
@@ -31,10 +31,10 @@ SDL_AppResult EventManager::handleEvent(SDL_Event* event)
 {
     SDL_EventType type = (SDL_EventType) event->type;
     if (this->eventListeners.contains(type)) {
-        auto results = this->eventListeners.at(type) | std::views::transform(
-            [&event](EventListener listener) {
-                return listener((SDL_EventType) event->type, event);
-            });
+        std::vector<SDL_AppResult> results;
+        for (auto& listener : this->eventListeners.at(type)) {
+            results.emplace_back(listener((SDL_EventType) event->type, event));
+        }
         if (std::ranges::contains(results, SDL_APP_FAILURE))
             return SDL_APP_FAILURE;
         if (std::ranges::contains(results, SDL_APP_SUCCESS))

@@ -102,7 +102,7 @@ public:
     struct InputAction {
         std::string name;
         std::vector<Key> bindings;
-        std::function<void()> callback;
+        std::function<void(bool)> callback;
     };
 
     InputManager();
@@ -110,28 +110,26 @@ public:
 
     void init(); // see if necessary
     void processEvents();
-    void registerAction(const std::string& actionName, const std::vector<Key>& keys, std::function<void()> callback, const std::string& context);
+    void registerAction(const std::string& actionName, const std::vector<Key>& keys, std::function<void(bool)> callback, const std::string& context);
 
     void setActiveContext(const std::string& context);
     std::string getActiveContext() const;
 
-    void rebindAction(const std::string& actionName, const std::vector<Key>& newBindings, const std::string& context);
-    void removeBindings(const std::string& actionName, const std::string& context);
-    std::vector<Key> getBindings(const std::string& actionName, const std::string& context) const;
+    //void rebindAction(const std::string& actionName, const std::vector<Key>& newBindings, const std::string& context);
+    //void removeBindings(const std::string& actionName, const std::string& context);
+    //std::vector<Key> getBindings(const std::string& actionName, const std::string& context) const;
     std::vector<InputAction*> getActionsByKey(const Key key) const;
 
     SDL_AppResult handleEvent(SDL_EventType type, SDL_Event* const event);
 
+    void initKeyMap();
 private:
     // TODO: flesh this out to avoid loops in process actions
     // additionally to actionsByContext, not instead
-    std::map<std::string, std::vector<InputAction>> actionsByContext;
-    std::map<Key, std::vector<InputAction*>> actionsByKey;
+    std::map<std::string, std::map<Key, std::vector<InputAction*>>> actionsByContextAndKey;
 
     std::map<Key, SDL_Scancode> keyMap;
     std::string activeContext;
-
-    void initKeyMap();
 };
 
 std::ostream& operator<<(std::ostream& os, InputManager::Key key);

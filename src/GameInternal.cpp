@@ -50,6 +50,7 @@ SDL_AppResult GameInternal::init()
     GameInternal::soundManager = new SoundManager();
     GameInternal::collisionHandler = new CollisionHandler(manager); // why does this use a referrence, but AssetManager a pointer?
     GameInternal::inputManager = new InputManager();
+    GameInternal::inputManager->initKeyMap();
 
     GameInternal::renderManager = new RenderManager();
     GameInternal::eventManager = new EventManager();
