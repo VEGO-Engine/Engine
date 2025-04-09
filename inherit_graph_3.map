@@ -1,25 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classComponent.html" title=" " alt="" coords="12,228,99,254"/>
-<area shape="rect" id="Node000001" href="$classColliderComponent.html" title=" " alt="" coords="164,5,294,31"/>
-<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="61,212,72,173,90,127,117,81,152,40,169,29,172,34,155,44,121,84,95,130,77,175,66,213"/>
-<area shape="rect" id="Node000002" href="$classHealthComponent.html" title=" " alt="" coords="167,55,292,80"/>
-<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="65,212,98,151,123,118,152,89,171,79,173,83,155,94,127,121,103,153,70,215"/>
-<area shape="rect" id="Node000003" href="$classInputComponent.html" title=" " alt="" coords="171,104,288,130"/>
-<area shape="poly" id="edge3_Node000000_Node000003" title=" " alt="" coords="73,214,107,175,152,139,174,128,177,133,155,143,111,179,77,217"/>
-<area shape="rect" id="Node000004" href="$classPlayerComponent.html" title=" " alt="" coords="168,153,291,179"/>
-<area shape="poly" id="edge4_Node000000_Node000004" title=" " alt="" coords="92,218,153,188,181,177,183,182,155,193,94,222"/>
-<area shape="rect" id="Node000005" href="$classPowerupComponent.html" title=" " alt="" coords="160,203,298,228"/>
-<area shape="poly" id="edge5_Node000000_Node000005" title=" " alt="" coords="114,230,159,223,160,228,115,235"/>
-<area shape="rect" id="Node000006" href="$classProjectileComponent.html" title=" " alt="" coords="159,252,300,278"/>
-<area shape="poly" id="edge6_Node000000_Node000006" title=" " alt="" coords="115,246,159,252,158,258,114,252"/>
-<area shape="rect" id="Node000007" href="$classSpriteComponent.html" title=" " alt="" coords="169,449,290,475"/>
-<area shape="poly" id="edge7_Node000000_Node000007" title=" " alt="" coords="66,268,77,306,95,351,121,397,155,436,172,447,169,451,152,440,117,400,90,354,72,308,61,270"/>
-<area shape="rect" id="Node000009" href="$classStatEffectsComponent.html" title=" " alt="" coords="154,301,305,327"/>
-<area shape="poly" id="edge8_Node000000_Node000009" title=" " alt="" coords="95,259,155,288,183,298,181,303,153,293,93,264"/>
-<area shape="rect" id="Node000010" href="$classTileComponent.html" title=" " alt="" coords="175,351,284,376"/>
-<area shape="poly" id="edge9_Node000000_Node000010" title=" " alt="" coords="77,264,111,302,155,337,177,348,174,352,152,342,108,306,74,268"/>
-<area shape="rect" id="Node000011" href="$classTransformComponent.html" title=" " alt="" coords="156,400,302,426"/>
-<area shape="poly" id="edge10_Node000000_Node000011" title=" " alt="" coords="70,267,103,327,127,359,155,387,173,397,171,402,152,391,123,363,98,330,65,269"/>
-<area shape="rect" id="Node000008" href="$classRenderObject.html" title=" " alt="" coords="5,449,106,475"/>
-<area shape="poly" id="edge11_Node000008_Node000007" title=" " alt="" coords="121,460,169,460,169,465,121,465"/>
+<area shape="rect" id="Node000000" href="$classConfigLoader.html" title="Enables configuration of specific engine variables via a custom JSON file." alt="" coords="5,5,103,31"/>
 </map>

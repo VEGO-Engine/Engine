@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['rendermanager_0',['RenderManager',['../classRenderManager.html',1,'']]],
-  ['renderobject_1',['RenderObject',['../classRenderObject.html',1,'']]]
+  ['pickupcomponent_0',['PickupComponent',['../classPickupComponent.html',1,'']]],
+  ['pickupmanager_1',['PickupManager',['../classPickupManager.html',1,'']]],
+  ['playercomponent_2',['PlayerComponent',['../classPlayerComponent.html',1,'']]],
+  ['projectilecomponent_3',['ProjectileComponent',['../classProjectileComponent.html',1,'']]]
 ];

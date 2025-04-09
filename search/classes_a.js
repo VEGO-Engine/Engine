@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['texturemanager_0',['TextureManager',['../classTextureManager.html',1,'']]],
-  ['tilecomponent_1',['TileComponent',['../classTileComponent.html',1,'']]],
-  ['transformcomponent_2',['TransformComponent',['../classTransformComponent.html',1,'']]]
+  ['soundmanager_0',['SoundManager',['../classSoundManager.html',1,'']]],
+  ['spritecomponent_1',['SpriteComponent',['../classSpriteComponent.html',1,'']]],
+  ['stateffect_2',['StatEffect',['../structStatEffect.html',1,'']]],
+  ['stateffectscomponent_3',['StatEffectsComponent',['../classStatEffectsComponent.html',1,'']]]
 ];

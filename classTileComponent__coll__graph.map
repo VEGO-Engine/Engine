@@ -1,38 +1,40 @@
 <map id="TileComponent" name="TileComponent">
-<area shape="rect" id="Node000001" title=" " alt="" coords="135,498,243,524"/>
-<area shape="rect" id="Node000002" href="$classComponent.html" title=" " alt="" coords="134,298,221,324"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="181,339,191,497,186,498,176,339"/>
-<area shape="rect" id="Node000004" href="$classTransformComponent.html" title=" " alt="" coords="5,409,152,435"/>
-<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="167,339,153,363,134,387,102,411,99,407,130,383,148,360,163,336"/>
-<area shape="rect" id="Node000006" href="$classSpriteComponent.html" title=" " alt="" coords="230,409,351,435"/>
-<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="203,333,280,407,276,411,199,337"/>
-<area shape="rect" id="Node000003" href="$classEntity.html" title="Main class for any object in game, stores associations, labeling and components." alt="" coords="150,200,204,226"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="180,241,180,298,174,298,174,241"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="93,447,114,472,133,485,154,495,152,500,131,490,111,476,89,450"/>
-<area shape="rect" id="Node000005" href="$classVector2D.html" title=" " alt="" coords="34,298,110,324"/>
-<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="76,339,80,409,75,409,71,340"/>
-<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="267,447,205,500,201,496,264,443"/>
-<area shape="rect" id="Node000007" href="$classRenderObject.html" title=" " alt="" coords="244,298,345,324"/>
-<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="296,340,294,409,288,409,291,339"/>
-<area shape="rect" id="Node000008" href="$classRenderManager.html" title=" " alt="" coords="233,200,345,226"/>
-<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="292,241,293,267,296,297,291,298,288,267,287,241"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="430,291,629,331"/>
-<area shape="poly" id="edge10_Node000006_Node000009" title=" " alt="" coords="473,341,318,411,316,406,471,336"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="580,200,657,226"/>
-<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="599,239,549,292,546,288,595,235"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="533,94,656,135"/>
-<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="606,149,618,199,613,200,600,150"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="682,200,867,226"/>
-<area shape="poly" id="edge13_Node000009_Node000012" title=" " alt="" coords="730,234,581,293,579,288,728,229"/>
-<area shape="rect" id="Node000013" href="$structAnimation.html" title=" " alt="" coords="680,102,760,127"/>
-<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="735,140,752,172,769,198,764,201,748,175,730,142"/>
-<area shape="rect" id="Node000014" title=" " alt="" coords="784,102,920,127"/>
-<area shape="poly" id="edge15_Node000012_Node000014" title=" " alt="" coords="834,141,786,201,782,198,830,138"/>
-<area shape="rect" id="Node000015" title=" " alt="" coords="522,5,560,31"/>
-<area shape="poly" id="edge16_Node000014_Node000015" title=" " alt="" coords="576,27,812,98,811,103,574,32"/>
-<area shape="rect" id="Node000016" title=" " alt="" coords="378,102,494,127"/>
-<area shape="poly" id="edge19_Node000016_Node000015" title=" " alt="" coords="518,43,451,103,448,99,515,39"/>
-<area shape="poly" id="edge17_Node000009_Node000016" title=" " alt="" coords="423,142,409,183,407,206,413,227,427,246,444,263,483,288,480,292,440,267,423,249,408,229,402,206,403,182,418,140"/>
-<area shape="rect" id="Node000017" title=" " alt="" coords="417,5,455,31"/>
-<area shape="poly" id="edge18_Node000016_Node000017" title=" " alt="" coords="438,47,438,101,433,101,433,47"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="250,498,358,524"/>
+<area shape="rect" id="Node000002" href="$classComponent.html" title=" " alt="" coords="182,298,269,324"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="196,335,170,356,148,381,137,408,137,421,143,434,164,458,191,476,221,489,250,498,249,503,219,494,189,480,160,462,138,436,132,422,131,407,144,378,166,352,192,331"/>
+<area shape="rect" id="Node000004" href="$classTransformComponent.html" title=" " alt="" coords="152,409,299,435"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="228,339,228,409,223,409,223,339"/>
+<area shape="rect" id="Node000006" href="$classSpriteComponent.html" title=" " alt="" coords="322,409,444,435"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="257,331,367,407,364,411,254,335"/>
+<area shape="rect" id="Node000003" href="$classEntity.html" title="Main class for any object in game, stores associations, labeling and components." alt="" coords="199,200,252,226"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="228,241,228,298,223,298,223,241"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="244,446,264,472,290,496,287,499,260,476,239,449"/>
+<area shape="rect" id="Node000005" href="$classVector2D.html" title=" " alt="" coords="5,298,81,324"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="77,330,207,406,204,411,75,334"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="364,448,317,499,313,496,360,445"/>
+<area shape="rect" id="Node000007" href="$classRenderObject.html" title=" " alt="" coords="313,298,413,324"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="371,338,383,409,378,410,365,339"/>
+<area shape="rect" id="Node000008" href="$classRenderManager.html" title=" " alt="" coords="278,200,390,226"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="344,240,362,297,357,299,339,241"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="473,291,672,331"/>
+<area shape="poly" id="edge10_Node000006_Node000009" title=" " alt="" coords="526,342,405,411,403,406,524,337"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="414,200,491,226"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="481,233,549,288,546,292,478,237"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="363,94,486,135"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="437,149,451,199,446,200,432,150"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="516,200,701,226"/>
+<area shape="poly" id="edge13_Node000009_Node000012" title=" " alt="" coords="601,241,582,291,577,289,596,239"/>
+<area shape="rect" id="Node000013" href="$structAnimation.html" title=" " alt="" coords="510,102,589,127"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="567,139,603,198,599,201,563,142"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="614,102,749,127"/>
+<area shape="poly" id="edge15_Node000012_Node000014" title=" " alt="" coords="665,141,619,201,615,198,661,138"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="698,5,737,31"/>
+<area shape="poly" id="edge16_Node000014_Node000015" title=" " alt="" coords="702,45,697,56,686,102,680,100,692,54,698,43"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="773,102,889,127"/>
+<area shape="poly" id="edge19_Node000016_Node000015" title=" " alt="" coords="741,40,771,68,814,99,811,103,768,72,737,44"/>
+<area shape="poly" id="edge17_Node000009_Node000016" title=" " alt="" coords="811,140,768,183,715,230,687,251,656,269,613,293,611,288,654,264,684,246,712,226,765,179,808,137"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="812,5,850,31"/>
+<area shape="poly" id="edge18_Node000016_Node000017" title=" " alt="" coords="834,47,834,101,828,101,828,47"/>
+<area shape="rect" id="Node000018" href="$classTextures.html" title="Forward declaration of the Textures enum class." alt="" coords="467,409,539,435"/>
+<area shape="poly" id="edge20_Node000001_Node000018" title=" " alt="" coords="463,444,389,476,334,500,332,495,387,472,461,439"/>
 </map>

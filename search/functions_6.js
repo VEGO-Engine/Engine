@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['hascomponent_0',['hasComponent',['../classEntity.html#aa622a8d79153a90d0e3b9b992ca2d38b',1,'Entity']]],
-  ['hasgroup_1',['hasGroup',['../classEntity.html#acfb6240560624c026ffc24af4d469b68',1,'Entity']]]
+  ['interact_0',['interact',['../classInteractionComponent.html#ab6358a875d127206cb5f867f93e05368',1,'InteractionComponent']]],
+  ['interactioncomponent_1',['InteractionComponent',['../classInteractionComponent.html#af60fed077b6f92c22f2246c2464923ed',1,'InteractionComponent']]],
+  ['isactive_2',['isActive',['../classEntity.html#aea1c1568b4123d989c5310697030ad77',1,'Entity']]]
 ];

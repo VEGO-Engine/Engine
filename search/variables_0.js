@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gameinternal_0',['gameInternal',['../classGame.html#a97bfdecc66a53f55ac7ff8b8ba014418',1,'Game']]]
+  ['actor_0',['actor',['../structInteractionEventdataStruct.html#a37aa07113eed65f8f5c19634092f1810',1,'InteractionEventdataStruct']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['entity_0',['Entity',['../classEntity.html',1,'']]]
+  ['datacomponent_0',['DataComponent',['../classDataComponent.html',1,'']]]
 ];

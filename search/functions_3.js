@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['entity_0',['Entity',['../classEntity.html#aad34087e815ec2da644b86ae2357039b',1,'Entity']]]
+  ['fadeoutmusic_0',['fadeOutMusic',['../classSoundManager.html#aea6a94c8b5456812c49115baa7534bf7',1,'SoundManager']]]
 ];

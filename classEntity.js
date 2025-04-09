@@ -20,5 +20,5 @@ var classEntity =
     [ "hasComponent", "classEntity.html#aa622a8d79153a90d0e3b9b992ca2d38b", null ],
     [ "hasGroup", "classEntity.html#acfb6240560624c026ffc24af4d469b68", null ],
     [ "isActive", "classEntity.html#aea1c1568b4123d989c5310697030ad77", null ],
-    [ "update", "classEntity.html#af4e16c727ddfe4d27fe0edeb4b9261aa", null ]
+    [ "update", "classEntity.html#af4415c165338eed191ee0cddf550732b", null ]
 ];

@@ -1,0 +1,18 @@
+<map id="InteractionEventdataStruct" name="InteractionEventdataStruct">
+<area shape="rect" id="Node000001" title="Struct to hold data for interaction events. This struct is used to pass data to the interaction manag..." alt="" coords="210,286,386,312"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="113,183,283,223"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="232,232,287,284,284,288,228,236"/>
+<area shape="rect" id="Node000003" href="$classInteractionListener.html" title=" " alt="" coords="5,94,135,120"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="100,127,173,180,170,184,97,131"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="159,94,288,120"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="219,135,206,183,201,181,214,134"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="281,5,320,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="282,45,236,95,232,92,278,41"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="311,94,448,120"/>
+<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="324,41,370,92,367,95,320,44"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="307,190,489,216"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="376,229,313,288,309,284,372,225"/>
+<area shape="rect" id="Node000007" href="$classVector2D.html" title=" " alt="" coords="471,94,546,120"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="497,135,476,161,452,178,427,192,425,187,449,174,472,157,493,131"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="387,134,398,189,393,190,382,135"/>
+</map>

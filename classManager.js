@@ -5,5 +5,5 @@ var classManager =
     [ "getAll", "classManager.html#aae16a3d76e450281012c526541ebeb5b", null ],
     [ "getGroup", "classManager.html#a365f24fd26d214314ca5a65ca3a647b1", null ],
     [ "refresh", "classManager.html#adc5c66704fd1b0a9b9d38de8fdcb3748", null ],
-    [ "update", "classManager.html#af43da42550bd9746c5ea61a6aeee80de", null ]
+    [ "update", "classManager.html#ab76ac7deabcf2a203a227c228c27c02b", null ]
 ];
