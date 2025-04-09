@@ -1,4 +1,4 @@
-#include "PowerupComponent.h"
+#include "PickupComponent.h"
 #include "GameInternal.h"
 #include "CollisionHandler.h"
 #include "Entity.h"
@@ -7,12 +7,12 @@
 #include "Constants.h"
 #include <cstdint>
 
-PowerupComponent::PowerupComponent(std::function<void (Entity*)> func)
+PickupComponent::PickupComponent(std::function<void (Entity*)> func)
 {
     this->pickupFunc = func;
 }
 
-void  PowerupComponent::update(uint_fast16_t diffTime)
+void  PickupComponent::update(uint_fast16_t diffTime)
 {
     Entity* player;
     if ((player = this->entity->getManager().getGame()->collisionHandler->getAnyIntersection<Entity*>(
