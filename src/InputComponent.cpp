@@ -10,7 +10,7 @@ InputComponent::~InputComponent() = default;
 
 void InputComponent::init(){}
 
-void InputComponent::update()
+void InputComponent::update(uint_fast16_t diffTime)
 {
     SDL_PumpEvents();
 }

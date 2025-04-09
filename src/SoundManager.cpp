@@ -1,15 +1,16 @@
 #include "SoundManager.h"
 
-#include <stdexcept>
 #include <string>
 #include <iostream>
 
-#include "GameInternal.h"
-#include "AssetManager.h"
+#include <SDL3_mixer/SDL_mixer.h>
 
+#include "GameInternal.h"
+
+/*
 Mix_Music* SoundManager::loadMusic(const char* fileName)
 {
-	auto it = this->music_cache.find(fileName);
+	//auto it = this->music_cache.find(fileName);
 
 	if (it != this->music_cache.end()) {
 		return it->second;
@@ -47,14 +48,21 @@ Mix_Chunk* SoundManager::loadSound(const char* fileName)
 	return sound;
 }
 
-void SoundManager::playSound(GameInternal* game, std::string sound, bool canOverlap, int loops, int volume, int channel)
+*/
+
+void SoundManager::playSound(SoundEffects sound, bool canOverlap, int loops, int volume, int channel)
 {
+	if (!this_instance->sound_cache.contains(sound)) {
+		std::cerr << "Error playing Sound-Effect: sound effect not found" << std::endl;
+		return;
+	}
+
 	if(!canOverlap)
 	{
 		// dev needs to specify a channel for this check to work, if they set it to -1 and let sdl pick the first available
 		// channel mix_getchunk() won't work
 		if (Mix_Playing(channel) != 0 && 
-			Mix_GetChunk(channel) == game->assets->getSound(sound) && 
+			Mix_GetChunk(channel) == this_instance->sound_cache.at(sound) &&
 			channel != -1)
 		{
 			return;
@@ -63,36 +71,36 @@ void SoundManager::playSound(GameInternal* game, std::string sound, bool canOver
 		Mix_HaltChannel(channel);
 	}
 
-	if(Mix_VolumeChunk(game->assets->getSound(sound), volume) == -1)
+	if(Mix_VolumeChunk(this_instance->sound_cache.at(sound), volume) == -1)
 	{
-		std::cerr << "Error adjusting volume: " << Mix_GetError() << std::endl;
+		std::cerr << "Error adjusting volume: " << SDL_GetError() << std::endl;
 	}
 
-	if (Mix_PlayChannel(channel, game->assets->getSound(sound), loops) == -1) 
+	if (Mix_PlayChannel(channel, this_instance->sound_cache.at(sound), loops) == -1)
 	{
-		std::cerr << "Error playing sound '" << sound << "': " << Mix_GetError() << std::endl;
+		std::cerr << "Error playing sound " << ": " << SDL_GetError() << std::endl;
 	}
 }
 
-void SoundManager::playMusic(GameInternal* game, std::string music, int loops, int volume, int ms)
+void SoundManager::playMusic(BackgroundMusic music, int loops, int volume, int milliseconds)
 {
+	if (!this_instance->music_cache.contains(music)) {
+		std::cerr << "Error playing music: music not found" << std::endl;
+		return;
+	}
+
 	if (Mix_PlayingMusic() != 0 || Mix_Fading() == Mix_Fading::MIX_FADING_IN)
 		return;
 
-	if(ms > 0)
+	if(milliseconds > 0)
 	{
-		Mix_FadeInMusic(game->assets->getMusic(music), loops, ms);
+		Mix_FadeInMusic(this_instance->music_cache.at(music), loops, milliseconds);
 		return;
 	}
 
 	if(Mix_VolumeMusic(volume) == -1)
 	{
-		std::cerr << "Error adjusting volume: " << Mix_GetError() << std::endl;
-	}
-
-	if (Mix_PlayMusic(game->assets->getMusic(music), loops) == -1) 
-	{
-		std::cerr << "Error playing music '" << music << "': " << Mix_GetError() << std::endl;
+		std::cerr << "Error adjusting volume: " << SDL_GetError() << std::endl;
 	}
 }
 
@@ -133,3 +141,51 @@ void SoundManager::fadeOutMusic(int ms)
 
 	Mix_FadeOutMusic(ms);
 }
+
+void SoundManager::addSingleSoundEffect(SoundEffects soundEffect, const char *path) {
+	if (this_instance->sound_cache.contains(soundEffect)) {
+		std::cerr << "Error when adding Sound-Effect: sound-effect with that key already in cache" << std::endl;
+		return;
+	}
+
+	Mix_Chunk* sound = Mix_LoadWAV(path);
+
+	if (sound == nullptr) {
+		std::cerr << "Error when loading Sound-Effect: could not load sound effect from " << path << std::endl;
+		return;
+	}
+
+	this_instance->sound_cache.emplace(soundEffect, sound);
+}
+
+void SoundManager::addSingleBackgroundMusic(BackgroundMusic backgroundMusic, const char *path) {
+	if (this_instance->music_cache.contains(backgroundMusic)) {
+		std::cerr << "Error when adding Sound-Effect: sound-effect with that key already in cache" << std::endl;
+		return;
+	}
+
+	Mix_Music* music = Mix_LoadMUS(path);
+
+	if (music == nullptr) {
+		std::cerr << "Error when loading Sound-Effect: could not load sound effect from " << path << std::endl;
+		return;
+	}
+
+	this_instance->music_cache.emplace(backgroundMusic, music);
+}
+
+void SoundManager::addSoundEffects(const std::map<SoundEffects, const char *> &effects) {
+	for (auto effect : effects)
+		addSingleSoundEffect(effect.first, effect.second);
+}
+
+void SoundManager::addBackgroundMusic(const std::map<BackgroundMusic, const char *> &backgroundMusic) {
+	for (auto track : backgroundMusic)
+		addSingleBackgroundMusic(track.first, track.second);
+}
+
+SoundManager* SoundManager::this_instance = nullptr;
+
+
+
+

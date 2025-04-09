@@ -27,9 +27,9 @@ void Manager::refresh()
 		std::end(entities));
 }
 
-void Manager::update()
+void Manager::update(uint_fast16_t diffTime)
 {
-	for (auto& e : entities) e->update();
+	for (auto& e : entities) e->update(diffTime);
 }
 
 void Manager::addToGroup(Entity* mEntity, Group mGroup)

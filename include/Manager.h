@@ -24,7 +24,7 @@ class Manager
 public:
 	Manager(GameInternal* game) : game(game) {};
 	
-	void update(); //!< \sa Entity::update()
+	void update(uint_fast16_t diffTime); //!< \sa Entity::update()
 	//! Disables all functionality of entities marked for destruction  
 	//! \sa Entity::destroy()
 	void refresh();

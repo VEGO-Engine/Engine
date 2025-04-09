@@ -6,10 +6,11 @@
 #include "Manager.h"
 #include "Vector2D.h"
 
-#include <SDL_rect.h>
+#include <SDL3/SDL_rect.h>
 #include <bitset>
 #include <cstdio>
 #include <memory>
+#include <VEGO.h>
 
 IntersectionBitSet CollisionHandler::getIntersection(Entity* entityA, Entity* entityB, Vector2D posModA, Vector2D posModB)
 {
@@ -26,7 +27,7 @@ IntersectionBitSet CollisionHandler::getIntersection(Entity* entityA, Entity* en
 	colliderB.x += posModB.x;
 	colliderB.y += posModB.y;
 
-	if (!SDL_HasIntersection(
+	if (!SDL_HasRectIntersection(
 		&colliderA,
 		&colliderB))
 		return std::bitset<DIRECTION_C>();
@@ -66,20 +67,20 @@ IntersectionBitSet CollisionHandler::getIntersectionWithBounds(Entity* entity, V
 
 	// all 4 directions and both sides to allow checking for fully out of bounds
 	if (collider->x + posMod.x < 0 ||
-		collider->x + posMod.x > SCREEN_SIZE_WIDTH) {
+		collider->x + posMod.x > VEGO_Game().config->getFinalConfig().at("screen_width")) {
 		intersections.set((size_t) Direction::LEFT);
 	}
 
 	if (collider->x + collider->w + posMod.x < 0 ||
-		collider->x + collider->w + posMod.x > SCREEN_SIZE_WIDTH)
+		collider->x + collider->w + posMod.x > VEGO_Game().config->getFinalConfig().at("screen_width"))
 		intersections.set((size_t) Direction::RIGHT);
 
 	if (collider->y + posMod.y < 0 ||
-		collider->y + posMod.y > SCREEN_SIZE_HEIGHT)
+		collider->y + posMod.y > VEGO_Game().config->getFinalConfig().at("screen_height"))
 		intersections.set((size_t) Direction::UP);
 
 	if (collider->y + collider->h + posMod.y < 0 ||
-		collider->y + collider->h + posMod.y > SCREEN_SIZE_HEIGHT)
+		collider->y + collider->h + posMod.y > VEGO_Game().config->getFinalConfig().at("screen_height"))
 		intersections.set((size_t) Direction::DOWN);
 
 	return intersections;
@@ -152,7 +153,7 @@ Entity* CollisionHandler::getAnyIntersection<Entity*>(
 	if (!entity->hasComponent<ColliderComponent>()) return nullptr;
 	for (auto& collider : getColliders(groupLabels, excludedEntities)) {
 		SDL_Rect rect = entity->getComponent<ColliderComponent>().collider + posMod;
-   	    if (SDL_HasIntersection(&rect, &collider->collider)) {
+   	    if (SDL_HasRectIntersection(&rect, &collider->collider)) {
    	    	return collider->entity;
    	    }
 	}
@@ -175,7 +176,7 @@ bool CollisionHandler::getAnyIntersection<bool>(
 	if (!entity->hasComponent<ColliderComponent>()) return false;
 	for (auto& collider : getColliders(groupLabels, excludedEntities)) {
 		SDL_Rect rect = entity->getComponent<ColliderComponent>().collider + posMod;
-   	    if (SDL_HasIntersection(&rect, &collider->collider)) {
+   	    if (SDL_HasRectIntersection(&rect, &collider->collider)) {
    	    	return true;
    	    }
 	}

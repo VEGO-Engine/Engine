@@ -1,5 +1,5 @@
 #pragma once
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #include <map>
 
 #include "Component.h"
@@ -94,12 +94,12 @@ public:
     ~InputComponent();
 
     void init() override;
-	void update() override;
+	void update(uint_fast16_t diffTime) override;
 
     bool isKeyDown(Key key);
 
 private:
-    const Uint8* m_keyStates;
+    const bool* m_keyStates;
     SDL_Scancode mapKeyToSDL(Key key);
     std::map<Key, SDL_Scancode> m_keyMappings;
     void InitKeyMappings();

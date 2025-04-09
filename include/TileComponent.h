@@ -1,10 +1,11 @@
 #pragma once
 
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #include <string>
 #include <map>
 
 #include "Component.h"
+#include "Textures.h"
 
 class SpriteComponent;
 class TransformComponent;
@@ -17,17 +18,19 @@ public:
 
 	SDL_Rect tileRect;
 	int tileID;
-	const char* path;
+	Textures texture;
 
 	TileComponent() = default;
-	TileComponent(int x, int y, int w, int h, int id, const std::map<int, std::pair<std::string, bool>>* textureDict);
+	TileComponent(int x, int y, int w, int h, int id, const std::map<int, std::pair<Textures, bool>>* textureDict);
 	~TileComponent() = default;
 
 	void init() override;
 
-	bool hasCollision(){return this->collision;}
-	std::string getName(){return this->tileName;}
+	bool hasCollision() {
+		return this->collision;
+	}
+
+
 private:
 	bool collision;
-	std::string tileName;
 };

@@ -31,10 +31,10 @@ void ColliderComponent::init()
 	}
 
 	transform = &entity->getComponent<TransformComponent>();
-	this->update();
+	this->update(0);
 }
 
-void ColliderComponent::update()
+void ColliderComponent::update(uint_fast16_t diffTime)
 {
 	collider.x = transform->position.x - (transform->width - transform->width * transform->scale * this->hitboxScale) / 2;
 	collider.y = transform->position.y - (transform->width - transform->width * transform->scale * this->hitboxScale) / 2;

@@ -4,9 +4,11 @@
 #include "Component.h"
 #include <cstddef>
 
-void Entity::update() const
+void Entity::update(uint_fast16_t diffTime) const
 {
-	for (auto const& c : components) c->update();
+	for (auto const& c : components)
+        if (c)
+            c->update(diffTime);
 }
 
 bool Entity::hasGroup(Group mGroup)
