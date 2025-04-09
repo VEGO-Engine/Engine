@@ -7,7 +7,7 @@ class RenderObject
 public:
 	virtual void draw() = 0;
 
-	RenderObject(int zIndex, RenderManager& renderManager);
+	RenderObject(int zIndex, RenderManager* renderManager);
 	~RenderObject();
 
 	int getZIndex() { return this->zIndex; };
@@ -23,5 +23,5 @@ private:
 	int zIndex = 0;
 
 protected:
-	RenderManager& renderManager;
+	RenderManager* renderManager;
 };

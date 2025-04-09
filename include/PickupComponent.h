@@ -13,8 +13,8 @@ public:
 	PickupComponent(std::function<void (Entity*)> func);
 	~PickupComponent() {};
 
-	void update(uint_fast16_t diffTime) override;
+    void update(uint_fast16_t diffTime) override;
 
 private:
-	std::function<void (Entity*)> pickupFunc;
+    std::function<void (Entity*)> pickupFunc;
 };

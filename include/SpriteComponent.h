@@ -40,6 +40,11 @@ private:
 	const char* path; //!< empty string if texture has a texture enum value, otherwise the path of the texture
 
 public:
+    //debug
+    Textures getTexture() { return this->textureEnum; }
+
+
+
 	SpriteComponent(Textures texture, int zIndex);
 	SpriteComponent(Textures texture, int xOffset, int yOffset, int zIndex);
 	SpriteComponent(const char* path, int xOffset, int yOffset, int zIndex);
