@@ -121,69 +121,27 @@ $(function(){initNavTree('classTransformComponent.html',''); initResizable(true)
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classTransformComponent-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">TransformComponent Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Inheritance diagram for TransformComponent:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classTransformComponent__inherit__graph.svg" width="158" height="111"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for TransformComponent:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classTransformComponent__coll__graph.svg" width="207" height="230"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+
+<p>Adds a transform to an entity when added via entity.addComponent()  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="TransformComponent_8h_source.html">TransformComponent.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad3844c3c266a2cfd206f24f7a09c9014" id="r_ad3844c3c266a2cfd206f24f7a09c9014"><td class="memItemLeft" align="right" valign="top"><a id="ad3844c3c266a2cfd206f24f7a09c9014" name="ad3844c3c266a2cfd206f24f7a09c9014"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>TransformComponent</b> (int scale=1)</td></tr>
+<tr class="memitem:ad3844c3c266a2cfd206f24f7a09c9014" id="r_ad3844c3c266a2cfd206f24f7a09c9014"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad3844c3c266a2cfd206f24f7a09c9014">TransformComponent</a> (int scale=1)</td></tr>
 <tr class="separator:ad3844c3c266a2cfd206f24f7a09c9014"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba30beb72f0ca23c2e8af5d6bc6762b9" id="r_aba30beb72f0ca23c2e8af5d6bc6762b9"><td class="memItemLeft" align="right" valign="top"><a id="aba30beb72f0ca23c2e8af5d6bc6762b9" name="aba30beb72f0ca23c2e8af5d6bc6762b9"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>TransformComponent</b> (float x, float y, int scale=1)</td></tr>
-<tr class="separator:aba30beb72f0ca23c2e8af5d6bc6762b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c78d1f86b6eb545f1e088031e020c8e" id="r_a1c78d1f86b6eb545f1e088031e020c8e"><td class="memItemLeft" align="right" valign="top"><a id="a1c78d1f86b6eb545f1e088031e020c8e" name="a1c78d1f86b6eb545f1e088031e020c8e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>TransformComponent</b> (float x, float y, int w, int h, int scale=1)</td></tr>
-<tr class="separator:a1c78d1f86b6eb545f1e088031e020c8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca7dc4830ccbbbd6005a5ed44c0f9cab" id="r_aca7dc4830ccbbbd6005a5ed44c0f9cab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca7dc4830ccbbbd6005a5ed44c0f9cab">init</a> () override</td></tr>
-<tr class="separator:aca7dc4830ccbbbd6005a5ed44c0f9cab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad79c66bbe9cbe15e8ac6feda09b08be6" id="r_ad79c66bbe9cbe15e8ac6feda09b08be6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad79c66bbe9cbe15e8ac6feda09b08be6">update</a> (uint_fast16_t diffTime) override</td></tr>
-<tr class="separator:ad79c66bbe9cbe15e8ac6feda09b08be6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d5fcff6bb2a7835ba17a87e586ea0af" id="r_a7d5fcff6bb2a7835ba17a87e586ea0af"><td class="memItemLeft" align="right" valign="top"><a id="a7d5fcff6bb2a7835ba17a87e586ea0af" name="a7d5fcff6bb2a7835ba17a87e586ea0af"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setPositionAfterCollision</b> (<a class="el" href="classVector2D.html">Vector2D</a> &amp;positionChange)</td></tr>
-<tr class="separator:a7d5fcff6bb2a7835ba17a87e586ea0af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcde2c328b82dbbc61a3961ecfbceaf6" id="r_abcde2c328b82dbbc61a3961ecfbceaf6"><td class="memItemLeft" align="right" valign="top"><a id="abcde2c328b82dbbc61a3961ecfbceaf6" name="abcde2c328b82dbbc61a3961ecfbceaf6"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getSpeed</b> ()</td></tr>
-<tr class="separator:abcde2c328b82dbbc61a3961ecfbceaf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:adf3afbdd3625dca98a74f1421f54b5c2" id="r_adf3afbdd3625dca98a74f1421f54b5c2"><td class="memItemLeft" align="right" valign="top"><a id="adf3afbdd3625dca98a74f1421f54b5c2" name="adf3afbdd3625dca98a74f1421f54b5c2"></a>
-<a class="el" href="classVector2D.html">Vector2D</a>&#160;</td><td class="memItemRight" valign="bottom"><b>position</b></td></tr>
-<tr class="separator:adf3afbdd3625dca98a74f1421f54b5c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39e31f729aeb4da883a135c66354124f" id="r_a39e31f729aeb4da883a135c66354124f"><td class="memItemLeft" align="right" valign="top"><a id="a39e31f729aeb4da883a135c66354124f" name="a39e31f729aeb4da883a135c66354124f"></a>
-<a class="el" href="classVector2D.html">Vector2D</a>&#160;</td><td class="memItemRight" valign="bottom"><b>direction</b></td></tr>
-<tr class="separator:a39e31f729aeb4da883a135c66354124f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0fce3f59b7aab22d228be195eaa915b" id="r_ad0fce3f59b7aab22d228be195eaa915b"><td class="memItemLeft" align="right" valign="top"><a id="ad0fce3f59b7aab22d228be195eaa915b" name="ad0fce3f59b7aab22d228be195eaa915b"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>height</b> = 32</td></tr>
-<tr class="separator:ad0fce3f59b7aab22d228be195eaa915b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0dd6d1c90765593157481bf410612f7e" id="r_a0dd6d1c90765593157481bf410612f7e"><td class="memItemLeft" align="right" valign="top"><a id="a0dd6d1c90765593157481bf410612f7e" name="a0dd6d1c90765593157481bf410612f7e"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>width</b> = 32</td></tr>
-<tr class="separator:a0dd6d1c90765593157481bf410612f7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac95872ee109d63e8c3248c0232b21c22" id="r_ac95872ee109d63e8c3248c0232b21c22"><td class="memItemLeft" align="right" valign="top"><a id="ac95872ee109d63e8c3248c0232b21c22" name="ac95872ee109d63e8c3248c0232b21c22"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>scale</b> = 1</td></tr>
-<tr class="separator:ac95872ee109d63e8c3248c0232b21c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_attribs_classComponent"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_attribs_classComponent')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classComponent.html">Component</a></td></tr>
-<tr class="memitem:a6acb3f00c9d114d961c8763ede390d2c inherit pub_attribs_classComponent" id="r_a6acb3f00c9d114d961c8763ede390d2c"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="classEntity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>entity</b></td></tr>
-<tr class="separator:a6acb3f00c9d114d961c8763ede390d2c inherit pub_attribs_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="aca7dc4830ccbbbd6005a5ed44c0f9cab" name="aca7dc4830ccbbbd6005a5ed44c0f9cab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca7dc4830ccbbbd6005a5ed44c0f9cab">&#9670;&#160;</a></span>init()</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Adds a transform to an entity when added via entity.addComponent() </p>
+<p>The transform component is responsible for the position, direction and size of an entity. It is used to move the entity in the game world and to determine its size and position on the screen. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad3844c3c266a2cfd206f24f7a09c9014" name="ad3844c3c266a2cfd206f24f7a09c9014"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3844c3c266a2cfd206f24f7a09c9014">&#9670;&#160;</a></span>TransformComponent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -192,48 +150,19 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>scale</b> = 1</td></tr
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void TransformComponent::init </td>
+          <td class="memname">TransformComponent::TransformComponent </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>scale</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel explicit">explicit</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="classComponent.html">Component</a>.</p>
-
-</div>
-</div>
-<a id="ad79c66bbe9cbe15e8ac6feda09b08be6" name="ad79c66bbe9cbe15e8ac6feda09b08be6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad79c66bbe9cbe15e8ac6feda09b08be6">&#9670;&#160;</a></span>update()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void TransformComponent::update </td>
-          <td>(</td>
-          <td class="paramtype">uint_fast16_t</td>          <td class="paramname"><span class="paramname"><em>diffTime</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>TODO: document usage of collision handler </p>
-
-<p>Reimplemented from <a class="el" href="classComponent.html">Component</a>.</p>
+<dl class="section attention"><dt>Attention</dt><dd>in order to allow an entity to move the stat "speed" must be set in the DataComponent (written exactly like that and set to any positive int value, 0 will lead to no movement, negative numbers to backwards movement) </dd></dl>
 
 </div>
 </div>

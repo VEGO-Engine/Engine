@@ -120,7 +120,6 @@ $(function(){initNavTree('structInteractionEventdataStruct.html',''); initResiza
 
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structInteractionEventdataStruct-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">InteractionEventdataStruct Struct Reference</div></div>
@@ -131,18 +130,7 @@ $(function(){initNavTree('structInteractionEventdataStruct.html',''); initResiza
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="InteractionEventdataStruct_8h_source.html">InteractionEventdataStruct.h</a>&gt;</code></p>
-<div class="dynheader">
-Collaboration diagram for InteractionEventdataStruct:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="structInteractionEventdataStruct__coll__graph.svg" width="552" height="318"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a775fc336eb241fee0a7b935a498ec615" id="r_a775fc336eb241fee0a7b935a498ec615"><td class="memItemLeft" align="right" valign="top"><a id="a775fc336eb241fee0a7b935a498ec615" name="a775fc336eb241fee0a7b935a498ec615"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>triggerEvent</b> ()</td></tr>
-<tr class="separator:a775fc336eb241fee0a7b935a498ec615"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a37aa07113eed65f8f5c19634092f1810" id="r_a37aa07113eed65f8f5c19634092f1810"><td class="memItemLeft" align="right" valign="top"><a id="a37aa07113eed65f8f5c19634092f1810" name="a37aa07113eed65f8f5c19634092f1810"></a>
@@ -154,11 +142,11 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>data</b></td></tr>
 <tr class="memdesc:a82dc8bba3309e5aca77629c8fd192fbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The data to pass to the interaction listener. Can be any type of pointer. <br /></td></tr>
 <tr class="separator:a82dc8bba3309e5aca77629c8fd192fbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2244f55fa7cff63d586d46d28d8a6ef3" id="r_a2244f55fa7cff63d586d46d28d8a6ef3"><td class="memItemLeft" align="right" valign="top"><a id="a2244f55fa7cff63d586d46d28d8a6ef3" name="a2244f55fa7cff63d586d46d28d8a6ef3"></a>
-std::weak_ptr&lt; <a class="el" href="classInteractionListener.html">InteractionListener</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>target</b> = std::weak_ptr&lt;<a class="el" href="classInteractionListener.html">InteractionListener</a>&gt;()</td></tr>
-<tr class="memdesc:a2244f55fa7cff63d586d46d28d8a6ef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The target of the interaction, e.g. <a class="el" href="classInteractionComponent.html">InteractionComponent</a> of an <a class="el" href="classEntity.html" title="Main class for any object in game, stores associations, labeling and components.">Entity</a>. Is required if strategy is set to 0 (none) <br /></td></tr>
+std::weak_ptr&lt; InteractionListener &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>target</b> = std::weak_ptr&lt;InteractionListener&gt;()</td></tr>
+<tr class="memdesc:a2244f55fa7cff63d586d46d28d8a6ef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The target of the interaction, e.g. <a class="el" href="classInteractionComponent.html" title="InteractionComponent class to handle interaction events.">InteractionComponent</a> of an <a class="el" href="classEntity.html" title="Main class for any object in game, stores associations, labeling and components.">Entity</a>. Is required if strategy is set to 0 (none) <br /></td></tr>
 <tr class="separator:a2244f55fa7cff63d586d46d28d8a6ef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49f1d3c0d48b7b26af7fba98ec53b402" id="r_a49f1d3c0d48b7b26af7fba98ec53b402"><td class="memItemLeft" align="right" valign="top"><a id="a49f1d3c0d48b7b26af7fba98ec53b402" name="a49f1d3c0d48b7b26af7fba98ec53b402"></a>
-std::shared_ptr&lt; <a class="el" href="classVector2D.html">Vector2D</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>targetingReference</b> = nullptr</td></tr>
+std::shared_ptr&lt; Vector2D &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>targetingReference</b> = nullptr</td></tr>
 <tr class="memdesc:a49f1d3c0d48b7b26af7fba98ec53b402"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coordinates from which to base targeting on. Is required if strategy is not set to 0 (none) <br /></td></tr>
 <tr class="separator:a49f1d3c0d48b7b26af7fba98ec53b402"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad4922791175a51c55987ecedba335c4" id="r_aad4922791175a51c55987ecedba335c4"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad4922791175a51c55987ecedba335c4">strategy</a> = 0</td></tr>

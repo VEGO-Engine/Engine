@@ -137,22 +137,18 @@ $(function(){initNavTree('StatEffectsComponent_8h_source.html',''); initResizabl
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>};</div>
 </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="foldopen" id="foldopen00017" data-start="{" data-end="};">
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classStatEffectsComponent.html">   17</a></span><span class="keyword">class </span>StatEffectsComponent : <span class="keyword">public</span> <a class="code hl_class" href="classComponent.html">Component</a>{</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">class </span>StatEffectsComponent : <span class="keyword">public</span> Component{</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    StatEffectsComponent() {};</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    ~StatEffectsComponent() {};</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">void</span> init() <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">void</span> update(uint_fast16_t diffTime) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classStatEffectsComponent.html#a2d5edffc1abd620d39aa0315a1504b13">addEffect</a>(uint32_t duration, std::function&lt;<span class="keywordtype">void</span>()&gt; resetFunction);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">void</span> addEffect(uint32_t duration, std::function&lt;<span class="keywordtype">void</span>()&gt; resetFunction);</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    std::vector&lt;StatEffect&gt; effects = {};</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>};</div>
-</div>
-<div class="ttc" id="aclassComponent_html"><div class="ttname"><a href="classComponent.html">Component</a></div><div class="ttdef"><b>Definition</b> Component.h:8</div></div>
-<div class="ttc" id="aclassStatEffectsComponent_html_a2d5edffc1abd620d39aa0315a1504b13"><div class="ttname"><a href="classStatEffectsComponent.html#a2d5edffc1abd620d39aa0315a1504b13">StatEffectsComponent::addEffect</a></div><div class="ttdeci">void addEffect(uint32_t duration, std::function&lt; void()&gt; resetFunction)</div><div class="ttdoc">Add a stat effect to the entity.</div><div class="ttdef"><b>Definition</b> StatEffectsComponent.cpp:24</div></div>
 <div class="ttc" id="astructStatEffect_html"><div class="ttname"><a href="structStatEffect.html">StatEffect</a></div><div class="ttdoc">Struct to hold the duration, reset function and start time of a stat effect.</div><div class="ttdef"><b>Definition</b> StatEffectsComponent.h:11</div></div>
 <div class="ttc" id="astructStatEffect_html_aca6d477c75029a2575d2e0a4f5794a43"><div class="ttname"><a href="structStatEffect.html#aca6d477c75029a2575d2e0a4f5794a43">StatEffect::resetFunction</a></div><div class="ttdeci">std::function&lt; void()&gt; resetFunction</div><div class="ttdoc">Function to reset the effect, will be called on expiry of duration.</div><div class="ttdef"><b>Definition</b> StatEffectsComponent.h:13</div></div>
 <div class="ttc" id="astructStatEffect_html_af1f5099f0680329ff9ce3a9362391196"><div class="ttname"><a href="structStatEffect.html#af1f5099f0680329ff9ce3a9362391196">StatEffect::duration</a></div><div class="ttdeci">uint32_t duration</div><div class="ttdoc">Duration of the effect in milliseconds.</div><div class="ttdef"><b>Definition</b> StatEffectsComponent.h:12</div></div>

@@ -125,26 +125,24 @@ $(function(){initNavTree('classMap.html',''); initResizable(true); });
   <div class="headertitle"><div class="title">Map Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class responsible for the creation and management of the map or background.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="Map_8h_source.html">Map.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af8808c7a5677f1f9c71bf4ed74fc79c1" id="r_af8808c7a5677f1f9c71bf4ed74fc79c1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af8808c7a5677f1f9c71bf4ed74fc79c1">Map</a> (const char *path)</td></tr>
 <tr class="memdesc:af8808c7a5677f1f9c71bf4ed74fc79c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a .tmx map.  <br /></td></tr>
 <tr class="separator:af8808c7a5677f1f9c71bf4ed74fc79c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a770f6b9997712224e994c284e8812cfc" id="r_a770f6b9997712224e994c284e8812cfc"><td class="memItemLeft" align="right" valign="top"><a id="a770f6b9997712224e994c284e8812cfc" name="a770f6b9997712224e994c284e8812cfc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>generateTiles</b> ()</td></tr>
-<tr class="memdesc:a770f6b9997712224e994c284e8812cfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the map based on the loaded definition. <br /></td></tr>
+<tr class="memitem:a770f6b9997712224e994c284e8812cfc" id="r_a770f6b9997712224e994c284e8812cfc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a770f6b9997712224e994c284e8812cfc">generateTiles</a> ()</td></tr>
+<tr class="memdesc:a770f6b9997712224e994c284e8812cfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to generate the tiles of a previously loaded map.  <br /></td></tr>
 <tr class="separator:a770f6b9997712224e994c284e8812cfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a219fe1755f2c3b27833714a4c16d93c0" id="r_a219fe1755f2c3b27833714a4c16d93c0"><td class="memItemLeft" align="right" valign="top"><a id="a219fe1755f2c3b27833714a4c16d93c0" name="a219fe1755f2c3b27833714a4c16d93c0"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:a219fe1755f2c3b27833714a4c16d93c0"><td class="memTemplItemLeft" align="right" valign="top">std::optional&lt; bool &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>getLayerProperty</b> (const std::vector&lt; tmx::Property &gt; &amp;properties, std::string propertyName)</td></tr>
-<tr class="separator:a219fe1755f2c3b27833714a4c16d93c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9e525948e271e7eaa6d8b7450440e9d" id="r_ac9e525948e271e7eaa6d8b7450440e9d"><td class="memItemLeft" align="right" valign="top"><a id="ac9e525948e271e7eaa6d8b7450440e9d" name="ac9e525948e271e7eaa6d8b7450440e9d"></a>
-template&lt;&gt; </td></tr>
-<tr class="memitem:ac9e525948e271e7eaa6d8b7450440e9d"><td class="memTemplItemLeft" align="right" valign="top">std::optional&lt; int &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>getLayerProperty</b> (const std::vector&lt; tmx::Property &gt; &amp;properties, std::string propertyName)</td></tr>
-<tr class="separator:ac9e525948e271e7eaa6d8b7450440e9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class responsible for the creation and management of the map or background. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af8808c7a5677f1f9c71bf4ed74fc79c1" name="af8808c7a5677f1f9c71bf4ed74fc79c1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af8808c7a5677f1f9c71bf4ed74fc79c1">&#9670;&#160;</a></span>Map()</h2>
 
@@ -167,7 +165,28 @@ template&lt;&gt; </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a770f6b9997712224e994c284e8812cfc" title="Generates the map based on the loaded definition.">Map::generateTiles()</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a770f6b9997712224e994c284e8812cfc" title="Used to generate the tiles of a previously loaded map.">Map::generateTiles()</a> </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a770f6b9997712224e994c284e8812cfc" name="a770f6b9997712224e994c284e8812cfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a770f6b9997712224e994c284e8812cfc">&#9670;&#160;</a></span>generateTiles()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Map::generateTiles </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Used to generate the tiles of a previously loaded map. </p>
+<p>Generates the map based on the loaded definition </p>
 
 </div>
 </div>

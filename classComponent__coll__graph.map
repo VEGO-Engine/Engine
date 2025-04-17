@@ -1,5 +1,0 @@
-<map id="Component" name="Component">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,94,93,120"/>
-<area shape="rect" id="Node000002" href="$classEntity.html" title="Main class for any object in game, stores associations, labeling and components." alt="" coords="22,5,76,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="52,47,52,94,46,94,46,47"/>
-</map>

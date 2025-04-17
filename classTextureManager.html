@@ -121,7 +121,6 @@ $(function(){initNavTree('classTextureManager.html',''); initResizable(true); })
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classTextureManager-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">TextureManager Class Reference</div></div>
 </div><!--header-->
@@ -134,9 +133,6 @@ $(function(){initNavTree('classTextureManager.html',''); initResizable(true); })
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad3be4563a8829983a69870a83e2e0b8e" id="r_ad3be4563a8829983a69870a83e2e0b8e"><td class="memItemLeft" align="right" valign="top"><a id="ad3be4563a8829983a69870a83e2e0b8e" name="ad3be4563a8829983a69870a83e2e0b8e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>TextureManager</b> (<a class="el" href="classManager.html">Manager</a> *manager)</td></tr>
-<tr class="separator:ad3be4563a8829983a69870a83e2e0b8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8a4eb67288539db37552b2c68217bb1" id="r_ab8a4eb67288539db37552b2c68217bb1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab8a4eb67288539db37552b2c68217bb1">addSingleTexture</a> (<a class="el" href="classTextures.html">Textures</a> texture, const char *filePath)</td></tr>
 <tr class="memdesc:ab8a4eb67288539db37552b2c68217bb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a single texture to the cache.  <br /></td></tr>
 <tr class="separator:ab8a4eb67288539db37552b2c68217bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,24 +142,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3304650a6b7304dbaa1afb164ed4c4e8" id="r_a3304650a6b7304dbaa1afb164ed4c4e8"><td class="memItemLeft" align="right" valign="top">SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3304650a6b7304dbaa1afb164ed4c4e8">loadTexture</a> (<a class="el" href="classTextures.html">Textures</a> texture)</td></tr>
 <tr class="memdesc:a3304650a6b7304dbaa1afb164ed4c4e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a texture from the cache.  <br /></td></tr>
 <tr class="separator:a3304650a6b7304dbaa1afb164ed4c4e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd2ed5b21c33c12d568cb82a5c0adf80" id="r_afd2ed5b21c33c12d568cb82a5c0adf80"><td class="memItemLeft" align="right" valign="top"><a id="afd2ed5b21c33c12d568cb82a5c0adf80" name="afd2ed5b21c33c12d568cb82a5c0adf80"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setScaleMode</b> (SDL_ScaleMode scaleMode)</td></tr>
-<tr class="separator:afd2ed5b21c33c12d568cb82a5c0adf80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2bf6f97639eee824c45266472430ee0" id="r_ac2bf6f97639eee824c45266472430ee0"><td class="memItemLeft" align="right" valign="top">SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac2bf6f97639eee824c45266472430ee0">loadMapTileTexture</a> (const char *path)</td></tr>
 <tr class="memdesc:ac2bf6f97639eee824c45266472430ee0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a map tile texture from the file system and caches it.  <br /></td></tr>
 <tr class="separator:ac2bf6f97639eee824c45266472430ee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a849a1a5271fff7a4109b6bd9f156631f" id="r_a849a1a5271fff7a4109b6bd9f156631f"><td class="memItemLeft" align="right" valign="top"><a id="a849a1a5271fff7a4109b6bd9f156631f" name="a849a1a5271fff7a4109b6bd9f156631f"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getTexturePath</b> (<a class="el" href="classTextures.html">Textures</a> texture)</td></tr>
-<tr class="separator:a849a1a5271fff7a4109b6bd9f156631f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ade289eda2f6b9a25468470f6b959cf91" id="r_ade289eda2f6b9a25468470f6b959cf91"><td class="memItemLeft" align="right" valign="top"><a id="ade289eda2f6b9a25468470f6b959cf91" name="ade289eda2f6b9a25468470f6b959cf91"></a>
-static std::vector&lt; SDL_Rect &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>splitSpriteSheet</b> (SDL_Texture *spriteSheet, int width, int height, int spritesOnSheet)</td></tr>
-<tr class="separator:ade289eda2f6b9a25468470f6b959cf91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac11591a33c57e86aa13aaf1c449cb33f" id="r_ac11591a33c57e86aa13aaf1c449cb33f"><td class="memItemLeft" align="right" valign="top"><a id="ac11591a33c57e86aa13aaf1c449cb33f" name="ac11591a33c57e86aa13aaf1c449cb33f"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> (SDL_Renderer *renderer, SDL_Texture *texture, SDL_FRect src, SDL_FRect dest, bool flipped=false)</td></tr>
-<tr class="separator:ac11591a33c57e86aa13aaf1c449cb33f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A manager for loading, caching, and drawing textures. </p>
@@ -263,7 +244,7 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> (SDL_
   </dd>
 </dl>
 <p>This function checks if the map tile texture is already cached. If not, it loads the texture from the file system and stores it in the cache.</p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000009">Todo</a></b></dt><dd>should not be usable for the developer and only be accessed by the map class </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo</a></b></dt><dd>should not be usable for the developer and only be accessed by the map class </dd></dl>
 
 </div>
 </div>

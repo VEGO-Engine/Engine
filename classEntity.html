@@ -137,15 +137,14 @@ Public Types</h2></td></tr>
 <tr class="memitem:a9449a7a0ad2c9ae5ee85ef2401382f2b" id="r_a9449a7a0ad2c9ae5ee85ef2401382f2b"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9449a7a0ad2c9ae5ee85ef2401382f2b">GroupLabel</a> { <br />
 &#160;&#160;<a class="el" href="#a9449a7a0ad2c9ae5ee85ef2401382f2ba924bf7180d60940e428a9166b51ce0f4">MAPTILES</a>
 , <a class="el" href="#a9449a7a0ad2c9ae5ee85ef2401382f2bae334ea4bb6fd38968f6809b091120ad8">PLAYERS</a>
-, <a class="el" href="#a9449a7a0ad2c9ae5ee85ef2401382f2baf0d62ea6bc0a041d009322e77e1253c0">ENEMIES</a>
 , <a class="el" href="#a9449a7a0ad2c9ae5ee85ef2401382f2badffa23e89f914b343e7811b01a8f756c">COLLIDERS</a>
+, <a class="el" href="#a9449a7a0ad2c9ae5ee85ef2401382f2ba46dccab75ce652352e52086601fdc294">PROJECTILE</a>
 , <br />
-&#160;&#160;<a class="el" href="#a9449a7a0ad2c9ae5ee85ef2401382f2ba46dccab75ce652352e52086601fdc294">PROJECTILE</a>
-, <a class="el" href="#a9449a7a0ad2c9ae5ee85ef2401382f2bad52d2d4c0b7218c48897d2e69e156ba4">HEARTS</a>
+&#160;&#160;<a class="el" href="#a9449a7a0ad2c9ae5ee85ef2401382f2bad52d2d4c0b7218c48897d2e69e156ba4">HEARTS</a>
 , <a class="el" href="#a9449a7a0ad2c9ae5ee85ef2401382f2ba5262638eb9e1d1af560f3d0f9ad133e4">POWERUPS</a>
 <br />
  }</td></tr>
-<tr class="memdesc:a9449a7a0ad2c9ae5ee85ef2401382f2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used for rendering order (last is highest) or retrieving entities of group.  <a href="#a9449a7a0ad2c9ae5ee85ef2401382f2b">More...</a><br /></td></tr>
+<tr class="memdesc:a9449a7a0ad2c9ae5ee85ef2401382f2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Some premade <a class="el" href="classEntity.html" title="Main class for any object in game, stores associations, labeling and components.">Entity</a> groups used to avoid checking all entities for everything all of the time.  <a href="#a9449a7a0ad2c9ae5ee85ef2401382f2b">More...</a><br /></td></tr>
 <tr class="separator:a9449a7a0ad2c9ae5ee85ef2401382f2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -160,14 +159,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (uint_fast
 <tr class="separator:aea1c1568b4123d989c5310697030ad77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a691dbe5f9ec930c27af2af0b97907a9e" id="r_a691dbe5f9ec930c27af2af0b97907a9e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a691dbe5f9ec930c27af2af0b97907a9e">destroy</a> ()</td></tr>
 <tr class="separator:a691dbe5f9ec930c27af2af0b97907a9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfb6240560624c026ffc24af4d469b68" id="r_acfb6240560624c026ffc24af4d469b68"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acfb6240560624c026ffc24af4d469b68">hasGroup</a> (Group mGroup)</td></tr>
-<tr class="separator:acfb6240560624c026ffc24af4d469b68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a712c05a013e928943c26c3a5b1467f01" id="r_a712c05a013e928943c26c3a5b1467f01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a712c05a013e928943c26c3a5b1467f01">addGroup</a> (Group mGroup)</td></tr>
-<tr class="separator:a712c05a013e928943c26c3a5b1467f01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3902aa921b519ed2c25cf4676c9cb5d" id="r_ae3902aa921b519ed2c25cf4676c9cb5d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3902aa921b519ed2c25cf4676c9cb5d">delGroup</a> (Group mGroup)</td></tr>
-<tr class="separator:ae3902aa921b519ed2c25cf4676c9cb5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf88082fc18a9ee0294072a0e028453d" id="r_adf88082fc18a9ee0294072a0e028453d"><td class="memItemLeft" align="right" valign="top">std::bitset&lt; MAX_GROUPS &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adf88082fc18a9ee0294072a0e028453d">getGroupBitSet</a> ()</td></tr>
-<tr class="separator:adf88082fc18a9ee0294072a0e028453d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdf7c696ee39da0d8ebddb1976ea0abe" id="r_acdf7c696ee39da0d8ebddb1976ea0abe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classManager.html">Manager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acdf7c696ee39da0d8ebddb1976ea0abe">getManager</a> ()</td></tr>
 <tr class="separator:acdf7c696ee39da0d8ebddb1976ea0abe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa622a8d79153a90d0e3b9b992ca2d38b" id="r_aa622a8d79153a90d0e3b9b992ca2d38b"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
@@ -179,18 +170,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (uint_fast
 <tr class="separator:ae587a44fd803d7918a45dbfe531c962d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5ce9d4246498a5a2ffd163a2d38c98f" id="r_ad5ce9d4246498a5a2ffd163a2d38c98f"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ad5ce9d4246498a5a2ffd163a2d38c98f"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ad5ce9d4246498a5a2ffd163a2d38c98f">getComponent</a> () const</td></tr>
-<tr class="memdesc:ad5ce9d4246498a5a2ffd163a2d38c98f"><td class="mdescLeft">&#160;</td><td class="mdescRight">&lt;  <br /></td></tr>
+<tr class="memdesc:ad5ce9d4246498a5a2ffd163a2d38c98f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access a specific component of an entity.  <br /></td></tr>
 <tr class="separator:ad5ce9d4246498a5a2ffd163a2d38c98f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af153779f4ae16c3aa4d67a52f61333b7" id="r_af153779f4ae16c3aa4d67a52f61333b7"><td class="memTemplParams" colspan="2"><a id="af153779f4ae16c3aa4d67a52f61333b7" name="af153779f4ae16c3aa4d67a52f61333b7"></a>
-template&lt;typename T&gt; </td></tr>
-<tr class="memitem:af153779f4ae16c3aa4d67a52f61333b7"><td class="memTemplItemLeft" align="right" valign="top">std::shared_ptr&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>getComponentAsPointer</b> () const</td></tr>
+<tr class="memitem:af153779f4ae16c3aa4d67a52f61333b7" id="r_af153779f4ae16c3aa4d67a52f61333b7"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:af153779f4ae16c3aa4d67a52f61333b7"><td class="memTemplItemLeft" align="right" valign="top">std::shared_ptr&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#af153779f4ae16c3aa4d67a52f61333b7">getComponentAsPointer</a> () const</td></tr>
+<tr class="memdesc:af153779f4ae16c3aa4d67a52f61333b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access a specific component of an entity as a pointer.  <br /></td></tr>
 <tr class="separator:af153779f4ae16c3aa4d67a52f61333b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main class for any object in game, stores associations, labeling and components. </p>
 <p>The entity class is the primary class each object in the game needs to use. Add components to assign functionality.</p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo</a></b></dt><dd><p class="startdd">More detailed description </p>
-<p class="enddd">Some functions in entity class are only supposed to be called in specific context, which might be valid uses for <code>friend</code> keyword. Example: <a class="el" href="#aad34087e815ec2da644b86ae2357039b">Entity()</a> should only be called from <a class="el" href="classManager.html#a6be095e14d18da37fdb2f8bdb4b48b5a" title="Creates and returns a new, empty entity.">Manager::addEntity()</a>. Verify each functions intended use/scope.</p>
+<p class="enddd">Some functions in entity class are only supposed to be called in specific context, which might be valid uses for <code>friend</code> keyword. Example: <a class="el" href="#aad34087e815ec2da644b86ae2357039b">Entity()</a> should only be called from <a class="el" href="classManager.html#a6be095e14d18da37fdb2f8bdb4b48b5a" title="Add a new entity to the game.">Manager::addEntity()</a>. Verify each functions intended use/scope.</p>
 </dd></dl>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a9449a7a0ad2c9ae5ee85ef2401382f2b" name="a9449a7a0ad2c9ae5ee85ef2401382f2b"></a>
@@ -213,26 +204,20 @@ template&lt;typename T&gt; </td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Used for rendering order (last is highest) or retrieving entities of group. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo</a></b></dt><dd><p class="startdd">Label used in singular entity shouldn't use plural </p>
-<p class="interdd">HEARTS are rendered above POWERUPS, missleading order </p>
-<p class="interdd">PROJECTILE are rendered above POWERUPS, missleading order </p>
-<p class="enddd">Generalize HEARTS as UI or similar </p>
-</dd></dl>
+<p>Some premade <a class="el" href="classEntity.html" title="Main class for any object in game, stores associations, labeling and components.">Entity</a> groups used to avoid checking all entities for everything all of the time. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2ba924bf7180d60940e428a9166b51ce0f4" name="a9449a7a0ad2c9ae5ee85ef2401382f2ba924bf7180d60940e428a9166b51ce0f4"></a>MAPTILES&#160;</td><td class="fielddoc"><p><a class="el" href="classEntity.html" title="Main class for any object in game, stores associations, labeling and components.">Entity</a> using <a class="el" href="classTileComponent.html">TileComponent</a>. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2ba924bf7180d60940e428a9166b51ce0f4" name="a9449a7a0ad2c9ae5ee85ef2401382f2ba924bf7180d60940e428a9166b51ce0f4"></a>MAPTILES&#160;</td><td class="fielddoc"><p><a class="el" href="classEntity.html" title="Main class for any object in game, stores associations, labeling and components.">Entity</a> using TileComponent, internal use. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2bae334ea4bb6fd38968f6809b091120ad8" name="a9449a7a0ad2c9ae5ee85ef2401382f2bae334ea4bb6fd38968f6809b091120ad8"></a>PLAYERS&#160;</td><td class="fielddoc"><p>Primary entity in player controll. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2baf0d62ea6bc0a041d009322e77e1253c0" name="a9449a7a0ad2c9ae5ee85ef2401382f2baf0d62ea6bc0a041d009322e77e1253c0"></a>ENEMIES&#160;</td><td class="fielddoc"><dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated</a></b></dt><dd>All players now grouped as <a class="el" href="#a9449a7a0ad2c9ae5ee85ef2401382f2bae334ea4bb6fd38968f6809b091120ad8" title="Primary entity in player controll.">Entity::PLAYERS</a> </dd></dl>
+<tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2bae334ea4bb6fd38968f6809b091120ad8" name="a9449a7a0ad2c9ae5ee85ef2401382f2bae334ea4bb6fd38968f6809b091120ad8"></a>PLAYERS&#160;</td><td class="fielddoc"><p>Primary entity in player control, used to be able to interact with pickupables. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2badffa23e89f914b343e7811b01a8f756c" name="a9449a7a0ad2c9ae5ee85ef2401382f2badffa23e89f914b343e7811b01a8f756c"></a>COLLIDERS&#160;</td><td class="fielddoc"><p>Fixed collider entity, e.g. a wall. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2ba46dccab75ce652352e52086601fdc294" name="a9449a7a0ad2c9ae5ee85ef2401382f2ba46dccab75ce652352e52086601fdc294"></a>PROJECTILE&#160;</td><td class="fielddoc"><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo</a></b></dt><dd>Document </dd></dl>
+<tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2ba46dccab75ce652352e52086601fdc294" name="a9449a7a0ad2c9ae5ee85ef2401382f2ba46dccab75ce652352e52086601fdc294"></a>PROJECTILE&#160;</td><td class="fielddoc"><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo</a></b></dt><dd>Document </dd></dl>
 </td></tr>
-<tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2bad52d2d4c0b7218c48897d2e69e156ba4" name="a9449a7a0ad2c9ae5ee85ef2401382f2bad52d2d4c0b7218c48897d2e69e156ba4"></a>HEARTS&#160;</td><td class="fielddoc"><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo</a></b></dt><dd>Document </dd></dl>
+<tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2bad52d2d4c0b7218c48897d2e69e156ba4" name="a9449a7a0ad2c9ae5ee85ef2401382f2bad52d2d4c0b7218c48897d2e69e156ba4"></a>HEARTS&#160;</td><td class="fielddoc"><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo</a></b></dt><dd>Document </dd></dl>
 </td></tr>
-<tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2ba5262638eb9e1d1af560f3d0f9ad133e4" name="a9449a7a0ad2c9ae5ee85ef2401382f2ba5262638eb9e1d1af560f3d0f9ad133e4"></a>POWERUPS&#160;</td><td class="fielddoc"><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000007">Todo</a></b></dt><dd>Document </dd></dl>
+<tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2ba5262638eb9e1d1af560f3d0f9ad133e4" name="a9449a7a0ad2c9ae5ee85ef2401382f2ba5262638eb9e1d1af560f3d0f9ad133e4"></a>POWERUPS&#160;</td><td class="fielddoc"><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo</a></b></dt><dd>Document <br  />
+ </dd></dl>
 </td></tr>
 </table>
 
@@ -261,7 +246,7 @@ template&lt;typename T&gt; </td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo</a></b></dt><dd>Document </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo</a></b></dt><dd>Document </dd></dl>
 
 </div>
 </div>
@@ -301,42 +286,6 @@ template&lt;typename T, typename... TArgs&gt; </div>
 
 </div>
 </div>
-<a id="a712c05a013e928943c26c3a5b1467f01" name="a712c05a013e928943c26c3a5b1467f01"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a712c05a013e928943c26c3a5b1467f01">&#9670;&#160;</a></span>addGroup()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Entity::addGroup </td>
-          <td>(</td>
-          <td class="paramtype">Group</td>          <td class="paramname"><span class="paramname"><em>mGroup</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a9449a7a0ad2c9ae5ee85ef2401382f2b" title="Used for rendering order (last is highest) or retrieving entities of group.">GroupLabel</a> </dd></dl>
-
-</div>
-</div>
-<a id="ae3902aa921b519ed2c25cf4676c9cb5d" name="ae3902aa921b519ed2c25cf4676c9cb5d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3902aa921b519ed2c25cf4676c9cb5d">&#9670;&#160;</a></span>delGroup()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Entity::delGroup </td>
-          <td>(</td>
-          <td class="paramtype">Group</td>          <td class="paramname"><span class="paramname"><em>mGroup</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a9449a7a0ad2c9ae5ee85ef2401382f2b" title="Used for rendering order (last is highest) or retrieving entities of group.">GroupLabel</a> </dd></dl>
-
-</div>
-</div>
 <a id="a691dbe5f9ec930c27af2af0b97907a9e" name="a691dbe5f9ec930c27af2af0b97907a9e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a691dbe5f9ec930c27af2af0b97907a9e">&#9670;&#160;</a></span>destroy()</h2>
 
@@ -359,7 +308,7 @@ template&lt;typename T, typename... TArgs&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Mark for destruction for <a class="el" href="classManager.html#adc5c66704fd1b0a9b9d38de8fdcb3748">Manager::refresh()</a> and disables collision </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classColliderComponent.html">ColliderComponent</a> </dd></dl>
+<p>Mark for destruction for <a class="el" href="classManager.html#adc5c66704fd1b0a9b9d38de8fdcb3748">Manager::refresh()</a> and disables collision </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classColliderComponent.html" title="Adds a collision box to an entity when added via entity.addComponent()">ColliderComponent</a> </dd></dl>
 
 </div>
 </div>
@@ -388,27 +337,51 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>&lt; </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo</a></b></dt><dd>: rewrite to use optionals </dd></dl>
+<p>Access a specific component of an entity. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of component to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference to component of type T &lt; </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo</a></b></dt><dd>: rewrite to use optionals </dd></dl>
 
 </div>
 </div>
-<a id="adf88082fc18a9ee0294072a0e028453d" name="adf88082fc18a9ee0294072a0e028453d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf88082fc18a9ee0294072a0e028453d">&#9670;&#160;</a></span>getGroupBitSet()</h2>
+<a id="af153779f4ae16c3aa4d67a52f61333b7" name="af153779f4ae16c3aa4d67a52f61333b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af153779f4ae16c3aa4d67a52f61333b7">&#9670;&#160;</a></span>getComponentAsPointer()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::bitset&lt; MAX_GROUPS &gt; Entity::getGroupBitSet </td>
+          <td class="memname">std::shared_ptr&lt; T &gt; Entity::getComponentAsPointer </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>bitset with true on position <a class="el" href="#a9449a7a0ad2c9ae5ee85ef2401382f2b" title="Used for rendering order (last is highest) or retrieving entities of group.">GroupLabel</a> if the entity belongs to group </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a9449a7a0ad2c9ae5ee85ef2401382f2b" title="Used for rendering order (last is highest) or retrieving entities of group.">GroupLabel</a> </dd></dl>
+
+<p>Access a specific component of an entity as a pointer. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>Type of component to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to component of type T </dd></dl>
 
 </div>
 </div>
@@ -462,25 +435,7 @@ template&lt;typename T&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classComponent.html">Component</a> </dd></dl>
-
-</div>
-</div>
-<a id="acfb6240560624c026ffc24af4d469b68" name="acfb6240560624c026ffc24af4d469b68"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acfb6240560624c026ffc24af4d469b68">&#9670;&#160;</a></span>hasGroup()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Entity::hasGroup </td>
-          <td>(</td>
-          <td class="paramtype">Group</td>          <td class="paramname"><span class="paramname"><em>mGroup</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a9449a7a0ad2c9ae5ee85ef2401382f2b" title="Used for rendering order (last is highest) or retrieving entities of group.">GroupLabel</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd>Component </dd></dl>
 
 </div>
 </div>

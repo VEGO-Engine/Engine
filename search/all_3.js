@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['enemies_0',['ENEMIES',['../classEntity.html#a9449a7a0ad2c9ae5ee85ef2401382f2baf0d62ea6bc0a041d009322e77e1253c0',1,'Entity']]],
-  ['entity_1',['Entity',['../classEntity.html',1,'Entity'],['../classEntity.html#aad34087e815ec2da644b86ae2357039b',1,'Entity::Entity()']]],
-  ['eventmanager_2',['EventManager',['../classEventManager.html',1,'EventManager'],['../classEventManager.html#a89099b22114f158b5c530edfea52371d',1,'EventManager::EventManager()']]]
+  ['data_0',['data',['../structInteractionEventdataStruct.html#a82dc8bba3309e5aca77629c8fd192fbc',1,'InteractionEventdataStruct']]],
+  ['deprecated_20list_1',['Deprecated List',['../deprecated.html',1,'']]],
+  ['destroy_2',['destroy',['../classEntity.html#a691dbe5f9ec930c27af2af0b97907a9e',1,'Entity']]],
+  ['documentation_3',['Welcome to the VEGO library documentation',['../index.html',1,'']]],
+  ['draw_20your_20environment_4',['Draw Your Environment',['../md_docs_2md-pages_2tilemaps.html#autotoc_md10',1,'']]],
+  ['duration_5',['duration',['../structStatEffect.html#af1f5099f0680329ff9ce3a9362391196',1,'StatEffect']]]
 ];

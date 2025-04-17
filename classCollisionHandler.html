@@ -126,42 +126,37 @@ $(function(){initNavTree('classCollisionHandler.html',''); initResizable(true); 
   <div class="headertitle"><div class="title">CollisionHandler Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class responsible for collision detection and handling.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="CollisionHandler_8h_source.html">CollisionHandler.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a312be1663db742d603323b3db9fe1036" id="r_a312be1663db742d603323b3db9fe1036"><td class="memItemLeft" align="right" valign="top"><a id="a312be1663db742d603323b3db9fe1036" name="a312be1663db742d603323b3db9fe1036"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>CollisionHandler</b> (<a class="el" href="classManager.html">Manager</a> &amp;mManager)</td></tr>
-<tr class="separator:a312be1663db742d603323b3db9fe1036"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4a74f55ada38ad5ed43bfab00694d16" id="r_aa4a74f55ada38ad5ed43bfab00694d16"><td class="memItemLeft" align="right" valign="top"><a id="aa4a74f55ada38ad5ed43bfab00694d16" name="aa4a74f55ada38ad5ed43bfab00694d16"></a>
-std::vector&lt; <a class="el" href="classColliderComponent.html">ColliderComponent</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getColliders</b> (std::initializer_list&lt; <a class="el" href="classEntity.html#a9449a7a0ad2c9ae5ee85ef2401382f2b">Entity::GroupLabel</a> &gt; const &amp;groupLabels, std::initializer_list&lt; <a class="el" href="classEntity.html">Entity</a> * &gt; const &amp;excludedEntities={})</td></tr>
-<tr class="separator:aa4a74f55ada38ad5ed43bfab00694d16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca14b15166c3bfbf26e9ff5a8895acd9" id="r_aca14b15166c3bfbf26e9ff5a8895acd9"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:aca14b15166c3bfbf26e9ff5a8895acd9"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#aca14b15166c3bfbf26e9ff5a8895acd9">getAnyIntersection</a> (<a class="el" href="classEntity.html">Entity</a> *entity, <a class="el" href="classVector2D.html">Vector2D</a> posMod={}, std::initializer_list&lt; <a class="el" href="classEntity.html#a9449a7a0ad2c9ae5ee85ef2401382f2b">Entity::GroupLabel</a> &gt; const &amp;groupLabels={}, std::initializer_list&lt; <a class="el" href="classEntity.html">Entity</a> * &gt; const &amp;excludedEntities={})</td></tr>
+<tr class="memitem:aca14b15166c3bfbf26e9ff5a8895acd9"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#aca14b15166c3bfbf26e9ff5a8895acd9">getAnyIntersection</a> (<a class="el" href="classEntity.html">Entity</a> *entity, Vector2D posMod={}, std::initializer_list&lt; <a class="el" href="classEntity.html#a9449a7a0ad2c9ae5ee85ef2401382f2b">Entity::GroupLabel</a> &gt; const &amp;groupLabels={}, std::initializer_list&lt; <a class="el" href="classEntity.html">Entity</a> * &gt; const &amp;excludedEntities={})</td></tr>
 <tr class="memdesc:aca14b15166c3bfbf26e9ff5a8895acd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests entity against all entities with the specified labels for a collision.  <br /></td></tr>
 <tr class="separator:aca14b15166c3bfbf26e9ff5a8895acd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72f6372bb95506ef3224f1b70a889aed" id="r_a72f6372bb95506ef3224f1b70a889aed"><td class="memItemLeft" align="right" valign="top"><a id="a72f6372bb95506ef3224f1b70a889aed" name="a72f6372bb95506ef3224f1b70a889aed"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()</td></tr>
-<tr class="separator:a72f6372bb95506ef3224f1b70a889aed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a247c551454374148029c2e88a5c325d9" id="r_a247c551454374148029c2e88a5c325d9"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a247c551454374148029c2e88a5c325d9"><td class="memTemplItemLeft" align="right" valign="top">IntersectionBitSet&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a247c551454374148029c2e88a5c325d9">getAnyIntersection</a> (<a class="el" href="classEntity.html">Entity</a> *entity, <a class="el" href="classVector2D.html">Vector2D</a> posMod, std::initializer_list&lt; <a class="el" href="classEntity.html#a9449a7a0ad2c9ae5ee85ef2401382f2b">Entity::GroupLabel</a> &gt; const &amp;groupLabels, std::initializer_list&lt; <a class="el" href="classEntity.html">Entity</a> * &gt; const &amp;excludedEntities)</td></tr>
+<tr class="memitem:a247c551454374148029c2e88a5c325d9"><td class="memTemplItemLeft" align="right" valign="top">IntersectionBitSet&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a247c551454374148029c2e88a5c325d9">getAnyIntersection</a> (<a class="el" href="classEntity.html">Entity</a> *entity, Vector2D posMod, std::initializer_list&lt; <a class="el" href="classEntity.html#a9449a7a0ad2c9ae5ee85ef2401382f2b">Entity::GroupLabel</a> &gt; const &amp;groupLabels, std::initializer_list&lt; <a class="el" href="classEntity.html">Entity</a> * &gt; const &amp;excludedEntities)</td></tr>
 <tr class="separator:a247c551454374148029c2e88a5c325d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79f12d91a9eb27153d63d1c3d82870b3" id="r_a79f12d91a9eb27153d63d1c3d82870b3"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a79f12d91a9eb27153d63d1c3d82870b3"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classEntity.html">Entity</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a79f12d91a9eb27153d63d1c3d82870b3">getAnyIntersection</a> (<a class="el" href="classEntity.html">Entity</a> *entity, <a class="el" href="classVector2D.html">Vector2D</a> posMod, std::initializer_list&lt; <a class="el" href="classEntity.html#a9449a7a0ad2c9ae5ee85ef2401382f2b">Entity::GroupLabel</a> &gt; const &amp;groupLabels, std::initializer_list&lt; <a class="el" href="classEntity.html">Entity</a> * &gt; const &amp;excludedEntities)</td></tr>
+<tr class="memitem:a79f12d91a9eb27153d63d1c3d82870b3"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classEntity.html">Entity</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a79f12d91a9eb27153d63d1c3d82870b3">getAnyIntersection</a> (<a class="el" href="classEntity.html">Entity</a> *entity, Vector2D posMod, std::initializer_list&lt; <a class="el" href="classEntity.html#a9449a7a0ad2c9ae5ee85ef2401382f2b">Entity::GroupLabel</a> &gt; const &amp;groupLabels, std::initializer_list&lt; <a class="el" href="classEntity.html">Entity</a> * &gt; const &amp;excludedEntities)</td></tr>
 <tr class="separator:a79f12d91a9eb27153d63d1c3d82870b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7696ffbe45a8df61cc1f81f669214399" id="r_a7696ffbe45a8df61cc1f81f669214399"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a7696ffbe45a8df61cc1f81f669214399"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a7696ffbe45a8df61cc1f81f669214399">getAnyIntersection</a> (<a class="el" href="classEntity.html">Entity</a> *entity, <a class="el" href="classVector2D.html">Vector2D</a> posMod, std::initializer_list&lt; <a class="el" href="classEntity.html#a9449a7a0ad2c9ae5ee85ef2401382f2b">Entity::GroupLabel</a> &gt; const &amp;groupLabels, std::initializer_list&lt; <a class="el" href="classEntity.html">Entity</a> * &gt; const &amp;excludedEntities)</td></tr>
+<tr class="memitem:a7696ffbe45a8df61cc1f81f669214399"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a7696ffbe45a8df61cc1f81f669214399">getAnyIntersection</a> (<a class="el" href="classEntity.html">Entity</a> *entity, Vector2D posMod, std::initializer_list&lt; <a class="el" href="classEntity.html#a9449a7a0ad2c9ae5ee85ef2401382f2b">Entity::GroupLabel</a> &gt; const &amp;groupLabels, std::initializer_list&lt; <a class="el" href="classEntity.html">Entity</a> * &gt; const &amp;excludedEntities)</td></tr>
 <tr class="separator:a7696ffbe45a8df61cc1f81f669214399"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a9a52ac3eac33ef236ab0ced07f4763ce" id="r_a9a52ac3eac33ef236ab0ced07f4763ce"><td class="memItemLeft" align="right" valign="top"><a id="a9a52ac3eac33ef236ab0ced07f4763ce" name="a9a52ac3eac33ef236ab0ced07f4763ce"></a>
-static IntersectionBitSet&#160;</td><td class="memItemRight" valign="bottom"><b>getIntersection</b> (<a class="el" href="classEntity.html">Entity</a> *entityA, <a class="el" href="classEntity.html">Entity</a> *entityB, <a class="el" href="classVector2D.html">Vector2D</a> posModA=<a class="el" href="classVector2D.html">Vector2D</a>(0, 0), <a class="el" href="classVector2D.html">Vector2D</a> posModB=<a class="el" href="classVector2D.html">Vector2D</a>(0, 0))</td></tr>
+<tr class="memitem:a9a52ac3eac33ef236ab0ced07f4763ce" id="r_a9a52ac3eac33ef236ab0ced07f4763ce"><td class="memItemLeft" align="right" valign="top">static IntersectionBitSet&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9a52ac3eac33ef236ab0ced07f4763ce">getIntersection</a> (<a class="el" href="classEntity.html">Entity</a> *entityA, <a class="el" href="classEntity.html">Entity</a> *entityB, Vector2D posModA=Vector2D(0, 0), Vector2D posModB=Vector2D(0, 0))</td></tr>
+<tr class="memdesc:a9a52ac3eac33ef236ab0ced07f4763ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks for intersections relative to entityA.  <br /></td></tr>
 <tr class="separator:a9a52ac3eac33ef236ab0ced07f4763ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adfa9eb9683768efcf062e90ed1015d1e" id="r_adfa9eb9683768efcf062e90ed1015d1e"><td class="memItemLeft" align="right" valign="top"><a id="adfa9eb9683768efcf062e90ed1015d1e" name="adfa9eb9683768efcf062e90ed1015d1e"></a>
-static IntersectionBitSet&#160;</td><td class="memItemRight" valign="bottom"><b>getIntersectionWithBounds</b> (<a class="el" href="classEntity.html">Entity</a> *entity, <a class="el" href="classVector2D.html">Vector2D</a> posMod=<a class="el" href="classVector2D.html">Vector2D</a>(0, 0))</td></tr>
-<tr class="separator:adfa9eb9683768efcf062e90ed1015d1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class responsible for collision detection and handling. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a247c551454374148029c2e88a5c325d9" name="a247c551454374148029c2e88a5c325d9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a247c551454374148029c2e88a5c325d9">&#9670;&#160;</a></span>getAnyIntersection() <span class="overload">[1/4]</span></h2>
 
@@ -178,7 +173,7 @@ template&lt;&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classVector2D.html">Vector2D</a></td>          <td class="paramname"><span class="paramname"><em>posMod</em></span>, </td>
+          <td class="paramtype">Vector2D</td>          <td class="paramname"><span class="paramname"><em>posMod</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -199,7 +194,7 @@ IntersectionBitSet <div class="fragment"><div class="line"><span class="keyword"
 <div class="line"> </div>
 <div class="line"><span class="keyword">using </span>IntersectionBitSet = std::bitset&lt;DIRECTION_C&gt;;</div>
 </div><!-- fragment --></dd></dl>
-<p>Example usage for IntersectionBitSet (<a class="el" href="classTransformComponent.html#ad79c66bbe9cbe15e8ac6feda09b08be6">TransformComponent::update()</a>): </p><div class="fragment"><div class="line">IntersectionBitSet intersections =</div>
+<p>Example usage for IntersectionBitSet (TransformComponent::update()): </p><div class="fragment"><div class="line">IntersectionBitSet intersections =</div>
 <div class="line">    (CollisionHandler::getIntersectionWithBounds(entity, Vector2D(positionChange.x, 0)) |</div>
 <div class="line">        (this-&gt;entity-&gt;getManager()</div>
 <div class="line">        .getGame()-&gt;collisionHandler-&gt;getAnyIntersection&lt;IntersectionBitSet&gt;(entity, Vector2D(positionChange.x, 0), colliders)) &amp;</div>
@@ -233,7 +228,7 @@ template&lt;&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classVector2D.html">Vector2D</a></td>          <td class="paramname"><span class="paramname"><em>posMod</em></span>, </td>
+          <td class="paramtype">Vector2D</td>          <td class="paramname"><span class="paramname"><em>posMod</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -268,7 +263,7 @@ template&lt;&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classVector2D.html">Vector2D</a></td>          <td class="paramname"><span class="paramname"><em>posMod</em></span>, </td>
+          <td class="paramtype">Vector2D</td>          <td class="paramname"><span class="paramname"><em>posMod</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -302,7 +297,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classVector2D.html">Vector2D</a></td>          <td class="paramname"><span class="paramname"><em>posMod</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>, </td>
+          <td class="paramtype">Vector2D</td>          <td class="paramname"><span class="paramname"><em>posMod</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -318,7 +313,7 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 
 <p>Tests entity against all entities with the specified labels for a collision. </p>
-<p>Tests the given entity against every other entity with the specified labels for intersections between their collison boxes. If the primary entity has no <a class="el" href="classColliderComponent.html">ColliderComponent</a>, the equivalent of no collision is returned immediately, other entities are skipped if they don't have a <a class="el" href="classColliderComponent.html">ColliderComponent</a> </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Tests the given entity against every other entity with the specified labels for intersections between their collison boxes. If the primary entity has no <a class="el" href="classColliderComponent.html" title="Adds a collision box to an entity when added via entity.addComponent()">ColliderComponent</a>, the equivalent of no collision is returned immediately, other entities are skipped if they don't have a <a class="el" href="classColliderComponent.html" title="Adds a collision box to an entity when added via entity.addComponent()">ColliderComponent</a> </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">entity</td><td>The primary entity to check against. Return values will be relative to this entity </td></tr>
     <tr><td class="paramname">posMod</td><td>Modifier to apply toposition before checking collisions. </td></tr>
@@ -328,7 +323,56 @@ template&lt;typename T&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classColliderComponent.html">ColliderComponent</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classColliderComponent.html" title="Adds a collision box to an entity when added via entity.addComponent()">ColliderComponent</a> </dd></dl>
+
+</div>
+</div>
+<a id="a9a52ac3eac33ef236ab0ced07f4763ce" name="a9a52ac3eac33ef236ab0ced07f4763ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a52ac3eac33ef236ab0ced07f4763ce">&#9670;&#160;</a></span>getIntersection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">IntersectionBitSet CollisionHandler::getIntersection </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classEntity.html">Entity</a> *</td>          <td class="paramname"><span class="paramname"><em>entityA</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classEntity.html">Entity</a> *</td>          <td class="paramname"><span class="paramname"><em>entityB</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector2D</td>          <td class="paramname"><span class="paramname"><em>posModA</em></span><span class="paramdefsep"> = </span><span class="paramdefval">Vector2D(0,0)</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector2D</td>          <td class="paramname"><span class="paramname"><em>posModB</em></span><span class="paramdefsep"> = </span><span class="paramdefval">Vector2D(0,0)</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks for intersections relative to entityA. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entityA</td><td>The first entity to check against </td></tr>
+    <tr><td class="paramname">entityB</td><td>The second entity to check against </td></tr>
+    <tr><td class="paramname">posModA</td><td>Modifier to apply to entityA's position before checking collisions </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

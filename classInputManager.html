@@ -127,148 +127,108 @@ $(function(){initNavTree('classInputManager.html',''); initResizable(true); });
   <div class="headertitle"><div class="title">InputManager Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="classInputManager.html" title="InputManager class to handle input events and actions.">InputManager</a> class to handle input events and actions.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="InputManager_8h_source.html">InputManager.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structInputManager_1_1InputAction.html">InputAction</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structInputManager_1_1InputAction.html" title="InputAction struct to represent an action and its bindings.">InputAction</a> struct to represent an action and its bindings.  <a href="structInputManager_1_1InputAction.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:aea74732ef12db0a848ccc5ee0252600e" id="r_aea74732ef12db0a848ccc5ee0252600e"><td class="memItemLeft" align="right" valign="top"><a id="aea74732ef12db0a848ccc5ee0252600e" name="aea74732ef12db0a848ccc5ee0252600e"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>EventType</b> { <b>KeyDown</b>
-, <b>KeyUp</b>
- }</td></tr>
-<tr class="separator:aea74732ef12db0a848ccc5ee0252600e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace0b942f00c773dedae4956e27636e89" id="r_ace0b942f00c773dedae4956e27636e89"><td class="memItemLeft" align="right" valign="top"><a id="ace0b942f00c773dedae4956e27636e89" name="ace0b942f00c773dedae4956e27636e89"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>Key</b> { <br />
-&#160;&#160;<b>UP</b>
-, <b>DOWN</b>
-, <b>LEFT</b>
-, <b>RIGHT</b>
-, <br />
-&#160;&#160;<b>SPACE</b>
-, <b>ENTER</b>
-, <b>ESCAPE</b>
-, <b>TAB</b>
-, <br />
-&#160;&#160;<b>BACKSPACE</b>
-, <b>DELETE</b>
-, <b>HOME</b>
-, <b>END</b>
-, <br />
-&#160;&#160;<b>PAGE_UP</b>
-, <b>PAGE_DOWN</b>
-, <b>INSERT</b>
-, <b>CAPS_LOCK</b>
-, <br />
-&#160;&#160;<b>LEFT_SHIFT</b>
-, <b>RIGHT_SHIFT</b>
-, <b>LEFT_CTRL</b>
-, <b>RIGHT_CTRL</b>
-, <br />
-&#160;&#160;<b>LEFT_ALT</b>
-, <b>RIGHT_ALT</b>
-, <b>F1</b>
-, <b>F2</b>
-, <br />
-&#160;&#160;<b>F3</b>
-, <b>F4</b>
-, <b>F5</b>
-, <b>F6</b>
-, <br />
-&#160;&#160;<b>F7</b>
-, <b>F8</b>
-, <b>F9</b>
-, <b>F10</b>
-, <br />
-&#160;&#160;<b>F11</b>
-, <b>F12</b>
-, <b>A</b>
-, <b>B</b>
-, <br />
-&#160;&#160;<b>C</b>
-, <b>D</b>
-, <b>E</b>
-, <b>F</b>
-, <br />
-&#160;&#160;<b>G</b>
-, <b>H</b>
-, <b>I</b>
-, <b>J</b>
-, <br />
-&#160;&#160;<b>K</b>
-, <b>L</b>
-, <b>M</b>
-, <b>N</b>
-, <br />
-&#160;&#160;<b>O</b>
-, <b>P</b>
-, <b>Q</b>
-, <b>R</b>
-, <br />
-&#160;&#160;<b>S</b>
-, <b>T</b>
-, <b>U</b>
-, <b>V</b>
-, <br />
-&#160;&#160;<b>W</b>
-, <b>X</b>
-, <b>Y</b>
-, <b>Z</b>
-, <br />
-&#160;&#160;<b>NUM_0</b>
-, <b>NUM_1</b>
-, <b>NUM_2</b>
-, <b>NUM_3</b>
-, <br />
-&#160;&#160;<b>NUM_4</b>
-, <b>NUM_5</b>
-, <b>NUM_6</b>
-, <b>NUM_7</b>
-, <br />
-&#160;&#160;<b>NUM_8</b>
-, <b>NUM_9</b>
-, <b>LEFT_BRACKET</b>
-, <b>RIGHT_BRACKET</b>
-, <br />
-&#160;&#160;<b>SEMICOLON</b>
-, <b>APOSTROPHE</b>
-, <b>COMMA</b>
-, <b>PERIOD</b>
-, <br />
-&#160;&#160;<b>SLASH</b>
-, <b>BACKSLASH</b>
-, <b>GRAVE</b>
-<br />
- }</td></tr>
+<tr class="memitem:ace0b942f00c773dedae4956e27636e89" id="r_ace0b942f00c773dedae4956e27636e89"><td class="memItemLeft" align="right" valign="top"><a id="ace0b942f00c773dedae4956e27636e89" name="ace0b942f00c773dedae4956e27636e89"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ace0b942f00c773dedae4956e27636e89">Key</a> </td></tr>
+<tr class="memdesc:ace0b942f00c773dedae4956e27636e89"><td class="mdescLeft">&#160;</td><td class="mdescRight">A list of every key that can be bound to an action. <br /></td></tr>
 <tr class="separator:ace0b942f00c773dedae4956e27636e89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a26772a504ea7b5ea1e205ea34f444326" id="r_a26772a504ea7b5ea1e205ea34f444326"><td class="memItemLeft" align="right" valign="top"><a id="a26772a504ea7b5ea1e205ea34f444326" name="a26772a504ea7b5ea1e205ea34f444326"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> ()</td></tr>
-<tr class="separator:a26772a504ea7b5ea1e205ea34f444326"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01135fd4977633bdbe61c4a864f0cb54" id="r_a01135fd4977633bdbe61c4a864f0cb54"><td class="memItemLeft" align="right" valign="top"><a id="a01135fd4977633bdbe61c4a864f0cb54" name="a01135fd4977633bdbe61c4a864f0cb54"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>processEvents</b> ()</td></tr>
-<tr class="separator:a01135fd4977633bdbe61c4a864f0cb54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adbdedfbf80f83eb8de165c2f3af8ae68" id="r_adbdedfbf80f83eb8de165c2f3af8ae68"><td class="memItemLeft" align="right" valign="top"><a id="adbdedfbf80f83eb8de165c2f3af8ae68" name="adbdedfbf80f83eb8de165c2f3af8ae68"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>registerAction</b> (const std::string &amp;actionName, const std::vector&lt; Key &gt; &amp;keys, std::function&lt; void(bool)&gt; callback, const std::string &amp;context)</td></tr>
-<tr class="separator:adbdedfbf80f83eb8de165c2f3af8ae68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6020878de8bb7046055cc40312e221e6" id="r_a6020878de8bb7046055cc40312e221e6"><td class="memItemLeft" align="right" valign="top"><a id="a6020878de8bb7046055cc40312e221e6" name="a6020878de8bb7046055cc40312e221e6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setActiveContext</b> (const std::string &amp;context)</td></tr>
+<tr class="memitem:afee4ab4cebfdac2fe08cd01e1a1c1620" id="r_afee4ab4cebfdac2fe08cd01e1a1c1620"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afee4ab4cebfdac2fe08cd01e1a1c1620">registerAction</a> (const std::string &amp;actionName, const std::vector&lt; <a class="el" href="#ace0b942f00c773dedae4956e27636e89">Key</a> &gt; &amp;keys, std::function&lt; void(bool)&gt; callback, const std::string &amp;context=&quot;Default&quot;)</td></tr>
+<tr class="memdesc:afee4ab4cebfdac2fe08cd01e1a1c1620"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register an action with a name, key bindings, and a callback function.  <br /></td></tr>
+<tr class="separator:afee4ab4cebfdac2fe08cd01e1a1c1620"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6020878de8bb7046055cc40312e221e6" id="r_a6020878de8bb7046055cc40312e221e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6020878de8bb7046055cc40312e221e6">setActiveContext</a> (const std::string &amp;context)</td></tr>
+<tr class="memdesc:a6020878de8bb7046055cc40312e221e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the active context, is "Default" by default  <br /></td></tr>
 <tr class="separator:a6020878de8bb7046055cc40312e221e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c3240499dc0103d5a855c0d38127281" id="r_a8c3240499dc0103d5a855c0d38127281"><td class="memItemLeft" align="right" valign="top"><a id="a8c3240499dc0103d5a855c0d38127281" name="a8c3240499dc0103d5a855c0d38127281"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getActiveContext</b> () const</td></tr>
+<tr class="memdesc:a8c3240499dc0103d5a855c0d38127281"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the active context. <br /></td></tr>
 <tr class="separator:a8c3240499dc0103d5a855c0d38127281"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8f3d3a0739821c41339f8ab779df05a" id="r_af8f3d3a0739821c41339f8ab779df05a"><td class="memItemLeft" align="right" valign="top"><a id="af8f3d3a0739821c41339f8ab779df05a" name="af8f3d3a0739821c41339f8ab779df05a"></a>
-std::vector&lt; <a class="el" href="structInputManager_1_1InputAction.html">InputAction</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getActionsByKey</b> (const Key key) const</td></tr>
-<tr class="separator:af8f3d3a0739821c41339f8ab779df05a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a258e9ccdaa3408c5cb0445dfe0ec07b9" id="r_a258e9ccdaa3408c5cb0445dfe0ec07b9"><td class="memItemLeft" align="right" valign="top"><a id="a258e9ccdaa3408c5cb0445dfe0ec07b9" name="a258e9ccdaa3408c5cb0445dfe0ec07b9"></a>
-SDL_AppResult&#160;</td><td class="memItemRight" valign="bottom"><b>handleEvent</b> (SDL_EventType type, SDL_Event *const event)</td></tr>
-<tr class="separator:a258e9ccdaa3408c5cb0445dfe0ec07b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66a99d953b60201a77d064d467633bff" id="r_a66a99d953b60201a77d064d467633bff"><td class="memItemLeft" align="right" valign="top"><a id="a66a99d953b60201a77d064d467633bff" name="a66a99d953b60201a77d064d467633bff"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>initKeyMap</b> ()</td></tr>
-<tr class="separator:a66a99d953b60201a77d064d467633bff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classInputManager.html" title="InputManager class to handle input events and actions.">InputManager</a> class to handle input events and actions. </p>
+<p>This class manages input events, allowing for the registration of actions and their corresponding key bindings. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="afee4ab4cebfdac2fe08cd01e1a1c1620" name="afee4ab4cebfdac2fe08cd01e1a1c1620"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afee4ab4cebfdac2fe08cd01e1a1c1620">&#9670;&#160;</a></span>registerAction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void InputManager::registerAction </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>actionName</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="#ace0b942f00c773dedae4956e27636e89">Key</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>keys</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; void(bool)&gt;</td>          <td class="paramname"><span class="paramname"><em>callback</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>context</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;Default&quot;</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Register an action with a name, key bindings, and a callback function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">actionName</td><td>The name of the action </td></tr>
+    <tr><td class="paramname">keys</td><td>The keys that are bound to this action </td></tr>
+    <tr><td class="paramname">callback</td><td>The function to call when the action is triggered </td></tr>
+    <tr><td class="paramname">context</td><td>The context in which the action is valid can be used to switch between e.g. gameplay and menu so the same keys can be used for different actions </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6020878de8bb7046055cc40312e221e6" name="a6020878de8bb7046055cc40312e221e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6020878de8bb7046055cc40312e221e6">&#9670;&#160;</a></span>setActiveContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void InputManager::setActiveContext </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>context</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>set the active context, is "Default" by default </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">context</td><td>The name of the context to set as active </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>include/<a class="el" href="InputManager_8h_source.html">InputManager.h</a></li>
 <li>src/<b>InputManager.cpp</b></li>

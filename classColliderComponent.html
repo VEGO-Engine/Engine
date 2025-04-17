@@ -121,69 +121,96 @@ $(function(){initNavTree('classColliderComponent.html',''); initResizable(true);
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classColliderComponent-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">ColliderComponent Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Inheritance diagram for ColliderComponent:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classColliderComponent__inherit__graph.svg" width="142" height="111"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for ColliderComponent:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classColliderComponent__coll__graph.svg" width="236" height="318"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+
+<p>Adds a collision box to an entity when added via entity.addComponent()  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="ColliderComponent_8h_source.html">ColliderComponent.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab2b8fbba2f80f7b9bbf70504f8c3c670" id="r_ab2b8fbba2f80f7b9bbf70504f8c3c670"><td class="memItemLeft" align="right" valign="top"><a id="ab2b8fbba2f80f7b9bbf70504f8c3c670" name="ab2b8fbba2f80f7b9bbf70504f8c3c670"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ColliderComponent</b> (const char *tag)</td></tr>
+<tr class="memitem:a334729b3c9b86cf7ee99b908f100a043" id="r_a334729b3c9b86cf7ee99b908f100a043"><td class="memItemLeft" align="right" valign="top">SDL_Rect &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a334729b3c9b86cf7ee99b908f100a043">getCollider</a> ()</td></tr>
+<tr class="separator:a334729b3c9b86cf7ee99b908f100a043"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4438054178328402309cf72589f4f163" id="r_a4438054178328402309cf72589f4f163"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4438054178328402309cf72589f4f163">getTag</a> () const</td></tr>
+<tr class="separator:a4438054178328402309cf72589f4f163"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a916be6c5f07a15fbd4f198be4c3c5a5f" id="r_a916be6c5f07a15fbd4f198be4c3c5a5f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a916be6c5f07a15fbd4f198be4c3c5a5f">hasCollision</a> () const</td></tr>
+<tr class="separator:a916be6c5f07a15fbd4f198be4c3c5a5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2b8fbba2f80f7b9bbf70504f8c3c670" id="r_ab2b8fbba2f80f7b9bbf70504f8c3c670"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2b8fbba2f80f7b9bbf70504f8c3c670">ColliderComponent</a> (const char *tag)</td></tr>
+<tr class="memdesc:ab2b8fbba2f80f7b9bbf70504f8c3c670"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classColliderComponent.html" title="Adds a collision box to an entity when added via entity.addComponent()">ColliderComponent</a>.  <br /></td></tr>
 <tr class="separator:ab2b8fbba2f80f7b9bbf70504f8c3c670"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29b7a4326327382ec473730a07f57b9a" id="r_a29b7a4326327382ec473730a07f57b9a"><td class="memItemLeft" align="right" valign="top"><a id="a29b7a4326327382ec473730a07f57b9a" name="a29b7a4326327382ec473730a07f57b9a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ColliderComponent</b> (const char *tag, float hitboxScale)</td></tr>
+<tr class="memitem:a29b7a4326327382ec473730a07f57b9a" id="r_a29b7a4326327382ec473730a07f57b9a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a29b7a4326327382ec473730a07f57b9a">ColliderComponent</a> (const char *tag, float hitboxScale)</td></tr>
+<tr class="memdesc:a29b7a4326327382ec473730a07f57b9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classColliderComponent.html" title="Adds a collision box to an entity when added via entity.addComponent()">ColliderComponent</a>.  <br /></td></tr>
 <tr class="separator:a29b7a4326327382ec473730a07f57b9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c0c763d047f6c0d62429cce48011093" id="r_a9c0c763d047f6c0d62429cce48011093"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9c0c763d047f6c0d62429cce48011093">init</a> () override</td></tr>
-<tr class="separator:a9c0c763d047f6c0d62429cce48011093"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a284c1328e3cebcd5ac84bd58b68534d1" id="r_a284c1328e3cebcd5ac84bd58b68534d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a284c1328e3cebcd5ac84bd58b68534d1">update</a> (uint_fast16_t diffTime) override</td></tr>
-<tr class="separator:a284c1328e3cebcd5ac84bd58b68534d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ac04cfb252c5712d53aaa30603165e3" id="r_a6ac04cfb252c5712d53aaa30603165e3"><td class="memItemLeft" align="right" valign="top"><a id="a6ac04cfb252c5712d53aaa30603165e3" name="a6ac04cfb252c5712d53aaa30603165e3"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>removeCollision</b> ()</td></tr>
+<tr class="memdesc:a6ac04cfb252c5712d53aaa30603165e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the collision of an entity. <br /></td></tr>
 <tr class="separator:a6ac04cfb252c5712d53aaa30603165e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a102a01671a5f52b398a6281b7cc1e44a" id="r_a102a01671a5f52b398a6281b7cc1e44a"><td class="memItemLeft" align="right" valign="top"><a id="a102a01671a5f52b398a6281b7cc1e44a" name="a102a01671a5f52b398a6281b7cc1e44a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>handleCollision</b> (<a class="el" href="classVector2D.html">Vector2D</a> &amp;characterPos, SDL_Rect &amp;characterCollider, SDL_Rect &amp;componentCollider)</td></tr>
-<tr class="separator:a102a01671a5f52b398a6281b7cc1e44a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a2e61eb6ff3d987149045c823172023aa" id="r_a2e61eb6ff3d987149045c823172023aa"><td class="memItemLeft" align="right" valign="top"><a id="a2e61eb6ff3d987149045c823172023aa" name="a2e61eb6ff3d987149045c823172023aa"></a>
-SDL_Rect&#160;</td><td class="memItemRight" valign="bottom"><b>collider</b></td></tr>
-<tr class="separator:a2e61eb6ff3d987149045c823172023aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafbdef12165c2d5c84b960e49d6d5646" id="r_aafbdef12165c2d5c84b960e49d6d5646"><td class="memItemLeft" align="right" valign="top"><a id="aafbdef12165c2d5c84b960e49d6d5646" name="aafbdef12165c2d5c84b960e49d6d5646"></a>
-const char *&#160;</td><td class="memItemRight" valign="bottom"><b>tag</b></td></tr>
-<tr class="separator:aafbdef12165c2d5c84b960e49d6d5646"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e8630c262f3fecfd657e6cc303f0b78" id="r_a9e8630c262f3fecfd657e6cc303f0b78"><td class="memItemLeft" align="right" valign="top"><a id="a9e8630c262f3fecfd657e6cc303f0b78" name="a9e8630c262f3fecfd657e6cc303f0b78"></a>
-<a class="el" href="classTransformComponent.html">TransformComponent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>transform</b></td></tr>
-<tr class="separator:a9e8630c262f3fecfd657e6cc303f0b78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0f36c9d4f8f990668a740293c19ac56" id="r_af0f36c9d4f8f990668a740293c19ac56"><td class="memItemLeft" align="right" valign="top"><a id="af0f36c9d4f8f990668a740293c19ac56" name="af0f36c9d4f8f990668a740293c19ac56"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>hasCollision</b></td></tr>
-<tr class="separator:af0f36c9d4f8f990668a740293c19ac56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca2cc05f6db5b60403d3b9bd7371be59" id="r_aca2cc05f6db5b60403d3b9bd7371be59"><td class="memItemLeft" align="right" valign="top"><a id="aca2cc05f6db5b60403d3b9bd7371be59" name="aca2cc05f6db5b60403d3b9bd7371be59"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>hitboxScale</b></td></tr>
-<tr class="separator:aca2cc05f6db5b60403d3b9bd7371be59"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33eabe34d7a248b728ebc4a20812380e" id="r_a33eabe34d7a248b728ebc4a20812380e"><td class="memItemLeft" align="right" valign="top"><a id="a33eabe34d7a248b728ebc4a20812380e" name="a33eabe34d7a248b728ebc4a20812380e"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isProjectile</b> = false</td></tr>
-<tr class="separator:a33eabe34d7a248b728ebc4a20812380e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_attribs_classComponent"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_attribs_classComponent')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classComponent.html">Component</a></td></tr>
-<tr class="memitem:a6acb3f00c9d114d961c8763ede390d2c inherit pub_attribs_classComponent" id="r_a6acb3f00c9d114d961c8763ede390d2c"><td class="memItemLeft" align="right" valign="top">
-<a class="el" href="classEntity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>entity</b></td></tr>
-<tr class="separator:a6acb3f00c9d114d961c8763ede390d2c inherit pub_attribs_classComponent"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Adds a collision box to an entity when added via entity.addComponent() </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ab2b8fbba2f80f7b9bbf70504f8c3c670" name="ab2b8fbba2f80f7b9bbf70504f8c3c670"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2b8fbba2f80f7b9bbf70504f8c3c670">&#9670;&#160;</a></span>ColliderComponent() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ColliderComponent::ColliderComponent </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>tag</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor for <a class="el" href="classColliderComponent.html" title="Adds a collision box to an entity when added via entity.addComponent()">ColliderComponent</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tag</td><td>The tag of the collider, can be any char* </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a29b7a4326327382ec473730a07f57b9a" name="a29b7a4326327382ec473730a07f57b9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29b7a4326327382ec473730a07f57b9a">&#9670;&#160;</a></span>ColliderComponent() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ColliderComponent::ColliderComponent </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>tag</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>hitboxScale</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor for <a class="el" href="classColliderComponent.html" title="Adds a collision box to an entity when added via entity.addComponent()">ColliderComponent</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tag</td><td>The tag of the collider, can be any char* </td></tr>
+    <tr><td class="paramname">hitboxScale</td><td>The scale of the collider, used to scale the collider size, default is 1.0f and takes up the 32x32 pixels </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9c0c763d047f6c0d62429cce48011093" name="a9c0c763d047f6c0d62429cce48011093"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c0c763d047f6c0d62429cce48011093">&#9670;&#160;</a></span>init()</h2>
+<a id="a334729b3c9b86cf7ee99b908f100a043" name="a334729b3c9b86cf7ee99b908f100a043"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a334729b3c9b86cf7ee99b908f100a043">&#9670;&#160;</a></span>getCollider()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -192,7 +219,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isProjectile</b> = fa
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void ColliderComponent::init </td>
+          <td class="memname">SDL_Rect &amp; ColliderComponent::getCollider </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -200,17 +227,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isProjectile</b> = fa
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Reimplemented from <a class="el" href="classComponent.html">Component</a>.</p>
+<dl class="section return"><dt>Returns</dt><dd>the collider of the entity </dd></dl>
 
 </div>
 </div>
-<a id="a284c1328e3cebcd5ac84bd58b68534d1" name="a284c1328e3cebcd5ac84bd58b68534d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a284c1328e3cebcd5ac84bd58b68534d1">&#9670;&#160;</a></span>update()</h2>
+<a id="a4438054178328402309cf72589f4f163" name="a4438054178328402309cf72589f4f163"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4438054178328402309cf72589f4f163">&#9670;&#160;</a></span>getTag()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -219,20 +245,45 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isProjectile</b> = fa
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void ColliderComponent::update </td>
+          <td class="memname">const char * ColliderComponent::getTag </td>
           <td>(</td>
-          <td class="paramtype">uint_fast16_t</td>          <td class="paramname"><span class="paramname"><em>diffTime</em></span></td><td>)</td>
-          <td></td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>the tag of the entity </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classComponent.html">Component</a>.</p>
+</div>
+</div>
+<a id="a916be6c5f07a15fbd4f198be4c3c5a5f" name="a916be6c5f07a15fbd4f198be4c3c5a5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a916be6c5f07a15fbd4f198be4c3c5a5f">&#9670;&#160;</a></span>hasCollision()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ColliderComponent::hasCollision </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>the collision state of the entity </dd></dl>
 
 </div>
 </div>

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['manager_0',['Manager',['../classManager.html',1,'']]],
-  ['map_1',['Map',['../classMap.html',1,'']]]
+  ['zindexcomparator_0',['ZIndexComparator',['../structRenderObject_1_1ZIndexComparator.html',1,'RenderObject']]]
 ];

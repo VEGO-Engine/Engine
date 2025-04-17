@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['loadmaptiletexture_0',['loadMapTileTexture',['../classTextureManager.html#ac2bf6f97639eee824c45266472430ee0',1,'TextureManager']]],
-  ['loadtexture_1',['loadTexture',['../classTextureManager.html#a3304650a6b7304dbaa1afb164ed4c4e8',1,'TextureManager']]]
+  ['interact_0',['interact',['../classInteractionComponent.html#ab6358a875d127206cb5f867f93e05368',1,'InteractionComponent']]],
+  ['interactioncomponent_1',['InteractionComponent',['../classInteractionComponent.html#af60fed077b6f92c22f2246c2464923ed',1,'InteractionComponent']]],
+  ['isactive_2',['isActive',['../classEntity.html#aea1c1568b4123d989c5310697030ad77',1,'Entity']]]
 ];

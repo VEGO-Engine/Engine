@@ -25,12 +25,22 @@
 var NAVTREE =
 [
   [ "VEGO-Engine", "index.html", [
+    [ "Welcome to the VEGO library documentation", "index.html", null ],
+    [ "Entities and Components", "md_docs_2md-pages_2entitiesAndComponents.html", [
+      [ "Entities", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md1", null ],
+      [ "Components", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md2", null ]
+    ] ],
+    [ "Interactions", "md_docs_2md-pages_2eventhandling.html", null ],
+    [ "Input Management", "md_docs_2md-pages_2inputhandling.html", null ],
+    [ "Quickstart guide for setting up the library", "md_docs_2md-pages_2quickstart.html", [
+      [ "Installations and tools", "md_docs_2md-pages_2quickstart.html#autotoc_md7", null ]
+    ] ],
+    [ "Building an environment using Tiled and tmx", "md_docs_2md-pages_2tilemaps.html", null ],
     [ "Todo List", "todo.html", null ],
     [ "Deprecated List", "deprecated.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
-      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
         [ "Functions", "functions_func.html", null ],

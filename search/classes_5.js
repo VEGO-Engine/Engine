@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['healthcomponent_0',['HealthComponent',['../classHealthComponent.html',1,'']]]
+  ['soundmanager_0',['SoundManager',['../classSoundManager.html',1,'']]],
+  ['spritecomponent_1',['SpriteComponent',['../classSpriteComponent.html',1,'']]],
+  ['stateffect_2',['StatEffect',['../structStatEffect.html',1,'']]]
 ];

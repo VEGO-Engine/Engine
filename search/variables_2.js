@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gameinternal_0',['gameInternal',['../classGame.html#a97bfdecc66a53f55ac7ff8b8ba014418',1,'Game']]]
+  ['resetfunction_0',['resetFunction',['../structStatEffect.html#aca6d477c75029a2575d2e0a4f5794a43',1,'StatEffect']]]
 ];

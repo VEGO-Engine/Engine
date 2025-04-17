@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['refresh_0',['refresh',['../classManager.html#adc5c66704fd1b0a9b9d38de8fdcb3748',1,'Manager']]],
-  ['renderall_1',['renderAll',['../classRenderManager.html#ac26def932c9624d73f03af4bd84b20ef',1,'RenderManager']]],
-  ['rendermanager_2',['RenderManager',['../classRenderManager.html',1,'']]],
-  ['renderobject_3',['RenderObject',['../classRenderObject.html',1,'']]],
-  ['resetfunction_4',['resetFunction',['../structStatEffect.html#aca6d477c75029a2575d2e0a4f5794a43',1,'StatEffect']]],
-  ['restartmusic_5',['restartMusic',['../classSoundManager.html#aaca970232ead83c6c107331f3d9ee0db',1,'SoundManager']]],
-  ['restartsound_6',['restartSound',['../classSoundManager.html#ac24dc06983603020f6556273d3c78df3',1,'SoundManager']]]
+  ['management_0',['Input Management',['../md_docs_2md-pages_2inputhandling.html',1,'']]],
+  ['manager_1',['Manager',['../classManager.html',1,'']]],
+  ['map_2',['Map',['../classMap.html',1,'Map'],['../classMap.html#af8808c7a5677f1f9c71bf4ed74fc79c1',1,'Map::Map()']]],
+  ['maptiles_3',['MAPTILES',['../classEntity.html#a9449a7a0ad2c9ae5ee85ef2401382f2ba924bf7180d60940e428a9166b51ce0f4',1,'Entity']]]
 ];

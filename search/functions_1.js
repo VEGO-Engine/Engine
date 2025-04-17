@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['delgroup_0',['delGroup',['../classEntity.html#ae3902aa921b519ed2c25cf4676c9cb5d',1,'Entity']]],
-  ['destroy_1',['destroy',['../classEntity.html#a691dbe5f9ec930c27af2af0b97907a9e',1,'Entity']]]
+  ['collidercomponent_0',['ColliderComponent',['../classColliderComponent.html#ab2b8fbba2f80f7b9bbf70504f8c3c670',1,'ColliderComponent::ColliderComponent(const char *tag)'],['../classColliderComponent.html#a29b7a4326327382ec473730a07f57b9a',1,'ColliderComponent::ColliderComponent(const char *tag, float hitboxScale)']]]
 ];

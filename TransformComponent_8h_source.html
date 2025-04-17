@@ -128,32 +128,30 @@ $(function(){initNavTree('TransformComponent_8h_source.html',''); initResizable(
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;Vector2D.h&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;Constants.h&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;DataComponent.h&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="foldopen" id="foldopen00008" data-start="{" data-end="};">
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classTransformComponent.html">    8</a></span><span class="keyword">class </span>TransformComponent : <span class="keyword">public</span> <a class="code hl_class" href="classComponent.html">Component</a></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <a class="code hl_class" href="classVector2D.html">Vector2D</a> position; <span class="comment">// TODO: change to int to save CPU time -&gt; possibly subpixel coordinates</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <a class="code hl_class" href="classVector2D.html">Vector2D</a> direction;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordtype">int</span> height = 32;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordtype">int</span> width = 32;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordtype">int</span> scale = 1;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">explicit</span> TransformComponent(<span class="keywordtype">int</span> scale = 1);</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    TransformComponent(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y, <span class="keywordtype">int</span> scale = 1);</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    TransformComponent(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y, <span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h, <span class="keywordtype">int</span> scale = 1);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">void</span> init() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classTransformComponent.html#ad79c66bbe9cbe15e8ac6feda09b08be6">update</a>(uint_fast16_t diffTime) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">void</span> setPositionAfterCollision(<a class="code hl_class" href="classVector2D.html">Vector2D</a>&amp; positionChange);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">int</span> getSpeed();</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>};</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span></div>
+<div class="foldopen" id="foldopen00010" data-start="{" data-end="};">
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classTransformComponent.html">   10</a></span><span class="keyword">class </span><a class="code hl_function" href="classTransformComponent.html#ad3844c3c266a2cfd206f24f7a09c9014">TransformComponent</a> : <span class="keyword">public</span> Component</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    Vector2D position; <span class="comment">// TODO: change to int to save CPU time -&gt; possibly subpixel coordinates</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    Vector2D direction;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordtype">int</span> height = 32;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">int</span> width = 32;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordtype">int</span> scale = 1;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classTransformComponent.html#ad3844c3c266a2cfd206f24f7a09c9014">TransformComponent</a>(<span class="keywordtype">int</span> scale = 1);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_function" href="classTransformComponent.html#ad3844c3c266a2cfd206f24f7a09c9014">TransformComponent</a>(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y, <span class="keywordtype">int</span> scale = 1);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <a class="code hl_function" href="classTransformComponent.html#ad3844c3c266a2cfd206f24f7a09c9014">TransformComponent</a>(<span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y, <span class="keywordtype">int</span> w, <span class="keywordtype">int</span> h, <span class="keywordtype">int</span> scale = 1);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">void</span> init() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">void</span> update(uint_fast16_t diffTime) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">void</span> setPositionAfterCollision(Vector2D&amp; positionChange);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">int</span> getSpeed();</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>};</div>
 </div>
-<div class="ttc" id="aclassComponent_html"><div class="ttname"><a href="classComponent.html">Component</a></div><div class="ttdef"><b>Definition</b> Component.h:8</div></div>
-<div class="ttc" id="aclassTransformComponent_html_ad79c66bbe9cbe15e8ac6feda09b08be6"><div class="ttname"><a href="classTransformComponent.html#ad79c66bbe9cbe15e8ac6feda09b08be6">TransformComponent::update</a></div><div class="ttdeci">void update(uint_fast16_t diffTime) override</div><div class="ttdef"><b>Definition</b> TransformComponent.cpp:43</div></div>
-<div class="ttc" id="aclassVector2D_html"><div class="ttname"><a href="classVector2D.html">Vector2D</a></div><div class="ttdef"><b>Definition</b> Vector2D.h:7</div></div>
+<div class="ttc" id="aclassTransformComponent_html_ad3844c3c266a2cfd206f24f7a09c9014"><div class="ttname"><a href="classTransformComponent.html#ad3844c3c266a2cfd206f24f7a09c9014">TransformComponent::TransformComponent</a></div><div class="ttdeci">TransformComponent(int scale=1)</div><div class="ttdef"><b>Definition</b> TransformComponent.cpp:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
