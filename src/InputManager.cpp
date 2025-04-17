@@ -253,7 +253,6 @@ void InputManager::registerAction(const std::string& actionName, const std::vect
     for (const auto& key : keys) {
         actionsByContextAndKey[context][key].emplace_back(storedAction);
     }
-    std::cout << "Registered action: " << storedAction << " in context: " << context << std::endl;
 }
 
 std::vector<InputManager::InputAction*> InputManager::getActionsByKey(const Key key) const {
@@ -271,7 +270,6 @@ std::vector<InputManager::InputAction*> InputManager::getActionsByKey(const Key 
 
 void InputManager::setActiveContext(const std::string& context) {
     activeContext = context;
-    std::cout << "Active context set to: " << activeContext << std::endl;
 }
 
 std::string InputManager::getActiveContext() const {
@@ -286,14 +284,12 @@ SDL_AppResult InputManager::handleEvent(SDL_EventType type, SDL_Event* const eve
     { return pair.second == event->key.scancode; });
 
     if (keyIt != keyMap.end()) {
-        std::cout << "in != keymap.end" << std::endl;
 
         Key pressedKey = keyIt->first;
         auto keyActions = actionsByContextAndKey[activeContext];
         auto it = keyActions.find(pressedKey);
         if (it != keyActions.end()) {
             for (auto& action : it->second) {
-                std::cout << "Action triggered: " << action->name << " in context: " << activeContext << std::endl;
                 action->callback(type == SDL_EVENT_KEY_UP);
             }
         }

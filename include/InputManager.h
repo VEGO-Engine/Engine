@@ -9,13 +9,11 @@
 #include <vector>
 #include <iostream>
 
+//! \brief InputManager class to handle input events and actions
+//! \details This class manages input events, allowing for the registration of actions and their corresponding key bindings.
 class InputManager {
 public:
-    enum class EventType {
-        KeyDown,
-        KeyUp
-    };
-
+//! \brief A list of every key that can be bound to an action
     enum class Key
     {
         UP,
@@ -99,6 +97,10 @@ public:
         GRAVE
     };
 
+//! \brief InputAction struct to represent an action and its bindings
+//! \param name The name of the action
+//! \param bindings The keys that are bound to this action
+//! \param callback The function to call when the action is triggered
     struct InputAction {
         std::string name;
         std::vector<Key> bindings;
@@ -110,9 +112,18 @@ public:
 
     void init(); // see if necessary
     void processEvents();
-    void registerAction(const std::string& actionName, const std::vector<Key>& keys, std::function<void(bool)> callback, const std::string& context);
+    //! \brief Register an action with a name, key bindings, and a callback function
+    //! \param actionName The name of the action
+    //! \param keys The keys that are bound to this action
+    //! \param callback The function to call when the action is triggered
+    //! \param context The context in which the action is valid can be used to switch between e.g. gameplay and menu so the same keys can be used for different actions
+    void registerAction(const std::string& actionName, const std::vector<Key>& keys, std::function<void(bool)> callback, const std::string& context = "Default");
 
+    //! \brief set the active context, is "Default" by default
+    //! \param context The name of the context to set as active
     void setActiveContext(const std::string& context);
+
+    //! \brief Get the active context
     std::string getActiveContext() const;
 
     //void rebindAction(const std::string& actionName, const std::vector<Key>& newBindings, const std::string& context);

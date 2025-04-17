@@ -51,7 +51,8 @@ void TransformComponent::update(uint_fast16_t diffTime)
 		direction.y * this->getSpeed() * multiplier * diffTime * (1.f/1000)
 	);
 
-	if (this->entity->hasGroup((size_t)Entity::GroupLabel::PLAYERS)){
+	if (this->entity->hasComponent<ColliderComponent>() 
+	&& this->entity->getComponent<ColliderComponent>().hasCollision()){
 		this->setPositionAfterCollision(positionChange);
 	}
 

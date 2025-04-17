@@ -9,7 +9,7 @@
 ColliderComponent::ColliderComponent(const char* tag)
 {
 	this->tag = tag;
-	this->hasCollision = true;
+	this->collision = true;
 	this->hitboxScale = 1;
 }
 
@@ -17,17 +17,13 @@ ColliderComponent::ColliderComponent(const char* tag, float hitboxScale) //addin
 {
 	this->tag = tag;
 	this->hitboxScale = hitboxScale;
-	this->hasCollision = true;
+	this->collision = true;
 }
 
 void ColliderComponent::init()
 {
 	if (!entity->hasComponent<TransformComponent>()) {
 		entity->addComponent<TransformComponent>();
-	}
-
-	if (strcmp(this->tag, "projectile") == 0) {
-		this->isProjectile = true;
 	}
 
 	transform = &entity->getComponent<TransformComponent>();
@@ -46,18 +42,5 @@ void ColliderComponent::update(uint_fast16_t diffTime)
 
 void ColliderComponent::removeCollision()
 {
-	this->hasCollision = false;
-}
-
-void ColliderComponent::handleCollision(Vector2D& entityPos, SDL_Rect& entityCollider, SDL_Rect& componentCollider)
-{
-	// collision to right of character
-	if (entityPos.x < componentCollider.x)
-	{
-		entityPos.x = componentCollider.x - entityCollider.w;
-	}
-	else // collision to left of character
-	{
-		entityPos.x = componentCollider.x + componentCollider.w;
-	}
+	this->collision = false;
 }

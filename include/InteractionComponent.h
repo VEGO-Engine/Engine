@@ -5,6 +5,8 @@
 
 #include <functional>
 
+//! \brief InteractionComponent class to handle interaction events
+//! \details This class manages interaction events, allowing for the registration of a callback function to be called when an interaction event is triggered.
 class InteractionComponent : public Component, public InteractionListener
 {
 public:
@@ -14,6 +16,7 @@ public:
      */
     InteractionComponent(std::function<void(void*,void*)> callback);
 
+    void init() override;
     /**
      * @brief Internal function to be called when an interaction event is triggered.
      */

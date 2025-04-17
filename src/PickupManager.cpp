@@ -39,6 +39,8 @@ void PickupManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pi
     powerups.addGroup((size_t)Entity::GroupLabel::POWERUPS);
 }
 
+// \internal
+// \brief Calculates a random spawn position for the powerup
 Vector2D PickupManager::calculateSpawnPosition()
 {
 	Vector2D spawnPos = Vector2D(-1, -1);
@@ -52,7 +54,7 @@ Vector2D PickupManager::calculateSpawnPosition()
 		conflict = false;
 		for (auto cc : this->man->getGame()->collisionHandler->getColliders({ Entity::GroupLabel::MAPTILES }))
 		{
-			if (SDL_HasRectIntersection(&spawnRect, &cc->collider) && strcmp(cc->tag, "projectile"))
+			if (SDL_HasRectIntersection(&spawnRect, &cc->getCollider()) && strcmp(cc->getTag(), "projectile"))
 			{
 				conflict = true;
 				break;

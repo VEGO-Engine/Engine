@@ -12,6 +12,7 @@
 #include "RenderObject.h"
 
 class TransformComponent;
+//! \brief SpriteComponent class to handle sprite rendering and animation
 
 class SpriteComponent : public Component, public RenderObject
 {
@@ -45,9 +46,27 @@ public:
 
 
 
+	//! \brief Constructor for SpriteComponent
+	//! \param texture The texture to be used for the sprite, must be a Texture enum
+	//! \brief zIndex The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on
 	SpriteComponent(Textures texture, int zIndex);
+
+	//! \param texture The texture to be used for the sprite, must be a Texture enum
+	//! \param xOffset The x offset of the sprite, used for rendering position
+	//! \param yOffset The y offset of the sprite, used for rendering position
+	//! \brief zIndex The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on
 	SpriteComponent(Textures texture, int xOffset, int yOffset, int zIndex);
+	//! \param texture The texture to be used for the sprite, must be a char* path
+	//! \param xOffset The x offset of the sprite, used for rendering position
+	//! \param yOffset The y offset of the sprite, used for rendering position
+	//! \brief zIndex The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on
 	SpriteComponent(const char* path, int xOffset, int yOffset, int zIndex);
+	//! \brief used for animated sprites
+	//! \param texture The texture to be used for the sprite, must be a Texture enum
+	//! \param isAnimated Whether the sprite is animated or not
+	//! \param animationList The list of animations to be used for the sprite
+	//! \param defaultAnimation The default animation to be used for the sprite when it first gets loaded
+	//! \param zIndex The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on
 	SpriteComponent(
 		Textures texture,
 		bool isAnimated,

@@ -27,6 +27,7 @@ constexpr uint8_t DIRECTION_C = 4;
 using IntersectionBitSet = std::bitset<DIRECTION_C>;
 // [IntersectionBitSet]
 
+//! \brief Class responsible for collision detection and handling
 class CollisionHandler
 {
 private:
@@ -38,7 +39,11 @@ public:
 		manager(mManager) { };
 	~CollisionHandler();
 
-	static IntersectionBitSet getIntersection( // intersections relative to entityA
+	//! \brief Checks for intersections relative to entityA
+	//! \param entityA The first entity to check against
+	//! \param entityB The second entity to check against
+	//! \param posModA Modifier to apply to entityA's position before checking collisions
+	static IntersectionBitSet getIntersection(
 		Entity* entityA,
 		Entity* entityB,
 		Vector2D posModA = Vector2D(0,0),

@@ -18,8 +18,8 @@ IntersectionBitSet CollisionHandler::getIntersection(Entity* entityA, Entity* en
 		!entityB->hasComponent<ColliderComponent>())
 		return std::bitset<DIRECTION_C>();
 
-	SDL_Rect colliderA = entityA->getComponent<ColliderComponent>().collider;
-	SDL_Rect colliderB = entityB->getComponent<ColliderComponent>().collider;
+	SDL_Rect colliderA = entityA->getComponent<ColliderComponent>().getCollider();
+	SDL_Rect colliderB = entityB->getComponent<ColliderComponent>().getCollider();
 
 	colliderA.x += posModA.x;
 	colliderA.y += posModA.y;
@@ -61,7 +61,7 @@ IntersectionBitSet CollisionHandler::getIntersectionWithBounds(Entity* entity, V
 	if (!entity->hasComponent<ColliderComponent>())
 		return std::bitset<DIRECTION_C>();
 
-	SDL_Rect* collider = &entity->getComponent<ColliderComponent>().collider;
+	SDL_Rect* collider = &entity->getComponent<ColliderComponent>().getCollider();
 
 	std::bitset<DIRECTION_C> intersections;
 
@@ -152,8 +152,8 @@ Entity* CollisionHandler::getAnyIntersection<Entity*>(
 {
 	if (!entity->hasComponent<ColliderComponent>()) return nullptr;
 	for (auto& collider : getColliders(groupLabels, excludedEntities)) {
-		SDL_Rect rect = entity->getComponent<ColliderComponent>().collider + posMod;
-   	    if (SDL_HasRectIntersection(&rect, &collider->collider)) {
+		SDL_Rect rect = entity->getComponent<ColliderComponent>().getCollider() + posMod;
+   	    if (SDL_HasRectIntersection(&rect, &collider->getCollider())) {
    	    	return collider->entity;
    	    }
 	}
@@ -175,8 +175,8 @@ bool CollisionHandler::getAnyIntersection<bool>(
 {
 	if (!entity->hasComponent<ColliderComponent>()) return false;
 	for (auto& collider : getColliders(groupLabels, excludedEntities)) {
-		SDL_Rect rect = entity->getComponent<ColliderComponent>().collider + posMod;
-   	    if (SDL_HasRectIntersection(&rect, &collider->collider)) {
+		SDL_Rect rect = entity->getComponent<ColliderComponent>().getCollider() + posMod;
+   	    if (SDL_HasRectIntersection(&rect, &collider->getCollider())) {
    	    	return true;
    	    }
 	}

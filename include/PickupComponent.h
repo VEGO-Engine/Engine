@@ -3,6 +3,8 @@
 #include <functional>
 #include "Component.h"
 
+//! \brief PickupComponent class to handle pickup events
+//! \details This class manages pickup events, allowing for the registration of a callback function to be called when an entity with this component collides with another entity that has the "players" group label.
 class PickupComponent : public Component
 {
 public:

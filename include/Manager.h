@@ -29,13 +29,18 @@ public:
 	//! \sa Entity::destroy()
 	void refresh();
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
 	void addToGroup(Entity* mEntity, Group mGroup); //!< \todo `friend` to Entity
 	std::vector<Entity*>& getGroup(Group mGroup); //!< \returns std::vector containing all entities in group Entity::GroupLabel
+#endif /* DOXYGEN_SHOULD_SKIP_THIS */
 
+	//! \brief Returns all entities currently loaded in the game
 	std::vector<Entity*> getAll(); //!< \returns std::vector containing all entities
 
+	//! \brief Add a new entity to the game
 	Entity& addEntity(); //!< Creates and returns a new, empty entity
 
+	/// \deprecated Use \ref VEGO_Game() instead
 	GameInternal* getGame() { return this->game; };
 
 private:

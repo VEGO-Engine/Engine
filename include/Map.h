@@ -11,6 +11,7 @@
 #include <tmxlite/Types.hpp>
 
 class GameInternal;
+//! \brief Class responsible for the creation and management of the map or background
 class Map
 {
 public:
@@ -21,6 +22,7 @@ public:
 	 * \sa Map::generateTiles()
 	 */
 	Map(const char* path);
+	//! \brief Used to generate the tiles of a previously loaded map
 	void generateTiles(); //!< Generates the map based on the loaded definition
 private:
 	// struct required for initialisation
@@ -45,7 +47,7 @@ private:
 	std::vector<std::function<void()>> tileConstructors;
 
 	void loadTileLayer(const tmx::TileLayer& layer);
-	static void addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int v, int zIndex, std::string texturePath, bool hasCollision);
+	static void addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int v, int zIndex, std::string texturePath, bool collision);
 
 	template<typename T>
 	static std::optional<T> getLayerProperty(const std::vector<tmx::Property>& properties, std::string propertyName) { return std::nullopt; };

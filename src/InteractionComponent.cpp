@@ -4,6 +4,11 @@
 
 InteractionComponent::InteractionComponent(std::function<void(void*,void*)> callback) : interactionCallback(callback)
 {
+    
+}
+
+void InteractionComponent::init()
+{
     VEGO_Game().interactionManager->registerListener(this->entity->getComponentAsPointer<InteractionComponent>());
 }
 

@@ -34,23 +34,15 @@ using ComponentArray = std::array<Component*, MAX_COMPONENTS>;
 class Entity
 {
 public:
-
-    /*!
-     * \brief Used for rendering order (last is highest) or retrieving entities of group
-     * \todo Label used in singular entity shouldn't use plural
-     * \todo HEARTS are rendered above POWERUPS, missleading order
-     * \todo PROJECTILE are rendered above POWERUPS, missleading order
-     * \todo Generalize HEARTS as UI or similar
-     */
+//! \brief Some premade Entity groups used to avoid checking all entities for everything all of the time
     enum class GroupLabel
     {
-        MAPTILES, //!< Entity using TileComponent
-        PLAYERS, //!< Primary entity in player controll
-        ENEMIES, //!< \deprecated All players now grouped as Entity::PLAYERS
+        MAPTILES, //!< Entity using TileComponent, internal use
+        PLAYERS, //!< Primary entity in player control, used to be able to interact with pickupables
         COLLIDERS, //!< Fixed collider entity, e.g. a wall
         PROJECTILE, //!< \todo Document
         HEARTS, //!< \todo Document
-        POWERUPS //!< \todo Document
+        POWERUPS //!< \todo Document  
     };
 
     /*!
@@ -70,13 +62,12 @@ public:
             this->getComponent<ColliderComponent>().removeCollision();
         }
     }
-
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
     bool hasGroup(Group mGroup); //!< \sa GroupLabel
     void addGroup(Group mGroup); //!< \sa GroupLabel
     void delGroup(Group mGroup); //!< \sa GroupLabel
-    //! \returns bitset with true on position GroupLabel if the entity belongs to group
-    //! \sa GroupLabel
     std::bitset<MAX_GROUPS> getGroupBitSet();
+#endif /* DOXYGEN_SHOULD_SKIP_THIS */
 
     //! \sa Manager
     Manager& getManager() { return manager; };
@@ -102,12 +93,17 @@ public:
         return *c;
     };
 
+    //! \brief Access a specific component of an entity
+    //! \tparam T Type of component to access
+    //! \return Reference to component of type T
     template <typename T> T& getComponent() const //!< \todo: rewrite to use optionals
     {
         auto ptr(componentArray[getComponentTypeID<T>()]);
         return *static_cast<T*>(ptr);
     }
-
+    //! \brief Access a specific component of an entity as a pointer
+    //! \tparam T Type of component to access
+    //! \return Pointer to component of type T
     template <typename T> std::shared_ptr<T> getComponentAsPointer() const
     {
         return std::static_pointer_cast<T>(components.at(getComponentTypeID<T>()));

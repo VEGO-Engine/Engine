@@ -162,7 +162,7 @@ void Map::loadTileLayer(const tmx::TileLayer& layer)
     this->tileConstructors.insert(this->tileConstructors.end(), tileConstructorRange.begin(), tileConstructorRange.end());
 }
 
-void Map::addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int v, int zIndex, std::string texturePath, bool hasCollision)
+void Map::addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int v, int zIndex, std::string texturePath, bool collision)
 {
     auto& tile(VEGO_Game().manager.addEntity());
 
@@ -170,7 +170,7 @@ void Map::addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int
     tile.addComponent<SpriteComponent>(texturePath.c_str(), v, u, zIndex); // why does uv need to be reversed?
     //TODO: also implement updated map stuff for this
 
-    if (hasCollision) {
+    if (collision) {
         // tag currently does not have a clear purposes, TODO: figure out appropriate tag name
         tile.addComponent<ColliderComponent>("hello I am a collider of a tile!");
         tile.addGroup((size_t)Entity::GroupLabel::MAPTILES);

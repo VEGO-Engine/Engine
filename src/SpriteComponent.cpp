@@ -98,6 +98,10 @@ void SpriteComponent::draw()
 
 void SpriteComponent::playAnimation(std::string type)
 {
+	if (animations == nullptr) {
+		SDL_SetError("playAnimation() was called on a sprite without any animations");
+		return;
+	}
 	this->animationIndex = animations->at(type)->index;
 	this->frames = animations->at(type)->frames;
 	this->speed = animations->at(type)->speed;
