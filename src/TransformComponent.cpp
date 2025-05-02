@@ -13,20 +13,20 @@
 
 #include "SoundManager.h"
 
-TransformComponent::TransformComponent(int scale)
+TransformComponent::TransformComponent(float scale)
 {
 	position.zero();
 	this->scale = scale;
 }
 
-TransformComponent::TransformComponent(float x, float y, int scale)
+TransformComponent::TransformComponent(float x, float y, float scale)
 {
 	this->position.x = x;
 	this->position.y = y;
 	this->scale = scale;
 }
 
-TransformComponent::TransformComponent(float x, float y, int w, int h, int scale)
+TransformComponent::TransformComponent(float x, float y, int w, int h, float scale)
 {
 	this->position.x = x;
 	this->position.y = y;

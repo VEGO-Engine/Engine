@@ -14,6 +14,7 @@ struct StatEffect {
     uint32_t startTime;
 };
 
+//! \brief Manages the lifecycle of temporary effects
 class StatEffectsComponent : public Component{
 public:
 	StatEffectsComponent() {};

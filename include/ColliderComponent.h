@@ -21,7 +21,7 @@ public:
 
 	//! \brief Constructor for ColliderComponent
 	//! \param tag The tag of the collider, can be any char*
-	//! \param hitboxScale The scale of the collider, used to scale the collider size, default is 1.0f and takes up the 32x32 pixels
+	//! \param hitboxScale The scale of the collider, used to scale the collider size (this is independent of the sprite size), default is 1.0f and takes up the 32x32 pixels
 	ColliderComponent(const char* tag, float hitboxScale);
 
 	void init() override;

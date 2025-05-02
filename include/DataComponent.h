@@ -6,6 +6,7 @@
 #include <optional>
 #include "Component.h"
 
+//! \brief DataComponent class to centrally store data about an entity such as stats
 class DataComponent : public Component
 {
 public:
@@ -13,7 +14,7 @@ public:
     ~DataComponent() {};
     /**
      * @brief Set a key-value pair of any type in the data map
-     * @details e.g. setEntry("speed", 180); in this case the key is "speed" and the value is set to an integer of 180
+     * @details e.g. \code{.cpp}setEntry("speed", 180);\endcode in this case the key is "speed" and the value is set to an integer of 180
      * @param key The name to store the value under
      * @param value The value to store of type T
      */
@@ -22,7 +23,7 @@ public:
 
     /**
      * @brief Get a value of type T from the data map
-     * @details e.g. getEntry<int>("speed"); in this case the key is "speed" and the value is returned as an integer
+     * @details e.g. \code{.cpp}getEntry<int>("speed");\endcode in this case the key is "speed" and the value is returned as an integer
      * @param key The name to retrieve the value from
      * @return An optional of type T containing the value if it exists and matches in typeid, otherwise std::nullopt
      */

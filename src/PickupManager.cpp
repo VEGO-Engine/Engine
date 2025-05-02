@@ -22,7 +22,7 @@ PickupManager::PickupManager(Manager* manager) : man(manager) {}
 
 PickupManager::~PickupManager() {}
 
-void PickupManager::createPowerup(Vector2D pos, std::function<void (Entity*)> pickupFunc, Textures texture) {
+void PickupManager::createPickupable(Vector2D pos, std::function<void (Entity*)> pickupFunc, Textures texture) {
 
     auto& powerups(man->addEntity());
     powerups.addComponent<TransformComponent>(pos.x, pos.y, 32, 32, 1); //32x32 is standard size for objects

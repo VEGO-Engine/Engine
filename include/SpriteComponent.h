@@ -12,8 +12,8 @@
 #include "RenderObject.h"
 
 class TransformComponent;
-//! \brief SpriteComponent class to handle sprite rendering and animation
 
+//! \brief SpriteComponent class to handle sprite rendering and animation of entities
 class SpriteComponent : public Component, public RenderObject
 {
 public:
@@ -48,31 +48,50 @@ public:
 
 	//! \brief Constructor for SpriteComponent
 	//! \param texture The texture to be used for the sprite, must be a Texture enum
-	//! \brief zIndex The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on
+	//! \param zIndex The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on
 	SpriteComponent(Textures texture, int zIndex);
 
 	//! \param texture The texture to be used for the sprite, must be a Texture enum
-	//! \param xOffset The x offset of the sprite, used for rendering position
-	//! \param yOffset The y offset of the sprite, used for rendering position
-	//! \brief zIndex The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on
-	SpriteComponent(Textures texture, int xOffset, int yOffset, int zIndex);
-	//! \param texture The texture to be used for the sprite, must be a char* path
-	//! \param xOffset The x offset of the sprite, used for rendering position
-	//! \param yOffset The y offset of the sprite, used for rendering position
-	//! \brief zIndex The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on
-	SpriteComponent(const char* path, int xOffset, int yOffset, int zIndex);
-	//! \brief used for animated sprites
-	//! \param texture The texture to be used for the sprite, must be a Texture enum
-	//! \param isAnimated Whether the sprite is animated or not
-	//! \param animationList The list of animations to be used for the sprite
-	//! \param defaultAnimation The default animation to be used for the sprite when it first gets loaded
+	//! \param xOffset The x offset of the sprite relative to the transform component position, used for rendering position 
+	//! \param yOffset The y offset of the sprite relative to the transform component position, used for rendering position
 	//! \param zIndex The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on
-	SpriteComponent(
+	SpriteComponent(Textures texture, int xOffset, int yOffset, int zIndex);
+
+	//! \param path The path to the texture to be used for the entity (for performance reasons, prefer enums instead)
+	//! \param xOffset The x offset of the sprite relative to the transform component position, used for rendering position
+	//! \param yOffset The y offset of the sprite relative to the transform component position, used for rendering position
+	//! \param zIndex The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on
+	SpriteComponent(const char* path, int xOffset, int yOffset, int zIndex);
+
+	/**
+	 *  \brief Constructor used for **animated** sprites
+	 *  \param texture The texture to be used for the sprite, must be a Texture enum
+	 *  \param isAnimated Whether the sprite is animated or not
+	 *  \param animationList The list of animations to be used for the sprite (list of maps mapping a string to an \ref Animation struct)
+	 *  \param defaultAnimation The default animation to be used for the sprite when it first gets loaded
+	 *  \param zIndex The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on
+	 *  \param xOffset The x offset of the sprite relative to the transform component position, used for rendering position
+	 *  \param yOffset The y offset of the sprite relative to the transform component position, used for rendering position
+	 *  ### How to spritesheet animation:
+	 * 
+	 * An animation sprite sheet consists of multiple sprites of the specified size (library supports 32x32) arranged in a grid.
+	 * Each row of the grid represents one animation, and each column in a row is one frame of the animation.
+	 * If a sprite sheet contains multiple animations with different frame counts,
+	 * you can just leave the rest of the row blank.
+	 * Be aware to specify the correct frame count in the animation struct!
+	 * \sa Animation
+	 * 
+	 * \image html Animations1.jpg "Example of a sprite sheet with 2 animations of 2 frames each"
+	*/
+	 SpriteComponent(
 		Textures texture,
 		bool isAnimated,
 		std::map<std::string, std::unique_ptr<Animation>>* animationList,
 		std::string defaultAnimation,
-		int zIndex);
+		int zIndex,
+		int xOffset = 0,
+		int yOffset = 0);
+
 	~SpriteComponent();
 
 	void setTexture(Textures texture);
@@ -81,6 +100,9 @@ public:
 	void init() override;
 	void update(uint_fast16_t diffTime) override;
 	void draw() override;
+
+	//! \brief By name select which animation should be played (gets looped)
+	//! \param type name previously set to an animation in animationList
 	void playAnimation(std::string type);
 	void setDirection(Direction direction);
 };

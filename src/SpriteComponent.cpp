@@ -37,7 +37,9 @@ SpriteComponent::SpriteComponent(
 	bool isAnimated,
 	std::map<std::string, std::unique_ptr<Animation>>* animationMap,
 	std::string defaultAnimation,
-	int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(0), textureYOffset(0)
+	int zIndex,
+	int xOffset,
+	int yOffset) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(xOffset), textureYOffset(yOffset)
 {
 	animated = isAnimated;
 
