@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['soundmanager_0',['SoundManager',['../classSoundManager.html',1,'']]],
-  ['spritecomponent_1',['SpriteComponent',['../classSpriteComponent.html',1,'']]],
-  ['stateffect_2',['StatEffect',['../structStatEffect.html',1,'']]]
+  ['manager_0',['Manager',['../classManager.html',1,'']]],
+  ['map_1',['Map',['../classMap.html',1,'']]]
 ];

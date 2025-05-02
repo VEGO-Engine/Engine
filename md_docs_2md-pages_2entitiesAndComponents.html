@@ -122,37 +122,50 @@ $(function(){initNavTree('md_docs_2md-pages_2entitiesAndComponents.html',''); in
   <div class="headertitle"><div class="title">Entities and Components</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md0"></a></p>
-<h1><a class="anchor" id="autotoc_md1"></a>
+<div class="textblock"><p><a class="anchor" id="autotoc_md2"></a></p>
+<h1><a class="anchor" id="autotoc_md3"></a>
 Entities</h1>
 <p>In the scope of this library entities essentially function like empty containers that you can add components or properties to. So an entity can be whatever you want it to be, give it a texture, make it pickupable, give it collision or all of the above and more. Here is a quick overview over relevant classes containing functions pertaining to the creation and editing of entities:</p><ul>
-<li><a class="el" href="classManager.html" title="Is responsible for managing all entities.">Manager</a></li>
-<li><a class="el" href="classEntity.html" title="Main class for any object in game, stores associations, labeling and components.">Entity</a></li>
+<li><a class="el" href="classManager.html">Manager</a></li>
+<li><a class="el" href="classEntity.html">Entity</a></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2"></a>
+<h1><a class="anchor" id="autotoc_md4"></a>
 Components</h1>
-<p>The following components are currently available to you to use in your entities:</p><ul>
-<li>Collider Component</li>
-</ul>
-<p>Adds collision functionality to an <a class="el" href="classEntity.html" title="Main class for any object in game, stores associations, labeling and components.">Entity</a> meaning functionality can be assigned to happen when two Entities collision boxes intersect --&gt; this is used by the library, the developer themselves cannot (yet) add custom functionality to happen on collision. It is used to stop entities from running through tiles given the "collision" tag (see <a class="el" href="md_docs_2md-pages_2tilemaps.html">Tiled</a> section) and to enable picking up other entities.</p><ul>
-<li>Data Component</li>
-</ul>
-<p>Custom Data such as Stats can be added to an <a class="el" href="classEntity.html" title="Main class for any object in game, stores associations, labeling and components.">Entity</a> and accessed using this Component. If an <a class="el" href="classEntity.html" title="Main class for any object in game, stores associations, labeling and components.">Entity</a> is supposed to have movement the stat "speed" <b>has to be added</b>!</p><ul>
-<li>Interaction Component</li>
-</ul>
-<p>Adding this component to an entity tells it to react to triggered Interactions e.g. by button press. For this a custom lambda or function pointer is passed to determine what exactly should happen once an entities ineraction was triggered.</p><ul>
-<li>Pickup Component</li>
-</ul>
-<p>Entities with pickup components will disappear once another collision having entity with the <a class="el" href="classEntity.html#a9449a7a0ad2c9ae5ee85ef2401382f2b">Group Label</a> "Player" intersects with it and executes the custom functionality given to it via constructor.</p><ul>
-<li>Sprite Component</li>
-</ul>
-<p><a class="el" href="classTextures.html" title="Forward declaration of the Textures enum class.">Textures</a> and Animations can be added via this component</p><ul>
-<li>Stateffects Component</li>
-</ul>
-<p>Temporary stateffects can be added using this component. Using the time and function passed it will execute whatever is in the function after the given time. It is used to e.g. reset stats after raising them in order to allow for temporary stat raises</p><ul>
-<li>Transform Component</li>
-</ul>
-<p>The Transform Component manages the position and movement of an <a class="el" href="classEntity.html" title="Main class for any object in game, stores associations, labeling and components.">Entity</a>. Multiple overloaded constructors exist depending on whether or not the entity is stationary </p>
+<p>The following components are currently available to you to use in your entities (the associated managers/handlers are also linked):</p>
+<hr  />
+ <h2><a class="anchor" id="autotoc_md6"></a>
+<a class="el" href="classColliderComponent.html">Collider Component</a></h2>
+<p>see also <a class="el" href="classCollisionHandler.html">Collision Handler</a></p>
+<p>Adds collision functionality to an <a class="el" href="classEntity.html" title="Main class for any object in game, stores associations, labeling and components.">Entity</a> meaning functionality can be assigned to happen when two Entities collision boxes intersect --&gt; this is used by the library, the developer themselves cannot (yet) add custom functionality to happen on collision unless the <a class="el" href="classCollisionHandler.html">Collision handler</a> itself is directly used. It is used to stop entities from running through tiles given the "collision" tag (see <a class="el" href="md_docs_2md-pages_2tilemaps.html">Tiled</a> section) and to enable picking up other entities.</p>
+<hr  />
+ <h2><a class="anchor" id="autotoc_md8"></a>
+<a class="el" href="classDataComponent.html">Data Component</a></h2>
+<p>Custom Data such as Stats can be added to an <a class="el" href="classEntity.html" title="Main class for any object in game, stores associations, labeling and components.">Entity</a> and accessed using this Component.</p>
+<dl class="section important"><dt>Important</dt><dd>If an <a class="el" href="classEntity.html" title="Main class for any object in game, stores associations, labeling and components.">Entity</a> is supposed to have movement the stat "speed" has to be added and set to a positive int!</dd></dl>
+<hr  />
+ <h2><a class="anchor" id="autotoc_md10"></a>
+<a class="el" href="classInteractionComponent.html">Interaction Component</a></h2>
+<p>see also <a class="el" href="structInteractionEventdataStruct.html">InteractionEventdataStruct</a></p>
+<p>Adding this component to an entity tells it to react to triggered Interactions e.g. by button press. For this a custom lambda or function pointer is passed to determine what exactly should happen once an entities ineraction was triggered.</p>
+<dl class="section note"><dt>Note</dt><dd>This component is only used to assign a functionality to an entity to be triggered when it is interacted with, to actually map a button to do something such as trigger an interaction refer to <a class="el" href="md_docs_2md-pages_2inputhandling.html">Input Management</a> and <a class="el" href="md_docs_2md-pages_2eventhandling.html">Eventhandling</a></dd></dl>
+<hr  />
+ <h2><a class="anchor" id="autotoc_md12"></a>
+<a class="el" href="classPickupComponent.html">Pickup Component</a></h2>
+<p>see also <a class="el" href="classPickupManager.html">Pickup Manager</a></p>
+<p>Entities with pickup components will disappear once another collision having entity with the <a class="el" href="classEntity.html#a9449a7a0ad2c9ae5ee85ef2401382f2b">Group Label</a> "Player" intersects with it and executes the custom functionality given to it via constructor.</p>
+<hr  />
+ <h2><a class="anchor" id="autotoc_md14"></a>
+<a class="el" href="classTransformComponent.html">Transform Component</a></h2>
+<p>The Transform Component manages the position and movement of an <a class="el" href="classEntity.html" title="Main class for any object in game, stores associations, labeling and components.">Entity</a>. Multiple overloaded constructors exist depending on whether or not the entity is stationary</p>
+<hr  />
+ <h2><a class="anchor" id="autotoc_md16"></a>
+<a class="el" href="classSpriteComponent.html">Sprite Component</a></h2>
+<p><a class="el" href="classTextures.html" title="Forward declaration of the Textures enum class.">Textures</a> and Animations can be added via this component.</p>
+<dl class="section important"><dt>Important</dt><dd>A <a class="el" href="classTransformComponent.html">Transform Component</a> is first needed before adding a Texture as the coordinates from the transform component are needed to tell the game where to render the texture</dd></dl>
+<hr  />
+ <h2><a class="anchor" id="autotoc_md18"></a>
+<a class="el" href="classStatEffectsComponent.html">Stat Effects Component</a></h2>
+<p>Temporary stateffects can be added using this component. Using the time and function passed it will execute whatever is in the function after the given time. It is used to e.g. reset stats after raising them in order to allow for temporary stat raises </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

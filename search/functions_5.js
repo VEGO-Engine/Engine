@@ -7,9 +7,10 @@ var searchData=
   ['getcollider_4',['getCollider',['../classColliderComponent.html#a334729b3c9b86cf7ee99b908f100a043',1,'ColliderComponent']]],
   ['getcomponent_5',['getComponent',['../classEntity.html#ad5ce9d4246498a5a2ffd163a2d38c98f',1,'Entity']]],
   ['getcomponentaspointer_6',['getComponentAsPointer',['../classEntity.html#af153779f4ae16c3aa4d67a52f61333b7',1,'Entity']]],
-  ['getgame_7',['getGame',['../classManager.html#a4fe31f4dc1f7d613cf0ca9cafc2bb90a',1,'Manager']]],
-  ['getintersection_8',['getIntersection',['../classCollisionHandler.html#a9a52ac3eac33ef236ab0ced07f4763ce',1,'CollisionHandler']]],
-  ['getmanager_9',['getManager',['../classEntity.html#acdf7c696ee39da0d8ebddb1976ea0abe',1,'Entity']]],
-  ['getposition_10',['getPosition',['../classInteractionComponent.html#a88ef331d132baf4f9a4c24544077f9f2',1,'InteractionComponent']]],
-  ['gettag_11',['getTag',['../classColliderComponent.html#a4438054178328402309cf72589f4f163',1,'ColliderComponent']]]
+  ['getentry_7',['getEntry',['../classDataComponent.html#a6e71b0bec578a208eb716676e3ccf667',1,'DataComponent']]],
+  ['getgame_8',['getGame',['../classManager.html#a4fe31f4dc1f7d613cf0ca9cafc2bb90a',1,'Manager']]],
+  ['getintersection_9',['getIntersection',['../classCollisionHandler.html#a9a52ac3eac33ef236ab0ced07f4763ce',1,'CollisionHandler']]],
+  ['getmanager_10',['getManager',['../classEntity.html#acdf7c696ee39da0d8ebddb1976ea0abe',1,'Entity']]],
+  ['getposition_11',['getPosition',['../classInteractionComponent.html#a88ef331d132baf4f9a4c24544077f9f2',1,'InteractionComponent']]],
+  ['gettag_12',['getTag',['../classColliderComponent.html#a4438054178328402309cf72589f4f163',1,'ColliderComponent']]]
 ];

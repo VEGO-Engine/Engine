@@ -126,7 +126,7 @@ $(function(){initNavTree('classSpriteComponent.html',''); initResizable(true); }
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classSpriteComponent.html" title="SpriteComponent class to handle sprite rendering and animation.">SpriteComponent</a> class to handle sprite rendering and animation.  
+<p><a class="el" href="classSpriteComponent.html" title="SpriteComponent class to handle sprite rendering and animation of entities.">SpriteComponent</a> class to handle sprite rendering and animation of entities.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="SpriteComponent_8h_source.html">SpriteComponent.h</a>&gt;</code></p>
@@ -134,20 +134,21 @@ $(function(){initNavTree('classSpriteComponent.html',''); initResizable(true); }
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af767b0da914fc583613626ac58505d58" id="r_af767b0da914fc583613626ac58505d58"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af767b0da914fc583613626ac58505d58">SpriteComponent</a> (<a class="el" href="classTextures.html">Textures</a> texture, int zIndex)</td></tr>
-<tr class="memdesc:af767b0da914fc583613626ac58505d58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classSpriteComponent.html" title="SpriteComponent class to handle sprite rendering and animation.">SpriteComponent</a>.  <br /></td></tr>
+<tr class="memdesc:af767b0da914fc583613626ac58505d58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classSpriteComponent.html" title="SpriteComponent class to handle sprite rendering and animation of entities.">SpriteComponent</a>.  <br /></td></tr>
 <tr class="separator:af767b0da914fc583613626ac58505d58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c2b0ac3fc6418bb475d257597905e66" id="r_a2c2b0ac3fc6418bb475d257597905e66"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c2b0ac3fc6418bb475d257597905e66">SpriteComponent</a> (<a class="el" href="classTextures.html">Textures</a> texture, int xOffset, int yOffset, int zIndex)</td></tr>
-<tr class="memdesc:a2c2b0ac3fc6418bb475d257597905e66"><td class="mdescLeft">&#160;</td><td class="mdescRight">zIndex The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on  <br /></td></tr>
 <tr class="separator:a2c2b0ac3fc6418bb475d257597905e66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5987774516010e021703a02a37d0509b" id="r_a5987774516010e021703a02a37d0509b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5987774516010e021703a02a37d0509b">SpriteComponent</a> (const char *path, int xOffset, int yOffset, int zIndex)</td></tr>
-<tr class="memdesc:a5987774516010e021703a02a37d0509b"><td class="mdescLeft">&#160;</td><td class="mdescRight">zIndex The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on  <br /></td></tr>
 <tr class="separator:a5987774516010e021703a02a37d0509b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0af0ea0070ffc60b3b8d0e1c1f13b5f2" id="r_a0af0ea0070ffc60b3b8d0e1c1f13b5f2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0af0ea0070ffc60b3b8d0e1c1f13b5f2">SpriteComponent</a> (<a class="el" href="classTextures.html">Textures</a> texture, bool isAnimated, std::map&lt; std::string, std::unique_ptr&lt; Animation &gt; &gt; *animationList, std::string defaultAnimation, int zIndex)</td></tr>
-<tr class="memdesc:a0af0ea0070ffc60b3b8d0e1c1f13b5f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">used for animated sprites  <br /></td></tr>
-<tr class="separator:a0af0ea0070ffc60b3b8d0e1c1f13b5f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c60f55924b1d18b9e6fb530b5c5346a" id="r_a2c60f55924b1d18b9e6fb530b5c5346a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c60f55924b1d18b9e6fb530b5c5346a">SpriteComponent</a> (<a class="el" href="classTextures.html">Textures</a> texture, bool isAnimated, std::map&lt; std::string, std::unique_ptr&lt; <a class="el" href="structAnimation.html">Animation</a> &gt; &gt; *animationList, std::string defaultAnimation, int zIndex, int xOffset=0, int yOffset=0)</td></tr>
+<tr class="memdesc:a2c60f55924b1d18b9e6fb530b5c5346a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor used for <b>animated</b> sprites.  <br /></td></tr>
+<tr class="separator:a2c60f55924b1d18b9e6fb530b5c5346a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4ebb6763d8b994f412dec66ecf58c59" id="r_aa4ebb6763d8b994f412dec66ecf58c59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4ebb6763d8b994f412dec66ecf58c59">playAnimation</a> (std::string type)</td></tr>
+<tr class="memdesc:aa4ebb6763d8b994f412dec66ecf58c59"><td class="mdescLeft">&#160;</td><td class="mdescRight">By name select which animation should be played (gets looped)  <br /></td></tr>
+<tr class="separator:aa4ebb6763d8b994f412dec66ecf58c59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classSpriteComponent.html" title="SpriteComponent class to handle sprite rendering and animation.">SpriteComponent</a> class to handle sprite rendering and animation. </p>
+<div class="textblock"><p><a class="el" href="classSpriteComponent.html" title="SpriteComponent class to handle sprite rendering and animation of entities.">SpriteComponent</a> class to handle sprite rendering and animation of entities. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af767b0da914fc583613626ac58505d58" name="af767b0da914fc583613626ac58505d58"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af767b0da914fc583613626ac58505d58">&#9670;&#160;</a></span>SpriteComponent() <span class="overload">[1/4]</span></h2>
@@ -168,14 +169,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Constructor for <a class="el" href="classSpriteComponent.html" title="SpriteComponent class to handle sprite rendering and animation.">SpriteComponent</a>. </p>
+<p>Constructor for <a class="el" href="classSpriteComponent.html" title="SpriteComponent class to handle sprite rendering and animation of entities.">SpriteComponent</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">texture</td><td>The texture to be used for the sprite, must be a Texture enum</td></tr>
+    <tr><td class="paramname">texture</td><td>The texture to be used for the sprite, must be a Texture enum </td></tr>
+    <tr><td class="paramname">zIndex</td><td>The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on </td></tr>
   </table>
   </dd>
 </dl>
-<p>zIndex The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on </p>
 
 </div>
 </div>
@@ -207,13 +208,12 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>zIndex The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">texture</td><td>The texture to be used for the sprite, must be a Texture enum </td></tr>
-    <tr><td class="paramname">xOffset</td><td>The x offset of the sprite, used for rendering position </td></tr>
-    <tr><td class="paramname">yOffset</td><td>The y offset of the sprite, used for rendering position </td></tr>
+    <tr><td class="paramname">xOffset</td><td>The x offset of the sprite relative to the transform component position, used for rendering position </td></tr>
+    <tr><td class="paramname">yOffset</td><td>The y offset of the sprite relative to the transform component position, used for rendering position </td></tr>
+    <tr><td class="paramname">zIndex</td><td>The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on </td></tr>
   </table>
   </dd>
 </dl>
@@ -248,21 +248,20 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>zIndex The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">texture</td><td>The texture to be used for the sprite, must be a char* path </td></tr>
-    <tr><td class="paramname">xOffset</td><td>The x offset of the sprite, used for rendering position </td></tr>
-    <tr><td class="paramname">yOffset</td><td>The y offset of the sprite, used for rendering position </td></tr>
+    <tr><td class="paramname">path</td><td>The path to the texture to be used for the entity (for performance reasons, prefer enums instead) </td></tr>
+    <tr><td class="paramname">xOffset</td><td>The x offset of the sprite relative to the transform component position, used for rendering position </td></tr>
+    <tr><td class="paramname">yOffset</td><td>The y offset of the sprite relative to the transform component position, used for rendering position </td></tr>
+    <tr><td class="paramname">zIndex</td><td>The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a0af0ea0070ffc60b3b8d0e1c1f13b5f2" name="a0af0ea0070ffc60b3b8d0e1c1f13b5f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0af0ea0070ffc60b3b8d0e1c1f13b5f2">&#9670;&#160;</a></span>SpriteComponent() <span class="overload">[4/4]</span></h2>
+<a id="a2c60f55924b1d18b9e6fb530b5c5346a" name="a2c60f55924b1d18b9e6fb530b5c5346a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c60f55924b1d18b9e6fb530b5c5346a">&#9670;&#160;</a></span>SpriteComponent() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -280,7 +279,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::map&lt; std::string, std::unique_ptr&lt; Animation &gt; &gt; *</td>          <td class="paramname"><span class="paramname"><em>animationList</em></span>, </td>
+          <td class="paramtype">std::map&lt; std::string, std::unique_ptr&lt; <a class="el" href="structAnimation.html">Animation</a> &gt; &gt; *</td>          <td class="paramname"><span class="paramname"><em>animationList</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -290,19 +289,64 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>zIndex</em></span>&#160;)</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>zIndex</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>xOffset</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>yOffset</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>used for animated sprites </p>
+<p>Constructor used for <b>animated</b> sprites. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">texture</td><td>The texture to be used for the sprite, must be a Texture enum </td></tr>
     <tr><td class="paramname">isAnimated</td><td>Whether the sprite is animated or not </td></tr>
-    <tr><td class="paramname">animationList</td><td>The list of animations to be used for the sprite </td></tr>
+    <tr><td class="paramname">animationList</td><td>The list of animations to be used for the sprite (list of maps mapping a string to an <a class="el" href="structAnimation.html">Animation</a> struct) </td></tr>
     <tr><td class="paramname">defaultAnimation</td><td>The default animation to be used for the sprite when it first gets loaded </td></tr>
     <tr><td class="paramname">zIndex</td><td>The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on </td></tr>
+    <tr><td class="paramname">xOffset</td><td>The x offset of the sprite relative to the transform component position, used for rendering position </td></tr>
+    <tr><td class="paramname">yOffset</td><td>The y offset of the sprite relative to the transform component position, used for rendering position </td></tr>
+  </table>
+  </dd>
+</dl>
+<h3><a class="anchor" id="autotoc_md0"></a>
+How to spritesheet animation:</h3>
+<p>An animation sprite sheet consists of multiple sprites of the specified size (library supports 32x32) arranged in a grid. Each row of the grid represents one animation, and each column in a row is one frame of the animation. If a sprite sheet contains multiple animations with different frame counts, you can just leave the rest of the row blank. Be aware to specify the correct frame count in the animation struct! </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="structAnimation.html" title="Animation struct to hold animation data.">Animation</a></dd></dl>
+<div class="image">
+<img src="Animations1.jpg" alt=""/>
+<div class="caption">
+Example of a sprite sheet with 2 animations of 2 frames each</div></div>
+ 
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa4ebb6763d8b994f412dec66ecf58c59" name="aa4ebb6763d8b994f412dec66ecf58c59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4ebb6763d8b994f412dec66ecf58c59">&#9670;&#160;</a></span>playAnimation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpriteComponent::playAnimation </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>type</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>By name select which animation should be played (gets looped) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>name previously set to an animation in animationList </td></tr>
   </table>
   </dd>
 </dl>

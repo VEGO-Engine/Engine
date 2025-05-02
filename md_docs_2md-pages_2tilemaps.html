@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11" />
     <meta name="generator" content="Doxygen 1.13.2" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>VEGO-Engine: Building an environment using Tiled and tmx</title>
+    <title>VEGO-Engine: Building a map using Tiled and tmx and loading it</title>
     <link href="tabs.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="dynsections.js"></script>
@@ -119,45 +119,72 @@ $(function(){initNavTree('md_docs_2md-pages_2tilemaps.html',''); initResizable(t
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Building an environment using Tiled and tmx</div></div>
+  <div class="headertitle"><div class="title">Building a map using Tiled and tmx and loading it</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md8"></a></p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md24"></a></p>
+<p>In order to create a map for your game the library has .tmx format support. In order to get .tmx files you use the associated tile editor "Tiled" which gets automatically downloaded when executing the VEGO libraries setup file (the installer is provided the installation itself must be finalized by the user). This section will walk you step by step through the creation of your first map/background using Tiled.</p>
 <p>see also: <a href="https://doc.mapeditor.org/en/stable/manual/introduction/#getting-started">the official Tiled documentation</a></p>
-<p>After opening Tiled, select "New Map", a custom size measured in tiles and as tile size select 32x32 as this is the size the library currently supports.</p>
-<h2><a class="anchor" id="autotoc_md9"></a>
+<h2><a class="anchor" id="autotoc_md25"></a>
+Getting started</h2>
+<p>After opening Tiled, select "New Map", a custom size measured in tiles and as tile size select 32x32 as this is the size the library currently supports. Also choose the size of your canvas, it is recommended you choose the same size as the one you defined in the <a class="el" href="md_docs_2md-pages_2config.html">games config</a> (default is 25w x 20h, measured in tiles, to get the pixel size just multiply by 32 as that is the tilesize the library uses)</p>
+<p><img src="Tiled1.jpg" alt="" width="50%" class="inline"/>    </p>
+<p><img src="Tiled2.jpg" alt="" width="50%" class="inline"/>    </p>
+<h2><a class="anchor" id="autotoc_md26"></a>
 Create a New Tileset</h2>
-<pre class="fragment">In the editor, go to the lower-right corner and select "New Tileset".
-
-Give your tileset a name.
-
-Make sure to select "Embed in map".
-
-Choose your tilesheet as the source.
-</pre><h2><a class="anchor" id="autotoc_md10"></a>
+<ol type="1">
+<li>In the editor, go to the lower-right corner and select "New Tileset".</li>
+<li>Give your tileset a name.</li>
+<li>Make sure to select "Embed in map".</li>
+<li>Choose your tilesheet as the source.</li>
+<li>Leave the rest of the settings on default <img src="Tiled3.jpg" alt="" width="50%" class="inline"/>    </li>
+</ol>
+<p><img src="Tiled4.jpg" alt="" width="50%" class="inline"/>    </p>
+<h2><a class="anchor" id="autotoc_md27"></a>
 Draw Your Environment</h2>
-<pre class="fragment">Once imported, you can select tiles from the tileset and use them to build your environment.
-</pre><h2><a class="anchor" id="autotoc_md11"></a>
+<p>Once imported, you can select tiles from the tileset and use them to build your environment.</p>
+<h2><a class="anchor" id="autotoc_md28"></a>
 Understand Layers in Tiled</h2>
-<pre class="fragment">Tiled allows you to use multiple layers for organizing your map.
-
-You need to give your Layers seperate z-Indices to decide their rendering order, the lower the number the earlier it gets rendered.
-
-In order to do this select a layer.
-
-Add a new int property named "zIndex" and give it a number starting with 0 to decide when to render it (0 gets rendered first etc.).
-
-Important: Tiles that should have collision must be placed on a separate layer.
-</pre><h2><a class="anchor" id="autotoc_md12"></a>
+<p>Tiled allows you to use multiple layers for organizing your map.</p>
+<p>You need to give your Layers seperate z-Indices to decide their rendering order, the lower the number the earlier it gets rendered. In order to do this:</p><ol type="1">
+<li>Select a layer.</li>
+</ol>
+<ol type="1">
+<li>Right-click "Custom Properties" and go to "Add Property".</li>
+</ol>
+<ol type="1">
+<li>Add a new int property named "zIndex" and give it a number starting with 0 to decide when to render it (the lower the number the more the layer is in the background i.e. tiles on layer 0 will be covered by tiles on layer 1 if they occupy the same space).</li>
+</ol>
+<div class="image">
+<img src="Tiled5.jpg" alt="" width="50%"/>
+</div>
+    <p><b>Important: Tiles that should have collision must be placed on a separate layer as custom properties are per layer not per tile.</b></p>
+<h2><a class="anchor" id="autotoc_md29"></a>
 Set Up Collision</h2>
-<pre class="fragment">Select the layer you want to have collision.
-
-Right-click and go to "Custom Properties".
-
-Add a new boolean property named "collision" and tick the checkbox.
-
-Any tile placed on this layer will now automatically have collision—meaning moving entities cannot pass through them.
-</pre> </div></div><!-- contents -->
+<p>To add collision to a layer:</p>
+<ol type="1">
+<li>Select the layer you want to have collision.</li>
+</ol>
+<ol type="1">
+<li>Right-click and go to "Custom Properties".</li>
+</ol>
+<ol type="1">
+<li>Add a new boolean property named "collision" and tick the checkbox.</li>
+</ol>
+<div class="image">
+<img src="Tiled5.jpg" alt="" width="50%"/>
+</div>
+    <p>Any tile placed on this layer will now automatically have collision—meaning moving entities cannot pass through them.</p>
+<h2><a class="anchor" id="autotoc_md30"></a>
+Saving your work</h2>
+<p>After completeing your map, save it in the asset folder of the library (or any place really the asset folder just exists as a recommendation to easily find all of your maps and textures)</p>
+<div class="image">
+<img src="Tiled6.jpg" alt="" width="50%"/>
+</div>
+    <h2><a class="anchor" id="autotoc_md31"></a>
+Loading your work into the game</h2>
+<p>The map gets loaded into the game in <code>GameImplementation.cpp</code>, simply add the path of the map .tmx file to the <a class="el" href="classMap.html">Map</a> constructor </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->

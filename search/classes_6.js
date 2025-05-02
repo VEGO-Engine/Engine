@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['texturemanager_0',['TextureManager',['../classTextureManager.html',1,'']]],
-  ['textures_1',['Textures',['../classTextures.html',1,'']]],
-  ['transformcomponent_2',['TransformComponent',['../classTransformComponent.html',1,'']]]
+  ['pickupcomponent_0',['PickupComponent',['../classPickupComponent.html',1,'']]],
+  ['pickupmanager_1',['PickupManager',['../classPickupManager.html',1,'']]]
 ];

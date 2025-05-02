@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['zindexcomparator_0',['ZIndexComparator',['../structRenderObject_1_1ZIndexComparator.html',1,'RenderObject']]]
+  ['soundmanager_0',['SoundManager',['../classSoundManager.html',1,'']]],
+  ['spritecomponent_1',['SpriteComponent',['../classSpriteComponent.html',1,'']]],
+  ['stateffect_2',['StatEffect',['../structStatEffect.html',1,'']]],
+  ['stateffectscomponent_3',['StatEffectsComponent',['../classStatEffectsComponent.html',1,'']]]
 ];

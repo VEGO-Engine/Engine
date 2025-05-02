@@ -26,16 +26,25 @@ var NAVTREE =
 [
   [ "VEGO-Engine", "index.html", [
     [ "Welcome to the VEGO library documentation", "index.html", null ],
+    [ "Configuring the game", "md_docs_2md-pages_2config.html", null ],
     [ "Entities and Components", "md_docs_2md-pages_2entitiesAndComponents.html", [
-      [ "Entities", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md1", null ],
-      [ "Components", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md2", null ]
+      [ "Entities", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md3", null ],
+      [ "Components", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md4", [
+        [ "Collider Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md6", null ],
+        [ "Data Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md8", null ],
+        [ "Interaction Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md10", null ],
+        [ "Pickup Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md12", null ],
+        [ "Transform Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md14", null ],
+        [ "Sprite Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md16", null ],
+        [ "Stat Effects Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md18", null ]
+      ] ]
     ] ],
     [ "Interactions", "md_docs_2md-pages_2eventhandling.html", null ],
     [ "Input Management", "md_docs_2md-pages_2inputhandling.html", null ],
     [ "Quickstart guide for setting up the library", "md_docs_2md-pages_2quickstart.html", [
-      [ "Installations and tools", "md_docs_2md-pages_2quickstart.html#autotoc_md7", null ]
+      [ "Installations and tools", "md_docs_2md-pages_2quickstart.html#autotoc_md23", null ]
     ] ],
-    [ "Building an environment using Tiled and tmx", "md_docs_2md-pages_2tilemaps.html", null ],
+    [ "Building a map using Tiled and tmx and loading it", "md_docs_2md-pages_2tilemaps.html", null ],
     [ "Todo List", "todo.html", null ],
     [ "Deprecated List", "deprecated.html", null ],
     [ "Classes", "annotated.html", [
