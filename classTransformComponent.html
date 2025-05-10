@@ -121,6 +121,7 @@ $(function(){initNavTree('classTransformComponent.html',''); initResizable(true)
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classTransformComponent-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">TransformComponent Class Reference</div></div>
 </div><!--header-->
@@ -139,6 +140,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af69e09cf21f97b258bf9ab4aecb096d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6c585faf233543172f739fb306e6c74" id="r_aa6c585faf233543172f739fb306e6c74"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa6c585faf233543172f739fb306e6c74">TransformComponent</a> (float x, float y, int w, int h, float scale=1)</td></tr>
 <tr class="separator:aa6c585faf233543172f739fb306e6c74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a39e31f729aeb4da883a135c66354124f" id="r_a39e31f729aeb4da883a135c66354124f"><td class="memItemLeft" align="right" valign="top">Vector2D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a39e31f729aeb4da883a135c66354124f">direction</a></td></tr>
+<tr class="memdesc:a39e31f729aeb4da883a135c66354124f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The direction in which the entity is moving. (0, 0) is the default and signifies no movement.  <br /></td></tr>
+<tr class="separator:a39e31f729aeb4da883a135c66354124f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The transform component is responsible for the position, direction and size of an entity. It is used to move the entity in the game world and to determine its size and position on the screen. </p>
@@ -252,6 +259,26 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a39e31f729aeb4da883a135c66354124f" name="a39e31f729aeb4da883a135c66354124f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39e31f729aeb4da883a135c66354124f">&#9670;&#160;</a></span>direction</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector2D TransformComponent::direction</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The direction in which the entity is moving. (0, 0) is the default and signifies no movement. </p>
+<p>access direction with direction.x and direction.y for each direction</p>
+<p>x = 1 for right, -1 for left</p>
+<p>y = 1 for down, -1 for up </p>
 
 </div>
 </div>

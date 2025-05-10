@@ -30,19 +30,19 @@ var NAVTREE =
     [ "Entities and Components", "md_docs_2md-pages_2entitiesAndComponents.html", [
       [ "Entities", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md3", null ],
       [ "Components", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md4", [
-        [ "Collider Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md6", null ],
-        [ "Data Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md8", null ],
-        [ "Interaction Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md10", null ],
-        [ "Pickup Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md12", null ],
-        [ "Transform Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md14", null ],
-        [ "Sprite Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md16", null ],
+        [ "Transform Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md6", null ],
+        [ "Sprite Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md8", null ],
+        [ "Data Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md10", null ],
+        [ "Collider Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md12", null ],
+        [ "Interaction Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md14", null ],
+        [ "Pickup Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md16", null ],
         [ "Stat Effects Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md18", null ]
       ] ]
     ] ],
     [ "Interactions", "md_docs_2md-pages_2eventhandling.html", null ],
     [ "Input Management", "md_docs_2md-pages_2inputhandling.html", null ],
     [ "Quickstart guide for setting up the library", "md_docs_2md-pages_2quickstart.html", [
-      [ "Installations and tools", "md_docs_2md-pages_2quickstart.html#autotoc_md23", null ]
+      [ "Installations and tools", "md_docs_2md-pages_2quickstart.html#autotoc_md25", null ]
     ] ],
     [ "Building a map using Tiled and tmx and loading it", "md_docs_2md-pages_2tilemaps.html", null ],
     [ "Todo List", "todo.html", null ],

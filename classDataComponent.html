@@ -133,6 +133,10 @@ $(function(){initNavTree('classDataComponent.html',''); initResizable(true); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a1d9bc3a1c818e646be5d093119edeb01" id="r_a1d9bc3a1c818e646be5d093119edeb01"><td class="memItemLeft" align="right" valign="top"><a id="a1d9bc3a1c818e646be5d093119edeb01" name="a1d9bc3a1c818e646be5d093119edeb01"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>DataComponent</b> ()</td></tr>
+<tr class="memdesc:a1d9bc3a1c818e646be5d093119edeb01"><td class="mdescLeft">&#160;</td><td class="mdescRight">The data component only has a default constructor. <br /></td></tr>
+<tr class="separator:a1d9bc3a1c818e646be5d093119edeb01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1dd53c6cb91e572090c2b6853881f8c9" id="r_a1dd53c6cb91e572090c2b6853881f8c9"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:a1dd53c6cb91e572090c2b6853881f8c9"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a1dd53c6cb91e572090c2b6853881f8c9">setEntry</a> (const std::string &amp;key, const T &amp;value)</td></tr>
 <tr class="memdesc:a1dd53c6cb91e572090c2b6853881f8c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a key-value pair of any type in the data map.  <br /></td></tr>
@@ -171,9 +175,10 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 
 <p>Get a value of type T from the data map. </p>
-<p>e.g. </p><div class="fragment"><div class="line"><a class="code hl_function" href="#a6e71b0bec578a208eb716676e3ccf667">getEntry&lt;int&gt;</a>(<span class="stringliteral">&quot;speed&quot;</span>);</div>
-<div class="ttc" id="aclassDataComponent_html_a6e71b0bec578a208eb716676e3ccf667"><div class="ttname"><a href="#a6e71b0bec578a208eb716676e3ccf667">DataComponent::getEntry</a></div><div class="ttdeci">std::optional&lt; T &gt; getEntry(std::string key) const</div><div class="ttdoc">Get a value of type T from the data map.</div><div class="ttdef"><b>Definition</b> DataComponent.h:31</div></div>
-</div><!-- fragment --><p> in this case the key is "speed" and the value is returned as an integer </p><dl class="params"><dt>Parameters</dt><dd>
+<p>e.g. </p><div class="fragment"><div class="line"><a class="code hl_function" href="#a6e71b0bec578a208eb716676e3ccf667">getEntry&lt;int&gt;</a>(<span class="stringliteral">&quot;speed&quot;</span>).value();</div>
+<div class="ttc" id="aclassDataComponent_html_a6e71b0bec578a208eb716676e3ccf667"><div class="ttname"><a href="#a6e71b0bec578a208eb716676e3ccf667">DataComponent::getEntry</a></div><div class="ttdeci">std::optional&lt; T &gt; getEntry(std::string key) const</div><div class="ttdoc">Get a value of type T from the data map.</div><div class="ttdef"><b>Definition</b> DataComponent.h:33</div></div>
+</div><!-- fragment --><p> in this case the key is "speed" and the value is returned as an integer</p>
+<p>the value() or value_or() is NEEDED to handle the optional return type </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">key</td><td>The name to retrieve the value from </td></tr>
   </table>
@@ -214,7 +219,7 @@ template&lt;typename T&gt; </div>
 
 <p>Set a key-value pair of any type in the data map. </p>
 <p>e.g. </p><div class="fragment"><div class="line"><a class="code hl_function" href="#a1dd53c6cb91e572090c2b6853881f8c9">setEntry</a>(<span class="stringliteral">&quot;speed&quot;</span>, 180);</div>
-<div class="ttc" id="aclassDataComponent_html_a1dd53c6cb91e572090c2b6853881f8c9"><div class="ttname"><a href="#a1dd53c6cb91e572090c2b6853881f8c9">DataComponent::setEntry</a></div><div class="ttdeci">void setEntry(const std::string &amp;key, const T &amp;value)</div><div class="ttdoc">Set a key-value pair of any type in the data map.</div><div class="ttdef"><b>Definition</b> DataComponent.h:22</div></div>
+<div class="ttc" id="aclassDataComponent_html_a1dd53c6cb91e572090c2b6853881f8c9"><div class="ttname"><a href="#a1dd53c6cb91e572090c2b6853881f8c9">DataComponent::setEntry</a></div><div class="ttdeci">void setEntry(const std::string &amp;key, const T &amp;value)</div><div class="ttdoc">Set a key-value pair of any type in the data map.</div><div class="ttdef"><b>Definition</b> DataComponent.h:23</div></div>
 </div><!-- fragment --><p> in this case the key is "speed" and the value is set to an integer of 180 </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">key</td><td>The name to store the value under </td></tr>

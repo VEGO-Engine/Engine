@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['game_0',['game',['../md_docs_2md-pages_2config.html',1,'Configuring the game'],['../md_docs_2md-pages_2tilemaps.html#autotoc_md31',1,'Loading your work into the game']]],
+  ['game_0',['game',['../md_docs_2md-pages_2config.html',1,'Configuring the game'],['../md_docs_2md-pages_2tilemaps.html#autotoc_md33',1,'Loading your work into the game']]],
   ['generatetiles_1',['generateTiles',['../classMap.html#a770f6b9997712224e994c284e8812cfc',1,'Map']]],
   ['getactivecontext_2',['getActiveContext',['../classInputManager.html#a8c3240499dc0103d5a855c0d38127281',1,'InputManager']]],
   ['getall_3',['getAll',['../classManager.html#aae16a3d76e450281012c526541ebeb5b',1,'Manager']]],
@@ -14,7 +14,7 @@ var searchData=
   ['getmanager_11',['getManager',['../classEntity.html#acdf7c696ee39da0d8ebddb1976ea0abe',1,'Entity']]],
   ['getposition_12',['getPosition',['../classInteractionComponent.html#a88ef331d132baf4f9a4c24544077f9f2',1,'InteractionComponent']]],
   ['gettag_13',['getTag',['../classColliderComponent.html#a4438054178328402309cf72589f4f163',1,'ColliderComponent']]],
-  ['getting_20started_14',['Getting started',['../md_docs_2md-pages_2tilemaps.html#autotoc_md25',1,'']]],
+  ['getting_20started_14',['Getting started',['../md_docs_2md-pages_2tilemaps.html#autotoc_md27',1,'']]],
   ['grouplabel_15',['GroupLabel',['../classEntity.html#a9449a7a0ad2c9ae5ee85ef2401382f2b',1,'Entity']]],
   ['guide_20for_20setting_20up_20the_20library_16',['Quickstart guide for setting up the library',['../md_docs_2md-pages_2quickstart.html',1,'']]]
 ];
