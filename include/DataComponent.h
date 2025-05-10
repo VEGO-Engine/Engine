@@ -10,6 +10,7 @@
 class DataComponent : public Component
 {
 public:
+    //! \brief The data component only has a default constructor
     DataComponent() {};
     ~DataComponent() {};
     /**
@@ -23,7 +24,8 @@ public:
 
     /**
      * @brief Get a value of type T from the data map
-     * @details e.g. \code{.cpp}getEntry<int>("speed");\endcode in this case the key is "speed" and the value is returned as an integer
+     * @details e.g. \code{.cpp}getEntry<int>("speed").value();\endcode in this case the key is "speed" and the value is returned as an integer
+     * @details the value() or value_or() is NEEDED to handle the optional return type
      * @param key The name to retrieve the value from
      * @return An optional of type T containing the value if it exists and matches in typeid, otherwise std::nullopt
      */

@@ -1,25 +1,38 @@
 # Entities and Components
 ## Entities
 In the scope of this library entities essentially function like empty containers that you can add components or properties to. So an entity can be whatever you want it to be, give it a texture, make it pickupable, give it collision or all of the above and more.
-Here is a quick overview over relevant classes containing functions pertaining to the creation and editing of entities:
-- [Manager](@ref Manager)
-- [Entity](@ref Entity)
+[Manager](@ref Manager) contains functions responsible for the creation and editing of entities:
+
+**If you are ever lost when looking for related functionality via search or side bar remember it is all neatly organized on this page for better readability and a better overview**
 
 ## Components
-The following components are currently available to you to use in your entities (the associated managers/handlers are also linked):
+The following components are currently available for you to use in your entities (the associated managers/handlers are also linked):
 
 ---
-### [Collider Component](@ref ColliderComponent)
-see also [Collision Handler](@ref CollisionHandler)
+### [Transform Component](@ref TransformComponent)
+The Transform Component manages the position and movement of an Entity. Multiple overloaded constructors exist depending on whether or not the entity is stationary
 
-Adds collision functionality to an Entity meaning functionality can be assigned to happen when two Entities collision boxes intersect --> this is used by the library, the developer themselves cannot (yet) add custom functionality to happen on collision unless the [Collision handler](@ref CollisionHandler) itself is directly used. It is used to stop entities from running through tiles given the "collision" tag (see [Tiled](@ref md_docs_2md-pages_2tilemaps) section) and to enable picking up other entities.
+---
+### [Sprite Component](@ref SpriteComponent)
+Textures and Animations can be added via this component. 
+
+> [!important]
+> A [Transform Component](@ref TransformComponent) is first needed before adding a Texture as the coordinates from the transform component are needed to tell the game where to render the texture
 
 ---
 ### [Data Component](@ref DataComponent)
 Custom Data such as Stats can be added to an Entity and accessed using this Component.
 
 > [!important]
-> If an Entity is supposed to have movement the stat "speed" has to be added and set to a positive int!
+> If an Entity is supposed to be able to move the stat "speed" has to be added and set to a positive int!
+
+---
+### [Collider Component](@ref ColliderComponent)
+see also [Collision Handler](@ref CollisionHandler)
+
+Adds collision functionality to an Entity. It is used to stop entities with a PLAYER group label from running through tiles that were given the "collision" tag in the Tiled editor (see [Tiled](@ref md_docs_2md-pages_2tilemaps) section) or the COLLIDERS group label in the code.
+
+Also enables "picking up" other entities via [Pickup Component](@ref PickupComponent).
 
 ---
 ### [Interaction Component](@ref InteractionComponent)
@@ -35,17 +48,6 @@ Adding this component to an entity tells it to react to triggered Interactions e
 see also [Pickup Manager](@ref PickupManager)
 
 Entities with pickup components will disappear once another collision having entity with the [Group Label](@ref Entity#GroupLabel) "Player" intersects with it and executes the custom functionality given to it via constructor.
-
----
-### [Transform Component](@ref TransformComponent)
-The Transform Component manages the position and movement of an Entity. Multiple overloaded constructors exist depending on whether or not the entity is stationary
-
----
-### [Sprite Component](@ref SpriteComponent)
-Textures and Animations can be added via this component. 
-
-> [!important]
-> A [Transform Component](@ref TransformComponent) is first needed before adding a Texture as the coordinates from the transform component are needed to tell the game where to render the texture
 
 ---
 ### [Stat Effects Component](@ref StatEffectsComponent)

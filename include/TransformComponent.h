@@ -10,6 +10,11 @@ class TransformComponent : public Component
 {
 public:
 	Vector2D position; // TODO: change to int to save CPU time -> possibly subpixel coordinates
+
+	//! \brief The direction in which the entity is moving. (0, 0) is the default and signifies no movement.
+	//! \brief access direction with direction.x and direction.y for each direction
+	//! \brief x = 1 for right, -1 for left
+	//! \brief y = 1 for down, -1 for up
 	Vector2D direction;
 
 	int height = 32;

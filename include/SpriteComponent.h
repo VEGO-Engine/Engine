@@ -44,24 +44,17 @@ public:
     //debug
     Textures getTexture() { return this->textureEnum; }
 
-
-
-	//! \brief Constructor for SpriteComponent
-	//! \param texture The texture to be used for the sprite, must be a Texture enum
-	//! \param zIndex The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on
-	SpriteComponent(Textures texture, int zIndex);
-
 	//! \param texture The texture to be used for the sprite, must be a Texture enum
 	//! \param xOffset The x offset of the sprite relative to the transform component position, used for rendering position 
 	//! \param yOffset The y offset of the sprite relative to the transform component position, used for rendering position
 	//! \param zIndex The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on
-	SpriteComponent(Textures texture, int xOffset, int yOffset, int zIndex);
+	SpriteComponent(Textures texture, int zIndex, int xOffset = 0, int yOffset = 0);
 
 	//! \param path The path to the texture to be used for the entity (for performance reasons, prefer enums instead)
 	//! \param xOffset The x offset of the sprite relative to the transform component position, used for rendering position
 	//! \param yOffset The y offset of the sprite relative to the transform component position, used for rendering position
 	//! \param zIndex The z-index of the sprite, used for rendering order, in order to show up on the map, the zIndex must be higher than the layer you want it to show up on
-	SpriteComponent(const char* path, int xOffset, int yOffset, int zIndex);
+	SpriteComponent(const char* path, int zIndex, int xOffset = 0, int yOffset = 0);
 
 	/**
 	 *  \brief Constructor used for **animated** sprites

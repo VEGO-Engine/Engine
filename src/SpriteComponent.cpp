@@ -15,19 +15,13 @@
 #include "Manager.h"
 #include "VEGO.h"
 
-SpriteComponent::SpriteComponent(Textures texture, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(0), textureYOffset(0)
-{
-	this->textureEnum = texture;
-    this->path = "";
-}
-
-SpriteComponent::SpriteComponent(Textures texture, int xOffset, int yOffset, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(xOffset), textureYOffset(yOffset)
+SpriteComponent::SpriteComponent(Textures texture, int zIndex, int xOffset, int yOffset) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(xOffset), textureYOffset(yOffset)
 {
 	this->textureEnum = texture;
 	this->path = "";
 }
 
-SpriteComponent::SpriteComponent(const char* path, int xOffset, int yOffset, int zIndex) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(xOffset), textureYOffset(yOffset) {
+SpriteComponent::SpriteComponent(const char* path, int zIndex, int xOffset, int yOffset) : RenderObject(zIndex, VEGO_Game().renderManager), textureXOffset(xOffset), textureYOffset(yOffset) {
 
 	this->path = path;
 }

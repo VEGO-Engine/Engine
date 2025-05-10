@@ -167,7 +167,7 @@ void Map::addTile(float x, float y, const tmx::Vector2u& mapTileSize, int u, int
     auto& tile(VEGO_Game().manager.addEntity());
 
     tile.addComponent<TransformComponent>(x, y, mapTileSize.x, mapTileSize.y, 1);
-    tile.addComponent<SpriteComponent>(texturePath.c_str(), v, u, zIndex); // why does uv need to be reversed?
+    tile.addComponent<SpriteComponent>(texturePath.c_str(), zIndex, v, u); // why does uv need to be reversed?
     //TODO: also implement updated map stuff for this
 
     if (collision) {
