@@ -28,21 +28,24 @@ var NAVTREE =
     [ "Welcome to the VEGO library documentation", "index.html", null ],
     [ "Configuring the game", "md_docs_2md-pages_2config.html", null ],
     [ "Entities and Components", "md_docs_2md-pages_2entitiesAndComponents.html", [
-      [ "Entities", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md3", null ],
-      [ "Components", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md4", [
-        [ "Transform Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md6", null ],
-        [ "Sprite Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md8", null ],
-        [ "Data Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md10", null ],
-        [ "Collider Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md12", null ],
-        [ "Interaction Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md14", null ],
-        [ "Pickup Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md16", null ],
-        [ "Stat Effects Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md18", null ]
+      [ "Entities", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md3", [
+        [ "Manager", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md4", null ],
+        [ "Entity", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md5", null ]
+      ] ],
+      [ "Components", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md6", [
+        [ "Transform Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md8", null ],
+        [ "Sprite Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md10", null ],
+        [ "Data Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md12", null ],
+        [ "Collider Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md14", null ],
+        [ "Interaction Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md16", null ],
+        [ "Pickup Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md18", null ],
+        [ "Stat Effects Component", "md_docs_2md-pages_2entitiesAndComponents.html#autotoc_md20", null ]
       ] ]
     ] ],
     [ "Interactions", "md_docs_2md-pages_2eventhandling.html", null ],
     [ "Input Management", "md_docs_2md-pages_2inputhandling.html", null ],
     [ "Quickstart guide for setting up the library", "md_docs_2md-pages_2quickstart.html", [
-      [ "Installations and tools", "md_docs_2md-pages_2quickstart.html#autotoc_md25", null ]
+      [ "Installations and tools", "md_docs_2md-pages_2quickstart.html#autotoc_md27", null ]
     ] ],
     [ "Building a map using Tiled and tmx and loading it", "md_docs_2md-pages_2tilemaps.html", null ],
     [ "Todo List", "todo.html", null ],

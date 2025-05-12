@@ -122,15 +122,15 @@ $(function(){initNavTree('md_docs_2md-pages_2tilemaps.html',''); initResizable(t
   <div class="headertitle"><div class="title">Building a map using Tiled and tmx and loading it</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md26"></a></p>
+<div class="textblock"><p><a class="anchor" id="autotoc_md28"></a></p>
 <p>In order to create a map for your game the library has .tmx format support. In order to get .tmx files you use the associated tile editor "Tiled" which gets automatically downloaded when executing the VEGO libraries setup file (the installer is provided the installation itself must be finalized by the user). This section will walk you step by step through the creation of your first map/background using Tiled.</p>
 <p>see also: <a href="https://doc.mapeditor.org/en/stable/manual/introduction/#getting-started">the official Tiled documentation</a></p>
-<h2><a class="anchor" id="autotoc_md27"></a>
+<h2><a class="anchor" id="autotoc_md29"></a>
 Getting started</h2>
 <p>After opening Tiled, select "New Map", a custom size measured in tiles and as tile size select 32x32 as this is the size the library currently supports. Also choose the size of your canvas, it is recommended you choose the same size as the one you defined in the <a class="el" href="md_docs_2md-pages_2config.html">games config</a> (default is 25w x 20h, measured in tiles, to get the pixel size just multiply by 32 as that is the tilesize the library uses)</p>
 <p><img src="Tiled1.jpg" alt="" width="50%" class="inline"/>    </p>
 <p><img src="Tiled2.jpg" alt="" width="50%" class="inline"/>    </p>
-<h2><a class="anchor" id="autotoc_md28"></a>
+<h2><a class="anchor" id="autotoc_md30"></a>
 Create a New Tileset</h2>
 <ol type="1">
 <li>In the editor, go to the lower-right corner and select "New Tileset".</li>
@@ -140,10 +140,10 @@ Create a New Tileset</h2>
 <li>Leave the rest of the settings on default <img src="Tiled3.jpg" alt="" width="50%" class="inline"/>    </li>
 </ol>
 <p><img src="Tiled4.jpg" alt="" width="50%" class="inline"/>    </p>
-<h2><a class="anchor" id="autotoc_md29"></a>
+<h2><a class="anchor" id="autotoc_md31"></a>
 Draw Your Environment</h2>
 <p>Once imported, you can select tiles from the tileset and use them to build your environment.</p>
-<h2><a class="anchor" id="autotoc_md30"></a>
+<h2><a class="anchor" id="autotoc_md32"></a>
 Understand Layers in Tiled</h2>
 <p>Tiled allows you to use multiple layers for organizing your map.</p>
 <p>You need to give your Layers seperate z-Indices to decide their rendering order, the lower the number the earlier it gets rendered. In order to do this:</p><ol type="1">
@@ -159,7 +159,7 @@ Understand Layers in Tiled</h2>
 <img src="Tiled5.jpg" alt="" width="50%"/>
 </div>
     <p><b>Important: Tiles that should have collision must be placed on a separate layer as custom properties are per layer not per tile.</b></p>
-<h2><a class="anchor" id="autotoc_md31"></a>
+<h2><a class="anchor" id="autotoc_md33"></a>
 Set Up Collision</h2>
 <p>To add collision to a layer:</p>
 <ol type="1">
@@ -175,13 +175,13 @@ Set Up Collision</h2>
 <img src="Tiled5.jpg" alt="" width="50%"/>
 </div>
     <p>Any tile placed on this layer will now automatically have collision—meaning moving entities cannot pass through them.</p>
-<h2><a class="anchor" id="autotoc_md32"></a>
+<h2><a class="anchor" id="autotoc_md34"></a>
 Saving your work</h2>
 <p>After completeing your map, save it in the asset folder of the library (or any place really the asset folder just exists as a recommendation to easily find all of your maps and textures)</p>
 <div class="image">
 <img src="Tiled6.jpg" alt="" width="50%"/>
 </div>
-    <h2><a class="anchor" id="autotoc_md33"></a>
+    <h2><a class="anchor" id="autotoc_md35"></a>
 Loading your work into the game</h2>
 <p>The map gets loaded into the game in <code>GameImplementation.cpp</code>, simply add the path of the map .tmx file to the <a class="el" href="classMap.html">Map</a> constructor </p>
 </div></div><!-- contents -->
