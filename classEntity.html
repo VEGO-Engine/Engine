@@ -166,7 +166,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (uint_fast
 <tr class="separator:aa622a8d79153a90d0e3b9b992ca2d38b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae587a44fd803d7918a45dbfe531c962d" id="r_ae587a44fd803d7918a45dbfe531c962d"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... TArgs&gt; </td></tr>
 <tr class="memitem:ae587a44fd803d7918a45dbfe531c962d"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ae587a44fd803d7918a45dbfe531c962d">addComponent</a> (TArgs &amp;&amp;...mArgs)</td></tr>
-<tr class="memdesc:ae587a44fd803d7918a45dbfe531c962d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds specified type as component and calls Component::init()  <br /></td></tr>
+<tr class="memdesc:ae587a44fd803d7918a45dbfe531c962d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds specified type as component and calls its CONSTRUCTOR.  <br /></td></tr>
 <tr class="separator:ae587a44fd803d7918a45dbfe531c962d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5ce9d4246498a5a2ffd163a2d38c98f" id="r_ad5ce9d4246498a5a2ffd163a2d38c98f"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ad5ce9d4246498a5a2ffd163a2d38c98f"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ad5ce9d4246498a5a2ffd163a2d38c98f">getComponent</a> () const</td></tr>
@@ -206,18 +206,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (uint_fast
 
 <p>Some premade <a class="el" href="classEntity.html" title="Main class for any object in game, stores associations, labeling and components.">Entity</a> groups used to avoid checking all entities for everything all of the time. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2ba924bf7180d60940e428a9166b51ce0f4" name="a9449a7a0ad2c9ae5ee85ef2401382f2ba924bf7180d60940e428a9166b51ce0f4"></a>MAPTILES&#160;</td><td class="fielddoc"><p><a class="el" href="classEntity.html" title="Main class for any object in game, stores associations, labeling and components.">Entity</a> using TileComponent, internal use. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2ba924bf7180d60940e428a9166b51ce0f4" name="a9449a7a0ad2c9ae5ee85ef2401382f2ba924bf7180d60940e428a9166b51ce0f4"></a>MAPTILES&#160;</td><td class="fielddoc"><p><a class="el" href="classEntity.html" title="Main class for any object in game, stores associations, labeling and components.">Entity</a> using TileComponent, internal use only. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2bae334ea4bb6fd38968f6809b091120ad8" name="a9449a7a0ad2c9ae5ee85ef2401382f2bae334ea4bb6fd38968f6809b091120ad8"></a>PLAYERS&#160;</td><td class="fielddoc"><p>Primary entity in player control, used to be able to interact with pickupables. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2badffa23e89f914b343e7811b01a8f756c" name="a9449a7a0ad2c9ae5ee85ef2401382f2badffa23e89f914b343e7811b01a8f756c"></a>COLLIDERS&#160;</td><td class="fielddoc"><p>Fixed collider entity, e.g. a wall. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2ba46dccab75ce652352e52086601fdc294" name="a9449a7a0ad2c9ae5ee85ef2401382f2ba46dccab75ce652352e52086601fdc294"></a>PROJECTILE&#160;</td><td class="fielddoc"><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo</a></b></dt><dd>Document </dd></dl>
+<tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2ba46dccab75ce652352e52086601fdc294" name="a9449a7a0ad2c9ae5ee85ef2401382f2ba46dccab75ce652352e52086601fdc294"></a>PROJECTILE&#160;</td><td class="fielddoc"><p>Not used. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2bad52d2d4c0b7218c48897d2e69e156ba4" name="a9449a7a0ad2c9ae5ee85ef2401382f2bad52d2d4c0b7218c48897d2e69e156ba4"></a>HEARTS&#160;</td><td class="fielddoc"><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo</a></b></dt><dd>Document </dd></dl>
+<tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2bad52d2d4c0b7218c48897d2e69e156ba4" name="a9449a7a0ad2c9ae5ee85ef2401382f2bad52d2d4c0b7218c48897d2e69e156ba4"></a>HEARTS&#160;</td><td class="fielddoc"><p>Not used. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2ba5262638eb9e1d1af560f3d0f9ad133e4" name="a9449a7a0ad2c9ae5ee85ef2401382f2ba5262638eb9e1d1af560f3d0f9ad133e4"></a>POWERUPS&#160;</td><td class="fielddoc"><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo</a></b></dt><dd>Document <br  />
- </dd></dl>
+<tr><td class="fieldname"><a id="a9449a7a0ad2c9ae5ee85ef2401382f2ba5262638eb9e1d1af560f3d0f9ad133e4" name="a9449a7a0ad2c9ae5ee85ef2401382f2ba5262638eb9e1d1af560f3d0f9ad133e4"></a>POWERUPS&#160;</td><td class="fielddoc"><p>Not used. </p>
 </td></tr>
 </table>
 
@@ -276,8 +275,8 @@ template&lt;typename T, typename... TArgs&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Adds specified type as component and calls Component::init() </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Adds specified type as component and calls its CONSTRUCTOR. </p>
+<p>e.g. addComponent&lt;Type of component&gt;(parameters of constructor) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mArgs</td><td>Constructor arguments of component </td></tr>
   </table>
