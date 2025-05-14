@@ -37,12 +37,12 @@ public:
 //! \brief Some premade Entity groups used to avoid checking all entities for everything all of the time
     enum class GroupLabel
     {
-        MAPTILES, //!< Entity using TileComponent, internal use
+        MAPTILES, //!< Entity using TileComponent, internal use only
         PLAYERS, //!< Primary entity in player control, used to be able to interact with pickupables
         COLLIDERS, //!< Fixed collider entity, e.g. a wall
-        PROJECTILE, //!< \todo Document
-        HEARTS, //!< \todo Document
-        POWERUPS //!< \todo Document  
+        PROJECTILE, //!< Not used
+        HEARTS, //!< Not used
+        POWERUPS //!< Not used  
     };
 
     /*!
@@ -77,7 +77,8 @@ public:
         return componentBitSet[getComponentTypeID<T>()];
     }
 
-    //! \brief Adds specified type as component and calls Component::init()
+    //! \brief Adds specified type as component and calls its CONSTRUCTOR
+    //! \details e.g. addComponent<Type of component>(parameters of constructor)
     //! \param mArgs Constructor arguments of component
     template <typename T, typename...TArgs> T& addComponent(TArgs&&...mArgs)
     {

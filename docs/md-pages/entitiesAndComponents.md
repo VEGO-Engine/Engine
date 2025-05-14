@@ -3,12 +3,12 @@
 In the scope of this library entities essentially function like empty containers that you can add components or properties to. So an entity can be whatever you want it to be, give it a texture, make it pickupable, give it collision or all of the above and more.
 Relevant functions for the creation and editing of Entities and Components:
 ### Manager
-- [addEntity()]
-- [getAll()]
+- [addEntity()](@ref Manager#addEntity())
+- [getAll()](@ref Manager#getAll())
 ### Entity
-- [addComponent()]
-- [getComponent()]
-- [destroy()] 	
+- [addComponent()](@ref Entity#addComponent())
+- [getComponent()](@ref Entity#getComponent())
+- [destroy()](@ref Entity#destroy())
 
 **If you are ever lost when looking for related functionality via search or side bar remember it is all neatly organized on this page for better readability and a better overview**
 
