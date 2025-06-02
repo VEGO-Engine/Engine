@@ -1,10 +1,7 @@
 #pragma once
 
 #include <cassert>
-#include <iostream>
-#include <map>
 #include <functional>
-#include <string>
 #include <stdexcept>
 
 #include "Game.h"
